@@ -1,1 +1,1 @@
-export { Form } from "./components/Form";
+export { Form } from "./timetable-form/Form";
