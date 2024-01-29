@@ -11,10 +11,6 @@ See the wiki [here](https://github.com/digital-land/local-plans-timetable/wiki).
 
 In the project directory, you can run:
 
-### `npm run dev`
-
-Starts dev server. Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
-
 ### `npm run preview`
 
 Shows a preview of the build locally.
