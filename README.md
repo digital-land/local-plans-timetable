@@ -1,11 +1,27 @@
-# local-plans-timetable
+# Local Plans Timetable
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository is a component library publishing two components as part of the Local Plans Timetable private beta:
 
-Currently, two official plugins are available:
+- **Timetable form:** Used by LPAs to produce timetable data for a local plan that meets the [data standard](https://digital-land.github.io/specification/specification/development-plan/)
+- **Timetable visualisation:** A tool to visualise timetable data that follows the data standard
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+See the wiki [here](https://github.com/digital-land/local-plans-timetable/wiki).
+
+## Available Scripts
+
+In the project directory, you can run:
+
+### `npm run dev`
+
+Starts dev server. Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
+
+### `npm run preview`
+
+Shows a preview of the build locally.
+
+### `npm run build`
+
+Builds the library for production to the `dist` folder.
 
 ## Expanding the ESLint configuration
 
@@ -28,20 +44,3 @@ export default {
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm run dev`
-
-Starts dev server
-Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
-
-### `npm run preview`
-
-Shows a preview of the build locally
-
-### `npm run build`
-
-Builds the library for production to the `dist` folder.
