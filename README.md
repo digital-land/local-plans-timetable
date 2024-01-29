@@ -23,6 +23,14 @@ Shows a preview of the build locally.
 
 Builds the library for production to the `dist` folder.
 
+### `npm run storybook`
+
+Starts Storybook. Open [http://localhost:6006](http://localhost:6006) to view it in your browser.
+
+### `npm run build-storybook`
+
+Builds Storybook to the `storybook-static` folder.
+
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
