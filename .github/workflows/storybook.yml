@@ -2,7 +2,7 @@ name: Build and Deploy Storybook
 on:
   push:
     branches:
-      - SOW-24/setup-github-actions
+      - main
     paths:
       [
         ".github/workflows/storybook.yml",
