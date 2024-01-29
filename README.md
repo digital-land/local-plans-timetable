@@ -11,10 +11,6 @@ See the wiki [here](https://github.com/digital-land/local-plans-timetable/wiki).
 
 In the project directory, you can run:
 
-### `npm run dev`
-
-Starts dev server. Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
-
 ### `npm run preview`
 
 Shows a preview of the build locally.
@@ -22,6 +18,14 @@ Shows a preview of the build locally.
 ### `npm run build`
 
 Builds the library for production to the `dist` folder.
+
+### `npm run storybook`
+
+Starts Storybook. Open [http://localhost:6006](http://localhost:6006) to view it in your browser.
+
+### `npm run build-storybook`
+
+Builds Storybook to the `storybook-static` folder.
 
 ## Expanding the ESLint configuration
 
