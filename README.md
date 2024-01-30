@@ -19,6 +19,10 @@ Shows a preview of the build locally.
 
 Builds the library for production to the `dist` folder.
 
+### `npm test`
+
+Runs all unit tests
+
 ### `npm run storybook`
 
 Starts Storybook. Open [http://localhost:6006](http://localhost:6006) to view it in your browser.
@@ -37,12 +41,12 @@ If you are developing a production application, we recommend updating the config
 export default {
   // other rules...
   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
+    ecmaVersion: "latest",
+    sourceType: "module",
+    project: ["./tsconfig.json", "./tsconfig.node.json"],
     tsconfigRootDir: __dirname,
   },
-}
+};
 ```
 
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
