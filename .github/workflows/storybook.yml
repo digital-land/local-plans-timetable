@@ -9,6 +9,7 @@ on:
         ".github/workflows/storybook.yml",
         "lib/stories/**",
         "lib/timetable-form/**",
+        "package-lock.json",
       ]
 
 jobs:
