@@ -19,7 +19,7 @@ export default defineConfig({
       // exclude react from bundle
       external: ["react", "react/jsx-runtime"],
       input: Object.fromEntries(
-        glob.sync('lib/**/*.{ts,tsx}', { ignore: 'lib/**/*.stories.tsx'}).map((file) => [
+        glob.sync('lib/**/*.{ts,tsx}', { ignore: ['lib/**/*.stories.tsx','lib/**/*.test.tsx']}).map((file) => [
           // The name of the entry point
           // lib/nested/foo.ts becomes nested/foo
           relative("lib", file.slice(0, file.length - extname(file).length)),

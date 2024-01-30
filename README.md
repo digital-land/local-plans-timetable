@@ -19,6 +19,10 @@ Shows a preview of the build locally.
 
 Builds the library for production to the `dist` folder.
 
+### `npm test`
+
+Runs all unit tests
+
 ### `npm run storybook`
 
 Starts Storybook. Open [http://localhost:6006](http://localhost:6006) to view it in your browser.
