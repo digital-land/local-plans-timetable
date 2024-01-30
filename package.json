@@ -15,7 +15,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "test": "jest",
-    "prepublishOnly": "npm run build"
+    "test:watch": "jest --watch"
   },
   "peerDependencies": {
     "react": "^18.2.0",
