@@ -1,3 +1,12 @@
 .form {
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.formContent {
+  display: grid;
+  grid-template-columns: 300px 200px;
+  gap: 10px
 }
