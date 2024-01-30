@@ -1,0 +1,7 @@
+name: Lint and Unit Test
+
+on: [pull_request]
+
+jobs:
+  lint-and-test:
+    uses: ./.github/workflows/shared-steps.yml

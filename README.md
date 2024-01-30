@@ -57,4 +57,4 @@ export default {
 
 The Storybook for this library is deployed to GitHub Pages: https://digital-land.github.io/local-plans-timetable/
 
-Assuming a successful test run, all commits to `main` will trigger a new deployment.
+Assuming a successful lint/test run, all commits to `main` will trigger a new deployment.

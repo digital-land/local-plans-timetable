@@ -1,7 +1,0 @@
-name: Unit Test
-
-on: [pull_request]
-
-jobs:
-  test:
-    uses: ./.github/workflows/shared-test.yml
