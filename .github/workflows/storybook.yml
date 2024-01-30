@@ -16,7 +16,7 @@ jobs:
     uses: ./.github/workflows/shared-steps.yml
   build-and-deploy:
     runs-on: ubuntu-latest
-    needs: test
+    needs: lint-and-test
     steps:
       - uses: actions/checkout@v4
 
