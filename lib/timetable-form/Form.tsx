@@ -36,26 +36,25 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
   return (
     <div className={`${className} ${styles.form}`} {...otherProps}>
       <h1 data-testid="form-title">Timetable Form </h1>
-      <div className={styles.formContent}>
+      <div className={styles.formRow}>
         Local Planning Authority
         <input value={lpa} onChange={(e) => setLpa(e.target.value)} />
-        {Object.entries(stages).map(([stageName, date]) => (
-          <>
-            {stageName}
-            <input
-              key={stageName}
-              type="month"
-              value={date}
-              onChange={(e) =>
-                setStages((prev) => ({
-                  ...prev,
-                  [stageName]: e.target.value,
-                }))
-              }
-            />
-          </>
-        ))}
       </div>
+      {stageNames.map((stageName) => (
+        <div className={styles.formRow} key={stageName}>
+          {stageName}
+          <input
+            type="month"
+            value={stages[stageName]}
+            onChange={(e) =>
+              setStages((prev) => ({
+                ...prev,
+                [stageName]: e.target.value,
+              }))
+            }
+          />
+        </div>
+      ))}
     </div>
   );
 };

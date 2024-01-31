@@ -3,10 +3,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 10px
 }
 
-.formContent {
+.formRow {
   display: grid;
   grid-template-columns: 300px 200px;
-  gap: 10px
 }
