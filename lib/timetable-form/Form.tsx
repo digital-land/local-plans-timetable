@@ -1,37 +1,61 @@
 import { useState } from "react";
 import styles from "./styles.module.css";
-
-const stageNames = [
-  "Timetable published",
-  "Draft plan for public consultation published",
-  "Public consultation start",
-  "Public consultation end",
-  "Submit plan for examination",
-  "Examination hearing start",
-  "Planning inspectorate examination start",
-  "Planning inspectorate examination end",
-  "Planning inspectorate found sound",
-  "Examination hearing end",
-  "Inspector report published",
-  "Plan adopted",
-] as const;
-
-type StageName = (typeof stageNames)[number];
+import { DevelopmentPlanTimetable, Stages } from "../types/timetable";
+import { stageNames } from "../constants";
 
 const defaultDate = "";
-
-type Stages = {
-  [key in StageName]: string;
-};
 
 const initialStages = Object.fromEntries(
   stageNames.map((stage) => [stage, defaultDate])
 ) as Stages;
 
+type FormData = {
+  LPA: string;
+  stages: Stages;
+};
+
+const formStateToDevelopmentPlanTimetables = (
+  state: FormData
+): DevelopmentPlanTimetable[] => {
+  return Object.entries(state.stages).map(([event, eventDate]) => ({
+    reference: "XXX-XXX-XXX",
+    name: "",
+    developmentPlan: "dorcester-new-local-plan",
+    developmentPlanEvent: event,
+    eventDate: eventDate,
+    notes: "",
+    organisation: state.LPA,
+    entryDate: new Date().toISOString(),
+    startDate: new Date().toISOString(),
+  }));
+};
+
+const DevPlanToCSVString = (timeTables: DevelopmentPlanTimetable[]): string => {
+  const headLine = Object.keys(timeTables[0]).join(", ");
+
+  const CSVRows = timeTables.reduce(
+    (array, timetableItem) => [
+      ...array,
+      Object.values(timetableItem).join(", "),
+    ],
+    [headLine]
+  );
+
+  return CSVRows.join("\n");
+};
+
 export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
   const { className, ...otherProps } = props;
   const [lpa, setLpa] = useState<string>("");
   const [stages, setStages] = useState<Stages>(initialStages);
+
+  const getTimetableDownload = (formData: FormData) => {
+    const timetables = formStateToDevelopmentPlanTimetables(formData);
+
+    const timetableCSV = DevPlanToCSVString(timetables);
+
+    return `data:text/csv;charset=urf-8, ${timetableCSV}`;
+  };
 
   return (
     <div className={`${className} ${styles.form}`} {...otherProps}>
@@ -55,6 +79,14 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
           />
         </div>
       ))}
+      <a
+        role="button"
+        type="button"
+        href={getTimetableDownload({ LPA: lpa, stages })}
+        download="timetable.csv"
+      >
+        <button> Export Timetable CSV</button>
+      </a>
     </div>
   );
 };
