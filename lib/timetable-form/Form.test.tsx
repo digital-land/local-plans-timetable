@@ -4,5 +4,5 @@ import { Form } from "./Form";
 
 test("Renders the main page", () => {
   render(<Form />);
-  expect(screen.getByText("Form Title")).toBeInTheDocument();
+  expect(screen.getByTestId("form-title")).toBeInTheDocument();
 });
