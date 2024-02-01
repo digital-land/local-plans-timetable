@@ -61,6 +61,7 @@
     "**/*.css"
   ],
   "dependencies": {
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "govuk-frontend": "^5.0.0"
   }
 }

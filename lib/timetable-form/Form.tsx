@@ -1,4 +1,6 @@
 import { useState } from "react";
+import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
+
 import styles from "./styles.module.css";
 import { Stages, FormData } from "../types/timetable";
 import { stageNames } from "../constants";
