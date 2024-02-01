@@ -1,49 +1,17 @@
 import { useState } from "react";
 import styles from "./styles.module.css";
-import { DevelopmentPlanTimetable, Stages } from "../types/timetable";
+import { Stages, FormData } from "../types/timetable";
 import { stageNames } from "../constants";
-import { randomUUID } from "crypto";
+import {
+  formStateToDevelopmentPlanTimetables,
+  devPlanToCSVString,
+} from "../utils/timetable";
 
 const defaultDate = "";
 
 const initialStages = Object.fromEntries(
-  stageNames.map((stage) => [stage, defaultDate])
+  stageNames.map((stage) => [stage, defaultDate]),
 ) as Stages;
-
-type FormData = {
-  LPA: string;
-  stages: Stages;
-};
-
-const formStateToDevelopmentPlanTimetables = (
-  state: FormData
-): DevelopmentPlanTimetable[] => {
-  return Object.entries(state.stages).map(([event, eventDate]) => ({
-    reference: randomUUID(),
-    name: "",
-    developmentPlan: "dorcester-new-local-plan", //this will be coming from a dropdown on the form
-    developmentPlanEvent: event,
-    eventDate: eventDate,
-    notes: "",
-    organisation: state.LPA,
-    entryDate: new Date().toISOString(),
-    startDate: new Date().toISOString(),
-  }));
-};
-
-const devPlanToCSVString = (timeTables: DevelopmentPlanTimetable[]): string => {
-  const headLine = Object.keys(timeTables[0]).join(", ");
-
-  const CSVRows = timeTables.reduce(
-    (array, timetableItem) => [
-      ...array,
-      Object.values(timetableItem).join(", "),
-    ],
-    [headLine]
-  );
-
-  return CSVRows.join("\n");
-};
 
 export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
   const { className, ...otherProps } = props;
@@ -71,6 +39,7 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
           <input
             type="month"
             value={stages[stageName]}
+            data-testid={`${stageName.replace(/ /gi, "-")}-input`}
             onChange={(e) =>
               setStages((prev) => ({
                 ...prev,
@@ -83,6 +52,7 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
       <a
         role="button"
         type="button"
+        data-testid="csv-download-button"
         href={getTimetableDownload({ LPA: lpa, stages })}
         download="timetable.csv"
       >

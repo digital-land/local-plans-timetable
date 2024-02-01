@@ -35,3 +35,8 @@ export type StageName = (typeof stageNames)[number];
 export type Stages = {
   [key in StageName]: string;
 };
+
+export type FormData = {
+  LPA: string;
+  stages: Stages;
+};
