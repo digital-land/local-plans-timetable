@@ -7,7 +7,7 @@ const formStateToDevelopmentPlanTimetables = (
   return Object.entries(state.stages).map(([event, eventDate]) => ({
     reference: uuidv4(),
     name: "",
-    developmentPlan: "dorcester-new-local-plan", //this will be coming from a dropdown on the form
+    developmentPlan: "dorcester-new-local-plan", //this will likely come from a fetch from DPD
     developmentPlanEvent: event,
     eventDate: eventDate,
     notes: "",
