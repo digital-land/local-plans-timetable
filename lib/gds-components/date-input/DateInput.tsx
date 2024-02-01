@@ -2,7 +2,7 @@
  * GDS component: https://design-system.service.gov.uk/components/date-input/
  */
 
-interface DateInputProps {
+export interface DateInputProps {
   label: string;
   name: string;
   onChange: (value: string) => void;
