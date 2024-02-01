@@ -1,18 +1,21 @@
 import { useState } from "react";
 import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
 
-import styles from "./styles.module.css";
+import { TextInput } from "../gds-components/text-input/TextInput";
+import { DateInput } from "../gds-components/date-input/DateInput";
 import { Stages, FormData } from "../types/timetable";
-import { stageNames } from "../constants";
 import {
   formStateToDevelopmentPlanTimetables,
   devPlanToCSVString,
 } from "../utils/timetable";
+import { stageNames } from "../constants";
+
+import styles from "./styles.module.css";
 
 const defaultDate = "";
 
 const initialStages = Object.fromEntries(
-  stageNames.map((stage) => [stage, defaultDate]),
+  stageNames.map((stage) => [stage, defaultDate])
 ) as Stages;
 
 export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
@@ -30,23 +33,24 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
 
   return (
     <div className={`${className} ${styles.form}`} {...otherProps}>
-      <h1 data-testid="form-title">Timetable Form </h1>
+      <h1 className="govuk-heading-xl" data-testid="form-title">
+        Timetable Form
+      </h1>
       <div className={styles.formRow}>
-        Local Planning Authority
-        <input value={lpa} onChange={(e) => setLpa(e.target.value)} />
+        <TextInput
+          label="Local planning authority"
+          onChange={setLpa}
+          value={lpa}
+        />
       </div>
       {stageNames.map((stageName) => (
-        <div className={styles.formRow} key={stageName}>
-          {stageName}
-          <input
-            type="month"
+        <div key={stageName}>
+          <DateInput
             value={stages[stageName]}
-            data-testid={`${stageName.replace(/ /gi, "-")}-input`}
-            onChange={(e) =>
-              setStages((prev) => ({
-                ...prev,
-                [stageName]: e.target.value,
-              }))
+            label={stageName}
+            name={`${stageName.split(" ").join("-")}-date`}
+            onChange={(value) =>
+              setStages((prev) => ({ ...prev, [stageName]: value }))
             }
           />
         </div>

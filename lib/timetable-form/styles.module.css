@@ -1,12 +1,3 @@
 .form {
   padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px
-}
-
-.form-row {
-  display: grid;
-  grid-template-columns: 300px 200px;
 }
