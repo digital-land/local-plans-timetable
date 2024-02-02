@@ -1,0 +1,229 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`calls the onChange handler with the right value when the month input changes 1`] = `
+<DocumentFragment>
+  <div
+    class="govuk-form-group"
+  >
+    <fieldset
+      aria-describedby="date-hint"
+      class="govuk-fieldset"
+      role="group"
+    >
+      <legend
+        class="govuk-fieldset__legend"
+      >
+        Date
+      </legend>
+      <div
+        class="govuk-hint"
+        id="date-hint"
+      >
+        For example, 3 2007
+      </div>
+      <div
+        class="govuk-date-input"
+      >
+        <div
+          class="govuk-date-input__item"
+        >
+          <div
+            class="govuk-form-group"
+          >
+            <label
+              class="govuk-label govuk-date-input__label"
+              for="date-month"
+            >
+              Month
+            </label>
+            <input
+              class="govuk-input govuk-date-input__input govuk-input--width-2"
+              data-testid="date-month"
+              id="date-month"
+              inputmode="numeric"
+              maxlength="2"
+              type="text"
+              value="4"
+            />
+          </div>
+        </div>
+        <div
+          class="govuk-date-input__item"
+        >
+          <div
+            class="govuk-form-group"
+          >
+            <label
+              class="govuk-label govuk-date-input__label"
+              for="date-year"
+            >
+              Year
+            </label>
+            <input
+              class="govuk-input govuk-date-input__inpaut govuk-input--width-4"
+              data-testid="date-year"
+              id="date-year"
+              inputmode="numeric"
+              maxlength="4"
+              type="text"
+              value="2007"
+            />
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`calls the onChange handler with the right value when the year input changes 1`] = `
+<DocumentFragment>
+  <div
+    class="govuk-form-group"
+  >
+    <fieldset
+      aria-describedby="date-hint"
+      class="govuk-fieldset"
+      role="group"
+    >
+      <legend
+        class="govuk-fieldset__legend"
+      >
+        Date
+      </legend>
+      <div
+        class="govuk-hint"
+        id="date-hint"
+      >
+        For example, 3 2007
+      </div>
+      <div
+        class="govuk-date-input"
+      >
+        <div
+          class="govuk-date-input__item"
+        >
+          <div
+            class="govuk-form-group"
+          >
+            <label
+              class="govuk-label govuk-date-input__label"
+              for="date-month"
+            >
+              Month
+            </label>
+            <input
+              class="govuk-input govuk-date-input__input govuk-input--width-2"
+              data-testid="date-month"
+              id="date-month"
+              inputmode="numeric"
+              maxlength="2"
+              type="text"
+              value="3"
+            />
+          </div>
+        </div>
+        <div
+          class="govuk-date-input__item"
+        >
+          <div
+            class="govuk-form-group"
+          >
+            <label
+              class="govuk-label govuk-date-input__label"
+              for="date-year"
+            >
+              Year
+            </label>
+            <input
+              class="govuk-input govuk-date-input__inpaut govuk-input--width-4"
+              data-testid="date-year"
+              id="date-year"
+              inputmode="numeric"
+              maxlength="4"
+              type="text"
+              value="2008"
+            />
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`shows the right input values from the provided value 1`] = `
+<DocumentFragment>
+  <div
+    class="govuk-form-group"
+  >
+    <fieldset
+      aria-describedby="date-hint"
+      class="govuk-fieldset"
+      role="group"
+    >
+      <legend
+        class="govuk-fieldset__legend"
+      >
+        Date
+      </legend>
+      <div
+        class="govuk-hint"
+        id="date-hint"
+      >
+        For example, 3 2007
+      </div>
+      <div
+        class="govuk-date-input"
+      >
+        <div
+          class="govuk-date-input__item"
+        >
+          <div
+            class="govuk-form-group"
+          >
+            <label
+              class="govuk-label govuk-date-input__label"
+              for="date-month"
+            >
+              Month
+            </label>
+            <input
+              class="govuk-input govuk-date-input__input govuk-input--width-2"
+              data-testid="date-month"
+              id="date-month"
+              inputmode="numeric"
+              maxlength="2"
+              type="text"
+              value="3"
+            />
+          </div>
+        </div>
+        <div
+          class="govuk-date-input__item"
+        >
+          <div
+            class="govuk-form-group"
+          >
+            <label
+              class="govuk-label govuk-date-input__label"
+              for="date-year"
+            >
+              Year
+            </label>
+            <input
+              class="govuk-input govuk-date-input__inpaut govuk-input--width-4"
+              data-testid="date-year"
+              id="date-year"
+              inputmode="numeric"
+              maxlength="4"
+              type="text"
+              value="2007"
+            />
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+</DocumentFragment>
+`;
