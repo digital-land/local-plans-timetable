@@ -1,3 +1,7 @@
+/**
+ * GDS component: https://design-system.service.gov.uk/components/button/
+ */
+
 interface ButtonProps {
   children?: React.ReactNode;
   type?: "submit" | "button" | "reset";
