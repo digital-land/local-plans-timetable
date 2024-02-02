@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`returns the plain text value 1`] = `
+<DocumentFragment>
+  <div
+    class="govuk-form-group"
+  >
+    <label
+      class="govuk-label"
+    >
+      input
+      <input
+        class="govuk-input"
+        type="text"
+        value=""
+      />
+    </label>
+  </div>
+</DocumentFragment>
+`;
