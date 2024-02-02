@@ -2,38 +2,31 @@ import { useState } from "react";
 import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
 
 import styles from "./styles.module.css";
-
-const stageNames = [
-  "Timetable published",
-  "Draft plan for public consultation published",
-  "Public consultation start",
-  "Public consultation end",
-  "Submit plan for examination",
-  "Examination hearing start",
-  "Planning inspectorate examination start",
-  "Planning inspectorate examination end",
-  "Planning inspectorate found sound",
-  "Examination hearing end",
-  "Inspector report published",
-  "Plan adopted",
-] as const;
-
-type StageName = (typeof stageNames)[number];
+import { Stages, FormData } from "../types/timetable";
+import { stageNames } from "../constants";
+import {
+  formStateToDevelopmentPlanTimetables,
+  devPlanToCSVString,
+} from "../utils/timetable";
 
 const defaultDate = "";
 
-type Stages = {
-  [key in StageName]: string;
-};
-
 const initialStages = Object.fromEntries(
-  stageNames.map((stage) => [stage, defaultDate])
+  stageNames.map((stage) => [stage, defaultDate]),
 ) as Stages;
 
 export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
   const { className, ...otherProps } = props;
   const [lpa, setLpa] = useState<string>("");
   const [stages, setStages] = useState<Stages>(initialStages);
+
+  const getTimetableDownload = (formData: FormData) => {
+    const timetables = formStateToDevelopmentPlanTimetables(formData);
+
+    const timetableCSV = devPlanToCSVString(timetables);
+
+    return `data:text/csv;charset=urf-8, ${timetableCSV}`;
+  };
 
   return (
     <div className={`${className} ${styles.form}`} {...otherProps}>
@@ -48,6 +41,7 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
           <input
             type="month"
             value={stages[stageName]}
+            data-testid={`${stageName.replace(/ /gi, "-")}-input`}
             onChange={(e) =>
               setStages((prev) => ({
                 ...prev,
@@ -57,6 +51,15 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
           />
         </div>
       ))}
+      <a
+        role="button"
+        type="button"
+        data-testid="csv-download-button"
+        href={getTimetableDownload({ LPA: lpa, stages })}
+        download="timetable.csv"
+      >
+        <button> Export Timetable CSV</button>
+      </a>
     </div>
   );
 };
