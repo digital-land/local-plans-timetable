@@ -7,6 +7,12 @@ This repository is a component library publishing two components as part of the 
 
 See the wiki [here](https://github.com/digital-land/local-plans-timetable/wiki).
 
+## Deployment
+
+The Storybook for this library is deployed to GitHub Pages: https://digital-land.github.io/local-plans-timetable/
+
+Assuming a successful lint/test run, all commits to `main` will trigger a new deployment.
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -52,9 +58,3 @@ export default {
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-
-## Deployment
-
-The Storybook for this library is deployed to GitHub Pages: https://digital-land.github.io/local-plans-timetable/
-
-Assuming a successful lint/test run, all commits to `main` will trigger a new deployment.

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
 
+import { Button } from "../gds-components/button/Button";
 import { TextInput } from "../gds-components/text-input/TextInput";
 import { DateInput } from "../gds-components/date-input/DateInput";
 import { Stages, FormData } from "../types/timetable";
@@ -62,7 +63,7 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
         href={getTimetableDownload({ LPA: lpa, stages })}
         download="timetable.csv"
       >
-        <button> Export Timetable CSV</button>
+        <Button>Export Timetable CSV</Button>
       </a>
     </div>
   );
