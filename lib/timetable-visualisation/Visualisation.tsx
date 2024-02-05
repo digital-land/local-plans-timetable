@@ -53,7 +53,7 @@ export const Visualisation = (props: VisualisationProps) => {
   }, [loadData]);
 
   return (
-    <div>
+    <div data-testid="visualisation">
       <div>
         <h1 className="govuk-heading-xl" data-testid="form-title">
           {timetableData.name}
