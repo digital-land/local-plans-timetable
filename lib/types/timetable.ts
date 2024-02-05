@@ -5,15 +5,15 @@ export type DevelopmentPlan = {
   name: string;
   description: string;
   developmentPlanType: string;
-  periodStartDate: Date;
-  periodEndDate: Date;
+  periodStartDate: string;
+  periodEndDate: string;
   developmentPlanGeography: string;
   documentationUrl: string;
-  adoptedDate: Date;
+  adoptedDate: string;
   organisations: string[];
-  entryDate: Date;
-  startDate: Date;
-  endDate: Date;
+  entryDate: string;
+  startDate: string;
+  endDate: string;
   timetableEvents: DevelopmentPlanTimetable[];
 };
 
@@ -31,12 +31,3 @@ export type DevelopmentPlanTimetable = {
 };
 
 export type StageName = (typeof stageNames)[number];
-
-export type Stages = {
-  [key in StageName]: string;
-};
-
-export type FormData = {
-  LPA: string;
-  stages: Stages;
-};

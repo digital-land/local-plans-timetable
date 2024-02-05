@@ -1,36 +1,57 @@
-import { useState } from "react";
-import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
+import { useMemo, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 import { Button } from "../gds-components/button/Button";
 import { TextInput } from "../gds-components/text-input/TextInput";
 import { DateInput } from "../gds-components/date-input/DateInput";
-import { Stages, FormData } from "../types/timetable";
-import {
-  formStateToDevelopmentPlanTimetables,
-  devPlanToCSVString,
-} from "../utils/timetable";
+import { DevelopmentPlan } from "../types/timetable";
+import { devPlanToCSVString } from "../utils/timetable";
 import { stageNames } from "../constants";
 
 import styles from "./styles.module.css";
+import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
+import { PlanPreview } from "../timetable-visualisation/PlanPreview";
 
 const defaultDate = "";
 
-const initialStages = Object.fromEntries(
-  stageNames.map((stage) => [stage, defaultDate])
-) as Stages;
+const initialState: DevelopmentPlan = {
+  reference: "",
+  name: "",
+  description: "",
+  developmentPlanType: "",
+  periodStartDate: defaultDate,
+  periodEndDate: defaultDate,
+  developmentPlanGeography: "",
+  documentationUrl: "",
+  adoptedDate: defaultDate,
+  organisations: [],
+  entryDate: defaultDate,
+  startDate: defaultDate,
+  endDate: defaultDate,
+  timetableEvents: stageNames.map((stage) => ({
+    reference: uuidv4(),
+    name: "",
+    developmentPlan: "",
+    developmentPlanEvent: stage,
+    eventDate: "",
+    notes: "",
+    organisation: "",
+    entryDate: defaultDate,
+    startDate: "",
+    endDate: "",
+  })),
+};
 
 export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
   const { className, ...otherProps } = props;
-  const [lpa, setLpa] = useState<string>("");
-  const [stages, setStages] = useState<Stages>(initialStages);
+  const [developmentPlan, setDevelopmentPlan] =
+    useState<DevelopmentPlan>(initialState);
 
-  const getTimetableDownload = (formData: FormData) => {
-    const timetables = formStateToDevelopmentPlanTimetables(formData);
-
-    const timetableCSV = devPlanToCSVString(timetables);
+  const timetableDownloadLink = useMemo(() => {
+    const timetableCSV = devPlanToCSVString(developmentPlan);
 
     return `data:text/csv;charset=urf-8, ${timetableCSV}`;
-  };
+  }, [developmentPlan]);
 
   return (
     <div className={`${className} ${styles.form}`} {...otherProps}>
@@ -40,18 +61,28 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
       <div className={styles.formRow}>
         <TextInput
           label="Local planning authority"
-          onChange={setLpa}
-          value={lpa}
+          onChange={(lpa) =>
+            setDevelopmentPlan((prev) => ({
+              ...prev,
+              organisations: [lpa],
+            }))
+          }
+          value={developmentPlan.organisations[0]}
         />
       </div>
-      {stageNames.map((stageName) => (
-        <div key={stageName}>
+      {developmentPlan.timetableEvents.map((stage) => (
+        <div key={stage.developmentPlanEvent}>
           <DateInput
-            value={stages[stageName]}
-            label={stageName}
-            name={`${stageName.split(" ").join("-")}-date`}
+            value={stage.eventDate}
+            label={stage.developmentPlanEvent}
+            name={`${stage.developmentPlanEvent.split(" ").join("-")}-date`}
             onChange={(value) =>
-              setStages((prev) => ({ ...prev, [stageName]: value }))
+              setDevelopmentPlan((prev) => ({
+                ...prev,
+                timetableEvents: prev.timetableEvents.map((e) =>
+                  e === stage ? { ...e, eventDate: value } : e
+                ),
+              }))
             }
           />
         </div>
@@ -60,11 +91,13 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
         role="button"
         type="button"
         data-testid="csv-download-button"
-        href={getTimetableDownload({ LPA: lpa, stages })}
+        href={timetableDownloadLink}
         download="timetable.csv"
       >
         <Button>Export Timetable CSV</Button>
       </a>
+      <h1 className="govuk-heading-xl">Preview</h1>
+      <PlanPreview plan={developmentPlan} />
     </div>
   );
 };
