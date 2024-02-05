@@ -62,6 +62,7 @@
     "**/*.css"
   ],
   "dependencies": {
+    "csvtojson": "^2.0.10",
     "govuk-frontend": "^5.0.0",
     "uuid": "^9.0.1"
   }

@@ -2,7 +2,7 @@ import { DevelopmentPlanTimetable, FormData } from "../types/timetable";
 import { v4 as uuidv4 } from "uuid";
 
 const formStateToDevelopmentPlanTimetables = (
-  state: FormData,
+  state: FormData
 ): DevelopmentPlanTimetable[] => {
   return Object.entries(state.stages).map(([event, eventDate]) => ({
     reference: uuidv4(),
@@ -25,10 +25,25 @@ const devPlanToCSVString = (timeTables: DevelopmentPlanTimetable[]): string => {
       ...array,
       Object.values(timetableItem).join(", "),
     ],
-    [headLine],
+    [headLine]
   );
 
   return CSVRows.join("\n");
 };
 
-export { formStateToDevelopmentPlanTimetables, devPlanToCSVString };
+const loadCSV = async (filepath: string) =>
+  await fetch(filepath).then((res) => res.text());
+
+const dateToDefaultLocalDateString = (date: Date) =>
+  new Date(date).toLocaleDateString("en-uk", {
+    day: "numeric",
+    year: "numeric",
+    month: "long",
+  });
+
+export {
+  formStateToDevelopmentPlanTimetables,
+  devPlanToCSVString,
+  loadCSV,
+  dateToDefaultLocalDateString,
+};
