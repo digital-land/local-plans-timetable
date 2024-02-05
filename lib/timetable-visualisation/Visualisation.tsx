@@ -33,27 +33,18 @@ export const Visualisation = (props: VisualisationProps) => {
     DEFAULT_TIMETABLE_DATA
   );
   const loadData = useCallback(async () => {
-    let loadedData: DevelopmentPlan = DEFAULT_TIMETABLE_DATA;
-    await loadCSV(stagesFilepath).then(async (data) => {
-      await csvToJson()
-        .fromString(data)
-        .then((jsonObj) => {
-          loadedData = {
-            ...loadedData,
-            timetableEvents: jsonObj,
-          };
-        });
-    });
-    await loadCSV(headersFilepath).then(async (data) => {
-      await csvToJson()
-        .fromString(data)
-        .then((jsonObj) => {
-          loadedData = {
-            ...loadedData,
-            ...jsonObj[0],
-          };
-        });
-    });
+    const stagesData = await loadCSV(stagesFilepath);
+    const events = await csvToJson().fromString(stagesData);
+
+    const headersData = await loadCSV(headersFilepath);
+    const headers = await csvToJson().fromString(headersData);
+
+    const loadedData: DevelopmentPlan = {
+      ...DEFAULT_TIMETABLE_DATA,
+      ...headers[0],
+      timetableEvents: events,
+    };
+
     setTimetableData(loadedData);
   }, [headersFilepath, stagesFilepath]);
 
