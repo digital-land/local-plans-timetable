@@ -3,20 +3,17 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import { stageNames } from "../constants";
-import {
-  formStateToDevelopmentPlanTimetables,
-  devPlanToCSVString,
-} from "../utils/timetable";
+import { devPlanToCSVString } from "../utils/timetable";
 import { Form } from "./Form";
+import { PlanViewer } from "../timetable-visualisation/PlanViewer";
 
 jest.mock("../utils/timetable");
+jest.mock("../timetable-visualisation/PlanViewer");
 
 describe("all activity users", () => {
   beforeEach(() => {
-    (formStateToDevelopmentPlanTimetables as jest.Mock).mockImplementation(
-      () => {}
-    );
     (devPlanToCSVString as jest.Mock).mockImplementation(() => {});
+    (PlanViewer as jest.Mock).mockReturnValue(<></>);
   });
 
   afterEach(() => {
@@ -31,7 +28,6 @@ describe("all activity users", () => {
   test("Generates CSV file on render", () => {
     render(<Form />);
 
-    expect(formStateToDevelopmentPlanTimetables).toHaveBeenCalledTimes(1);
     expect(devPlanToCSVString).toHaveBeenCalledTimes(1);
   });
 
@@ -47,7 +43,12 @@ describe("all activity users", () => {
       "2026"
     );
 
-    expect(formStateToDevelopmentPlanTimetables).toHaveBeenCalledTimes(7);
     expect(devPlanToCSVString).toHaveBeenCalledTimes(7);
+  });
+
+  test("renders a PlanPreview component", () => {
+    render(<Form />);
+
+    expect(PlanViewer).toHaveBeenCalledTimes(1);
   });
 });

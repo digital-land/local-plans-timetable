@@ -1,11 +1,13 @@
 import { useCallback, useEffect, useState } from "react";
+
 import csvToJson from "csvtojson";
+
 import { loadCSV } from "../utils/timetable";
 import { DevelopmentPlan } from "../types/timetable";
-
-import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
 import { PlanViewer } from "./PlanViewer";
 import { DEFAULT_DEVELOPMENT_PLAN } from "../constants";
+
+import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
 
 type VisualisationProps = {
   stagesFilepath: string;
