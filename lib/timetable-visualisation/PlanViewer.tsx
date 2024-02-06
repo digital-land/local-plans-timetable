@@ -2,11 +2,11 @@ import { DevelopmentPlan } from "../types/timetable";
 
 import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
 
-type PlanPreviewProps = {
+type PlanViewerProps = {
   plan: DevelopmentPlan;
 };
 
-export const PlanPreview = ({
+export const PlanViewer  = ({
   plan: {
     name,
     description,
@@ -22,11 +22,11 @@ export const PlanPreview = ({
     documentationUrl,
     timetableEvents,
   },
-}: PlanPreviewProps) => {
+}: PlanViewerProps) => {
   return (
     <div data-testid="plan-preview">
       <div>
-        <h1 className="govuk-heading-xl" data-testid="form-title">
+        <h1 className="govuk-heading-xl">
           {name}
         </h1>
         <p className="govuk-body-l">{description}</p>

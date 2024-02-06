@@ -1,57 +1,58 @@
-import { useMemo, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { useCallback, useMemo, useState } from "react";
 
 import { Button } from "../gds-components/button/Button";
 import { TextInput } from "../gds-components/text-input/TextInput";
 import { DateInput } from "../gds-components/date-input/DateInput";
-import { DevelopmentPlan } from "../types/timetable";
+import {
+  DevelopmentPlan,
+  DevelopmentPlanTimetable,
+  StageName,
+} from "../types/timetable";
 import { devPlanToCSVString } from "../utils/timetable";
-import { stageNames } from "../constants";
+import { DEFAULT_DEVELOPMENT_PLAN } from "../constants";
+import { PlanViewer } from "../timetable-visualisation/PlanViewer";
 
 import styles from "./styles.module.css";
 import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
-import { PlanPreview } from "../timetable-visualisation/PlanPreview";
 
-const defaultDate = "";
-
-const initialState: DevelopmentPlan = {
-  reference: "",
-  name: "",
-  description: "",
-  developmentPlanType: "",
-  periodStartDate: defaultDate,
-  periodEndDate: defaultDate,
-  developmentPlanGeography: "",
-  documentationUrl: "",
-  adoptedDate: defaultDate,
-  organisations: [],
-  entryDate: defaultDate,
-  startDate: defaultDate,
-  endDate: defaultDate,
-  timetableEvents: stageNames.map((stage) => ({
-    reference: uuidv4(),
-    name: "",
-    developmentPlan: "",
-    developmentPlanEvent: stage,
-    eventDate: "",
-    notes: "",
-    organisation: "",
-    entryDate: defaultDate,
-    startDate: "",
-    endDate: "",
-  })),
-};
+const {
+  timetableEvents: timetableEventsInitialState,
+  ...developmentPlanInitialState
+} = DEFAULT_DEVELOPMENT_PLAN;
 
 export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
   const { className, ...otherProps } = props;
-  const [developmentPlan, setDevelopmentPlan] =
-    useState<DevelopmentPlan>(initialState);
+
+  const [developmentPlan, setDevelopmentPlan] = useState<
+    Omit<DevelopmentPlan, "timetableEvents">
+  >(developmentPlanInitialState);
+  const [developmentPlanEvents, setDevelopmentPlanEvents] = useState<
+    DevelopmentPlanTimetable[]
+  >(timetableEventsInitialState);
 
   const timetableDownloadLink = useMemo(() => {
-    const timetableCSV = devPlanToCSVString(developmentPlan);
+    const timetableCSV = devPlanToCSVString({
+      ...developmentPlan,
+      timetableEvents: developmentPlanEvents,
+    });
 
     return `data:text/csv;charset=urf-8, ${timetableCSV}`;
-  }, [developmentPlan]);
+  }, [developmentPlan, developmentPlanEvents]);
+
+  const updateEventDate = useCallback(
+    (dateValue: string, stageName: StageName) => {
+      const updatedEvents = [...developmentPlanEvents];
+      const dateToUpdate = updatedEvents.find(
+        (event) => event.developmentPlanEvent === stageName
+      );
+
+      if (dateToUpdate) {
+        dateToUpdate.eventDate = dateValue;
+        setDevelopmentPlanEvents(updatedEvents);
+      }
+    },
+    [developmentPlanEvents]
+  );
 
   return (
     <div className={`${className} ${styles.form}`} {...otherProps}>
@@ -70,19 +71,14 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
           value={developmentPlan.organisations[0]}
         />
       </div>
-      {developmentPlan.timetableEvents.map((stage) => (
+      {developmentPlanEvents.map((stage) => (
         <div key={stage.developmentPlanEvent}>
           <DateInput
             value={stage.eventDate}
             label={stage.developmentPlanEvent}
             name={`${stage.developmentPlanEvent.split(" ").join("-")}-date`}
             onChange={(value) =>
-              setDevelopmentPlan((prev) => ({
-                ...prev,
-                timetableEvents: prev.timetableEvents.map((e) =>
-                  e === stage ? { ...e, eventDate: value } : e
-                ),
-              }))
+              updateEventDate(value, stage.developmentPlanEvent)
             }
           />
         </div>
@@ -97,7 +93,12 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
         <Button>Export Timetable CSV</Button>
       </a>
       <h1 className="govuk-heading-xl">Preview</h1>
-      <PlanPreview plan={developmentPlan} />
+      <PlanViewer
+        plan={{
+          ...developmentPlan,
+          timetableEvents: developmentPlanEvents,
+        }}
+      />
     </div>
   );
 };

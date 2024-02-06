@@ -4,24 +4,8 @@ import { loadCSV } from "../utils/timetable";
 import { DevelopmentPlan } from "../types/timetable";
 
 import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
-import { PlanPreview } from "./PlanPreview";
-
-const DEFAULT_DEVELOPMENT_PLAN_DATA: DevelopmentPlan = {
-  reference: "",
-  name: "",
-  description: "",
-  developmentPlanType: "",
-  periodStartDate: "",
-  periodEndDate: "",
-  developmentPlanGeography: "",
-  documentationUrl: "",
-  adoptedDate: "",
-  organisations: [],
-  entryDate: "",
-  startDate: "",
-  endDate: "",
-  timetableEvents: [],
-};
+import { PlanViewer } from "./PlanViewer";
+import { DEFAULT_DEVELOPMENT_PLAN } from "../constants";
 
 type VisualisationProps = {
   stagesFilepath: string;
@@ -31,7 +15,7 @@ type VisualisationProps = {
 export const Visualisation = (props: VisualisationProps) => {
   const { stagesFilepath, headersFilepath } = props;
   const [timetableData, setTimetableData] = useState<DevelopmentPlan>(
-    DEFAULT_DEVELOPMENT_PLAN_DATA
+    DEFAULT_DEVELOPMENT_PLAN
   );
   const loadData = useCallback(async () => {
     const stagesData = await loadCSV(stagesFilepath);
@@ -41,7 +25,7 @@ export const Visualisation = (props: VisualisationProps) => {
     const headers = await csvToJson().fromString(headersData);
 
     const loadedData: DevelopmentPlan = {
-      ...DEFAULT_DEVELOPMENT_PLAN_DATA,
+      ...DEFAULT_DEVELOPMENT_PLAN,
       ...headers[0],
       timetableEvents: events,
     };
@@ -55,7 +39,7 @@ export const Visualisation = (props: VisualisationProps) => {
 
   return (
     <div data-testid="visualisation">
-      <PlanPreview plan={timetableData} />
+      <PlanViewer plan={timetableData} />
     </div>
   );
 };
