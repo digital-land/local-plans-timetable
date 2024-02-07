@@ -8,14 +8,14 @@ export type DevelopmentPlan = {
   description: string;
   developmentPlanType: string;
   periodStartDate: string;
-  periodEndDate: string;
+  periodEndDate?: string;
   developmentPlanGeography: string;
   documentationUrl: string;
   adoptedDate: string;
   organisations: string[];
   entryDate: string;
   startDate: string;
-  endDate: string;
+  endDate?: string;
   timetableEvents: DevelopmentPlanTimetable[];
 };
 

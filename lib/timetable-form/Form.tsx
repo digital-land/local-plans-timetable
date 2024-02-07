@@ -3,11 +3,8 @@ import { useMemo, useState } from "react";
 import { Button } from "../gds-components/button/Button";
 import { TextInput } from "../gds-components/text-input/TextInput";
 import { DateInput } from "../gds-components/date-input/DateInput";
-import {
-  DevelopmentPlan,
-  DevelopmentPlanTimetable,
-} from "../types/timetable";
-import { devPlanToCSVString } from "../utils/timetable";
+import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
+import { objectArrayToCSVString } from "../utils/timetable";
 import { DEFAULT_DEVELOPMENT_PLAN } from "../constants";
 import { PlanViewer } from "../timetable-visualisation/PlanViewer";
 
@@ -30,13 +27,16 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
   >(timetableEventsInitialState);
 
   const timetableDownloadLink = useMemo(() => {
-    const timetableCSV = devPlanToCSVString({
-      ...developmentPlan,
-      timetableEvents: developmentPlanEvents,
-    });
+    const timetableCSV = objectArrayToCSVString(developmentPlanEvents);
 
     return `data:text/csv;charset=urf-8, ${timetableCSV}`;
-  }, [developmentPlan, developmentPlanEvents]);
+  }, [developmentPlanEvents]);
+
+  const timetableHeaderDownloadLink = useMemo(() => {
+    const timetableCSV = objectArrayToCSVString([developmentPlan]);
+
+    return `data:text/csv;charset=urf-8, ${timetableCSV}`;
+  }, [developmentPlan]);
 
   return (
     <div className={`${className} ${styles.form}`} {...otherProps}>
@@ -63,21 +63,34 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
             name={`${stage.developmentPlanEvent.split(" ").join("-")}-date`}
             onChange={(value) =>
               setDevelopmentPlanEvents((prev) =>
-                prev.map((e) => (e === stage ? { ...e, eventDate: value } : e))
+                prev.map((e) => (e === stage ? { ...e, eventDate: value } : e)),
               )
             }
           />
         </div>
       ))}
-      <a
-        role="button"
-        type="button"
-        data-testid="csv-download-button"
-        href={timetableDownloadLink}
-        download="timetable.csv"
-      >
-        <Button>Export Timetable CSV</Button>
-      </a>
+      <div>
+        <a
+          role="button"
+          type="button"
+          data-testid="csv-download-button"
+          href={timetableDownloadLink}
+          download="timetable.csv"
+        >
+          <Button>Export Timetable CSV</Button>
+        </a>
+      </div>
+      <div>
+        <a
+          role="button"
+          type="button"
+          data-testid="csv-download-header-button"
+          href={timetableHeaderDownloadLink}
+          download="timetableHeader.csv"
+        >
+          <Button>Export Timetable Header CSV</Button>
+        </a>
+      </div>
       <h1 className="govuk-heading-xl">Preview</h1>
       <PlanViewer
         plan={{

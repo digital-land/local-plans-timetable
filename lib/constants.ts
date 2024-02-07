@@ -16,22 +16,20 @@ export const stageNames = [
   "Plan adopted",
 ] as const;
 
-const defaultDate = "";
+const defaultDate = new Date().toISOString().split("T")[0];
 
 export const DEFAULT_DEVELOPMENT_PLAN: DevelopmentPlan = {
-  reference: "",
+  reference: uuidv4(),
   name: "",
   description: "",
   developmentPlanType: "",
   periodStartDate: defaultDate,
-  periodEndDate: defaultDate,
   developmentPlanGeography: "",
   documentationUrl: "",
   adoptedDate: defaultDate,
   organisations: [],
   entryDate: defaultDate,
   startDate: defaultDate,
-  endDate: defaultDate,
   timetableEvents: stageNames.map((stage) => ({
     reference: uuidv4(),
     name: "",
@@ -41,7 +39,7 @@ export const DEFAULT_DEVELOPMENT_PLAN: DevelopmentPlan = {
     notes: "",
     organisation: "",
     entryDate: defaultDate,
-    startDate: "",
+    startDate: defaultDate,
     endDate: "",
   })),
 };
