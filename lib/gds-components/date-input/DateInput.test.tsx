@@ -30,7 +30,7 @@ const DateInputWrapper = ({
 
 it("shows the right input values from the provided value", () => {
   const { asFragment } = render(
-    <DateInputWrapper initialValue="3-2007" onChange={() => {}} />
+    <DateInputWrapper initialValue="2007-3" onChange={() => {}} />
   );
 
   expect(asFragment()).toMatchSnapshot();
@@ -41,25 +41,25 @@ it("shows the right input values from the provided value", () => {
 it("calls the onChange handler with the right value when the month input changes", async () => {
   const onChange = jest.fn();
   const { asFragment } = render(
-    <DateInputWrapper initialValue="3-2007" onChange={onChange} />
+    <DateInputWrapper initialValue="2007-3" onChange={onChange} />
   );
 
   await userEvent.clear(screen.getByLabelText("Month"));
   await userEvent.type(screen.getByLabelText("Month"), "4");
 
   expect(asFragment()).toMatchSnapshot();
-  expect(onChange).toHaveBeenLastCalledWith("4-2007");
+  expect(onChange).toHaveBeenLastCalledWith("2007-4");
 });
 
 it("calls the onChange handler with the right value when the year input changes", async () => {
   const onChange = jest.fn();
   const { asFragment } = render(
-    <DateInputWrapper initialValue="3-2007" onChange={onChange} />
+    <DateInputWrapper initialValue="2007-3" onChange={onChange} />
   );
 
   await userEvent.clear(screen.getByLabelText("Year"));
   await userEvent.type(screen.getByLabelText("Year"), "2008");
 
   expect(asFragment()).toMatchSnapshot();
-  expect(onChange).toHaveBeenLastCalledWith("3-2008");
+  expect(onChange).toHaveBeenLastCalledWith("2008-3");
 });

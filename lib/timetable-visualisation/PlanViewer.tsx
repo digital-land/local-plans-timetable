@@ -6,7 +6,7 @@ type PlanViewerProps = {
   plan: DevelopmentPlan;
 };
 
-export const PlanViewer  = ({
+export const PlanViewer = ({
   plan: {
     name,
     description,
@@ -26,9 +26,7 @@ export const PlanViewer  = ({
   return (
     <div data-testid="plan-preview">
       <div>
-        <h1 className="govuk-heading-xl">
-          {name}
-        </h1>
+        <h1 className="govuk-heading-xl">{name}</h1>
         <p className="govuk-body-l">{description}</p>
       </div>
       <div className="govuk-body">
@@ -60,7 +58,7 @@ export const PlanViewer  = ({
         </thead>
         <tbody className="govuk-table__body">
           {timetableEvents.map((timetableEvent) => (
-            <tr className="govuk-table__row">
+            <tr className="govuk-table__row" key={timetableEvent.reference}>
               <th scope="row" className="govuk-table__header">
                 {timetableEvent.developmentPlanEvent}
               </th>

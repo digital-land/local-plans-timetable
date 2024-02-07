@@ -1,13 +1,13 @@
-reference, name, developmentPlan, developmentPlanEvent, eventDate, notes, organisation, entryDate, startDate
-39b7f5e2-beba-43d7-b20d-d9ca3b710f80, , dorcester-new-local-plan, Timetable published,2024-02, , , 2024-02-02T15:46:14.144Z, 2024-02-02T15:46:14.144Z
-7336edfb-8db3-4bbc-806f-4a0895cdeea6, , dorcester-new-local-plan, Draft plan for public consultation published,2024-02, , , 2024-02-02T15:46:14.144Z, 2024-02-02T15:46:14.144Z
-267645e9-7643-4d00-a33c-cebc39e898ef, , dorcester-new-local-plan, Public consultation start,2024-02, , , 2024-02-02T15:46:14.144Z, 2024-02-02T15:46:14.144Z
-2968bdd3-6ea0-4129-b3ad-10980bfb396a, , dorcester-new-local-plan, Public consultation end,2024-02, , , 2024-02-02T15:46:14.144Z, 2024-02-02T15:46:14.144Z
-9c45718b-55e4-4130-a590-0c7fb72ceef4, , dorcester-new-local-plan, Submit plan for examination,2024-02, , , 2024-02-02T15:46:14.144Z, 2024-02-02T15:46:14.144Z
-70ce45bb-509e-4749-9d61-4a05315bc7e1, , dorcester-new-local-plan, Examination hearing start,2024-02, , , 2024-02-02T15:46:14.144Z, 2024-02-02T15:46:14.144Z
-d26178c6-8c07-448e-890b-b4332ec0dcae, , dorcester-new-local-plan, Planning inspectorate examination start,2024-02, , , 2024-02-02T15:46:14.144Z, 2024-02-02T15:46:14.144Z
-f602ce0b-1abd-491f-bb58-46ec8feb7c0f, , dorcester-new-local-plan, Planning inspectorate examination end,2024-02, , , 2024-02-02T15:46:14.144Z, 2024-02-02T15:46:14.144Z
-9d238d4d-4635-4f82-8a60-ccfdab0b2c99, , dorcester-new-local-plan, Planning inspectorate found sound,2024-02, , , 2024-02-02T15:46:14.144Z, 2024-02-02T15:46:14.144Z
-b85f4dbc-30af-4d30-943b-c0c103b296c8, , dorcester-new-local-plan, Examination hearing end,2024-02, , , 2024-02-02T15:46:14.144Z, 2024-02-02T15:46:14.144Z
-4a85023e-96dc-4e26-86cf-c9064dbaec72, , dorcester-new-local-plan, Inspector report published,2024-02, , , 2024-02-02T15:46:14.144Z, 2024-02-02T15:46:14.144Z
-beb5847a-f802-43d7-ac69-b5d6a567b9a0, , dorcester-new-local-plan, Plan adopted,2024-02, , , 2024-02-02T15:46:14.144Z, 2024-02-02T15:46:14.144Z
+reference,name,developmentPlan,developmentPlanEvent,eventDate,notes,organisation,entryDate,startDate
+39b7f5e2-beba-43d7-b20d-d9ca3b710f80,,dorcester-new-local-plan,Timetable published,2024-02,,,2024-02-02T15:46:14.144Z,2024-02-02T15:46:14.144Z
+7336edfb-8db3-4bbc-806f-4a0895cdeea6,,dorcester-new-local-plan,Draft plan for public consultation published,2024-02,,,2024-02-02T15:46:14.144Z,2024-02-02T15:46:14.144Z
+267645e9-7643-4d00-a33c-cebc39e898ef,,dorcester-new-local-plan,Public consultation start,2024-02,,,2024-02-02T15:46:14.144Z,2024-02-02T15:46:14.144Z
+2968bdd3-6ea0-4129-b3ad-10980bfb396a,,dorcester-new-local-plan,Public consultation end,2024-02,,,2024-02-02T15:46:14.144Z,2024-02-02T15:46:14.144Z
+9c45718b-55e4-4130-a590-0c7fb72ceef4,,dorcester-new-local-plan,Submit plan for examination,2024-02,,,2024-02-02T15:46:14.144Z,2024-02-02T15:46:14.144Z
+70ce45bb-509e-4749-9d61-4a05315bc7e1,,dorcester-new-local-plan,Examination hearing start,2024-02,,,2024-02-02T15:46:14.144Z,2024-02-02T15:46:14.144Z
+d26178c6-8c07-448e-890b-b4332ec0dcae,,dorcester-new-local-plan,Planning inspectorate examination start,2024-02,,,2024-02-02T15:46:14.144Z,2024-02-02T15:46:14.144Z
+f602ce0b-1abd-491f-bb58-46ec8feb7c0f,,dorcester-new-local-plan,Planning inspectorate examination end,2024-02,,,2024-02-02T15:46:14.144Z,2024-02-02T15:46:14.144Z
+9d238d4d-4635-4f82-8a60-ccfdab0b2c99,,dorcester-new-local-plan,Planning inspectorate found sound,2024-02,,,2024-02-02T15:46:14.144Z,2024-02-02T15:46:14.144Z
+b85f4dbc-30af-4d30-943b-c0c103b296c8,,dorcester-new-local-plan,Examination hearing end,2024-02,,,2024-02-02T15:46:14.144Z,2024-02-02T15:46:14.144Z
+4a85023e-96dc-4e26-86cf-c9064dbaec72,,dorcester-new-local-plan,Inspector report published,2024-02,,,2024-02-02T15:46:14.144Z,2024-02-02T15:46:14.144Z
+beb5847a-f802-43d7-ac69-b5d6a567b9a0,,dorcester-new-local-plan,Plan adopted,2024-02,,,2024-02-02T15:46:14.144Z,2024-02-02T15:46:14.144Z

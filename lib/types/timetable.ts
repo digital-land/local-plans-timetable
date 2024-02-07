@@ -12,7 +12,7 @@ export type DevelopmentPlan = {
   developmentPlanGeography: string;
   documentationUrl: string;
   adoptedDate: string;
-  organisations: string[];
+  organisations: string;
   entryDate: string;
   startDate: string;
   endDate?: string;
