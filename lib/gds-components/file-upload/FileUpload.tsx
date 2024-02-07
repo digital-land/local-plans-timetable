@@ -24,8 +24,6 @@ export const FileUpload = ({
       <label className="govuk-label">{label}</label>
       <input
         className="govuk-file-upload"
-        id="file-upload-1"
-        name="fileUpload1"
         type="file"
         accept={accept}
         onChange={handleChange}
