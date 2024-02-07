@@ -57,3 +57,4 @@ jobs:
           folder: dist-cdn
           clean: true
           branch: master
+          clean-exclude: README.md
