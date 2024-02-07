@@ -1,14 +1,14 @@
-import { DevelopmentPlan } from "../types/timetable";
+const objectArrayToCSVString = (
+  objArr: { [key: string]: unknown }[],
+): string => {
+  const headLine = Object.keys(objArr[0]).join(",");
 
-const devPlanToCSVString = (timeTables: DevelopmentPlan): string => {
-  const headLine = Object.keys(timeTables.timetableEvents[0]).join(", ");
-
-  const CSVRows = timeTables.timetableEvents.reduce(
+  const CSVRows = objArr.reduce(
     (array, timetableItem) => [
       ...array,
-      Object.values(timetableItem).join(", "),
+      Object.values(timetableItem).join(","),
     ],
-    [headLine]
+    [headLine],
   );
 
   return CSVRows.join("\n");
@@ -24,8 +24,4 @@ const dateToDefaultLocalDateString = (date: Date) =>
     month: "long",
   });
 
-export {
-  devPlanToCSVString,
-  loadCSV,
-  dateToDefaultLocalDateString,
-};
+export { objectArrayToCSVString, loadCSV, dateToDefaultLocalDateString };

@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import { stageNames } from "../constants";
-import { devPlanToCSVString } from "../utils/timetable";
+import { objectArrayToCSVString } from "../utils/timetable";
 import { Form } from "./Form";
 import { PlanViewer } from "../timetable-visualisation/PlanViewer";
 
@@ -12,7 +12,7 @@ jest.mock("../timetable-visualisation/PlanViewer");
 
 describe("all activity users", () => {
   beforeEach(() => {
-    (devPlanToCSVString as jest.Mock).mockImplementation(() => {});
+    (objectArrayToCSVString as jest.Mock).mockImplementation(() => {});
     (PlanViewer as jest.Mock).mockReturnValue(<></>);
   });
 
@@ -28,7 +28,7 @@ describe("all activity users", () => {
   test("Generates CSV file on render", () => {
     render(<Form />);
 
-    expect(devPlanToCSVString).toHaveBeenCalledTimes(1);
+    expect(objectArrayToCSVString).toHaveBeenCalledTimes(2);
   });
 
   test("Updates the CSV when the state changes", async () => {
@@ -43,7 +43,7 @@ describe("all activity users", () => {
       "2026"
     );
 
-    expect(devPlanToCSVString).toHaveBeenCalledTimes(7);
+    expect(objectArrayToCSVString).toHaveBeenCalledTimes(8);
   });
 
   test("renders a PlanPreview component", () => {
