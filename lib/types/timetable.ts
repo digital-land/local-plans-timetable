@@ -1,19 +1,21 @@
 import { stageNames } from "../constants";
 
+export type StageName = (typeof stageNames)[number];
+
 export type DevelopmentPlan = {
   reference: string;
   name: string;
   description: string;
   developmentPlanType: string;
-  periodStartDate: Date;
-  periodEndDate: Date;
+  periodStartDate: string;
+  periodEndDate: string;
   developmentPlanGeography: string;
   documentationUrl: string;
-  adoptedDate: Date;
+  adoptedDate: string;
   organisations: string[];
-  entryDate: Date;
-  startDate: Date;
-  endDate: Date;
+  entryDate: string;
+  startDate: string;
+  endDate: string;
   timetableEvents: DevelopmentPlanTimetable[];
 };
 
@@ -21,22 +23,11 @@ export type DevelopmentPlanTimetable = {
   reference: string;
   name: string;
   developmentPlan: string;
-  developmentPlanEvent: string;
+  developmentPlanEvent: StageName;
   eventDate: string;
   notes: string;
   organisation: string;
   entryDate: string;
   startDate: string;
   endDate?: string;
-};
-
-export type StageName = (typeof stageNames)[number];
-
-export type Stages = {
-  [key in StageName]: string;
-};
-
-export type FormData = {
-  LPA: string;
-  stages: Stages;
 };

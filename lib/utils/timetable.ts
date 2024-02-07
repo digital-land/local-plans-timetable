@@ -1,26 +1,9 @@
-import { DevelopmentPlanTimetable, FormData } from "../types/timetable";
-import { v4 as uuidv4 } from "uuid";
+import { DevelopmentPlan } from "../types/timetable";
 
-const formStateToDevelopmentPlanTimetables = (
-  state: FormData
-): DevelopmentPlanTimetable[] => {
-  return Object.entries(state.stages).map(([event, eventDate]) => ({
-    reference: uuidv4(),
-    name: "",
-    developmentPlan: "dorcester-new-local-plan", //this will likely come from a fetch from DPD
-    developmentPlanEvent: event,
-    eventDate: eventDate,
-    notes: "",
-    organisation: state.LPA,
-    entryDate: new Date().toISOString(),
-    startDate: new Date().toISOString(),
-  }));
-};
+const devPlanToCSVString = (timeTables: DevelopmentPlan): string => {
+  const headLine = Object.keys(timeTables.timetableEvents[0]).join(", ");
 
-const devPlanToCSVString = (timeTables: DevelopmentPlanTimetable[]): string => {
-  const headLine = Object.keys(timeTables[0]).join(", ");
-
-  const CSVRows = timeTables.reduce(
+  const CSVRows = timeTables.timetableEvents.reduce(
     (array, timetableItem) => [
       ...array,
       Object.values(timetableItem).join(", "),
@@ -42,7 +25,6 @@ const dateToDefaultLocalDateString = (date: Date) =>
   });
 
 export {
-  formStateToDevelopmentPlanTimetables,
   devPlanToCSVString,
   loadCSV,
   dateToDefaultLocalDateString,

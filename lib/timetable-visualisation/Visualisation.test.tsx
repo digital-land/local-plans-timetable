@@ -3,8 +3,10 @@ import { render, waitFor, screen } from "@testing-library/react";
 import { loadCSV } from "../utils/timetable";
 import { Visualisation } from "./Visualisation";
 import csvToJson from "csvtojson";
+import { PlanViewer } from "./PlanViewer";
 
 jest.mock("../utils/timetable");
+jest.mock("../timetable-visualisation/PlanViewer");
 jest.mock("csvtojson", () => ({
   default: jest.fn(() => ({
     fromString: jest.fn(() => new Promise((resolve) => resolve([]))),
@@ -17,6 +19,7 @@ const headersFilepath = "/header";
 describe("Visualisation", () => {
   beforeEach(() => {
     (loadCSV as jest.Mock).mockResolvedValue("");
+    (PlanViewer as jest.Mock).mockReturnValue(<></>);
   });
 
   afterEach(() => {
@@ -47,5 +50,14 @@ describe("Visualisation", () => {
 
       expect(csvToJson).toHaveBeenCalledTimes(2);
     });
+  });
+  it("renders a PlanPreview component", () => {
+    render(
+      <Visualisation
+        stagesFilepath={stagesFilePath}
+        headersFilepath={headersFilepath}
+      />
+    );
+    expect(PlanViewer).toHaveBeenCalledTimes(1);
   });
 });
