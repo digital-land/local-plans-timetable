@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import { Button } from "../gds-components/button/Button";
 import { TextInput } from "../gds-components/text-input/TextInput";
@@ -6,7 +6,6 @@ import { DateInput } from "../gds-components/date-input/DateInput";
 import {
   DevelopmentPlan,
   DevelopmentPlanTimetable,
-  StageName,
 } from "../types/timetable";
 import { devPlanToCSVString } from "../utils/timetable";
 import { DEFAULT_DEVELOPMENT_PLAN } from "../constants";
@@ -39,21 +38,6 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
     return `data:text/csv;charset=urf-8, ${timetableCSV}`;
   }, [developmentPlan, developmentPlanEvents]);
 
-  const updateEventDate = useCallback(
-    (dateValue: string, stageName: StageName) => {
-      const updatedEvents = [...developmentPlanEvents];
-      const dateToUpdate = updatedEvents.find(
-        (event) => event.developmentPlanEvent === stageName
-      );
-
-      if (dateToUpdate) {
-        dateToUpdate.eventDate = dateValue;
-        setDevelopmentPlanEvents(updatedEvents);
-      }
-    },
-    [developmentPlanEvents]
-  );
-
   return (
     <div className={`${className} ${styles.form}`} {...otherProps}>
       <h1 className="govuk-heading-xl" data-testid="form-title">
@@ -78,7 +62,9 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
             label={stage.developmentPlanEvent}
             name={`${stage.developmentPlanEvent.split(" ").join("-")}-date`}
             onChange={(value) =>
-              updateEventDate(value, stage.developmentPlanEvent)
+              setDevelopmentPlanEvents((prev) =>
+                prev.map((e) => (e === stage ? { ...e, eventDate: value } : e))
+              )
             }
           />
         </div>
