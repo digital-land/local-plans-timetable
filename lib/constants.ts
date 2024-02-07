@@ -27,7 +27,7 @@ export const DEFAULT_DEVELOPMENT_PLAN: DevelopmentPlan = {
   developmentPlanGeography: "",
   documentationUrl: "",
   adoptedDate: defaultDate,
-  organisations: [],
+  organisations: "",
   entryDate: defaultDate,
   startDate: defaultDate,
   timetableEvents: stageNames.map((stage) => ({
