@@ -10,7 +10,7 @@ export interface DateInputProps {
 }
 
 export const DateInput = ({ value, label, name, onChange }: DateInputProps) => {
-  const [month = "", year = ""] = value.split("-");
+  const [year = "", month = ""] = value.split("-");
 
   return (
     <div className="govuk-form-group">

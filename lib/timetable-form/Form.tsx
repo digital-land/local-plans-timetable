@@ -1,10 +1,12 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
-import { Button } from "../gds-components/button/Button";
-import { TextInput } from "../gds-components/text-input/TextInput";
-import { DateInput } from "../gds-components/date-input/DateInput";
+import { FileUpload, TextInput, DateInput, Button } from "../gds-components";
 import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
-import { objectArrayToCSVString } from "../utils/timetable";
+import {
+  objectArrayToCSVString,
+  CSVStringToDevPlan,
+  CSVStringToDevPlanTimetable,
+} from "../utils/timetable";
 import { DEFAULT_DEVELOPMENT_PLAN } from "../constants";
 import { PlanViewer } from "../timetable-visualisation/PlanViewer";
 
@@ -15,6 +17,8 @@ const {
   timetableEvents: timetableEventsInitialState,
   ...developmentPlanInitialState
 } = DEFAULT_DEVELOPMENT_PLAN;
+
+const reader = new FileReader();
 
 export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
   const { className, ...otherProps } = props;
@@ -38,21 +42,53 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
     return `data:text/csv;charset=urf-8, ${timetableCSV}`;
   }, [developmentPlan]);
 
+  const handleDevelopmentPlanFileUpload = useCallback((file: File) => {
+    reader.onload = (event) => {
+      const csvString = event.target?.result?.toString();
+
+      if (csvString) {
+        setDevelopmentPlan(CSVStringToDevPlan(csvString));
+      }
+    };
+
+    reader.readAsText(file);
+  }, []);
+
+  const handleDevelopmentPlanTimetableFileUpload = useCallback((file: File) => {
+    reader.onload = (event) => {
+      const csvString = event.target?.result?.toString();
+
+      if (csvString) {
+        setDevelopmentPlanEvents(CSVStringToDevPlanTimetable(csvString));
+      }
+    };
+
+    reader.readAsText(file);
+  }, []);
+
   return (
     <div className={`${className} ${styles.form}`} {...otherProps}>
       <h1 className="govuk-heading-xl" data-testid="form-title">
         Timetable Form
       </h1>
-      <div className={styles.formRow}>
+      <div>
+        <FileUpload
+          label="Upload a CSV file for Development Plan"
+          onChange={handleDevelopmentPlanFileUpload}
+        />
+        <FileUpload
+          label="Upload a CSV file for Timetable"
+          onChange={handleDevelopmentPlanTimetableFileUpload}
+        />
         <TextInput
           label="Local planning authority"
           onChange={(lpa) =>
             setDevelopmentPlan((prev) => ({
               ...prev,
-              organisations: [lpa],
+              organisations: lpa,
             }))
           }
-          value={developmentPlan.organisations[0]}
+          value={developmentPlan.organisations}
         />
       </div>
       {developmentPlanEvents.map((stage) => (
@@ -63,7 +99,7 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
             name={`${stage.developmentPlanEvent.split(" ").join("-")}-date`}
             onChange={(value) =>
               setDevelopmentPlanEvents((prev) =>
-                prev.map((e) => (e === stage ? { ...e, eventDate: value } : e)),
+                prev.map((e) => (e === stage ? { ...e, eventDate: value } : e))
               )
             }
           />
