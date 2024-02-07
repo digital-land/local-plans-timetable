@@ -56,4 +56,4 @@ jobs:
         with:
           folder: dist-cdn
           clean: true
-          branch: develop
+          branch: master
