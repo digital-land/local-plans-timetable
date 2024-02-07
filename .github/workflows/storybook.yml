@@ -27,11 +27,11 @@ jobs:
           cache: "npm"
 
       - run: npm ci
-      - run: npm run build-storybook
+      - run: npm run build:storybook
 
       - name: Deploy Storybook
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: storybook-static # The folder that the build-storybook script generates files.
+          folder: storybook-static # The folder that the build:storybook script generates files.
           clean: true # Automatically remove deleted files from the deploy branch
           clean-exclude: .nojekyll

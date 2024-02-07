@@ -33,9 +33,13 @@ Runs all unit tests
 
 Starts Storybook. Open [http://localhost:6006](http://localhost:6006) to view it in your browser.
 
-### `npm run build-storybook`
+### `npm run build:storybook`
 
 Builds Storybook to the `storybook-static` folder.
+
+### `npm run build:cdn`
+
+Builds the visualisation component for the CDN to the `dist` folder.
 
 ## Expanding the ESLint configuration
 
