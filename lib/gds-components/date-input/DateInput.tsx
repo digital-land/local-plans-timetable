@@ -39,7 +39,7 @@ export const DateInput = ({ value, label, name, onChange }: DateInputProps) => {
                 type="text"
                 inputMode="numeric"
                 value={month}
-                onChange={(e) => onChange(`${e.target.value}-${year}`)}
+                onChange={(e) => onChange(`${year}-${e.target.value}`)}
                 maxLength={2}
               />
             </div>
@@ -59,7 +59,7 @@ export const DateInput = ({ value, label, name, onChange }: DateInputProps) => {
                 type="text"
                 inputMode="numeric"
                 value={year}
-                onChange={(e) => onChange(`${month}-${e.target.value}`)}
+                onChange={(e) => onChange(`${e.target.value}-${month}`)}
                 maxLength={4}
               />
             </div>
