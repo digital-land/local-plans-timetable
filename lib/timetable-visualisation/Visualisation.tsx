@@ -9,7 +9,7 @@ import { DEFAULT_DEVELOPMENT_PLAN } from "../constants";
 
 import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
 
-type VisualisationProps = {
+export type VisualisationProps = {
   stagesFilepath: string;
   headersFilepath: string;
 };
