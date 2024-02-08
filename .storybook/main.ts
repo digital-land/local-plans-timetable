@@ -16,6 +16,12 @@ const config: StorybookConfig = {
   docs: {
     autodocs: "tag",
   },
+  staticDirs: [
+    {
+      from: "../node_modules/govuk-frontend/dist/govuk/assets/fonts",
+      to: "assets/fonts",
+    },
+  ],
   viteFinal: async (config) => {
     return {
       ...config,
