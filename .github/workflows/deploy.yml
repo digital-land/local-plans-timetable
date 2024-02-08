@@ -6,7 +6,7 @@ on:
       - SOW-24/wrap-form-in-app
     paths:
       [
-        ".github/workflows/storybook.yml",
+        ".github/workflows/deploy.yml",
         "lib/stories/**",
         "lib/**/*",
         "src/**/*",
