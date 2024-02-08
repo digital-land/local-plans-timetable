@@ -46,7 +46,7 @@ Builds Storybook to the `storybook-static` folder.
 
 ### `npm run build:cdn`
 
-Builds the visualisation component for the CDN to the `dist` folder.
+Builds the visualisation component for the CDN to the `dist-cdn` folder.
 
 ## Expanding the ESLint configuration
 
