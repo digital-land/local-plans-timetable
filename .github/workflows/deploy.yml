@@ -16,7 +16,7 @@ on:
 jobs:
   # lint-and-test:
   #   uses: ./.github/workflows/shared-steps.yml
-  build-and-deploy-storybook:
+  build-and-deploy:
     runs-on: ubuntu-latest
     # needs: lint-and-test
     steps:
