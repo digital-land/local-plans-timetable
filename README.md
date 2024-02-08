@@ -9,9 +9,16 @@ See the wiki [here](https://github.com/digital-land/local-plans-timetable/wiki).
 
 ## Deployment
 
+Assuming a successful lint/test run, all commits to `main` will trigger a new deployment workflow run.
+
 The Storybook for this library is deployed to GitHub Pages: https://digital-land.github.io/local-plans-timetable/
 
-Assuming a successful lint/test run, all commits to `main` will trigger a new deployment.
+The visualisation component is distributed by the [Statically](https://statically.io/) CDN, with the built files living in the `master` branch. The files distributed by the CDN are cached for one day and are available here:
+
+```
+https://cdn.statically.io/gh/digital-land/local-plans-timetable/master/timetable-visualisation.min.js
+https://cdn.statically.io/gh/digital-land/local-plans-timetable/master/timetable-visualisation.min.css
+```
 
 ## Available Scripts
 
