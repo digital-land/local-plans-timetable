@@ -7,8 +7,8 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        entryFileNames: "local-plans-timetable/form.js",
-        assetFileNames: "local-plans-timetable/form.css",
+        entryFileNames: "form.js",
+        assetFileNames: "form.css",
       },
     },
   },
