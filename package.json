@@ -15,7 +15,7 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build:storybook": "storybook build",
-    "build:cdn": "tsc --p ./tsconfig-build.json && vite --config cdn-vite.config.ts build && mkdirp ./dist-cdn/assets/fonts && cp -R node_modules/govuk-frontend/dist/govuk/assets/fonts/* dist-cdn/assets/fonts",
+    "build:cdn": "tsc --p ./tsconfig-build.json && vite --config cdn-vite.config.ts build && node ./scripts/cdn-post-build.cjs",
     "build:lib": "tsc --p ./tsconfig-build.json && vite --config lib-vite.config.ts build",
     "test": "jest",
     "test:watch": "jest --watch"
@@ -51,7 +51,6 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
-    "mkdirp": "^3.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storybook": "^7.6.10",
