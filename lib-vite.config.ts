@@ -11,6 +11,7 @@ export default defineConfig({
   plugins: [react(), libInjectCss(), dts({ include: ["lib"] })],
   build: {
     copyPublicDir: false,
+    outDir: resolve(__dirname, "dist-lib"),
     lib: {
       entry: resolve(__dirname, "lib/main.ts"),
       formats: ["es"],
