@@ -28,6 +28,10 @@ In the project directory, you can run:
 
 Shows a preview of the build locally.
 
+### `npm run prebuild`
+
+Copies the GOV.UK Frontend font assets to the `public` folder.
+
 ### `npm run build`
 
 Builds the App for production to the `dist` folder.
@@ -51,6 +55,10 @@ Builds Storybook to the `storybook-static` folder.
 ### `npm run build:cdn`
 
 Builds the visualisation component for the CDN to the `dist-cdn` folder.
+
+### `npm run postbuild:cdn`
+
+Copies the GOV.UK Frontend font assets to the `dist-cdn` folder and rewrites the font URLs in the CSS.
 
 ## Expanding the ESLint configuration
 
