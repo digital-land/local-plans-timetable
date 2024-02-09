@@ -1,6 +1,4 @@
-import { stageNames } from "../constants";
-
-export type StageName = (typeof stageNames)[number];
+import { StageKey } from "../constants";
 
 export type DevelopmentPlan = {
   reference: string;
@@ -23,7 +21,7 @@ export type DevelopmentPlanTimetable = {
   reference: string;
   name: string;
   developmentPlan: string;
-  developmentPlanEvent: StageName;
+  developmentPlanEvent: StageKey;
   eventDate: string;
   notes: string;
   organisation: string;
