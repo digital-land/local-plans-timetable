@@ -3,23 +3,14 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - SOW-24/wrap-form-in-app
-    paths:
-      [
-        ".github/workflows/deploy.yml",
-        "vite.config.ts",
-        "lib/stories/**",
-        "lib/**/*",
-        "src/**/*",
-        "package-lock.json",
-      ]
+      - main
 
 jobs:
-  # lint-and-test:
-  #   uses: ./.github/workflows/shared-steps.yml
+  lint-and-test:
+    uses: ./.github/workflows/shared-steps.yml
   build-and-deploy:
     runs-on: ubuntu-latest
-    # needs: lint-and-test
+    needs: lint-and-test
     steps:
       - uses: actions/checkout@v4
 
@@ -31,32 +22,32 @@ jobs:
       - run: npm ci
       - run: npm run build
 
-      - name: Deploy Storybook
+      - name: Deploy App
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: dist # The folder that the build script generates files.
           clean: true # Automatically remove deleted files from the deploy branch
           clean-exclude: .nojekyll
-  # build-and-deploy-cdn:
-  #   runs-on: ubuntu-latest
-  #   needs: lint-and-test
-  #   steps:
-  #     - uses: actions/checkout@v4
+  build-and-deploy-cdn:
+    runs-on: ubuntu-latest
+    needs: lint-and-test
+    steps:
+      - uses: actions/checkout@v4
 
-  #     - uses: actions/setup-node@v3
-  #       with:
-  #         node-version: "20.x"
-  #         cache: "npm"
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "20.x"
+          cache: "npm"
 
-  #     - run: npm ci
+      - run: npm ci
 
-  #     - name: Build CDN component
-  #       run: npm run build:cdn
+      - name: Build CDN component
+        run: npm run build:cdn
 
-  #     - name: Deploy CDN
-  #       uses: JamesIves/github-pages-deploy-action@v4
-  #       with:
-  #         folder: dist-cdn
-  #         clean: true
-  #         branch: master
-  #         clean-exclude: README.md
+      - name: Deploy CDN
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist-cdn
+          clean: true
+          branch: master
+          clean-exclude: README.md

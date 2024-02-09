@@ -11,7 +11,7 @@ See the wiki [here](https://github.com/digital-land/local-plans-timetable/wiki).
 
 Assuming a successful lint/test run, all commits to `main` will trigger a new deployment workflow run.
 
-The Storybook for this library is deployed to GitHub Pages: https://digital-land.github.io/local-plans-timetable/
+The App containing the Timetable Form is deployed to GitHub Pages: https://digital-land.github.io/local-plans-timetable/
 
 The visualisation component is distributed by the [Statically](https://statically.io/) CDN, with the built files living in the `master` branch. The files distributed by the CDN are cached for one day and are available here:
 
@@ -30,7 +30,7 @@ Shows a preview of the build locally.
 
 ### `npm run build`
 
-Builds the library for production to the `dist` folder.
+Builds the App for production to the `dist` folder.
 
 ### `npm test`
 
