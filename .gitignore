@@ -15,6 +15,9 @@ storybook-static
 dist-cdn
 dist-lib
 
+# Ignoring the public folder for now as it's only used for font assets
+public
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

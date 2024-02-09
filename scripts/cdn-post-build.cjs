@@ -2,15 +2,9 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const fs = require("fs");
 
-// Create the fonts directory
-fs.mkdirSync("dist-cdn/assets/fonts", { recursive: true });
+const { copyFonts } = require("./copy-fonts.cjs");
 
-// Copy the fonts
-fs.cpSync(
-  "node_modules/govuk-frontend/dist/govuk/assets/fonts",
-  "dist-cdn/assets/fonts",
-  { recursive: true }
-);
+copyFonts("dist-cdn");
 
 // Rewrite the font paths
 const css = fs
