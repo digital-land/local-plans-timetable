@@ -13,6 +13,7 @@ dist-ssr
 *.local
 storybook-static
 dist-cdn
+dist-lib
 
 # Editor directories and files
 .vscode/*
