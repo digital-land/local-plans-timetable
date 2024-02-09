@@ -6,3 +6,5 @@ The `master` branch is used to distribute the visualisation component via the [S
 https://cdn.statically.io/gh/digital-land/local-plans-timetable/master/timetable-visualisation.min.js
 https://cdn.statically.io/gh/digital-land/local-plans-timetable/master/timetable-visualisation.min.css
 ```
+
+We also distribute the GDS font files from `assets/fonts` to ensure they're accessible from the CDN CSS file.
