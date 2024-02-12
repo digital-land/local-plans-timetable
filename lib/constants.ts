@@ -1,45 +1,66 @@
 import { v4 as uuidv4 } from "uuid";
 import { DevelopmentPlan } from "./types/timetable";
 
-export const stageNames = [
-  "Timetable published",
-  "Draft plan for public consultation published",
-  "Public consultation start",
-  "Public consultation end",
-  "Submit plan for examination",
-  "Examination hearing start",
-  "Planning inspectorate examination start",
-  "Planning inspectorate examination end",
-  "Planning inspectorate found sound",
-  "Examination hearing end",
-  "Inspector report published",
-  "Plan adopted",
+export const stages = [
+  { name: "Timetable published", key: "timetable-published" },
+  {
+    name: "Draft plan for public consultation published",
+    key: "draft-plan-for-public-consultation-published",
+  },
+  { name: "Public consultation start", key: "public-consultation-start" },
+  { name: "Public consultation end", key: "public-consultation-end" },
+  { name: "Submit plan for examination", key: "submit-plan-for-examination" },
+  { name: "Examination hearing start", key: "examination-hearing-start" },
+  {
+    name: "Planning inspectorate examination start",
+    key: "planning-inspectorate-examination-start",
+  },
+  {
+    name: "Planning inspectorate examination end",
+    key: "planning-inspectorate-examination-end",
+  },
+  {
+    name: "Planning inspectorate found sound",
+    key: "planning-inspectorate-found-sound",
+  },
+  { name: "Examination hearing end", key: "examination-hearing-end" },
+  { name: "Inspector report published", key: "inspector-report-published" },
+  { name: "Plan adopted", key: "plan-adopted" },
 ] as const;
 
-const defaultDate = new Date().toISOString().split("T")[0];
+export type StageKey = (typeof stages)[number]["key"];
+
+const stageKeyToNameMap = stages.reduce<Record<StageKey, string>>(
+  (acc, { key, name }) => ({ ...acc, [key]: name }),
+  {} as Record<StageKey, string>
+);
+
+export const getStageName = (key: StageKey) => stageKeyToNameMap[key];
+
+export const getFormattedDate = () => new Date().toISOString().split("T")[0];
 
 export const DEFAULT_DEVELOPMENT_PLAN: DevelopmentPlan = {
   reference: uuidv4(),
   name: "",
   description: "",
   developmentPlanType: "",
-  periodStartDate: defaultDate,
+  periodStartDate: getFormattedDate(),
   developmentPlanGeography: "",
   documentationUrl: "",
-  adoptedDate: defaultDate,
+  adoptedDate: getFormattedDate(),
   organisations: "",
-  entryDate: defaultDate,
-  startDate: defaultDate,
-  timetableEvents: stageNames.map((stage) => ({
+  entryDate: getFormattedDate(),
+  startDate: getFormattedDate(),
+  timetableEvents: stages.map(({ key }) => ({
     reference: uuidv4(),
     name: "",
     developmentPlan: "",
-    developmentPlanEvent: stage,
+    developmentPlanEvent: key,
     eventDate: "",
     notes: "",
     organisation: "",
-    entryDate: defaultDate,
-    startDate: defaultDate,
+    entryDate: getFormattedDate(),
+    startDate: getFormattedDate(),
     endDate: "",
   })),
 };

@@ -6,8 +6,9 @@ import {
   objectArrayToCSVString,
   CSVStringToDevPlan,
   CSVStringToDevPlanTimetable,
+  resolveTimetableEventsCSV,
 } from "../utils/timetable";
-import { DEFAULT_DEVELOPMENT_PLAN } from "../constants";
+import { DEFAULT_DEVELOPMENT_PLAN, getStageName, stages } from "../constants";
 import { PlanViewer } from "../timetable-visualisation/PlanViewer";
 
 import styles from "./styles.module.css";
@@ -26,20 +27,26 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
   const [developmentPlan, setDevelopmentPlan] = useState<
     Omit<DevelopmentPlan, "timetableEvents">
   >(developmentPlanInitialState);
+
+  const [loadedDevelopmentPlanEvents, setLoadedDevelopmentPlanEvents] =
+    useState<DevelopmentPlanTimetable[] | null>(null);
   const [developmentPlanEvents, setDevelopmentPlanEvents] = useState<
     DevelopmentPlanTimetable[]
   >(timetableEventsInitialState);
 
   const timetableDownloadLink = useMemo(() => {
-    const timetableCSV = objectArrayToCSVString(developmentPlanEvents);
+    const timetableCSV = resolveTimetableEventsCSV(
+      developmentPlanEvents,
+      loadedDevelopmentPlanEvents
+    );
 
-    return `data:text/csv;charset=urf-8, ${timetableCSV}`;
-  }, [developmentPlanEvents]);
+    return `data:text/csv;charset=urf-8,${timetableCSV}`;
+  }, [developmentPlanEvents, loadedDevelopmentPlanEvents]);
 
   const timetableHeaderDownloadLink = useMemo(() => {
     const timetableCSV = objectArrayToCSVString([developmentPlan]);
 
-    return `data:text/csv;charset=urf-8, ${timetableCSV}`;
+    return `data:text/csv;charset=urf-8,${timetableCSV}`;
   }, [developmentPlan]);
 
   const handleDevelopmentPlanFileUpload = useCallback((file: File) => {
@@ -59,7 +66,18 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
       const csvString = event.target?.result?.toString();
 
       if (csvString) {
-        setDevelopmentPlanEvents(CSVStringToDevPlanTimetable(csvString));
+        const loadedEvents = CSVStringToDevPlanTimetable(csvString);
+        setLoadedDevelopmentPlanEvents(loadedEvents);
+        setDevelopmentPlanEvents(
+          loadedEvents
+            // This assumes any row with an end date is invalid
+            .filter((event) => !event.endDate)
+            .sort(
+              (a, b) =>
+                stages.findIndex((s) => s.key === a.developmentPlanEvent) -
+                stages.findIndex((s) => s.key === b.developmentPlanEvent)
+            )
+        );
       }
     };
 
@@ -95,8 +113,8 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
         <div key={stage.developmentPlanEvent}>
           <DateInput
             value={stage.eventDate}
-            label={stage.developmentPlanEvent}
-            name={`${stage.developmentPlanEvent.split(" ").join("-")}-date`}
+            label={getStageName(stage.developmentPlanEvent)}
+            name={`${stage.developmentPlanEvent}-date`}
             onChange={(value) =>
               setDevelopmentPlanEvents((prev) =>
                 prev.map((e) => (e === stage ? { ...e, eventDate: value } : e))
