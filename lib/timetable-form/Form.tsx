@@ -1,6 +1,7 @@
 import { useCallback, useMemo, useState, useEffect } from "react";
 
-import { FileUpload, DateInput, Button, Autocomplete } from "../gds-components";
+import { FileUpload, DateInput, Button } from "../gds-components";
+import { Autocomplete } from "./autocomplete/Autocomplete";
 import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
 import {
   objectArrayToCSVString,
