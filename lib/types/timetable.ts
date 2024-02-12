@@ -14,7 +14,6 @@ export type DevelopmentPlan = {
   entryDate: string;
   startDate: string;
   endDate?: string;
-  timetableEvents: DevelopmentPlanTimetable[];
 };
 
 export type DevelopmentPlanTimetable = {

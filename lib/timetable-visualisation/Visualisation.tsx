@@ -3,9 +3,12 @@ import { useCallback, useEffect, useState } from "react";
 import csvToJson from "csvtojson";
 
 import { loadCSV } from "../utils/timetable";
-import { DevelopmentPlan } from "../types/timetable";
+import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
 import { PlanViewer } from "./PlanViewer";
-import { DEFAULT_DEVELOPMENT_PLAN } from "../constants";
+import {
+  DEFAULT_DEVELOPMENT_PLAN,
+  DEFAULT_TIMETABLE_EVENTS,
+} from "../constants";
 
 import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
 
@@ -16,9 +19,13 @@ export type VisualisationProps = {
 
 export const Visualisation = (props: VisualisationProps) => {
   const { stagesFilepath, headersFilepath } = props;
-  const [timetableData, setTimetableData] = useState<DevelopmentPlan>(
+  const [developmentPlan, setDevelopmentPlan] = useState<DevelopmentPlan>(
     DEFAULT_DEVELOPMENT_PLAN
   );
+  const [timetableEvents, setTimetableEvents] = useState<
+    DevelopmentPlanTimetable[]
+  >(DEFAULT_TIMETABLE_EVENTS);
+
   const loadData = useCallback(async () => {
     const stagesData = await loadCSV(stagesFilepath);
     const events = await csvToJson().fromString(stagesData);
@@ -28,11 +35,12 @@ export const Visualisation = (props: VisualisationProps) => {
 
     const loadedData: DevelopmentPlan = {
       ...DEFAULT_DEVELOPMENT_PLAN,
-      ...headers[0],
-      timetableEvents: events,
+      // This assumes the last row is the current row
+      ...headers.slice(-1)[0],
     };
 
-    setTimetableData(loadedData);
+    setDevelopmentPlan(loadedData);
+    setTimetableEvents(events);
   }, [headersFilepath, stagesFilepath]);
 
   useEffect(() => {
@@ -41,7 +49,10 @@ export const Visualisation = (props: VisualisationProps) => {
 
   return (
     <div data-testid="visualisation">
-      <PlanViewer plan={timetableData} />
+      <PlanViewer
+        developmentPlan={developmentPlan}
+        timetableEvents={timetableEvents}
+      />
     </div>
   );
 };

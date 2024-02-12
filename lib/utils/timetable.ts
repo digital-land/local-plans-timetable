@@ -59,14 +59,14 @@ export const resolveTimetableEventsCSV = (
 };
 
 export const resolveDevelopmentPlanCSV = (
-  developmentPlan: Omit<DevelopmentPlan, "timetableEvents">,
-  loadedDevelopmentPlan: Omit<DevelopmentPlan, "timetableEvents">[] | null
+  developmentPlan: DevelopmentPlan,
+  loadedDevelopmentPlan: DevelopmentPlan[] | null
 ): string => {
   if (!loadedDevelopmentPlan) {
     return objectArrayToCSVString([developmentPlan]);
   }
 
-  const planToDownload: Omit<DevelopmentPlan, "timetableEvents">[] = JSON.parse(
+  const planToDownload: DevelopmentPlan[] = JSON.parse(
     JSON.stringify(loadedDevelopmentPlan)
   );
   const latestPlan = planToDownload.slice(-1)[0];

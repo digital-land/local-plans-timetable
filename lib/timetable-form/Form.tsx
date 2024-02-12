@@ -8,17 +8,17 @@ import {
   fromCSVString,
   resolveDevelopmentPlanCSV,
 } from "../utils/timetable";
-import { DEFAULT_DEVELOPMENT_PLAN, getStageName, stages } from "../constants";
+import {
+  DEFAULT_DEVELOPMENT_PLAN,
+  DEFAULT_TIMETABLE_EVENTS,
+  getStageName,
+  stages,
+} from "../constants";
 import { PlanViewer } from "../timetable-visualisation/PlanViewer";
 import { fetchLPAs } from "../api/index";
 
 import styles from "./styles.module.css";
 import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
-
-const {
-  timetableEvents: timetableEventsInitialState,
-  ...developmentPlanInitialState
-} = DEFAULT_DEVELOPMENT_PLAN;
 
 const reader = new FileReader();
 
@@ -28,17 +28,17 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
   const [LPAs, setLPAs] = useState<string[]>([]);
 
   const [loadedDevelopmentPlan, setLoadedDevelopmentPlan] = useState<
-    Omit<DevelopmentPlan, "timetableEvents">[] | null
+    DevelopmentPlan[] | null
   >(null);
-  const [developmentPlan, setDevelopmentPlan] = useState<
-    Omit<DevelopmentPlan, "timetableEvents">
-  >(developmentPlanInitialState);
+  const [developmentPlan, setDevelopmentPlan] = useState<DevelopmentPlan>(
+    DEFAULT_DEVELOPMENT_PLAN
+  );
 
   const [loadedDevelopmentPlanEvents, setLoadedDevelopmentPlanEvents] =
     useState<DevelopmentPlanTimetable[] | null>(null);
   const [developmentPlanEvents, setDevelopmentPlanEvents] = useState<
     DevelopmentPlanTimetable[]
-  >(timetableEventsInitialState);
+  >(DEFAULT_TIMETABLE_EVENTS);
 
   const timetableDownloadLink = useMemo(() => {
     const timetableCSV = resolveTimetableEventsCSV(
@@ -63,8 +63,7 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
       const csvString = event.target?.result?.toString();
 
       if (csvString) {
-        const developmentPlan =
-          fromCSVString<Omit<DevelopmentPlan, "timetableEvents">>(csvString);
+        const developmentPlan = fromCSVString<DevelopmentPlan>(csvString);
         setLoadedDevelopmentPlan(developmentPlan);
         // This assumes the last row is the current row
         setDevelopmentPlan(developmentPlan.slice(-1)[0]);
@@ -172,10 +171,8 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
       </div>
       <h1 className="govuk-heading-xl">Preview</h1>
       <PlanViewer
-        plan={{
-          ...developmentPlan,
-          timetableEvents: developmentPlanEvents,
-        }}
+        developmentPlan={developmentPlan}
+        timetableEvents={developmentPlanEvents}
       />
     </div>
   );
