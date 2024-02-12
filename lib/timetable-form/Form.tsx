@@ -10,7 +10,7 @@ import {
 } from "../utils/timetable";
 import { DEFAULT_DEVELOPMENT_PLAN, getStageName, stages } from "../constants";
 import { PlanViewer } from "../timetable-visualisation/PlanViewer";
-import { fetchLPAs } from "../api/index.js";
+import { fetchLPAs } from "../api/index";
 
 import styles from "./styles.module.css";
 import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
