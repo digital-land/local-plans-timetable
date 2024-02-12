@@ -37,20 +37,20 @@ const stageKeyToNameMap = stages.reduce<Record<StageKey, string>>(
 
 export const getStageName = (key: StageKey) => stageKeyToNameMap[key];
 
-export const getDefaultDate = () => new Date().toISOString().split("T")[0];
+export const getFormattedDate = () => new Date().toISOString().split("T")[0];
 
 export const DEFAULT_DEVELOPMENT_PLAN: DevelopmentPlan = {
   reference: uuidv4(),
   name: "",
   description: "",
   developmentPlanType: "",
-  periodStartDate: getDefaultDate(),
+  periodStartDate: getFormattedDate(),
   developmentPlanGeography: "",
   documentationUrl: "",
-  adoptedDate: getDefaultDate(),
+  adoptedDate: getFormattedDate(),
   organisations: "",
-  entryDate: getDefaultDate(),
-  startDate: getDefaultDate(),
+  entryDate: getFormattedDate(),
+  startDate: getFormattedDate(),
   timetableEvents: stages.map(({ key }) => ({
     reference: uuidv4(),
     name: "",
@@ -59,8 +59,8 @@ export const DEFAULT_DEVELOPMENT_PLAN: DevelopmentPlan = {
     eventDate: "",
     notes: "",
     organisation: "",
-    entryDate: getDefaultDate(),
-    startDate: getDefaultDate(),
+    entryDate: getFormattedDate(),
+    startDate: getFormattedDate(),
     endDate: "",
   })),
 };

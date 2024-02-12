@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
-import { DEFAULT_DEVELOPMENT_PLAN, getDefaultDate } from "../constants";
+import { DEFAULT_DEVELOPMENT_PLAN, getFormattedDate } from "../constants";
 import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
 
 export const objectArrayToCSVString = (
@@ -43,12 +43,12 @@ export const resolveTimetableEventsCSV = (
     }
 
     if (formEvent.eventDate !== loadedEvent.eventDate) {
-      loadedEvent.endDate = getDefaultDate();
+      loadedEvent.endDate = getFormattedDate();
       eventsToDownload.push({
         ...formEvent,
         reference: uuidv4(),
-        entryDate: getDefaultDate(),
-        startDate: getDefaultDate(),
+        entryDate: getFormattedDate(),
+        startDate: getFormattedDate(),
       });
     }
   });
