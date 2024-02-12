@@ -88,13 +88,15 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
   }, []);
 
   useEffect(() => {
-    fetchLPAs()
-      .then((lpas) => {
+    const loadLpas = async () => {
+      try {
+        const lpas = await fetchLPAs();
         setLPAs(lpas.entities.map((lpa) => lpa.name));
-      })
-      .catch((error: Error) => {
-        console.error(error.message);
-      });
+      } catch (error) {
+        console.error(error instanceof Error ? error.message : error);
+      }
+    };
+    loadLpas();
   }, []);
 
   return (
