@@ -39,16 +39,18 @@ export const resolveTimetableEventsCSV = (
       (event) => event.reference === loadedEvent.reference
     );
     if (!formEvent) {
-      return;
+      // This shouldn't ever happen
+      throw Error("Form event not found");
     }
 
     if (formEvent.eventDate !== loadedEvent.eventDate) {
-      loadedEvent.endDate = getFormattedDate();
+      const currentDate = getFormattedDate();
+      loadedEvent.endDate = currentDate;
       eventsToDownload.push({
         ...formEvent,
         reference: uuidv4(),
-        entryDate: getFormattedDate(),
-        startDate: getFormattedDate(),
+        entryDate: currentDate,
+        startDate: currentDate,
       });
     }
   });
