@@ -9,14 +9,17 @@ import {
 } from "../utils/timetable";
 import { Form } from "./Form";
 import { PlanViewer } from "../timetable-visualisation/PlanViewer";
+import { fetchLPAs } from "../api";
 
 jest.mock("../utils/timetable");
+jest.mock("../api/");
 jest.mock("../timetable-visualisation/PlanViewer");
 
 describe("all activity users", () => {
   beforeEach(() => {
     (objectArrayToCSVString as jest.Mock).mockImplementation(() => {});
     (resolveTimetableEventsCSV as jest.Mock).mockImplementation(() => {});
+    (fetchLPAs as jest.Mock).mockResolvedValue({ entities: [] });
     (PlanViewer as jest.Mock).mockReturnValue(<></>);
   });
 

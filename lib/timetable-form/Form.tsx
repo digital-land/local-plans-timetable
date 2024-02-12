@@ -1,6 +1,7 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState, useEffect } from "react";
 
-import { FileUpload, TextInput, DateInput, Button } from "../gds-components";
+import { FileUpload, DateInput, Button } from "../gds-components";
+import { Autocomplete } from "./autocomplete/Autocomplete";
 import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
 import {
   objectArrayToCSVString,
@@ -10,6 +11,7 @@ import {
 } from "../utils/timetable";
 import { DEFAULT_DEVELOPMENT_PLAN, getStageName, stages } from "../constants";
 import { PlanViewer } from "../timetable-visualisation/PlanViewer";
+import { fetchLPAs } from "../api/index";
 
 import styles from "./styles.module.css";
 import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
@@ -23,6 +25,8 @@ const reader = new FileReader();
 
 export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
   const { className, ...otherProps } = props;
+
+  const [LPAs, setLPAs] = useState<string[]>([]);
 
   const [developmentPlan, setDevelopmentPlan] = useState<
     Omit<DevelopmentPlan, "timetableEvents">
@@ -84,6 +88,18 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
     reader.readAsText(file);
   }, []);
 
+  useEffect(() => {
+    const loadLpas = async () => {
+      try {
+        const lpas = await fetchLPAs();
+        setLPAs(lpas.entities.map((lpa) => lpa.name));
+      } catch (error) {
+        console.error(error instanceof Error ? error.message : error);
+      }
+    };
+    loadLpas();
+  }, []);
+
   return (
     <div className={`${className} ${styles.form}`} {...otherProps}>
       <h1 className="govuk-heading-xl" data-testid="form-title">
@@ -98,7 +114,7 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
           label="Upload a CSV file for Timetable"
           onChange={handleDevelopmentPlanTimetableFileUpload}
         />
-        <TextInput
+        <Autocomplete
           label="Local planning authority"
           onChange={(lpa) =>
             setDevelopmentPlan((prev) => ({
@@ -106,7 +122,7 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
               organisations: lpa,
             }))
           }
-          value={developmentPlan.organisations}
+          source={LPAs}
         />
       </div>
       {developmentPlanEvents.map((stage) => (
