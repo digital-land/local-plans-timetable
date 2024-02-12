@@ -28,23 +28,17 @@ type LPAEntity = {
   "local-authority-district": string;
 };
 
-export const fetchLPAs = (): Promise<LPAResponse> => {
-  return new Promise((resolve, reject) => {
-    fetch(
+export const fetchLPAs = async (): Promise<LPAResponse> => {
+  try {
+    const response = await fetch(
       "https://www.planning.data.gov.uk/entity.json?dataset=local-authority&limit=400"
-    )
-      .then((response) => {
-        response
-          .json()
-          .then((data) => {
-            resolve(data);
-          })
-          .catch((error) => {
-            reject(new Error(error));
-          });
-      })
-      .catch((error) => {
-        reject(new Error(error));
-      });
-  });
+    );
+    return response.json();
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error("Failed to fetch LPAs: " + error.message);
+    }
+    
+    throw new Error("Failed to fetch LPAs: " + JSON.stringify(error));
+  }
 };
