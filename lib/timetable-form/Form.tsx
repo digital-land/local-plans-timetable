@@ -4,10 +4,9 @@ import { FileUpload, DateInput, Button } from "../gds-components";
 import { Autocomplete } from "./autocomplete/Autocomplete";
 import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
 import {
-  objectArrayToCSVString,
-  CSVStringToDevPlan,
-  CSVStringToDevPlanTimetable,
   resolveTimetableEventsCSV,
+  fromCSVString,
+  resolveDevelopmentPlanCSV,
 } from "../utils/timetable";
 import { DEFAULT_DEVELOPMENT_PLAN, getStageName, stages } from "../constants";
 import { PlanViewer } from "../timetable-visualisation/PlanViewer";
@@ -28,6 +27,9 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
 
   const [LPAs, setLPAs] = useState<string[]>([]);
 
+  const [loadedDevelopmentPlan, setLoadedDevelopmentPlan] = useState<
+    Omit<DevelopmentPlan, "timetableEvents">[] | null
+  >(null);
   const [developmentPlan, setDevelopmentPlan] = useState<
     Omit<DevelopmentPlan, "timetableEvents">
   >(developmentPlanInitialState);
@@ -48,17 +50,24 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
   }, [developmentPlanEvents, loadedDevelopmentPlanEvents]);
 
   const timetableHeaderDownloadLink = useMemo(() => {
-    const timetableCSV = objectArrayToCSVString([developmentPlan]);
+    const timetableCSV = resolveDevelopmentPlanCSV(
+      developmentPlan,
+      loadedDevelopmentPlan
+    );
 
     return `data:text/csv;charset=urf-8,${timetableCSV}`;
-  }, [developmentPlan]);
+  }, [developmentPlan, loadedDevelopmentPlan]);
 
   const handleDevelopmentPlanFileUpload = useCallback((file: File) => {
     reader.onload = (event) => {
       const csvString = event.target?.result?.toString();
 
       if (csvString) {
-        setDevelopmentPlan(CSVStringToDevPlan(csvString));
+        const developmentPlan =
+          fromCSVString<Omit<DevelopmentPlan, "timetableEvents">>(csvString);
+        setLoadedDevelopmentPlan(developmentPlan);
+        // This assumes the last row is the current row
+        setDevelopmentPlan(developmentPlan.slice(-1)[0]);
       }
     };
 
@@ -70,7 +79,7 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
       const csvString = event.target?.result?.toString();
 
       if (csvString) {
-        const loadedEvents = CSVStringToDevPlanTimetable(csvString);
+        const loadedEvents = fromCSVString<DevelopmentPlanTimetable>(csvString);
         setLoadedDevelopmentPlanEvents(loadedEvents);
         setDevelopmentPlanEvents(
           loadedEvents
