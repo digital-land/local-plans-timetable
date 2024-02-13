@@ -35,7 +35,7 @@ export const Visualisation = (props: VisualisationProps) => {
 
     const loadedData: DevelopmentPlan = {
       ...DEFAULT_DEVELOPMENT_PLAN,
-      // This assumes the last row is the current row
+      // This assumes the last row is the current data
       ...headers.slice(-1)[0],
     };
 
