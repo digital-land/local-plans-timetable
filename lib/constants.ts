@@ -51,16 +51,17 @@ export const DEFAULT_DEVELOPMENT_PLAN: DevelopmentPlan = {
   organisations: "",
   entryDate: getFormattedDate(),
   startDate: getFormattedDate(),
-  timetableEvents: stages.map(({ key }) => ({
-    reference: uuidv4(),
-    name: "",
-    developmentPlan: "",
-    developmentPlanEvent: key,
-    eventDate: "",
-    notes: "",
-    organisation: "",
-    entryDate: getFormattedDate(),
-    startDate: getFormattedDate(),
-    endDate: "",
-  })),
 };
+
+export const DEFAULT_TIMETABLE_EVENTS = stages.map(({ key }) => ({
+  reference: uuidv4(),
+  name: "",
+  developmentPlan: "",
+  developmentPlanEvent: key,
+  eventDate: "",
+  notes: "",
+  organisation: "",
+  entryDate: getFormattedDate(),
+  startDate: getFormattedDate(),
+  endDate: "",
+}));

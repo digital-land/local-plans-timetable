@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 
 import { stages } from "../constants";
 import {
-  objectArrayToCSVString,
+  resolveDevelopmentPlanCSV,
   resolveTimetableEventsCSV,
 } from "../utils/timetable";
 import { Form } from "./Form";
@@ -17,7 +17,7 @@ jest.mock("../timetable-visualisation/PlanViewer");
 
 describe("all activity users", () => {
   beforeEach(() => {
-    (objectArrayToCSVString as jest.Mock).mockImplementation(() => {});
+    (resolveDevelopmentPlanCSV as jest.Mock).mockImplementation(() => {});
     (resolveTimetableEventsCSV as jest.Mock).mockImplementation(() => {});
     (fetchLPAs as jest.Mock).mockResolvedValue({ entities: [] });
     (PlanViewer as jest.Mock).mockReturnValue(<></>);
@@ -35,7 +35,7 @@ describe("all activity users", () => {
   test("Generates CSV file on render", () => {
     render(<Form />);
 
-    expect(objectArrayToCSVString).toHaveBeenCalledTimes(1);
+    expect(resolveDevelopmentPlanCSV).toHaveBeenCalledTimes(1);
     expect(resolveTimetableEventsCSV).toHaveBeenCalledTimes(1);
   });
 

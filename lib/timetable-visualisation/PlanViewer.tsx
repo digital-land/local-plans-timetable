@@ -1,13 +1,14 @@
-import { DevelopmentPlan } from "../types/timetable";
+import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
 
 import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
 
 type PlanViewerProps = {
-  plan: DevelopmentPlan;
+  developmentPlan: DevelopmentPlan;
+  timetableEvents: DevelopmentPlanTimetable[];
 };
 
 export const PlanViewer = ({
-  plan: {
+  developmentPlan: {
     name,
     description,
     adoptedDate,
@@ -20,8 +21,8 @@ export const PlanViewer = ({
     startDate,
     endDate,
     documentationUrl,
-    timetableEvents,
   },
+  timetableEvents,
 }: PlanViewerProps) => {
   return (
     <div data-testid="plan-preview">

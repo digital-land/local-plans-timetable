@@ -1,9 +1,9 @@
 import { v4 as uuidv4 } from "uuid";
 
-import { DEFAULT_DEVELOPMENT_PLAN, getFormattedDate } from "../constants";
+import { getFormattedDate } from "../constants";
 import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
 
-export const objectArrayToCSVString = (
+const objectArrayToCSVString = (
   objArr: { [key: string]: unknown }[]
 ): string => {
   const headLine = Object.keys(objArr[0]).join(",");
@@ -58,36 +58,43 @@ export const resolveTimetableEventsCSV = (
   return objectArrayToCSVString(eventsToDownload);
 };
 
-export const CSVStringToDevPlan = (csvString: string): DevelopmentPlan => {
-  const [headLine, data] = csvString.split("\n");
+export const resolveDevelopmentPlanCSV = (
+  developmentPlan: DevelopmentPlan,
+  loadedDevelopmentPlan: DevelopmentPlan[] | null
+): string => {
+  if (!loadedDevelopmentPlan) {
+    return objectArrayToCSVString([developmentPlan]);
+  }
 
-  const keys = headLine.split(",");
-  const values = data.split(",");
-  const entries = keys.map((key, i) => [key, values[i]]);
+  const planToDownload: DevelopmentPlan[] = JSON.parse(
+    JSON.stringify(loadedDevelopmentPlan)
+  );
+  const latestPlan = planToDownload.slice(-1)[0];
+  // TODO: More comparisons to make as we capture more fields
+  if (developmentPlan.organisations !== latestPlan.organisations) {
+    const currentDate = getFormattedDate();
+    latestPlan.endDate = currentDate;
+    planToDownload.push({
+      ...developmentPlan,
+      reference: uuidv4(),
+      entryDate: currentDate,
+      startDate: currentDate,
+    });
+  }
 
-  const developmentPlan: DevelopmentPlan = Object.fromEntries(entries);
-
-  return {
-    ...DEFAULT_DEVELOPMENT_PLAN,
-    ...developmentPlan,
-  };
+  return objectArrayToCSVString(planToDownload);
 };
 
-export const CSVStringToDevPlanTimetable = (
-  csvString: string
-): DevelopmentPlanTimetable[] => {
+export const fromCSVString = <Row>(csvString: string): Row[] => {
   const [headLine, ...data] = csvString.split("\n");
-
   const keys = headLine.split(",");
 
-  const timetableEvents = data.map((row) => {
+  return data.map((row) => {
     const values = row.split(",");
     const entries = keys.map((key, i) => [key, values[i]]);
 
     return Object.fromEntries(entries);
   });
-
-  return timetableEvents;
 };
 
 export const loadCSV = async (filepath: string) =>
