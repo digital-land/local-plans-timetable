@@ -102,7 +102,7 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
   }, []);
 
   const handleValidateForm = useCallback(() => {
-    const validationErrors: ValidationErrorItem[] = [];
+    const errors: ValidationErrorItem[] = [];
 
     developmentPlanEvents.forEach((event) => {
       const validationResult = developmentPlanEventSchema.validate(event, {
@@ -116,10 +116,10 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
             path: [validationResult.value.reference, ...error.path],
           })
         );
-        validationErrors.push(...validationErrors);
+        errors.push(...validationErrors);
       }
     });
-    serFormErrors(validationErrors);
+    serFormErrors(errors);
   }, [developmentPlanEvents]);
 
   useEffect(() => {
