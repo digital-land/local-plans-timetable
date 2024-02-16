@@ -1,4 +1,4 @@
-import Joi from "joi";
+import * as Joi from "joi";
 
 export const developmentPlanEventSchema = Joi.object({
   reference: Joi.string(),

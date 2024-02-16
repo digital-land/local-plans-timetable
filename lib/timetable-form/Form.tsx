@@ -221,13 +221,7 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
           <Button>Export Timetable Header CSV</Button>
         </a>
       </div>
-      <Button
-        onClick={() => {
-          handleValidateForm();
-        }}
-      >
-        Validate
-      </Button>
+      <Button onClick={handleValidateForm}>Validate</Button>
       <h1 className="govuk-heading-xl">Preview</h1>
       <PlanViewer
         developmentPlan={developmentPlan}
