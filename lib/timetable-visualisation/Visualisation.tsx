@@ -13,12 +13,13 @@ import {
 import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
 
 export type VisualisationProps = {
+  className?: string;
   stagesFilepath: string;
   headersFilepath: string;
 };
 
 export const Visualisation = (props: VisualisationProps) => {
-  const { stagesFilepath, headersFilepath } = props;
+  const { className, stagesFilepath, headersFilepath } = props;
   const [developmentPlan, setDevelopmentPlan] = useState<DevelopmentPlan>(
     DEFAULT_DEVELOPMENT_PLAN
   );
@@ -48,7 +49,7 @@ export const Visualisation = (props: VisualisationProps) => {
   }, [loadData]);
 
   return (
-    <div data-testid="visualisation">
+    <div data-testid="visualisation" className={className}>
       <PlanViewer
         developmentPlan={developmentPlan}
         timetableEvents={timetableEvents}
