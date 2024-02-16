@@ -1,5 +1,7 @@
 import { useCallback, useMemo, useState, useEffect } from "react";
 
+import { ValidationErrorItem } from "joi";
+
 import { FileUpload, DateInput, Button } from "../gds-components";
 import { Autocomplete } from "./autocomplete/Autocomplete";
 import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
@@ -16,6 +18,7 @@ import {
 } from "../constants";
 import { PlanViewer } from "../timetable-visualisation/PlanViewer";
 import { fetchLPAs } from "../api/index";
+import { developmentPlanEventSchema } from "../validation";
 
 import styles from "./styles.module.css";
 import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
@@ -39,6 +42,8 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
   const [developmentPlanEvents, setDevelopmentPlanEvents] = useState<
     DevelopmentPlanTimetable[]
   >(DEFAULT_TIMETABLE_EVENTS);
+
+  const [formErrors, serFormErrors] = useState<ValidationErrorItem[]>([]);
 
   const timetableDownloadLink = useMemo(() => {
     const timetableCSV = resolveTimetableEventsCSV(
@@ -96,6 +101,27 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
     reader.readAsText(file);
   }, []);
 
+  const handleValidateForm = useCallback(() => {
+    const validationErrors: ValidationErrorItem[] = [];
+
+    developmentPlanEvents.forEach((event) => {
+      const validationResult = developmentPlanEventSchema.validate(event, {
+        abortEarly: false,
+      });
+
+      if (validationResult.error) {
+        const validationErrors = validationResult.error.details.map(
+          (error) => ({
+            ...error,
+            path: [validationResult.value.reference, ...error.path],
+          })
+        );
+        validationErrors.push(...validationErrors);
+      }
+    });
+    serFormErrors(validationErrors);
+  }, [developmentPlanEvents]);
+
   useEffect(() => {
     const loadLpas = async () => {
       try {
@@ -113,6 +139,22 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
       <h1 className="govuk-heading-xl" data-testid="form-title">
         Timetable Form
       </h1>
+      {formErrors.length > 0 && (
+        <div className="govuk-error-summary" data-module="govuk-error-summary">
+          <div role="alert">
+            <h2 className="govuk-error-summary__title">There is a problem</h2>
+            <div className="govuk-error-summary__body">
+              <ul className="govuk-list govuk-error-summary__list">
+                {formErrors.map((error) => (
+                  <li>
+                    <a href={`#${error.path.join("-")}`}>{error.message}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      )}
       <div>
         <FileUpload
           label="Upload a CSV file for Development Plan"
@@ -134,11 +176,21 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
         />
       </div>
       {developmentPlanEvents.map((stage) => (
-        <div key={stage.developmentPlanEvent}>
+        <div
+          id={`${stage.reference}-eventDate`}
+          key={stage.developmentPlanEvent}
+        >
           <DateInput
             value={stage.eventDate}
             label={getStageName(stage.developmentPlanEvent)}
             name={`${stage.developmentPlanEvent}-date`}
+            error={
+              formErrors.find(
+                (error) =>
+                  error.path[0] === stage.reference &&
+                  error.path[1] === "eventDate"
+              )?.message
+            }
             onChange={(value) =>
               setDevelopmentPlanEvents((prev) =>
                 prev.map((e) => (e === stage ? { ...e, eventDate: value } : e))
@@ -169,6 +221,13 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
           <Button>Export Timetable Header CSV</Button>
         </a>
       </div>
+      <Button
+        onClick={() => {
+          handleValidateForm();
+        }}
+      >
+        Validate
+      </Button>
       <h1 className="govuk-heading-xl">Preview</h1>
       <PlanViewer
         developmentPlan={developmentPlan}

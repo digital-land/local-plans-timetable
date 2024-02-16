@@ -1,25 +1,40 @@
 /**
  * GDS component: https://design-system.service.gov.uk/components/date-input/
  */
+import cn from "classnames";
 
 export interface DateInputProps {
   label: string;
   name: string;
   onChange: (value: string) => void;
   value: string;
+  error?: string;
 }
 
-export const DateInput = ({ value, label, name, onChange }: DateInputProps) => {
+export const DateInput = ({
+  value,
+  label,
+  name,
+  onChange,
+  error,
+}: DateInputProps) => {
   const [year = "", month = ""] = value.split("-");
 
   return (
-    <div className="govuk-form-group">
+    <div
+      className={cn("govuk-form-group", { "govuk-form-group--error": error })}
+    >
       <fieldset
         className="govuk-fieldset"
         role="group"
         aria-describedby={`${name}-hint`}
       >
         <legend className="govuk-fieldset__legend">{label}</legend>
+        {error && (
+          <p id="passport-issued-error" className="govuk-error-message">
+            <span className="govuk-visually-hidden">Error:</span> {error}
+          </p>
+        )}
         <div id={`${name}-hint`} className="govuk-hint">
           For example, 3 2007
         </div>
