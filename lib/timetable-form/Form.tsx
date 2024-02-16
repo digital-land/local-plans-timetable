@@ -1,8 +1,6 @@
 import { useCallback, useMemo, useState, useEffect } from "react";
 
-import { ValidationErrorItem } from "joi";
-
-import { FileUpload, DateInput, Button } from "../gds-components";
+import { FileUpload, DateInput, Button, ErrorSummary } from "../gds-components";
 import { Autocomplete } from "./autocomplete/Autocomplete";
 import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
 import {
@@ -18,10 +16,10 @@ import {
 } from "../constants";
 import { PlanViewer } from "../timetable-visualisation/PlanViewer";
 import { fetchLPAs } from "../api/index";
-import { developmentPlanEventSchema } from "../validation";
 
 import styles from "./styles.module.css";
 import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
+import { useValidation } from "./useValidation";
 
 const reader = new FileReader();
 
@@ -43,7 +41,7 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
     DevelopmentPlanTimetable[]
   >(DEFAULT_TIMETABLE_EVENTS);
 
-  const [formErrors, setFormErrors] = useState<ValidationErrorItem[]>([]);
+  const { errors, validateDevelopmentPlanEvents } = useValidation();
 
   const timetableDownloadLink = useMemo(() => {
     const timetableCSV = resolveTimetableEventsCSV(
@@ -102,25 +100,8 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
   }, []);
 
   const handleValidateForm = useCallback(() => {
-    const errors: ValidationErrorItem[] = [];
-
-    developmentPlanEvents.forEach((event) => {
-      const validationResult = developmentPlanEventSchema.validate(event, {
-        abortEarly: false,
-      });
-
-      if (validationResult.error) {
-        const validationErrors = validationResult.error.details.map(
-          (error) => ({
-            ...error,
-            path: [validationResult.value.reference, ...error.path],
-          })
-        );
-        errors.push(...validationErrors);
-      }
-    });
-    setFormErrors(errors);
-  }, [developmentPlanEvents]);
+    validateDevelopmentPlanEvents(developmentPlanEvents);
+  }, [developmentPlanEvents, validateDevelopmentPlanEvents]);
 
   useEffect(() => {
     const loadLpas = async () => {
@@ -139,22 +120,7 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
       <h1 className="govuk-heading-xl" data-testid="form-title">
         Timetable Form
       </h1>
-      {formErrors.length > 0 && (
-        <div className="govuk-error-summary" data-module="govuk-error-summary">
-          <div role="alert">
-            <h2 className="govuk-error-summary__title">There is a problem</h2>
-            <div className="govuk-error-summary__body">
-              <ul className="govuk-list govuk-error-summary__list">
-                {formErrors.map((error) => (
-                  <li>
-                    <a href={`#${error.path.join("-")}`}>{error.message}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      )}
+      <ErrorSummary errors={errors} />
       <div>
         <FileUpload
           label="Upload a CSV file for Development Plan"
@@ -185,7 +151,7 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
             label={getStageName(stage.developmentPlanEvent)}
             name={`${stage.developmentPlanEvent}-date`}
             error={
-              formErrors.find(
+              errors.find(
                 (error) =>
                   error.path[0] === stage.reference &&
                   error.path[1] === "eventDate"
