@@ -43,7 +43,7 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
     DevelopmentPlanTimetable[]
   >(DEFAULT_TIMETABLE_EVENTS);
 
-  const [formErrors, serFormErrors] = useState<ValidationErrorItem[]>([]);
+  const [formErrors, setFormErrors] = useState<ValidationErrorItem[]>([]);
 
   const timetableDownloadLink = useMemo(() => {
     const timetableCSV = resolveTimetableEventsCSV(
@@ -119,7 +119,7 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
         errors.push(...validationErrors);
       }
     });
-    serFormErrors(errors);
+    setFormErrors(errors);
   }, [developmentPlanEvents]);
 
   useEffect(() => {
