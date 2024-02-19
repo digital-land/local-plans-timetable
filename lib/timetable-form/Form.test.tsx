@@ -14,6 +14,7 @@ import { fetchLPAs } from "../api";
 jest.mock("../utils/timetable");
 jest.mock("../api/");
 jest.mock("../timetable-visualisation/PlanViewer");
+jest.mock('../validation');
 
 describe("all activity users", () => {
   beforeEach(() => {

@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState, useEffect } from "react";
 
-import { FileUpload, DateInput, Button } from "../gds-components";
+import { FileUpload, DateInput, Button, ErrorSummary } from "../gds-components";
 import { Autocomplete } from "./autocomplete/Autocomplete";
 import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
 import {
@@ -19,6 +19,7 @@ import { fetchLPAs } from "../api/index";
 
 import styles from "./styles.module.css";
 import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
+import { useValidation } from "./useValidation";
 
 const reader = new FileReader();
 
@@ -39,6 +40,8 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
   const [developmentPlanEvents, setDevelopmentPlanEvents] = useState<
     DevelopmentPlanTimetable[]
   >(DEFAULT_TIMETABLE_EVENTS);
+
+  const { errors, validateDevelopmentPlanEvents } = useValidation();
 
   const timetableDownloadLink = useMemo(() => {
     const timetableCSV = resolveTimetableEventsCSV(
@@ -96,6 +99,10 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
     reader.readAsText(file);
   }, []);
 
+  const handleValidateForm = useCallback(() => {
+    validateDevelopmentPlanEvents(developmentPlanEvents);
+  }, [developmentPlanEvents, validateDevelopmentPlanEvents]);
+
   useEffect(() => {
     const loadLpas = async () => {
       try {
@@ -113,6 +120,7 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
       <h1 className="govuk-heading-xl" data-testid="form-title">
         Timetable Form
       </h1>
+      <ErrorSummary errors={errors} />
       <div>
         <FileUpload
           label="Upload a CSV file for Development Plan"
@@ -134,11 +142,21 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
         />
       </div>
       {developmentPlanEvents.map((stage) => (
-        <div key={stage.developmentPlanEvent}>
+        <div
+          id={`${stage.reference}-eventDate`}
+          key={stage.developmentPlanEvent}
+        >
           <DateInput
             value={stage.eventDate}
             label={getStageName(stage.developmentPlanEvent)}
             name={`${stage.developmentPlanEvent}-date`}
+            error={
+              errors.find(
+                (error) =>
+                  error.path[0] === stage.reference &&
+                  error.path[1] === "eventDate"
+              )?.message
+            }
             onChange={(value) =>
               setDevelopmentPlanEvents((prev) =>
                 prev.map((e) => (e === stage ? { ...e, eventDate: value } : e))
@@ -169,6 +187,7 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
           <Button>Export Timetable Header CSV</Button>
         </a>
       </div>
+      <Button onClick={handleValidateForm}>Validate</Button>
       <h1 className="govuk-heading-xl">Preview</h1>
       <PlanViewer
         developmentPlan={developmentPlan}
