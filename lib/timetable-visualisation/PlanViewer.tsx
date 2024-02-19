@@ -25,7 +25,7 @@ export const PlanViewer = ({
   timetableEvents,
 }: PlanViewerProps) => {
   return (
-    <div data-testid="plan-preview">
+    <div data-testid="plan-viewer">
       <div>
         <h1 className="govuk-heading-xl">{name}</h1>
         <p className="govuk-body-l">{description}</p>

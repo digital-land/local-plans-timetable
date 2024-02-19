@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import { stages } from "../constants";
@@ -16,32 +16,41 @@ jest.mock("../api/");
 jest.mock("../timetable-visualisation/PlanViewer");
 jest.mock('../validation');
 
+// This is mocked to avoid the warnings about componentWillMount and componentWillReceiveProps from the accessible-autocomplete component
+jest.mock("./autocomplete/Autocomplete");
+
 describe("all activity users", () => {
   beforeEach(() => {
     (resolveDevelopmentPlanCSV as jest.Mock).mockImplementation(() => {});
     (resolveTimetableEventsCSV as jest.Mock).mockImplementation(() => {});
     (fetchLPAs as jest.Mock).mockResolvedValue({ entities: [] });
-    (PlanViewer as jest.Mock).mockReturnValue(<></>);
+    (PlanViewer as jest.Mock).mockReturnValue(<>Plan viewer component</>);
   });
 
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  test("Renders the main page", () => {
-    render(<Form />);
+  test("Renders the main page", async () => {
+    await act(async () => {
+      render(<Form />);
+    });
     expect(screen.getByTestId("form-title")).toBeInTheDocument();
   });
 
-  test("Generates CSV file on render", () => {
-    render(<Form />);
+  test("Generates CSV file on render", async () => {
+    await act(async () => {
+      render(<Form />);
+    });
 
     expect(resolveDevelopmentPlanCSV).toHaveBeenCalledTimes(1);
     expect(resolveTimetableEventsCSV).toHaveBeenCalledTimes(1);
   });
 
   test("Updates the CSV when the state changes", async () => {
-    render(<Form />);
+    await act(async () => {
+      render(<Form />);
+    });
 
     await userEvent.type(
       screen.getByTestId(`${stages[1].key}-date-month`),
@@ -55,9 +64,11 @@ describe("all activity users", () => {
     expect(resolveTimetableEventsCSV).toHaveBeenCalledTimes(7);
   });
 
-  test("renders a PlanPreview component", () => {
-    render(<Form />);
+  test("renders a PlanViewer component", async () => {
+    await act(async () => {
+      render(<Form />);
+    });
 
-    expect(PlanViewer).toHaveBeenCalledTimes(1);
+    expect(screen.getByText("Plan viewer component")).toBeInTheDocument();
   });
 });
