@@ -1,4 +1,4 @@
-import { StageKey } from "../constants";
+import { EventKey } from "../constants";
 
 export type DevelopmentPlan = {
   reference: string;
@@ -20,7 +20,7 @@ export type DevelopmentPlanTimetable = {
   reference: string;
   name: string;
   developmentPlan: string;
-  developmentPlanEvent: StageKey;
+  developmentPlanEvent: EventKey;
   eventDate: string;
   notes: string;
   organisation: string;

@@ -11,8 +11,8 @@ import {
 import {
   DEFAULT_DEVELOPMENT_PLAN,
   DEFAULT_TIMETABLE_EVENTS,
-  getStageName,
-  stages,
+  getEventName,
+  events,
 } from "../constants";
 import { PlanViewer } from "../timetable-visualisation/PlanViewer";
 import { fetchLPAs } from "../api/index";
@@ -41,7 +41,7 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
     DevelopmentPlanTimetable[]
   >(DEFAULT_TIMETABLE_EVENTS);
 
-  const { errors, validateDevelopmentPlanEvents } = useValidation();
+  const { errors, validateDevelopmentPlanEventDates } = useValidation();
 
   const timetableDownloadLink = useMemo(() => {
     const timetableCSV = resolveTimetableEventsCSV(
@@ -89,8 +89,8 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
             .filter((event) => !event.endDate)
             .sort(
               (a, b) =>
-                stages.findIndex((s) => s.key === a.developmentPlanEvent) -
-                stages.findIndex((s) => s.key === b.developmentPlanEvent)
+                events.findIndex((s) => s.key === a.developmentPlanEvent) -
+                events.findIndex((s) => s.key === b.developmentPlanEvent)
             )
         );
       }
@@ -100,8 +100,8 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
   }, []);
 
   const handleValidateForm = useCallback(() => {
-    validateDevelopmentPlanEvents(developmentPlanEvents);
-  }, [developmentPlanEvents, validateDevelopmentPlanEvents]);
+    validateDevelopmentPlanEventDates(developmentPlanEvents);
+  }, [developmentPlanEvents, validateDevelopmentPlanEventDates]);
 
   useEffect(() => {
     const loadLpas = async () => {
@@ -148,7 +148,7 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
         >
           <DateInput
             value={stage.eventDate}
-            label={getStageName(stage.developmentPlanEvent)}
+            label={getEventName(stage.developmentPlanEvent)}
             name={`${stage.developmentPlanEvent}-date`}
             error={
               errors.find(

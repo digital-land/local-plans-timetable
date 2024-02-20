@@ -29,7 +29,9 @@ export const DateInput = ({
         role="group"
         aria-describedby={`${name}-hint`}
       >
-        <legend className="govuk-fieldset__legend">{label}</legend>
+        <legend className="govuk-fieldset__legend govuk-fieldset__legend--m">
+          {label}
+        </legend>
         {error && (
           <p id="passport-issued-error" className="govuk-error-message">
             <span className="govuk-visually-hidden">Error:</span> {error}

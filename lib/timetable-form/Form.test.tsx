@@ -2,7 +2,7 @@ import "@testing-library/jest-dom";
 import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { stages } from "../constants";
+import { events } from "../constants";
 import {
   resolveDevelopmentPlanCSV,
   resolveTimetableEventsCSV,
@@ -53,11 +53,11 @@ describe("all activity users", () => {
     });
 
     await userEvent.type(
-      screen.getByTestId(`${stages[1].key}-date-month`),
+      screen.getByTestId(`${events[1].key}-date-month`),
       "12"
     );
     await userEvent.type(
-      screen.getByTestId(`${stages[1].key}-date-year`),
+      screen.getByTestId(`${events[1].key}-date-year`),
       "2026"
     );
 

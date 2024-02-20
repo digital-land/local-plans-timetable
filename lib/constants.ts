@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { DevelopmentPlan } from "./types/timetable";
 
-export const stages = [
+export const events = [
   { name: "Timetable published", key: "timetable-published" },
   {
     name: "Draft plan for public consultation published",
@@ -28,14 +28,14 @@ export const stages = [
   { name: "Plan adopted", key: "plan-adopted" },
 ] as const;
 
-export type StageKey = (typeof stages)[number]["key"];
+export type EventKey = (typeof events)[number]["key"];
 
-const stageKeyToNameMap = stages.reduce<Record<StageKey, string>>(
+const stageKeyToNameMap = events.reduce<Record<EventKey, string>>(
   (acc, { key, name }) => ({ ...acc, [key]: name }),
-  {} as Record<StageKey, string>
+  {} as Record<EventKey, string>
 );
 
-export const getStageName = (key: StageKey) => stageKeyToNameMap[key];
+export const getEventName = (key: EventKey) => stageKeyToNameMap[key];
 
 export const getFormattedDate = () => new Date().toISOString().split("T")[0];
 
@@ -53,7 +53,7 @@ export const DEFAULT_DEVELOPMENT_PLAN: DevelopmentPlan = {
   startDate: getFormattedDate(),
 };
 
-export const DEFAULT_TIMETABLE_EVENTS = stages.map(({ key }) => ({
+export const DEFAULT_TIMETABLE_EVENTS = events.map(({ key }) => ({
   reference: uuidv4(),
   name: "",
   developmentPlan: "",
