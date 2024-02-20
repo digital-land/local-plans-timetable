@@ -36,7 +36,7 @@ export const DateInput = ({
           </p>
         )}
         <div id={`${name}-hint`} className="govuk-hint">
-          For example, 3 2007
+          For example, 03 2007
         </div>
         <div className="govuk-date-input">
           <div className="govuk-date-input__item">
@@ -55,6 +55,15 @@ export const DateInput = ({
                 inputMode="numeric"
                 value={month}
                 onChange={(e) => onChange(`${year}-${e.target.value}`)}
+                onBlur={(e) =>
+                  onChange(
+                    `${year}-${
+                      e.target.value.length == 1
+                        ? "0" + e.target.value
+                        : e.target.value
+                    }`
+                  )
+                }
                 maxLength={2}
               />
             </div>
