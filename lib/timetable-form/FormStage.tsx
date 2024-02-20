@@ -1,17 +1,17 @@
 import { ReactNode, useState } from "react";
 
-import { EventKey } from "../constants";
 import { Button, DateInput, ErrorSummary, TextArea } from "../gds-components";
 import { useValidation } from "./useValidation";
 
 import styles from "./styles.module.css";
 import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
+import { TimetableEventKey } from "../constants";
 
 interface FormStageProps {
   title: string;
   description: ReactNode;
-  startEvent: EventKey;
-  endEvent?: EventKey;
+  startEvent: TimetableEventKey;
+  endEvent?: TimetableEventKey;
 }
 
 export const FormStage = ({

@@ -2,7 +2,7 @@ import "@testing-library/jest-dom";
 import { act, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import { events } from "../constants";
+import { developmentPlanTimetableEvents } from "../constants";
 import {
   resolveDevelopmentPlanCSV,
   resolveTimetableEventsCSV,
@@ -55,14 +55,14 @@ describe("all activity users", () => {
     expect(resolveTimetableEventsCSV).toHaveBeenCalledTimes(1);
 
     await userEvent.type(
-      screen.getByTestId(`${events[1].key}-date-month`),
+      screen.getByTestId(`${developmentPlanTimetableEvents[1].key}-date-month`),
       "11"
     );
 
     expect(resolveTimetableEventsCSV).toHaveBeenCalledTimes(3);
 
     await userEvent.type(
-      screen.getByTestId(`${events[1].key}-date-year`),
+      screen.getByTestId(`${developmentPlanTimetableEvents[1].key}-date-year`),
       "2026"
     );
 

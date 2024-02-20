@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { DevelopmentPlan } from "./types/timetable";
 
-export const events = [
+export const developmentPlanTimetableEvents = [
   { name: "Timetable published", key: "timetable-published" },
   {
     name: "Draft plan for public consultation published",
@@ -28,14 +28,18 @@ export const events = [
   { name: "Plan adopted", key: "plan-adopted" },
 ] as const;
 
-export type EventKey = (typeof events)[number]["key"];
+export type TimetableEventKey =
+  (typeof developmentPlanTimetableEvents)[number]["key"];
 
-const eventKeyToNameMap = events.reduce<Record<EventKey, string>>(
+const eventKeyToNameMap = developmentPlanTimetableEvents.reduce<
+  Record<TimetableEventKey, string>
+>(
   (acc, { key, name }) => ({ ...acc, [key]: name }),
-  {} as Record<EventKey, string>
+  {} as Record<TimetableEventKey, string>
 );
 
-export const getEventName = (key: EventKey) => eventKeyToNameMap[key];
+export const getTimetableEventName = (key: TimetableEventKey) =>
+  eventKeyToNameMap[key];
 
 export const getFormattedDate = () => new Date().toISOString().split("T")[0];
 
@@ -53,15 +57,17 @@ export const DEFAULT_DEVELOPMENT_PLAN: DevelopmentPlan = {
   startDate: getFormattedDate(),
 };
 
-export const DEFAULT_TIMETABLE_EVENTS = events.map(({ key }) => ({
-  reference: uuidv4(),
-  name: "",
-  developmentPlan: "",
-  developmentPlanEvent: key,
-  eventDate: "",
-  notes: "",
-  organisation: "",
-  entryDate: getFormattedDate(),
-  startDate: getFormattedDate(),
-  endDate: "",
-}));
+export const DEFAULT_TIMETABLE_EVENTS = developmentPlanTimetableEvents.map(
+  ({ key }) => ({
+    reference: uuidv4(),
+    name: "",
+    developmentPlan: "",
+    developmentPlanEvent: key,
+    eventDate: "",
+    notes: "",
+    organisation: "",
+    entryDate: getFormattedDate(),
+    startDate: getFormattedDate(),
+    endDate: "",
+  })
+);
