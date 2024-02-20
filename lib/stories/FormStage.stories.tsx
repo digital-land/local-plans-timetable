@@ -48,6 +48,6 @@ export const StageWithoutEndEvent: Story = {
         </div>
       </p>
     ),
-    startEvent: "draft-plan-for-public-consultation-published",
+    startEvent: "submit-plan-for-examination",
   },
 };
