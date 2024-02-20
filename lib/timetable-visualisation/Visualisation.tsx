@@ -13,12 +13,12 @@ import {
 import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
 
 export type VisualisationProps = {
-  stagesFilepath: string;
-  headersFilepath: string;
+  developmentPlanFilepath: string;
+  timetableEventsFilepath: string;
 };
 
 export const Visualisation = (props: VisualisationProps) => {
-  const { stagesFilepath, headersFilepath } = props;
+  const { timetableEventsFilepath, developmentPlanFilepath } = props;
   const [developmentPlan, setDevelopmentPlan] = useState<DevelopmentPlan>(
     DEFAULT_DEVELOPMENT_PLAN
   );
@@ -27,21 +27,21 @@ export const Visualisation = (props: VisualisationProps) => {
   >(DEFAULT_TIMETABLE_EVENTS);
 
   const loadData = useCallback(async () => {
-    const stagesData = await loadCSV(stagesFilepath);
-    const events = await csvToJson().fromString(stagesData);
+    const eventsData = await loadCSV(timetableEventsFilepath);
+    const events = await csvToJson().fromString(eventsData);
 
-    const headersData = await loadCSV(headersFilepath);
-    const headers = await csvToJson().fromString(headersData);
+    const developmentPlanData = await loadCSV(developmentPlanFilepath);
+    const developmentPlan = await csvToJson().fromString(developmentPlanData);
 
     const loadedData: DevelopmentPlan = {
       ...DEFAULT_DEVELOPMENT_PLAN,
       // This assumes the last row is the current data
-      ...headers.slice(-1)[0],
+      ...developmentPlan.slice(-1)[0],
     };
 
     setDevelopmentPlan(loadedData);
     setTimetableEvents(events);
-  }, [headersFilepath, stagesFilepath]);
+  }, [developmentPlanFilepath, timetableEventsFilepath]);
 
   useEffect(() => {
     loadData();

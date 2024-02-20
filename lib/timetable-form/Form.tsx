@@ -11,8 +11,8 @@ import {
 import {
   DEFAULT_DEVELOPMENT_PLAN,
   DEFAULT_TIMETABLE_EVENTS,
-  getStageName,
-  stages,
+  getTimetableEventName,
+  developmentPlanTimetableEvents,
 } from "../constants";
 import { PlanViewer } from "../timetable-visualisation/PlanViewer";
 import { fetchLPAs } from "../api/index";
@@ -35,24 +35,25 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
     DEFAULT_DEVELOPMENT_PLAN
   );
 
-  const [loadedDevelopmentPlanEvents, setLoadedDevelopmentPlanEvents] =
-    useState<DevelopmentPlanTimetable[] | null>(null);
-  const [developmentPlanEvents, setDevelopmentPlanEvents] = useState<
+  const [loadedTimetableEvents, setLoadedTimetableEvents] = useState<
+    DevelopmentPlanTimetable[] | null
+  >(null);
+  const [timetableEvents, setTimetableEvents] = useState<
     DevelopmentPlanTimetable[]
   >(DEFAULT_TIMETABLE_EVENTS);
 
   const { errors, validateDevelopmentPlanEvents } = useValidation();
 
-  const timetableDownloadLink = useMemo(() => {
+  const timetableEventsDownloadLink = useMemo(() => {
     const timetableCSV = resolveTimetableEventsCSV(
-      developmentPlanEvents,
-      loadedDevelopmentPlanEvents
+      timetableEvents,
+      loadedTimetableEvents
     );
 
     return `data:text/csv;charset=urf-8,${timetableCSV}`;
-  }, [developmentPlanEvents, loadedDevelopmentPlanEvents]);
+  }, [timetableEvents, loadedTimetableEvents]);
 
-  const timetableHeaderDownloadLink = useMemo(() => {
+  const developmentPlanDownloadLink = useMemo(() => {
     const timetableCSV = resolveDevelopmentPlanCSV(
       developmentPlan,
       loadedDevelopmentPlan
@@ -82,15 +83,19 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
 
       if (csvString) {
         const loadedEvents = fromCSVString<DevelopmentPlanTimetable>(csvString);
-        setLoadedDevelopmentPlanEvents(loadedEvents);
-        setDevelopmentPlanEvents(
+        setLoadedTimetableEvents(loadedEvents);
+        setTimetableEvents(
           loadedEvents
             // This assumes any row with an end date is invalid
             .filter((event) => !event.endDate)
             .sort(
               (a, b) =>
-                stages.findIndex((s) => s.key === a.developmentPlanEvent) -
-                stages.findIndex((s) => s.key === b.developmentPlanEvent)
+                developmentPlanTimetableEvents.findIndex(
+                  (s) => s.key === a.developmentPlanEvent
+                ) -
+                developmentPlanTimetableEvents.findIndex(
+                  (s) => s.key === b.developmentPlanEvent
+                )
             )
         );
       }
@@ -100,8 +105,8 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
   }, []);
 
   const handleValidateForm = useCallback(() => {
-    validateDevelopmentPlanEvents(developmentPlanEvents);
-  }, [developmentPlanEvents, validateDevelopmentPlanEvents]);
+    validateDevelopmentPlanEvents(timetableEvents);
+  }, [timetableEvents, validateDevelopmentPlanEvents]);
 
   useEffect(() => {
     const loadLpas = async () => {
@@ -127,7 +132,7 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
           onChange={handleDevelopmentPlanFileUpload}
         />
         <FileUpload
-          label="Upload a CSV file for Timetable"
+          label="Upload a CSV file for Development Plan Timetable"
           onChange={handleDevelopmentPlanTimetableFileUpload}
         />
         <Autocomplete
@@ -141,25 +146,25 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
           source={LPAs}
         />
       </div>
-      {developmentPlanEvents.map((stage) => (
+      {timetableEvents.map((event) => (
         <div
-          id={`${stage.reference}-eventDate`}
-          key={stage.developmentPlanEvent}
+          id={`${event.reference}-eventDate`}
+          key={event.developmentPlanEvent}
         >
           <DateInput
-            value={stage.eventDate}
-            label={getStageName(stage.developmentPlanEvent)}
-            name={`${stage.developmentPlanEvent}-date`}
+            value={event.eventDate}
+            label={getTimetableEventName(event.developmentPlanEvent)}
+            name={`${event.developmentPlanEvent}-date`}
             error={
               errors.find(
                 (error) =>
-                  error.path[0] === stage.reference &&
+                  error.path[0] === event.reference &&
                   error.path[1] === "eventDate"
               )?.message
             }
             onChange={(value) =>
-              setDevelopmentPlanEvents((prev) =>
-                prev.map((e) => (e === stage ? { ...e, eventDate: value } : e))
+              setTimetableEvents((prev) =>
+                prev.map((e) => (e === event ? { ...e, eventDate: value } : e))
               )
             }
           />
@@ -169,29 +174,28 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
         <a
           role="button"
           type="button"
-          data-testid="csv-download-button"
-          href={timetableDownloadLink}
-          download="timetable.csv"
+          href={developmentPlanDownloadLink}
+          download="development-plan.csv"
         >
-          <Button>Export Timetable CSV</Button>
+          <Button>Export Development Plan CSV</Button>
         </a>
       </div>
       <div>
         <a
           role="button"
           type="button"
-          data-testid="csv-download-header-button"
-          href={timetableHeaderDownloadLink}
-          download="timetableHeader.csv"
+          data-testid="csv-download-button"
+          href={timetableEventsDownloadLink}
+          download="development-plan-timetable.csv"
         >
-          <Button>Export Timetable Header CSV</Button>
+          <Button>Export Development Plan Timetable CSV</Button>
         </a>
       </div>
       <Button onClick={handleValidateForm}>Validate</Button>
       <h1 className="govuk-heading-xl">Preview</h1>
       <PlanViewer
         developmentPlan={developmentPlan}
-        timetableEvents={developmentPlanEvents}
+        timetableEvents={timetableEvents}
       />
     </div>
   );

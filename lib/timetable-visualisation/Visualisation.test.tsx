@@ -13,8 +13,8 @@ jest.mock("csvtojson", () => ({
   })),
 }));
 
-const stagesFilePath = "/stages";
-const headersFilepath = "/header";
+const developmentPlanFilepath = "/development-plan";
+const timetableEventsFilepath = "/development-plan-timetable";
 
 describe("Visualisation", () => {
   beforeEach(() => {
@@ -30,8 +30,8 @@ describe("Visualisation", () => {
     await act(async () => {
       render(
         <Visualisation
-          stagesFilepath={stagesFilePath}
-          headersFilepath={headersFilepath}
+          timetableEventsFilepath={timetableEventsFilepath}
+          developmentPlanFilepath={developmentPlanFilepath}
         />
       );
     });
@@ -43,15 +43,15 @@ describe("Visualisation", () => {
     await act(async () => {
       render(
         <Visualisation
-          stagesFilepath={stagesFilePath}
-          headersFilepath={headersFilepath}
+          timetableEventsFilepath={timetableEventsFilepath}
+          developmentPlanFilepath={developmentPlanFilepath}
         />
       );
     });
 
     expect(loadCSV).toHaveBeenCalledTimes(2);
-    expect(loadCSV).toHaveBeenNthCalledWith(1, stagesFilePath);
-    expect(loadCSV).toHaveBeenNthCalledWith(2, headersFilepath);
+    expect(loadCSV).toHaveBeenNthCalledWith(1, timetableEventsFilepath);
+    expect(loadCSV).toHaveBeenNthCalledWith(2, developmentPlanFilepath);
 
     expect(csvToJson).toHaveBeenCalledTimes(2);
   });
@@ -60,8 +60,8 @@ describe("Visualisation", () => {
     await act(async () => {
       render(
         <Visualisation
-          stagesFilepath={stagesFilePath}
-          headersFilepath={headersFilepath}
+          timetableEventsFilepath={timetableEventsFilepath}
+          developmentPlanFilepath={developmentPlanFilepath}
         />
       );
     });
