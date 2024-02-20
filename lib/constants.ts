@@ -30,12 +30,12 @@ export const events = [
 
 export type EventKey = (typeof events)[number]["key"];
 
-const stageKeyToNameMap = events.reduce<Record<EventKey, string>>(
+const eventKeyToNameMap = events.reduce<Record<EventKey, string>>(
   (acc, { key, name }) => ({ ...acc, [key]: name }),
   {} as Record<EventKey, string>
 );
 
-export const getEventName = (key: EventKey) => stageKeyToNameMap[key];
+export const getEventName = (key: EventKey) => eventKeyToNameMap[key];
 
 export const getFormattedDate = () => new Date().toISOString().split("T")[0];
 
