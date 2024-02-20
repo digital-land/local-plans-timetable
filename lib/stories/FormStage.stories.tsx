@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 
 import { FormStage } from "../timetable-form/FormStage";
 
+import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
+
 const meta = {
   title: "Example/FormStage",
   component: FormStage,
