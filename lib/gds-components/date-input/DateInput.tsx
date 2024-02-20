@@ -56,13 +56,8 @@ export const DateInput = ({
                 value={month}
                 onChange={(e) => onChange(`${year}-${e.target.value}`)}
                 onBlur={(e) =>
-                  onChange(
-                    `${year}-${
-                      e.target.value.length == 1
-                        ? "0" + e.target.value
-                        : e.target.value
-                    }`
-                  )
+                  e.target.value.length == 1 &&
+                  onChange(`${year}-${"0" + e.target.value}`)
                 }
                 maxLength={2}
               />
