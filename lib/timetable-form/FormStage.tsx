@@ -5,6 +5,7 @@ import { Button, DateInput, ErrorSummary, TextArea } from "../gds-components";
 import { useValidation } from "./useValidation";
 
 import styles from "./styles.module.css";
+import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
 
 interface FormStageProps {
   title: string;
