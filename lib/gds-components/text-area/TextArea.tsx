@@ -17,7 +17,7 @@ export const TextArea = ({ label, onChange, value, hint }: TextAreaProps) => {
       </h1>
       <textarea
         className="govuk-textarea govuk-!-margin-bottom-2"
-        data-testid={`${label}-text-area`}
+        data-testid={`${label.replace(/ /g, '-')}-text-area`}
         rows={5}
         value={value}
         onChange={(e) => onChange(e.target.value)}
