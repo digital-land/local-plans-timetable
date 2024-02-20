@@ -14,7 +14,7 @@ import { fetchLPAs } from "../api";
 jest.mock("../utils/timetable");
 jest.mock("../api/");
 jest.mock("../timetable-visualisation/PlanViewer");
-jest.mock('../validation');
+jest.mock("../validation");
 
 // This is mocked to avoid the warnings about componentWillMount and componentWillReceiveProps from the accessible-autocomplete component
 jest.mock("./autocomplete/Autocomplete");
@@ -52,10 +52,15 @@ describe("all activity users", () => {
       render(<Form />);
     });
 
+    expect(resolveTimetableEventsCSV).toHaveBeenCalledTimes(1);
+
     await userEvent.type(
       screen.getByTestId(`${events[1].key}-date-month`),
-      "12"
+      "11"
     );
+
+    expect(resolveTimetableEventsCSV).toHaveBeenCalledTimes(3);
+
     await userEvent.type(
       screen.getByTestId(`${events[1].key}-date-year`),
       "2026"
