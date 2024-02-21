@@ -8,6 +8,7 @@ import { PlanViewer } from "./PlanViewer";
 import {
   DEFAULT_DEVELOPMENT_PLAN,
   DEFAULT_TIMETABLE_EVENTS,
+  developmentPlanTimetableEvents,
 } from "../constants";
 
 import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
@@ -40,7 +41,20 @@ export const Visualisation = (props: VisualisationProps) => {
     };
 
     setDevelopmentPlan(loadedData);
-    setTimetableEvents(events);
+    setTimetableEvents(
+      events
+        // This assumes any row with an end date is invalid
+        .filter((event) => !event.endDate)
+        .sort(
+          (a, b) =>
+            developmentPlanTimetableEvents.findIndex(
+              (s) => s.key === a.developmentPlanEvent
+            ) -
+            developmentPlanTimetableEvents.findIndex(
+              (s) => s.key === b.developmentPlanEvent
+            )
+        )
+    );
   }, [developmentPlanFilepath, timetableEventsFilepath]);
 
   useEffect(() => {
