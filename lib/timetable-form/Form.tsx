@@ -42,7 +42,7 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
     DevelopmentPlanTimetable[]
   >(DEFAULT_TIMETABLE_EVENTS);
 
-  const { errors, validateDevelopmentPlanEvents } = useValidation();
+  const { errors, validateDevelopmentPlanEventDates } = useValidation();
 
   const timetableEventsDownloadLink = useMemo(() => {
     const timetableCSV = resolveTimetableEventsCSV(
@@ -105,8 +105,8 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
   }, []);
 
   const handleValidateForm = useCallback(() => {
-    validateDevelopmentPlanEvents(timetableEvents);
-  }, [timetableEvents, validateDevelopmentPlanEvents]);
+    validateDevelopmentPlanEventDates(timetableEvents);
+  }, [timetableEvents, validateDevelopmentPlanEventDates]);
 
   useEffect(() => {
     const loadLpas = async () => {

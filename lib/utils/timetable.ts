@@ -43,7 +43,10 @@ export const resolveTimetableEventsCSV = (
       throw Error("Form event not found");
     }
 
-    if (formEvent.eventDate !== loadedEvent.eventDate) {
+    if (
+      formEvent.eventDate !== loadedEvent.eventDate ||
+      formEvent.notes !== loadedEvent.notes
+    ) {
       const currentDate = getFormattedDate();
       loadedEvent.endDate = currentDate;
       eventsToDownload.push({

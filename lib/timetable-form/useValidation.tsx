@@ -5,17 +5,25 @@ import { developmentPlanEventSchema } from "../validation";
 
 export const useValidation = (): {
   errors: ValidationErrorItem[];
-  validateDevelopmentPlanEvents: (
-    developmentPlanEvents: DevelopmentPlanTimetable[]
+  validateDevelopmentPlanEventDates: (
+    developmentPlanEventDates: Pick<
+      DevelopmentPlanTimetable,
+      "eventDate" | "reference"
+    >[]
   ) => void;
 } => {
   const [errors, setErrors] = useState<ValidationErrorItem[]>([]);
 
-  const validateDevelopmentPlanEvents = useCallback(
-    (developmentPlanEvents: DevelopmentPlanTimetable[]) => {
+  const validateDevelopmentPlanEventDates = useCallback(
+    (
+      developmentPlanEventDates: Pick<
+        DevelopmentPlanTimetable,
+        "eventDate" | "reference"
+      >[]
+    ) => {
       const errors: ValidationErrorItem[] = [];
 
-      developmentPlanEvents.forEach((event) => {
+      developmentPlanEventDates.forEach((event) => {
         const validationResult = developmentPlanEventSchema.validate(event, {
           abortEarly: false,
         });
@@ -35,5 +43,5 @@ export const useValidation = (): {
     []
   );
 
-  return { errors, validateDevelopmentPlanEvents };
+  return { errors, validateDevelopmentPlanEventDates };
 };

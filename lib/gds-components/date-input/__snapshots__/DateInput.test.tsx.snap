@@ -11,7 +11,7 @@ exports[`calls the onChange handler with the right value when the month input ch
       role="group"
     >
       <legend
-        class="govuk-fieldset__legend"
+        class="govuk-fieldset__legend govuk-fieldset__legend--m"
       >
         Date
       </legend>
@@ -87,7 +87,7 @@ exports[`calls the onChange handler with the right value when the year input cha
       role="group"
     >
       <legend
-        class="govuk-fieldset__legend"
+        class="govuk-fieldset__legend govuk-fieldset__legend--m"
       >
         Date
       </legend>
@@ -163,7 +163,7 @@ exports[`shows the right input values from the provided value 1`] = `
       role="group"
     >
       <legend
-        class="govuk-fieldset__legend"
+        class="govuk-fieldset__legend govuk-fieldset__legend--m"
       >
         Date
       </legend>

@@ -8,11 +8,15 @@ export const developmentPlanEventSchema = Joi.object({
   name: Joi.string().allow(""),
   developmentPlan: Joi.string().allow(""),
   developmentPlanEvent: Joi.string(),
-  eventDate: Joi.date().iso().min(minDate).max(maxDate).allow("").messages({
-    "date.format": `Date must be a real date`,
-    "date.min": `Date must be after ${minDate.toISOString().split("T")[0]}`,
-    "date.max": `Date must be before ${maxDate.toISOString().split("T")[0]}`,
-  }),
+  eventDate: Joi.date()
+    .iso()
+    .min(minDate)
+    .max(maxDate)
+    .messages({
+      "date.format": `Date must be a real date`,
+      "date.min": `Date must be after ${minDate.toISOString().split("T")[0]}`,
+      "date.max": `Date must be before ${maxDate.toISOString().split("T")[0]}`,
+    }),
   notes: Joi.string().allow(""),
   organisation: Joi.string().allow(""),
   entryDate: Joi.string().allow(""),

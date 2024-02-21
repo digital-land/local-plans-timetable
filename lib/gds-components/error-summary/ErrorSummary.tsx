@@ -22,7 +22,7 @@ export const ErrorSummary = ({
         <div className="govuk-error-summary__body">
           <ul className="govuk-list govuk-error-summary__list">
             {errors.map((error) => (
-              <li>
+              <li key={`${error.path[0]}-${error.path[1]}`}>
                 <a href={`#${error.path.join("-")}`}>{error.message}</a>
               </li>
             ))}
