@@ -7,11 +7,7 @@ import { PlanViewer } from "./PlanViewer";
 
 jest.mock("../utils/timetable");
 jest.mock("../timetable-visualisation/PlanViewer");
-jest.mock("csvtojson", () => ({
-  default: jest.fn(() => ({
-    fromString: jest.fn(() => new Promise((resolve) => resolve([]))),
-  })),
-}));
+jest.mock("csvtojson", () => ({ default: jest.fn() }));
 
 const developmentPlanFilepath = "/development-plan";
 const timetableEventsFilepath = "/development-plan-timetable";
@@ -20,6 +16,9 @@ describe("Visualisation", () => {
   beforeEach(() => {
     (loadCSV as jest.Mock).mockResolvedValue("");
     (PlanViewer as jest.Mock).mockReturnValue(<>Plan viewer component</>);
+    (csvToJson as jest.Mock).mockImplementation(() => ({
+      fromString: jest.fn(() => new Promise((resolve) => resolve([]))),
+    }));
   });
 
   afterEach(() => {
@@ -67,5 +66,90 @@ describe("Visualisation", () => {
     });
 
     expect(screen.getByText("Plan viewer component")).toBeInTheDocument();
+  });
+
+  it("filters and sorts the timetable events", async () => {
+    (csvToJson as jest.Mock).mockImplementation(() => ({
+      fromString: jest.fn(
+        () =>
+          new Promise((resolve) =>
+            resolve([
+              {
+                reference: "39b7f5e2-beba-43d7-b20d-d9ca3b710f80",
+                name: "",
+                developmentPlan: "dorcester-new-local-plan",
+                developmentPlanEvent: "timetable-published",
+                eventDate: "2024-02",
+                notes: "",
+                organisation: "",
+                entryDate: "2024-02-02T15:46:14.144Z",
+                startDate: "2024-02-02T15:46:14.144Z",
+                endDate: "2024-03-02T15:46:14.144Z",
+              },
+              {
+                reference: "7336edfb-8db3-4bbc-806f-4a0895cdeea6",
+                name: "",
+                developmentPlan: "dorcester-new-local-plan",
+                developmentPlanEvent:
+                  "draft-plan-for-public-consultation-published",
+                eventDate: "2024-07",
+                notes: "",
+                organisation: "",
+                entryDate: "2024-02-02T15:46:14.144Z",
+                startDate: "2024-02-02T15:46:14.144Z",
+                endDate: "",
+              },
+              {
+                reference: "d30c1520-adc1-45e4-8898-b2c7aaa83db8",
+                name: "",
+                developmentPlan: "dorcester-new-local-plan",
+                developmentPlanEvent: "timetable-published",
+                eventDate: "2024-03",
+                notes: "",
+                organisation: "",
+                entryDate: "2024-03-02T15:46:14.144Z",
+                startDate: "2024-03-02T15:46:14.144Z",
+                endDate: "",
+              },
+            ])
+          )
+      ),
+    }));
+
+    await act(async () => {
+      render(
+        <Visualisation
+          timetableEventsFilepath={timetableEventsFilepath}
+          developmentPlanFilepath={developmentPlanFilepath}
+        />
+      );
+    });
+
+    expect((PlanViewer as jest.Mock).mock.calls[1][0].timetableEvents).toEqual([
+      {
+        reference: "d30c1520-adc1-45e4-8898-b2c7aaa83db8",
+        name: "",
+        developmentPlan: "dorcester-new-local-plan",
+        developmentPlanEvent: "timetable-published",
+        eventDate: "2024-03",
+        notes: "",
+        organisation: "",
+        entryDate: "2024-03-02T15:46:14.144Z",
+        startDate: "2024-03-02T15:46:14.144Z",
+        endDate: "",
+      },
+      {
+        reference: "7336edfb-8db3-4bbc-806f-4a0895cdeea6",
+        name: "",
+        developmentPlan: "dorcester-new-local-plan",
+        developmentPlanEvent: "draft-plan-for-public-consultation-published",
+        eventDate: "2024-07",
+        notes: "",
+        organisation: "",
+        entryDate: "2024-02-02T15:46:14.144Z",
+        startDate: "2024-02-02T15:46:14.144Z",
+        endDate: "",
+      },
+    ]);
   });
 });
