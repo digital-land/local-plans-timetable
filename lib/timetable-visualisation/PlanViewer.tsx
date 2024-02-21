@@ -1,3 +1,4 @@
+import { getTimetableEventName } from "../constants";
 import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
 
 import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
@@ -61,7 +62,7 @@ export const PlanViewer = ({
           {timetableEvents.map((timetableEvent) => (
             <tr className="govuk-table__row" key={timetableEvent.reference}>
               <th scope="row" className="govuk-table__header">
-                {timetableEvent.developmentPlanEvent}
+                {getTimetableEventName(timetableEvent.developmentPlanEvent)}
               </th>
               <td className="govuk-table__cell">{timetableEvent.eventDate}</td>
             </tr>
