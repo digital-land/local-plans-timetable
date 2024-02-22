@@ -19,7 +19,7 @@ jest.mock("../validation");
 // This is mocked to avoid the warnings about componentWillMount and componentWillReceiveProps from the accessible-autocomplete component
 jest.mock("./autocomplete/Autocomplete");
 
-describe("all activity users", () => {
+describe("Form", () => {
   beforeEach(() => {
     (resolveDevelopmentPlanCSV as jest.Mock).mockImplementation(() => {});
     (resolveTimetableEventsCSV as jest.Mock).mockImplementation(() => {});
@@ -31,7 +31,7 @@ describe("all activity users", () => {
     jest.clearAllMocks();
   });
 
-  test("Renders the main page", async () => {
+  test("displays title", async () => {
     await act(async () => {
       render(<Form />);
     });

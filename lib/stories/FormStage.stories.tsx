@@ -1,19 +1,19 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { FormStage } from "../timetable-form/FormStage";
+import { StagePage } from "../timetable-form/pages/StagePage";
 
 import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
 
 const meta = {
   title: "Example/FormStage",
-  component: FormStage,
+  component: StagePage,
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/writing-docs/autodocs
   tags: ["autodocs"],
   parameters: {
     // More on how to position stories at: https://storybook.js.org/docs/configure/story-layout
     layout: "fullscreen",
   },
-} satisfies Meta<typeof FormStage>;
+} satisfies Meta<typeof StagePage>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

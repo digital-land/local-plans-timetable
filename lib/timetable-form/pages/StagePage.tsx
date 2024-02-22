@@ -1,24 +1,24 @@
 import { ReactNode, useState } from "react";
 
-import { Button, DateInput, ErrorSummary, TextArea } from "../gds-components";
-import { useValidation } from "./useValidation";
+import { Button, DateInput, ErrorSummary, TextArea } from "../../gds-components";
+import { useValidation } from "../useValidation";
 
 import styles from "./styles.module.css";
-import { TimetableEventKey } from "../constants";
+import { TimetableEventKey } from "../../constants";
 
-interface FormStageProps {
+interface StagePageProps {
   title: string;
   description: ReactNode;
   startEvent: TimetableEventKey;
   endEvent?: TimetableEventKey;
 }
 
-export const FormStage = ({
+export const StagePage = ({
   title,
   description,
   startEvent,
   endEvent,
-}: FormStageProps): JSX.Element => {
+}: StagePageProps): JSX.Element => {
   const [startDate, setStartDate] = useState<string>("");
   const [endDate, setEndDate] = useState<string>("");
   const [additionalInformation, setAdditionalInformation] =

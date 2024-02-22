@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import { act, render } from "@testing-library/react";
 import { fetchLPAs } from "../../api";
-import { Form } from "../Form";
+import { LPAPage } from "./LPAPage";
 
 jest.mock("../autocomplete/Autocomplete");
 jest.mock("../../api/");
@@ -17,7 +17,7 @@ describe("LPAPage", () => {
 
   test("Calls fetchLPAs on mount", async () => {
     await act(async () => {
-      render(<Form />);
+      render(<LPAPage />);
     });
     expect(fetchLPAs).toHaveBeenCalledTimes(1);
   });
