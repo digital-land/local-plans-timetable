@@ -7,14 +7,23 @@ interface TextAreaProps {
   onChange: (value: string) => void;
   value: string;
   hint?: string;
+  showLabel?: boolean;
 }
 
-export const TextArea = ({ label, onChange, value, hint }: TextAreaProps) => {
+export const TextArea = ({
+  label,
+  onChange,
+  value,
+  hint,
+  showLabel = true,
+}: TextAreaProps) => {
   return (
     <div className="govuk-form-group">
-      <h1 className="govuk-label-wrapper">
-        <label className="govuk-label govuk-label--m">{label}</label>
-      </h1>
+      {showLabel && (
+        <h1 className="govuk-label-wrapper">
+          <label className="govuk-label govuk-label--m">{label}</label>
+        </h1>
+      )}
       <textarea
         className="govuk-textarea govuk-!-margin-bottom-2"
         data-testid={`${label.replace(/ /g, '-')}-text-area`}

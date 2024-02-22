@@ -3,6 +3,15 @@ import * as Joi from "joi";
 const maxDate = new Date(2099, 11);
 const minDate = new Date(2000, 0);
 
+export const developmentPlanSchema = Joi.object({
+  name: Joi.string().allow("").max(100,).messages({
+    "string.max": `Title must be less must be less than or equal to 100 characters long`,
+  }),
+  description: Joi.string().allow("").max(400).messages({
+    "string.max": `Description must be less must be less than or equal to 400 characters long`,
+  }),
+});
+
 export const developmentPlanEventSchema = Joi.object({
   reference: Joi.string(),
   name: Joi.string().allow(""),
