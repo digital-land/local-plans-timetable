@@ -11,14 +11,13 @@
   "scripts": {
     "prebuild": "node ./scripts/wrapper-pre-build.cjs",
     "dev": "npm run prebuild && vite --open",
-    "build": "tsc --p ./tsconfig-build.json && vite build",
+    "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build:storybook": "storybook build",
-    "build:cdn": "tsc --p ./tsconfig-build.json && vite --config cdn-vite.config.ts build",
+    "build:cdn": "tsc --p ./tsconfig-cdn-build.json && vite --config cdn-vite.config.ts build",
     "postbuild:cdn": "node ./scripts/cdn-post-build.cjs",
-    "build:lib": "tsc --p ./tsconfig-build.json && vite --config lib-vite.config.ts build",
     "test": "jest",
     "test:watch": "jest --watch"
   },
