@@ -3,7 +3,7 @@ import { fetchLPAs } from "../../../api";
 import { Button } from "../../../gds-components";
 import { Autocomplete } from "../../autocomplete/Autocomplete";
 
-import styles from "../styles.module.css";
+import styles from "../../styles.module.css";
 
 export const LPAPage = (): JSX.Element => {
   const [LPAs, setLPAs] = useState<string[]>([]);
