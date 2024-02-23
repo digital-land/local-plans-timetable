@@ -1,10 +1,10 @@
 import "@testing-library/jest-dom";
 import { act, render } from "@testing-library/react";
-import { fetchLPAs } from "../../api";
+import { fetchLPAs } from "../../../api";
 import { LPAPage } from "./LPAPage";
 
-jest.mock("../autocomplete/Autocomplete");
-jest.mock("../../api/");
+jest.mock("../../autocomplete/Autocomplete");
+jest.mock("../../../api/");
 
 describe("LPAPage", () => {
   beforeEach(() => {

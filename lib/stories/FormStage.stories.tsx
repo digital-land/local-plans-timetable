@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import { StagePage } from "../timetable-form/pages/StagePage";
+import { StagePage } from "../timetable-form/pages/stage-page/StagePage";
 
 import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
 

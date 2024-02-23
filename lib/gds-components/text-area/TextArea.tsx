@@ -3,7 +3,7 @@
  */
 
 interface TextAreaProps {
-  label: string;
+  label?: string;
   onChange: (value: string) => void;
   value: string;
   hint?: string;
@@ -12,12 +12,10 @@ interface TextAreaProps {
 export const TextArea = ({ label, onChange, value, hint }: TextAreaProps) => {
   return (
     <div className="govuk-form-group">
-      <h1 className="govuk-label-wrapper">
-        <label className="govuk-label govuk-label--m">{label}</label>
-      </h1>
+      {label && <label className="govuk-label">{label}</label>}
       <textarea
         className="govuk-textarea govuk-!-margin-bottom-2"
-        data-testid={`${label.replace(/ /g, '-')}-text-area`}
+        data-testid={`${label ? label.replace(/ /g, "-") : "input"}-text-area`}
         rows={5}
         value={value}
         onChange={(e) => onChange(e.target.value)}

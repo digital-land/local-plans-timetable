@@ -3,15 +3,21 @@
  */
 
 interface TextInputProps {
-  label: string;
+  label?: string;
   onChange: (value: string) => void;
   value: string;
+  hint?: string;
 }
 
-export const TextInput = ({ label, onChange, value }: TextInputProps) => (
+export const TextInput = ({
+  label,
+  onChange,
+  value,
+  hint,
+}: TextInputProps) => (
   <div className="govuk-form-group">
     <label className="govuk-label">
-      {label}
+      {label && label}
       <input
         className="govuk-input"
         type="text"
@@ -19,5 +25,10 @@ export const TextInput = ({ label, onChange, value }: TextInputProps) => (
         onChange={(e) => onChange(e.target.value)}
       />
     </label>
+    {hint && (
+      <div id="more-detail-hint" className="govuk-hint">
+        {hint}
+      </div>
+    )}
   </div>
 );

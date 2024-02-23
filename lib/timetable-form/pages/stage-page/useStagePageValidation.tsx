@@ -1,7 +1,7 @@
 import { ValidationErrorItem } from "joi";
 import { useCallback, useState } from "react";
-import { DevelopmentPlanTimetable } from "../types/timetable";
-import { developmentPlanEventSchema } from "../validation";
+import { DevelopmentPlanTimetable } from "../../../types/timetable";
+import { developmentPlanEventSchema } from "../../../validation";
 
 export const useValidation = (): {
   errors: ValidationErrorItem[];

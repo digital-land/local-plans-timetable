@@ -1,10 +1,15 @@
 import { ReactNode, useState } from "react";
 
-import { Button, DateInput, ErrorSummary, TextArea } from "../../gds-components";
-import { useValidation } from "../useValidation";
+import {
+  Button,
+  DateInput,
+  ErrorSummary,
+  TextArea,
+} from "../../../gds-components";
 
-import styles from "./styles.module.css";
-import { TimetableEventKey } from "../../constants";
+import { TimetableEventKey } from "../../../constants";
+import styles from "../../styles.module.css";
+import { useValidation } from "./useStagePageValidation";
 
 interface StagePageProps {
   title: string;
