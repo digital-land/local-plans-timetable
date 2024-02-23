@@ -3,11 +3,10 @@
  */
 
 interface TextInputProps {
-  label: string;
+  label?: string;
   onChange: (value: string) => void;
   value: string;
   hint?: string;
-  showLabel?: boolean;
 }
 
 export const TextInput = ({
@@ -15,11 +14,10 @@ export const TextInput = ({
   onChange,
   value,
   hint,
-  showLabel = true,
 }: TextInputProps) => (
   <div className="govuk-form-group">
     <label className="govuk-label">
-      {showLabel && label}
+      {label && label}
       <input
         className="govuk-input"
         type="text"

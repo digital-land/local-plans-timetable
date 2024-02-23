@@ -1,9 +1,9 @@
 import "@testing-library/jest-dom";
 import { act, render } from "@testing-library/react";
 import { StagePage } from "./StagePage";
-import { DateInput } from "../../gds-components";
+import { DateInput } from "../../../gds-components";
 
-jest.mock("../../gds-components");
+jest.mock("../../../gds-components");
 
 describe("StagePage", () => {
   beforeEach(() => {

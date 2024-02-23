@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-import { Button, ErrorSummary, TextInput } from "../../gds-components";
+import { Button, ErrorSummary, TextInput } from "../../../gds-components";
 
-import styles from "../styles.module.css";
-import { useValidation } from "../useValidation";
+import styles from "../../styles.module.css";
+import { useValidation } from "./useTitlePageValidation";
 
 export const TitlePage = (): JSX.Element => {
   const [name, setName] = useState<string>("");
@@ -28,11 +28,9 @@ export const TitlePage = (): JSX.Element => {
         </h1>
         <ErrorSummary errors={errors} />
         <TextInput
-          label="Title"
           onChange={setName}
           value={name}
           hint="You can enter up to 100 characters"
-          showLabel={false}
         />
         <Button onClick={handleValidate}>Continue</Button>
       </div>

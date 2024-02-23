@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-import { Button, ErrorSummary, TextArea } from "../../gds-components";
+import { Button, ErrorSummary, TextArea } from "../../../gds-components";
 
-import styles from "../styles.module.css";
-import { useValidation } from "../useValidation";
+import styles from "../../styles.module.css";
+import { useValidation } from "./useDescriptionPageValidation";
 
 export const DescriptionPage = (): JSX.Element => {
   const [description, setDescription] = useState<string>("");
@@ -28,11 +28,9 @@ export const DescriptionPage = (): JSX.Element => {
         </h1>
         <ErrorSummary errors={errors} />
         <TextArea
-          label="Description"
           onChange={setDescription}
           value={description}
           hint="You can enter up to 400 characters"
-          showLabel={false}
         />
         <Button onClick={handleValidate}>Continue</Button>
       </div>

@@ -4,11 +4,13 @@ const maxDate = new Date(2099, 11);
 const minDate = new Date(2000, 0);
 
 export const developmentPlanSchema = Joi.object({
-  name: Joi.string().allow("").max(100,).messages({
+  name: Joi.string().max(100,).messages({
     "string.max": `Title must be less must be less than or equal to 100 characters long`,
+    "string.empty": "Title is not allowed to be empty"
   }),
   description: Joi.string().allow("").max(400).messages({
     "string.max": `Description must be less must be less than or equal to 400 characters long`,
+    "string.empty": `Description is not allowed to be empty`,
   }),
 });
 
