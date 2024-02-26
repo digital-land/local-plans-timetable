@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { act, render } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import csvToJson from "csvtojson";
 import { loadCSV } from "../utils/timetable";
 import { PlanViewer } from "./PlanViewer";
@@ -25,48 +25,48 @@ describe("Visualisation", () => {
     jest.clearAllMocks();
   });
 
-  // it("renders", async () => {
-  //   await act(async () => {
-  //     render(
-  //       <Visualisation
-  //         timetableEventsFilepath={timetableEventsFilepath}
-  //         developmentPlanFilepath={developmentPlanFilepath}
-  //       />
-  //     );
-  //   });
+  it("renders", async () => {
+    await act(async () => {
+      render(
+        <Visualisation
+          timetableEventsFilepath={timetableEventsFilepath}
+          developmentPlanFilepath={developmentPlanFilepath}
+        />
+      );
+    });
 
-  //   expect(screen.getByTestId("visualisation")).toBeInTheDocument();
-  // });
+    expect(screen.getByTestId("visualisation")).toBeInTheDocument();
+  });
 
-  // it("calls loadCSV and csvToJson twice on mount", async () => {
-  //   await act(async () => {
-  //     render(
-  //       <Visualisation
-  //         timetableEventsFilepath={timetableEventsFilepath}
-  //         developmentPlanFilepath={developmentPlanFilepath}
-  //       />
-  //     );
-  //   });
+  it("calls loadCSV and csvToJson twice on mount", async () => {
+    await act(async () => {
+      render(
+        <Visualisation
+          timetableEventsFilepath={timetableEventsFilepath}
+          developmentPlanFilepath={developmentPlanFilepath}
+        />
+      );
+    });
 
-  //   expect(loadCSV).toHaveBeenCalledTimes(2);
-  //   expect(loadCSV).toHaveBeenNthCalledWith(1, timetableEventsFilepath);
-  //   expect(loadCSV).toHaveBeenNthCalledWith(2, developmentPlanFilepath);
+    expect(loadCSV).toHaveBeenCalledTimes(2);
+    expect(loadCSV).toHaveBeenNthCalledWith(1, timetableEventsFilepath);
+    expect(loadCSV).toHaveBeenNthCalledWith(2, developmentPlanFilepath);
 
-  //   expect(csvToJson).toHaveBeenCalledTimes(2);
-  // });
+    expect(csvToJson).toHaveBeenCalledTimes(2);
+  });
 
-  // it("renders a PlanViewer component", async () => {
-  //   await act(async () => {
-  //     render(
-  //       <Visualisation
-  //         timetableEventsFilepath={timetableEventsFilepath}
-  //         developmentPlanFilepath={developmentPlanFilepath}
-  //       />
-  //     );
-  //   });
+  it("renders a PlanViewer component", async () => {
+    await act(async () => {
+      render(
+        <Visualisation
+          timetableEventsFilepath={timetableEventsFilepath}
+          developmentPlanFilepath={developmentPlanFilepath}
+        />
+      );
+    });
 
-  //   expect(screen.getByText("Plan viewer component")).toBeInTheDocument();
-  // });
+    expect(screen.getByText("Plan viewer component")).toBeInTheDocument();
+  });
 
   it("filters and sorts the timetable events", async () => {
     (csvToJson as jest.Mock).mockImplementation(() => ({
@@ -90,8 +90,7 @@ describe("Visualisation", () => {
                 reference: "7336edfb-8db3-4bbc-806f-4a0895cdeea6",
                 name: "",
                 developmentPlan: "dorcester-new-local-plan",
-                developmentPlanEvent:
-                  "local-development-scheme-published",
+                developmentPlanEvent: "local-development-scheme-published",
                 eventDate: "2024-07",
                 notes: "",
                 organisation: "",
