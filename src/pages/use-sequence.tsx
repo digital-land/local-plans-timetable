@@ -6,6 +6,7 @@ const sequence = [
   PageRoute.LPA,
   PageRoute.Title,
   PageRoute.Description,
+  PageRoute.PublishLocalDevelopmentScheme,
   ...stages.map((stage) => stage.key),
 ];
 

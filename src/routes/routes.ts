@@ -4,6 +4,7 @@ export enum PageRoute {
   LPA = "/what-is-your-local-authority",
   Title = "/title-of-local-plan",
   Description = "/local-plan-description",
+  PublishLocalDevelopmentScheme = "/publish-local-development-scheme",
   PublicConsultation = "/public-consultation-stage",
   Publication = "/publication-stage",
   Submission = "/submission",

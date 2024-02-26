@@ -1,20 +1,10 @@
 import { DevelopmentPlan, DevelopmentPlanTimetable } from "@lib/types/timetable";
 import Joi, { ValidationErrorItem } from "joi";
 import { StagePageProps } from "./StagePage";
-
-const maxDate = new Date(2099, 11);
-const minDate = new Date(2000, 0);
+import { eventDateSchema } from "../event-date-schema";
 
 const schema = Joi.object({
-  eventDate: Joi.date()
-    .iso()
-    .min(minDate)
-    .max(maxDate)
-    .messages({
-      "date.format": `Date must be a real date`,
-      "date.min": `Date must be after ${minDate.toISOString().split("T")[0]}`,
-      "date.max": `Date must be before ${maxDate.toISOString().split("T")[0]}`,
-    }),
+  eventDate: eventDateSchema,
   notes: Joi.string().allow(""),
 });
 
