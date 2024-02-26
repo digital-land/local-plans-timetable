@@ -1,3 +1,4 @@
+import { PageRoute } from "./routes";
 import { Button } from "@lib/gds-components";
 import { Link } from "react-router-dom";
 
@@ -85,7 +86,10 @@ export const Root = () => {
               </li>
             </ul>
             <div>
-             <Link to="/what-is-your-local-authority"> <Button>Start a new timetable</Button></Link>
+              <Link to={PageRoute.LPA}>
+                {" "}
+                <Button>Start a new timetable</Button>
+              </Link>
             </div>
             <div>
               <Button>Upload and edit an existing timetable CSV</Button>
