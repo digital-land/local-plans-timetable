@@ -152,6 +152,105 @@ exports[`calls the onChange handler with the right value when the year input cha
 </DocumentFragment>
 `;
 
+exports[`shows input for day when withDay is true 1`] = `
+<DocumentFragment>
+  <div
+    class="govuk-form-group"
+  >
+    <fieldset
+      aria-describedby="date-hint"
+      class="govuk-fieldset"
+      role="group"
+    >
+      <legend
+        class="govuk-fieldset__legend govuk-fieldset__legend--m"
+      >
+        Date
+      </legend>
+      <div
+        class="govuk-hint"
+        id="date-hint"
+      >
+        For example, 8 2024
+      </div>
+      <div
+        class="govuk-date-input"
+      >
+        <div
+          class="govuk-date-input__item"
+        >
+          <div
+            class="govuk-form-group"
+          >
+            <label
+              class="govuk-label govuk-date-input__label"
+              for="date-day"
+            >
+              Day
+            </label>
+            <input
+              class="govuk-input govuk-date-input__input govuk-input--width-2"
+              data-testid="date-day"
+              id="date-day"
+              inputmode="numeric"
+              maxlength="2"
+              type="text"
+              value="01"
+            />
+          </div>
+        </div>
+        <div
+          class="govuk-date-input__item"
+        >
+          <div
+            class="govuk-form-group"
+          >
+            <label
+              class="govuk-label govuk-date-input__label"
+              for="date-month"
+            >
+              Month
+            </label>
+            <input
+              class="govuk-input govuk-date-input__input govuk-input--width-2"
+              data-testid="date-month"
+              id="date-month"
+              inputmode="numeric"
+              maxlength="2"
+              type="text"
+              value="03"
+            />
+          </div>
+        </div>
+        <div
+          class="govuk-date-input__item"
+        >
+          <div
+            class="govuk-form-group"
+          >
+            <label
+              class="govuk-label govuk-date-input__label"
+              for="date-year"
+            >
+              Year
+            </label>
+            <input
+              class="govuk-input govuk-date-input__inpaut govuk-input--width-4"
+              data-testid="date-year"
+              id="date-year"
+              inputmode="numeric"
+              maxlength="4"
+              type="text"
+              value="2007"
+            />
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`shows the right input values from the provided value 1`] = `
 <DocumentFragment>
   <div

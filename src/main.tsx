@@ -1,11 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { LPAPage, TitlePage, DescriptionPage, StagePage } from "./pages";
+import {
+  LPAPage,
+  TitlePage,
+  DescriptionPage,
+  StagePage,
+  PublishLDSPage,
+} from "./pages";
 import { FormPageHoC } from "./pages/FormPageHoc";
 import { validateDescription } from "./pages/description-page/description-validation";
 import { validateTimetableStage } from "./pages/stage-page/validate-stage-page";
 import { validateTitle } from "./pages/title-page/validate-title-page";
+import { validatePublishLDSEvent } from "./pages/publish-LDS-page/validate-publish-lds-page";
 import { stages } from "./pages/stages";
 import { Page } from "./routes/Page";
 import { Root } from "./routes/Root";
@@ -32,11 +39,11 @@ const router = createBrowserRouter(
         },
         {
           path: PageRoute.Description,
-          element: FormPageHoC(
-            DescriptionPage,
-            {},
-            validateDescription
-          ),
+          element: FormPageHoC(DescriptionPage, {}, validateDescription),
+        },
+        {
+          path: PageRoute.PublishLocalDevelopmentScheme,
+          element: FormPageHoC(PublishLDSPage, {}, validatePublishLDSEvent),
         },
         ...stages.map(({ key, ...otherProps }) => ({
           path: key,
