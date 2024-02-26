@@ -1,4 +1,5 @@
 import { Button } from "@lib/gds-components";
+import { Link } from "react-router-dom";
 
 export const Root = () => {
   return (
@@ -7,40 +8,40 @@ export const Root = () => {
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-one-third">
             <nav className="app-subnav" aria-labelledby="app-subnav-heading">
-              <ul className="app-subnav__section">
-                <li className="app-subnav__section-item ">
+              <ul className="app-subnav-section">
+                <li className="app-subnav-section-item ">
                   Create or update a Local Plan timetable
                 </li>
-                <li className="app-subnav__section-item ">
-                  <a
-                    className="app-subnav__link govuk-link  govuk-link--no-underline"
-                    href="#"
+                <li className="app-subnav-section-item ">
+                  <Link
+                    className="app-subnav-link govuk-link  govuk-link--no-underline"
+                    to="#"
                     aria-current="page"
                   >
                     Create or update a Local Plan timetable
-                  </a>
+                  </Link>
                 </li>
-                <li className="app-subnav__section-item ">
-                  <a
-                    className="app-subnav__link govuk-link  govuk-link--no-underline"
-                    href="#"
+                <li className="app-subnav-section-item ">
+                  <Link
+                    className="app-subnav-link govuk-link  govuk-link--no-underline"
+                    to="#"
                     aria-current="page"
                   >
                     How to publish a Local Plan timetable online
-                  </a>
+                  </Link>
                 </li>
-                <li className="app-subnav__section-item ">
-                  <a
-                    className="app-subnav__link govuk-link  govuk-link--no-underline"
-                    href="#"
+                <li className="app-subnav-section-item ">
+                  <Link
+                    className="app-subnav-link govuk-link  govuk-link--no-underline"
+                    to="#"
                     aria-current="page"
                   >
                     How to update a Local Plan timetable online
-                  </a>
+                  </Link>
                 </li>
-                <li className="app-subnav__section-item ">
+                <li className="app-subnav-section-item ">
                   <a
-                    className="app-subnav__link govuk-link  govuk-link--no-underline"
+                    className="app-subnav-link govuk-link  govuk-link--no-underline"
                     href="#"
                     aria-current="page"
                   >
@@ -86,10 +87,10 @@ export const Root = () => {
             </div>
             <h2 className="govuk-heading-m">Before you start</h2>
             <p className="govuk-body">
-              Read our guidance on
-              <a href="#" className="govuk-link">
+              Read our guidance on{" "}
+              <Link className="govuk-link" to="#">
                 How to publish a Local Plan online
-              </a>
+              </Link>
             </p>
             <p className="govuk-body">
               Before you fill out the form, consider who else you might need to
