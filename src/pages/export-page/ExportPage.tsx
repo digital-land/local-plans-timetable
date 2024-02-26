@@ -3,8 +3,34 @@ import { Link } from "react-router-dom";
 import cn from "classnames";
 
 import styles from "./ExportPage.module.css";
+import { useFormContext } from "../../context/use-form-context";
+import {
+  resolveDevelopmentPlanCSV,
+  resolveTimetableEventsCSV,
+} from "@lib/utils/timetable";
+import { useMemo } from "react";
 
 export const ExportPage = () => {
+  const { developmentPlan, timetableEvents } = useFormContext();
+
+  const developmentPlanDownloadLink = useMemo(() => {
+    const timetableCSV = resolveDevelopmentPlanCSV(
+      developmentPlan,
+      null // TODO: Replace with loaded development plan in update journey
+    );
+
+    return `data:text/csv;charset=urf-8,${timetableCSV}`;
+  }, [developmentPlan]);
+
+  const timetableEventsDownloadLink = useMemo(() => {
+    const timetableCSV = resolveTimetableEventsCSV(
+      timetableEvents,
+      null // TODO: Replace with loaded timetable events in update journey
+    );
+
+    return `data:text/csv;charset=urf-8,${timetableCSV}`;
+  }, [timetableEvents]);
+
   return (
     <>
       <h1 className="govuk-heading-l govuk-!-margin-top-6">
@@ -41,11 +67,26 @@ export const ExportPage = () => {
       </p>
 
       <p className={cn("govuk-body", styles.exportButtonContainer)}>
-        <Button>Export timetable CSV</Button>
+        <a
+          role="button"
+          type="button"
+          data-testid="csv-download-button"
+          href={timetableEventsDownloadLink}
+          download="development-plan-timetable.csv"
+        >
+          <Button>Export timetable CSV</Button>
+        </a>
       </p>
 
       <p className={cn("govuk-body", styles.exportButtonContainer)}>
-        <Button>Export development plan CSV</Button>
+        <a
+          role="button"
+          type="button"
+          href={developmentPlanDownloadLink}
+          download="development-plan.csv"
+        >
+          <Button>Export development plan CSV</Button>
+        </a>
       </p>
 
       <h2 className="govuk-heading-m govuk-!-margin-top-6">
