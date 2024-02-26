@@ -1,15 +1,17 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+
+import { ValidationErrorItem } from "joi";
+
 import { Button } from "@lib/gds-components";
 import {
   DevelopmentPlan,
   DevelopmentPlanTimetable,
 } from "@lib/types/timetable";
-import { ValidationErrorItem } from "joi";
-import { useState } from "react";
-import { Link } from "react-router-dom";
 import { useFormContext } from "../context/use-form-context";
-
-import styles from "./styles.module.css";
 import { useSequence } from "./use-sequence";
+
+import styles from "./form-page.module.css";
 
 export const FormPageHoC = <P extends Record<string, unknown>>(
   FormComponent: (
