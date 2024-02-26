@@ -7,6 +7,8 @@ import { Root } from "./routes/Root";
 import { Routes } from "./routes/routes";
 import "./main.css";
 
+import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
+
 const router = createBrowserRouter(
   [
     {
