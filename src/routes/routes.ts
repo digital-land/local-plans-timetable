@@ -5,6 +5,8 @@ export enum PageRoute {
   Title = "/title-of-local-plan",
   Description = "/local-plan-description",
   PublicConsultation = "/public-consultation-stage",
+  Publication = "/publication-stage",
   Submission = "/submission",
-  // add all pages
+  IndependentExamination = "/independent-examination-stage",
+  PlanAdopted = "/plan-adopted",
 }
