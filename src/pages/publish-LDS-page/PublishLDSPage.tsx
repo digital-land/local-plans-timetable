@@ -34,7 +34,6 @@ export const PublishLDSPage = ({
       <ErrorSummary errors={errors} />
       <DateInput
         value={publishLDSEvent.eventDate}
-        label=""
         name="publish-LDS-date"
         error={
           errors?.find(

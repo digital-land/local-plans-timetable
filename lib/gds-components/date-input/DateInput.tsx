@@ -4,7 +4,7 @@
 import cn from "classnames";
 
 export interface DateInputProps {
-  label: string;
+  label?: string;
   name: string;
   onChange: (value: string) => void;
   value: string;
@@ -31,9 +31,11 @@ export const DateInput = ({
         role="group"
         aria-describedby={`${name}-hint`}
       >
-        <legend className="govuk-fieldset__legend govuk-fieldset__legend--m">
-          {label}
-        </legend>
+        {label && (
+          <legend className="govuk-fieldset__legend govuk-fieldset__legend--m">
+            {label}
+          </legend>
+        )}
         {error && (
           <p id="passport-issued-error" className="govuk-error-message">
             <span className="govuk-visually-hidden">Error:</span> {error}
@@ -86,10 +88,16 @@ export const DateInput = ({
                 type="text"
                 inputMode="numeric"
                 value={month}
-                onChange={(e) => onChange(`${year}-${e.target.value}${withDay? `-${day}`: ""}`)}
+                onChange={(e) =>
+                  onChange(
+                    `${year}-${e.target.value}${withDay ? `-${day}` : ""}`
+                  )
+                }
                 onBlur={(e) =>
                   e.target.value.length == 1 &&
-                  onChange(`${year}-${"0" + e.target.value}${withDay? `-${day}`:""}`)
+                  onChange(
+                    `${year}-${"0" + e.target.value}${withDay ? `-${day}` : ""}`
+                  )
                 }
                 maxLength={2}
               />
@@ -110,7 +118,11 @@ export const DateInput = ({
                 type="text"
                 inputMode="numeric"
                 value={year}
-                onChange={(e) => onChange(`${e.target.value}-${month}${withDay? `-${day}`: ""}`)}
+                onChange={(e) =>
+                  onChange(
+                    `${e.target.value}-${month}${withDay ? `-${day}` : ""}`
+                  )
+                }
                 maxLength={4}
               />
             </div>
