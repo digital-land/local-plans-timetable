@@ -12,7 +12,7 @@ import { FormPageHoC } from "./pages/FormPageHoc";
 import { validateDescription } from "./pages/description-page/description-validation";
 import { validateTimetableStage } from "./pages/stage-page/validate-stage-page";
 import { validateTitle } from "./pages/title-page/validate-title-page";
-import { validatePublishLDSEvent } from "./pages/publish-LDS-page/validate-publish-lds-page";
+import { validatePublishLDSEvent } from "./pages/publish-LDS-page/validate-publish-LDS-page";
 import { CreateTimetablePage } from "./pages/create-timetable-page/CreateTimetablePage";
 import { stages } from "./pages/stages";
 import { Page } from "./routes/Page";
