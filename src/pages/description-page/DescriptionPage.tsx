@@ -1,7 +1,6 @@
-
 import { ErrorSummary, TextArea } from "@lib/gds-components";
 import { ValidationErrorItem } from "joi";
-import { useFormContext } from "../FormContext";
+import { useFormContext } from "../../context/use-form-context";
 
 type DescriptionPageProps = {
   errors?: ValidationErrorItem[];

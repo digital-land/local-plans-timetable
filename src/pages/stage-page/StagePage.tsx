@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import { TimetableEventKey } from "@lib/constants";
 import { DateInput, ErrorSummary, TextArea } from "@lib/gds-components";
 import { ValidationErrorItem } from "joi";
-import { useFormContext } from "../FormContext";
+import { useFormContext } from "../../context/use-form-context";
 
 export interface StagePageProps {
   title: string;

@@ -1,3 +1,4 @@
+import { ReactNode, createContext, useCallback, useState } from "react";
 import {
   DEFAULT_DEVELOPMENT_PLAN,
   DEFAULT_TIMETABLE_EVENTS,
@@ -7,13 +8,6 @@ import {
   DevelopmentPlan,
   DevelopmentPlanTimetable,
 } from "@lib/types/timetable";
-import {
-  ReactNode,
-  createContext,
-  useCallback,
-  useContext,
-  useState,
-} from "react";
 
 type TimetableEventEditableField = keyof Pick<
   DevelopmentPlanTimetable,
@@ -29,10 +23,6 @@ export const FormContext = createContext<{
     value: string
   ) => void;
   updateDevelopmentPlan: (key: keyof DevelopmentPlan, value: string) => void;
-  // errors: ValidationErrorItem[];
-  // validate: <T>(schema: ObjectSchema<T>, value: T) => void;
-  // onContinue: () => void;
-  // onBack: () => void;
 }>({
   developmentPlan: DEFAULT_DEVELOPMENT_PLAN,
   timetableEvents: DEFAULT_TIMETABLE_EVENTS,
@@ -42,16 +32,6 @@ export const FormContext = createContext<{
   updateDevelopmentPlan: () => {
     throw new Error("no provider");
   },
-  // errors: [],
-  // validate: () => {
-  //   throw new Error("no provider");
-  // },
-  // onContinue: () => {
-  //   throw new Error("no provider");
-  // },
-  // onBack: () => {
-  //   throw new Error("no provider");
-  // },
 });
 
 export const FormProvider = (props: { children: ReactNode }) => {
@@ -63,22 +43,12 @@ export const FormProvider = (props: { children: ReactNode }) => {
     DevelopmentPlanTimetable[]
   >(DEFAULT_TIMETABLE_EVENTS);
 
-  // const [errors, setErrors] = useState<ValidationErrorItem[]>([]);
-
-  // const { errors, validateDevelopmentPlanEventDates } = useValidation();
-
   const updateTimetableEvent = useCallback(
     (
       event: TimetableEventKey,
       key: TimetableEventEditableField,
       value: string
     ) => {
-      // const eventToUpdate = timetableEvents.find(
-      //   (e) => e.developmentPlanEvent === event
-      // );
-
-      //   if (!eventToUpdate) return console.error("event not found")
-
       setTimetableEvents((prev) =>
         prev.map((e) =>
           e.developmentPlanEvent === event ? { ...e, [key]: value } : e
@@ -98,22 +68,6 @@ export const FormProvider = (props: { children: ReactNode }) => {
     []
   );
 
-  // function validate<T>(schema: ObjectSchema<T>, value: T) {
-  //   const validationResult = schema.validate(value);
-
-  //   if (validationResult.error) {
-  //     setErrors(validationResult.error.details);
-  //   } else {
-  //     navigate(formPages[currentPageIndex + 1]);
-  //   }
-  // }
-
-  // const onContinue = useCallback(()=>{
-  //   validate()
-
-  // },[])
-  // const onBack = useCallback(()=>{},[])
-
   return (
     <FormContext.Provider
       value={{
@@ -121,16 +75,9 @@ export const FormProvider = (props: { children: ReactNode }) => {
         timetableEvents,
         updateTimetableEvent,
         updateDevelopmentPlan,
-        // errors,
-        // validate,
       }}
     >
       {props.children}
     </FormContext.Provider>
   );
 };
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const useFormContext = () => useContext(FormContext);
-
-// const useValidation

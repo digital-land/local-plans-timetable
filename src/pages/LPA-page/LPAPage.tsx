@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { Autocomplete } from "@lib/timetable-form/autocomplete/Autocomplete";
 import { fetchLPAs } from "../../api";
-import { useFormContext } from "../FormContext";
+import { useFormContext } from "../../context/use-form-context";
 
 export const LPAPage = (): JSX.Element => {
   const [LPAs, setLPAs] = useState<string[]>([]);

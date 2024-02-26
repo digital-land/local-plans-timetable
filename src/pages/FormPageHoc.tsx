@@ -6,7 +6,7 @@ import {
 import { ValidationErrorItem } from "joi";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useFormContext } from "./FormContext";
+import { useFormContext } from "../context/use-form-context";
 
 import styles from "./styles.module.css";
 import { useSequence } from "./useSequence";
