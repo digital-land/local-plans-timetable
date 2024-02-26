@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { useFormContext } from "../context/use-form-context";
 
 import styles from "./styles.module.css";
-import { useSequence } from "./useSequence";
+import { useSequence } from "./use-sequence";
 
 export const FormPageHoC = <P extends Record<string, unknown>>(
   FormComponent: (
