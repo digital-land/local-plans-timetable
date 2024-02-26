@@ -1,47 +1,52 @@
 import { Button } from "@lib/gds-components";
 import { Link } from "react-router-dom";
 
+import styles from "./root.module.css";
+
 export const Root = () => {
   return (
     <div className="govuk-width-container app-width-container">
       <main className="govuk-main-wrapper">
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-one-third">
-            <nav className="app-subnav" aria-labelledby="app-subnav-heading">
-              <ul className="app-subnav-section">
-                <li className="app-subnav-section-item ">
+            <nav
+              className={`${styles["app-subnav"]}`}
+              aria-labelledby="app-subnav-heading"
+            >
+              <ul className={`${styles["app-subnav-section"]}`}>
+                <li className={`${styles["app-subnav-section-item"]}`}>
                   Create or update a Local Plan timetable
                 </li>
-                <li className="app-subnav-section-item ">
+                <li className={`${styles["app-subnav-section-item"]}`}>
                   <Link
-                    className="app-subnav-link govuk-link  govuk-link--no-underline"
+                    className={`${styles["app-subnav-link"]} govuk-link  govuk-link--no-underline`}
                     to="#"
                     aria-current="page"
                   >
                     Create or update a Local Plan timetable
                   </Link>
                 </li>
-                <li className="app-subnav-section-item ">
+                <li className={`${styles["app-subnav-section-item"]}`}>
                   <Link
-                    className="app-subnav-link govuk-link  govuk-link--no-underline"
+                    className={`${styles["app-subnav-link"]} govuk-link  govuk-link--no-underline`}
                     to="#"
                     aria-current="page"
                   >
                     How to publish a Local Plan timetable online
                   </Link>
                 </li>
-                <li className="app-subnav-section-item ">
+                <li className={`${styles["app-subnav-section-item"]}`}>
                   <Link
-                    className="app-subnav-link govuk-link  govuk-link--no-underline"
+                    className={`${styles["app-subnav-link"]} govuk-link  govuk-link--no-underline`}
                     to="#"
                     aria-current="page"
                   >
                     How to update a Local Plan timetable online
                   </Link>
                 </li>
-                <li className="app-subnav-section-item ">
+                <li className={`${styles["app-subnav-section-item"]}`}>
                   <a
-                    className="app-subnav-link govuk-link  govuk-link--no-underline"
+                    className={`${styles["app-subnav-link"]} govuk-link  govuk-link--no-underline`}
                     href="#"
                     aria-current="page"
                   >
