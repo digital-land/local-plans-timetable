@@ -10,49 +10,49 @@ export const Root = () => {
         <div className="govuk-grid-row">
           <div className="govuk-grid-column-one-third">
             <nav
-              className={`${styles["app-subnav"]}`}
+              className={`${styles.appSubnav}`}
               aria-labelledby="app-subnav-heading"
             >
-              <ul className={`${styles["app-subnav-section"]}`}>
-                <li className={`${styles["app-subnav-section-item"]}`}>
+              <ul className={`${styles.appSubnavSection}`}>
+                <li className={`${styles.appSubnavSectionItem}`}>
                   Create or update a Local Plan timetable
                 </li>
-                <li className={`${styles["app-subnav-section-item"]}`}>
+                <li className={`${styles.appSubnavSectionItem}`}>
                   <Link
-                    className={`${styles["app-subnav-link"]} govuk-link  govuk-link--no-underline`}
+                    className={`${styles.appSubnavLink} govuk-link  govuk-link--no-underline`}
                     to="#"
                     aria-current="page"
                   >
                     Create or update a Local Plan timetable
                   </Link>
                 </li>
-                <li className={`${styles["app-subnav-section-item"]}`}>
+                <li className={`${styles.appSubnavSectionItem}`}>
                   <Link
-                    className={`${styles["app-subnav-link"]} govuk-link  govuk-link--no-underline`}
+                    className={`${styles.appSubnavLink} govuk-link  govuk-link--no-underline`}
                     to="#"
                     aria-current="page"
                   >
                     How to publish a Local Plan timetable online
                   </Link>
                 </li>
-                <li className={`${styles["app-subnav-section-item"]}`}>
+                <li className={`${styles.appSubnavSectionItem}`}>
                   <Link
-                    className={`${styles["app-subnav-link"]} govuk-link  govuk-link--no-underline`}
+                    className={`${styles.appSubnavLink} govuk-link  govuk-link--no-underline`}
                     to="#"
                     aria-current="page"
                   >
                     How to update a Local Plan timetable online
                   </Link>
                 </li>
-                <li className={`${styles["app-subnav-section-item"]}`}>
-                  <a
-                    className={`${styles["app-subnav-link"]} govuk-link  govuk-link--no-underline`}
-                    href="#"
+                <li className={`${styles.appSubnavSectionItem}`}>
+                  <Link
+                    className={`${styles.appSubnavLink} govuk-link  govuk-link--no-underline`}
+                    to="#"
                     aria-current="page"
                   >
                     Publishing a local plan timetable online: guidance for web
                     teams
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </nav>
