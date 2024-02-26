@@ -1,12 +1,15 @@
 import { Outlet } from "react-router";
 
 import { Header, Footer } from "@lib/gds-components";
-import { Routes } from "./routes";
+import { PageRoute } from "./routes";
+import { FormProvider } from "../context/FormContext";
 
 export const Page = () => (
   <>
-    <Header homeURL={Routes.Base} />
-    <Outlet />
+    <Header homeURL={PageRoute.Base} />
+    <FormProvider>
+      <Outlet />
+    </FormProvider>
     <Footer />
   </>
 );

@@ -6,5 +6,7 @@ export default {
   },
   moduleNameMapper: {
     "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+
+    "^@lib/(.*)$": "<rootDir>/lib/$1",
   },
 };
