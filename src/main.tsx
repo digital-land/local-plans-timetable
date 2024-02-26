@@ -6,9 +6,9 @@ import { FormPageHoC } from "./pages/FormPageHoc";
 import { validateDescription } from "./pages/description-page/description-validation";
 import { validateTimetableStage } from "./pages/stage-page/validate-stage-page";
 import { validateTitle } from "./pages/title-page/validate-title-page";
+import { CreateTimetablePage } from "./pages/create-timetable-page/CreateTimetablePage";
 import { stages } from "./pages/stages";
 import { Page } from "./routes/Page";
-import { Root } from "./routes/Root";
 import { PageRoute } from "./routes/routes";
 
 import "./main.css";
@@ -22,7 +22,7 @@ const router = createBrowserRouter(
       children: [
         {
           path: PageRoute.Root,
-          element: <Root />,
+          element: <CreateTimetablePage />,
         },
         {
           path: PageRoute.LPA,

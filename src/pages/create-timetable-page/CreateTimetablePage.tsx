@@ -1,10 +1,10 @@
-import { PageRoute } from "./routes";
 import { Button } from "@lib/gds-components";
 import { Link } from "react-router-dom";
+import { PageRoute } from "../../routes/routes";
+import styles from "./create-timetable.module.css";
 
-import styles from "./root.module.css";
 
-export const Root = () => {
+export const CreateTimetablePage = () => {
   return (
     <div className="govuk-width-container app-width-container">
       <main className="govuk-main-wrapper">
@@ -86,10 +86,7 @@ export const Root = () => {
               </li>
             </ul>
             <div>
-              <Link to={PageRoute.LPA}>
-                {" "}
-                <Button>Start a new timetable</Button>
-              </Link>
+             <Link to={PageRoute.LPA}><Button>Start a new timetable</Button></Link>
             </div>
             <div>
               <Button>Upload and edit an existing timetable CSV</Button>
