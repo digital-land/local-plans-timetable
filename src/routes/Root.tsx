@@ -85,7 +85,7 @@ export const Root = () => {
               </li>
             </ul>
             <div>
-              <Button>Start a new timetable</Button>
+             <Link to="/what-is-your-local-authority"> <Button>Start a new timetable</Button></Link>
             </div>
             <div>
               <Button>Upload and edit an existing timetable CSV</Button>
