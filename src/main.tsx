@@ -13,12 +13,14 @@ import { validateDescription } from "./pages/description-page/description-valida
 import { validateTimetableStage } from "./pages/stage-page/validate-stage-page";
 import { validateTitle } from "./pages/title-page/validate-title-page";
 import { validatePublishLDSEvent } from "./pages/publish-LDS-page/validate-publish-lds-page";
+import { CreateTimetablePage } from "./pages/create-timetable-page/CreateTimetablePage";
 import { stages } from "./pages/stages";
 import { Page } from "./routes/Page";
-import { Root } from "./routes/Root";
 import { PageRoute } from "./routes/routes";
 
 import "./main.css";
+
+import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
 
 const router = createBrowserRouter(
   [
@@ -27,7 +29,7 @@ const router = createBrowserRouter(
       children: [
         {
           path: PageRoute.Root,
-          element: <Root />,
+          element: <CreateTimetablePage />,
         },
         {
           path: PageRoute.LPA,
