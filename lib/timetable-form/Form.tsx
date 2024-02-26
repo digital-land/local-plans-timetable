@@ -15,7 +15,7 @@ import {
   developmentPlanTimetableEvents,
 } from "../constants";
 import { PlanViewer } from "../timetable-visualisation/PlanViewer";
-import { fetchLPAs } from "../api/index";
+import { fetchLPAs } from "../../src/api/index";
 
 import styles from "./styles.module.css";
 import "govuk-frontend/dist/govuk/govuk-frontend.min.css";

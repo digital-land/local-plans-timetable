@@ -9,10 +9,10 @@ import {
 } from "../utils/timetable";
 import { Form } from "./Form";
 import { PlanViewer } from "../timetable-visualisation/PlanViewer";
-import { fetchLPAs } from "../api";
+import { fetchLPAs } from "../../src/api";
 
 jest.mock("../utils/timetable");
-jest.mock("../api/");
+jest.mock("../../src/api/");
 jest.mock("../timetable-visualisation/PlanViewer");
 jest.mock("../validation");
 

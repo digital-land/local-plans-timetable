@@ -5,7 +5,7 @@
 import { ValidationErrorItem } from "joi";
 
 interface ErrorSummaryProps {
-  errors: ValidationErrorItem[];
+  errors?: ValidationErrorItem[];
   title?: string;
 }
 
@@ -13,7 +13,7 @@ export const ErrorSummary = ({
   title = "There is a problem",
   errors,
 }: ErrorSummaryProps) => {
-  if (!errors.length) return null;
+  if (!errors?.length) return null;
 
   return (
     <div className="govuk-error-summary" data-module="govuk-error-summary">
