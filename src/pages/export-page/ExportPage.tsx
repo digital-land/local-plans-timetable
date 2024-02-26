@@ -1,14 +1,15 @@
-import { Button } from "@lib/gds-components";
+import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import cn from "classnames";
 
-import styles from "./ExportPage.module.css";
-import { useFormContext } from "../../context/use-form-context";
+import { Button } from "@lib/gds-components";
 import {
   resolveDevelopmentPlanCSV,
   resolveTimetableEventsCSV,
 } from "@lib/utils/timetable";
-import { useMemo } from "react";
+import { PlanViewer } from "@lib/timetable-visualisation/PlanViewer";
+import { useFormContext } from "../../context/use-form-context";
+import styles from "./ExportPage.module.css";
 
 export const ExportPage = () => {
   const { developmentPlan, timetableEvents } = useFormContext();
@@ -33,7 +34,7 @@ export const ExportPage = () => {
 
   return (
     <>
-      <h1 className="govuk-heading-l govuk-!-margin-top-6">
+      <h1 className="govuk-heading-xl govuk-!-margin-top-6">
         Export your timetable
       </h1>
 
@@ -89,7 +90,7 @@ export const ExportPage = () => {
         </a>
       </p>
 
-      <h2 className="govuk-heading-m govuk-!-margin-top-6">
+      <h2 className="govuk-heading-l govuk-!-margin-top-6">
         Preview your timetable
       </h2>
 
@@ -108,6 +109,11 @@ export const ExportPage = () => {
       <p className="govuk-body">
         Use the back button to make any changes before exporting.
       </p>
+
+      <PlanViewer
+        developmentPlan={developmentPlan}
+        timetableEvents={timetableEvents}
+      />
     </>
   );
 };

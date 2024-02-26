@@ -13,7 +13,7 @@ export const DescriptionPage = ({
 
   return (
     <>
-      <h1 className="govuk-heading-l govuk-!-margin-top-6">
+      <h1 className="govuk-heading-xl govuk-!-margin-top-6">
         Local Plan description
         <span className="govuk-caption-m govuk-!-margin-top-3">
           Keep this specific to your own Local Plan
