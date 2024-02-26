@@ -6,7 +6,7 @@ exports[`returns the plain text value 1`] = `
     class="govuk-form-group"
   >
     <label
-      class="govuk-label"
+      class="govuk-label govuk-label--m"
     >
       input
     </label>
