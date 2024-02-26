@@ -19,7 +19,7 @@ exports[`calls the onChange handler with the right value when the month input ch
         class="govuk-hint"
         id="date-hint"
       >
-        For example, 03 2007
+        For example, 8 2024
       </div>
       <div
         class="govuk-date-input"
@@ -95,7 +95,7 @@ exports[`calls the onChange handler with the right value when the year input cha
         class="govuk-hint"
         id="date-hint"
       >
-        For example, 03 2007
+        For example, 8 2024
       </div>
       <div
         class="govuk-date-input"
@@ -171,7 +171,7 @@ exports[`shows the right input values from the provided value 1`] = `
         class="govuk-hint"
         id="date-hint"
       >
-        For example, 03 2007
+        For example, 8 2024
       </div>
       <div
         class="govuk-date-input"

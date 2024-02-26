@@ -1,9 +1,9 @@
 import "@testing-library/jest-dom";
-import { render, screen, act } from "@testing-library/react";
-import { loadCSV } from "../utils/timetable";
-import { Visualisation } from "./Visualisation";
+import { act, render, screen } from "@testing-library/react";
 import csvToJson from "csvtojson";
+import { loadCSV } from "../utils/timetable";
 import { PlanViewer } from "./PlanViewer";
+import { Visualisation } from "./Visualisation";
 
 jest.mock("../utils/timetable");
 jest.mock("../timetable-visualisation/PlanViewer");
@@ -78,7 +78,7 @@ describe("Visualisation", () => {
                 reference: "39b7f5e2-beba-43d7-b20d-d9ca3b710f80",
                 name: "",
                 developmentPlan: "dorcester-new-local-plan",
-                developmentPlanEvent: "timetable-published",
+                developmentPlanEvent: "timetable-updated",
                 eventDate: "2024-02",
                 notes: "",
                 organisation: "",
@@ -90,8 +90,7 @@ describe("Visualisation", () => {
                 reference: "7336edfb-8db3-4bbc-806f-4a0895cdeea6",
                 name: "",
                 developmentPlan: "dorcester-new-local-plan",
-                developmentPlanEvent:
-                  "draft-plan-for-public-consultation-published",
+                developmentPlanEvent: "local-development-scheme-published",
                 eventDate: "2024-07",
                 notes: "",
                 organisation: "",
@@ -103,7 +102,7 @@ describe("Visualisation", () => {
                 reference: "d30c1520-adc1-45e4-8898-b2c7aaa83db8",
                 name: "",
                 developmentPlan: "dorcester-new-local-plan",
-                developmentPlanEvent: "timetable-published",
+                developmentPlanEvent: "timetable-updated",
                 eventDate: "2024-03",
                 notes: "",
                 organisation: "",
@@ -130,7 +129,7 @@ describe("Visualisation", () => {
         reference: "d30c1520-adc1-45e4-8898-b2c7aaa83db8",
         name: "",
         developmentPlan: "dorcester-new-local-plan",
-        developmentPlanEvent: "timetable-published",
+        developmentPlanEvent: "timetable-updated",
         eventDate: "2024-03",
         notes: "",
         organisation: "",
@@ -142,7 +141,7 @@ describe("Visualisation", () => {
         reference: "7336edfb-8db3-4bbc-806f-4a0895cdeea6",
         name: "",
         developmentPlan: "dorcester-new-local-plan",
-        developmentPlanEvent: "draft-plan-for-public-consultation-published",
+        developmentPlanEvent: "local-development-scheme-published",
         eventDate: "2024-07",
         notes: "",
         organisation: "",
