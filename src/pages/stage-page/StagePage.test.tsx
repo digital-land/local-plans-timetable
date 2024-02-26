@@ -20,7 +20,7 @@ describe("StagePage", () => {
         <StagePage
           title={""}
           description={undefined}
-          startEventKey="timetable-published"
+          startEventKey="plan-paused"
         />
       );
     });

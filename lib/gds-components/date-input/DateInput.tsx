@@ -38,7 +38,7 @@ export const DateInput = ({
           </p>
         )}
         <div id={`${name}-hint`} className="govuk-hint">
-          For example, 03 2007
+          For example, 8 2024
         </div>
         <div className="govuk-date-input">
           <div className="govuk-date-input__item">
