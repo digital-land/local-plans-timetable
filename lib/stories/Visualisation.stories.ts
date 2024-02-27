@@ -19,6 +19,6 @@ type Story = StoryObj<typeof meta>;
 export const ExampleVisualisation: Story = {
   args: {
     developmentPlanFilepath: "/assets/development-plan.csv",
-    timetableEventsFilepath: "/assets/development-plan-timetable.csv",
+    timetableEventsFilepath: "/assets/timetable.csv",
   },
 };

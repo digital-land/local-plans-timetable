@@ -76,7 +76,7 @@ export const ExportPage = () => {
           type="button"
           data-testid="csv-download-button"
           href={timetableEventsDownloadLink}
-          download="development-plan-timetable.csv"
+          download="timetable.csv"
         >
           <Button>Export timetable CSV</Button>
         </a>
