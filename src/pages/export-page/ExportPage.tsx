@@ -37,7 +37,7 @@ export const ExportPage = () => {
       </h1>
 
       <p className="govuk-body">
-        When you have completed all the details, you'll need to export your data
+        When you have completed all the details, you’ll need to export your data
         as CSV files. You can use these files to generate the timetable on your
         website.
       </p>
@@ -55,8 +55,8 @@ export const ExportPage = () => {
       </p>
 
       <p className="govuk-body">
-        Next, you'll need to follow the guidance which explains how to use the
-        CSV files you've just downloaded to publish the timetable on your
+        Next, you’ll need to follow the guidance which explains how to use the
+        CSV files you’ve just downloaded to publish the timetable on your
         website:{" "}
         <Link
           to="#" /* Replace with path to real page once it's been created */
@@ -93,15 +93,15 @@ export const ExportPage = () => {
       </h2>
 
       <p className="govuk-body">
-        You can use this page to preview timetable and check the data you've
+        You can use this page to preview timetable and check the data you’ve
         entered. This is how the timetable will be displayed on your website.
       </p>
 
       <p className="govuk-body">
         Rembmer to check the <strong>progress labels</strong> next to each stage
         are accurate. These are calculated automatically base on the dates
-        you've entered. For example, if a stage is 'not started', 'in progress',
-        or 'finished'.
+        you’ve entered. For example, if a stage is ‘not started’, ‘in progress’,
+        or ‘finished’.
       </p>
 
       <p className="govuk-body">
