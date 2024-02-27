@@ -54,8 +54,8 @@ export const DEFAULT_DEVELOPMENT_PLAN: DevelopmentPlan = {
   developmentPlanGeography: "",
   documentationUrl: "",
   organisations: "",
-  entryDate: getFormattedDate(),
-  startDate: getFormattedDate(),
+  entryDate: "",
+  startDate: "",
 };
 
 export const DEFAULT_TIMETABLE_EVENTS = developmentPlanTimetableEvents.map(
