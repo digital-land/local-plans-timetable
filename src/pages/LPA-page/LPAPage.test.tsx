@@ -3,7 +3,7 @@ import { act, render } from "@testing-library/react";
 import { LPAPage } from "./LPAPage";
 import { fetchLPAs } from "../../api";
 
-jest.mock("@lib/timetable-form/autocomplete/Autocomplete");
+jest.mock("@lib/autocomplete/Autocomplete");
 jest.mock("../../api");
 
 describe("LPAPage", () => {

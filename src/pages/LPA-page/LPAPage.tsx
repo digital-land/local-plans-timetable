@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { Autocomplete } from "@lib/timetable-form/autocomplete/Autocomplete";
+import { Autocomplete } from "@lib/autocomplete/Autocomplete";
 import { fetchLPAs } from "../../api";
 import { useFormContext } from "../../context/use-form-context";
 
