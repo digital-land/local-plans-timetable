@@ -12,7 +12,6 @@ export const PlanViewer = ({
   developmentPlan: {
     name,
     description,
-    adoptedDate,
     periodStartDate,
     periodEndDate,
     developmentPlanType,
@@ -32,7 +31,6 @@ export const PlanViewer = ({
         <p className="govuk-body-l">{description}</p>
       </div>
       <div className="govuk-body">
-        <p>{`Adopted: ${adoptedDate}`}</p>
         <p>{`Period Start: ${periodStartDate}`}</p>
         <p>{`Period End: ${periodEndDate}`}</p>
         <p>{`Plan Type: ${developmentPlanType}`}</p>
