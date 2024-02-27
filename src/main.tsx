@@ -7,6 +7,7 @@ import {
   DescriptionPage,
   StagePage,
   PublishLDSPage,
+  UploadTimetablePage,
 } from "./pages";
 import { FormPageHoC } from "./pages/FormPageHoc";
 import { validateDescription } from "./pages/description-page/description-validation";
@@ -30,6 +31,10 @@ const router = createBrowserRouter(
         {
           path: PageRoute.Root,
           element: <CreateTimetablePage />,
+        },
+        {
+          path: PageRoute.UploadTimetable,
+          element: FormPageHoC(UploadTimetablePage, {}),
         },
         {
           path: PageRoute.LPA,

@@ -84,7 +84,9 @@ export const CreateTimetablePage = () => {
           </Link>
         </div>
         <div>
-          <Button>Upload and edit an existing timetable CSV</Button>
+          <Link to={PageRoute.UploadTimetable}>
+            <Button>Upload and edit an existing timetable CSV</Button>
+          </Link>
         </div>
         <h2 className="govuk-heading-m">Before you start</h2>
         <p className="govuk-body">

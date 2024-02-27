@@ -3,16 +3,20 @@ import {
   DEFAULT_DEVELOPMENT_PLAN,
   DEFAULT_TIMETABLE_EVENTS,
   TimetableEventKey,
+  developmentPlanTimetableEvents,
 } from "@lib/constants";
 import {
   DevelopmentPlan,
   DevelopmentPlanTimetable,
 } from "@lib/types/timetable";
+import { fromCSVString } from "@lib/utils/timetable";
 
 type TimetableEventEditableField = keyof Pick<
   DevelopmentPlanTimetable,
   "eventDate" | "notes"
 >;
+
+const reader = new FileReader();
 
 export const FormContext = createContext<{
   developmentPlan: DevelopmentPlan;
@@ -23,6 +27,8 @@ export const FormContext = createContext<{
     value: string
   ) => void;
   updateDevelopmentPlan: (key: keyof DevelopmentPlan, value: string) => void;
+  handleDevelopmentPlanUpload: (file: File) => void;
+  handleTimetableUpload: (file: File) => void;
 }>({
   developmentPlan: DEFAULT_DEVELOPMENT_PLAN,
   timetableEvents: DEFAULT_TIMETABLE_EVENTS,
@@ -32,6 +38,12 @@ export const FormContext = createContext<{
   updateDevelopmentPlan: () => {
     throw new Error("no provider");
   },
+  handleDevelopmentPlanUpload: () => {
+    throw new Error("no provider");
+  },
+  handleTimetableUpload: () => {
+    throw new Error("no provider");
+  },
 });
 
 export const FormProvider = (props: { children: ReactNode }) => {
@@ -39,9 +51,17 @@ export const FormProvider = (props: { children: ReactNode }) => {
     DEFAULT_DEVELOPMENT_PLAN
   );
 
+  const [, setLoadedDevelopmentPlan] = useState<
+    DevelopmentPlan[] | null
+  >(null);
+
   const [timetableEvents, setTimetableEvents] = useState<
     DevelopmentPlanTimetable[]
   >(DEFAULT_TIMETABLE_EVENTS);
+
+  const [, setLoadedTimetableEvents] = useState<
+    DevelopmentPlanTimetable[] | null
+  >(null);
 
   const updateTimetableEvent = useCallback(
     (
@@ -68,6 +88,48 @@ export const FormProvider = (props: { children: ReactNode }) => {
     []
   );
 
+  const handleDevelopmentPlanUpload = useCallback((file: File) => {
+    reader.onload = (event) => {
+      const csvString = event.target?.result?.toString();
+
+      if (csvString) {
+        const developmentPlan = fromCSVString<DevelopmentPlan>(csvString);
+        setLoadedDevelopmentPlan(developmentPlan);
+        // This assumes the last row is the current row
+        setDevelopmentPlan(developmentPlan.slice(-1)[0]);
+      }
+    };
+
+    reader.readAsText(file);
+  }, []);
+
+  const handleTimetableUpload = useCallback((file: File) => {
+    reader.onload = (event) => {
+      const csvString = event.target?.result?.toString();
+
+      if (csvString) {
+        const loadedEvents = fromCSVString<DevelopmentPlanTimetable>(csvString);
+        setLoadedTimetableEvents(loadedEvents);
+        setTimetableEvents(
+          loadedEvents
+            // This assumes any row with an end date is invalid
+            .filter((event) => !event.endDate)
+            .sort(
+              (a, b) =>
+                developmentPlanTimetableEvents.findIndex(
+                  (s) => s.key === a.developmentPlanEvent
+                ) -
+                developmentPlanTimetableEvents.findIndex(
+                  (s) => s.key === b.developmentPlanEvent
+                )
+            )
+        );
+      }
+    };
+
+    reader.readAsText(file);
+  }, []);
+
   return (
     <FormContext.Provider
       value={{
@@ -75,6 +137,8 @@ export const FormProvider = (props: { children: ReactNode }) => {
         timetableEvents,
         updateTimetableEvent,
         updateDevelopmentPlan,
+        handleDevelopmentPlanUpload,
+        handleTimetableUpload,
       }}
     >
       {props.children}
