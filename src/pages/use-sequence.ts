@@ -8,6 +8,7 @@ const sequence = [
   PageRoute.Description,
   PageRoute.PublishLocalDevelopmentScheme,
   ...stages.map((stage) => stage.key),
+  PageRoute.Export,
 ];
 
 export const useSequence = () => {

@@ -7,7 +7,8 @@ type PublishLDSPageProps = {
   errors?: ValidationErrorItem[];
 };
 
-export const publishLDSEventKey: TimetableEventKey = "local-development-scheme-published"
+export const publishLDSEventKey: TimetableEventKey =
+  "local-development-scheme-published";
 
 export const PublishLDSPage = ({
   errors,
@@ -24,7 +25,7 @@ export const PublishLDSPage = ({
 
   return (
     <>
-      <h1 className="govuk-heading-l govuk-!-margin-top-6">
+      <h1 className="govuk-heading-xl govuk-!-margin-top-6">
         When will you publish your local development scheme (LDS)?
         <span className="govuk-caption-m govuk-!-margin-top-3">
           This should also be the date that you publish your timetable on your
