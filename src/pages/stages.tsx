@@ -14,7 +14,12 @@ export const stages: Stage[] = [
         Regulation 18 consultation, also known as issues and options.
         <br />
         You can read more about the{" "}
-        <a href="#" className="govuk-link">
+        <a
+          href="https://www.legislation.gov.uk/uksi/2012/767/regulation/18"
+          className="govuk-link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           requirements for Regulation 18 on <br />
           legislation.gov.uk (opens in new tab)
         </a>
@@ -31,7 +36,12 @@ export const stages: Stage[] = [
         Regulation 19 consultation.
         <br />
         You can read more about the{" "}
-        <a href="#" className="govuk-link">
+        <a
+          href="https://www.legislation.gov.uk/uksi/2012/767/regulation/19"
+          className="govuk-link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           requirements for Regulation 19 on <br />
           legislation.gov.uk (opens in new tab)
         </a>
