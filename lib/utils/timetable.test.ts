@@ -280,7 +280,6 @@ const planTestCases: PlanTestCase[] = [
       periodEndDate: "2023-01-02",
       developmentPlanGeography: "geography",
       documentationUrl: "url",
-      adoptedDate: "2023-01-01",
       organisations: "organisations",
       entryDate: "2023-01-01",
       startDate: "2023-01-01",
@@ -288,8 +287,8 @@ const planTestCases: PlanTestCase[] = [
     },
     loadedData: null,
     expectedCSV:
-      "reference,name,description,developmentPlanType,periodStartDate,periodEndDate,developmentPlanGeography,documentationUrl,adoptedDate,organisations,entryDate,startDate,endDate\n" +
-      "1,name,description,type,2023-01-01,2023-01-02,geography,url,2023-01-01,organisations,2023-01-01,2023-01-01,",
+      "reference,name,description,developmentPlanType,periodStartDate,periodEndDate,developmentPlanGeography,documentationUrl,organisations,entryDate,startDate,endDate\n" +
+      "1,name,description,type,2023-01-01,2023-01-02,geography,url,organisations,2023-01-01,2023-01-01,",
   },
   {
     name: "loaded plan with no changes",
@@ -302,7 +301,6 @@ const planTestCases: PlanTestCase[] = [
       periodEndDate: "2023-01-02",
       developmentPlanGeography: "geography",
       documentationUrl: "url",
-      adoptedDate: "2023-01-01",
       organisations: "organisations",
       entryDate: "2023-01-01",
       startDate: "2023-01-01",
@@ -318,7 +316,6 @@ const planTestCases: PlanTestCase[] = [
         periodEndDate: "2023-01-02",
         developmentPlanGeography: "geography",
         documentationUrl: "url",
-        adoptedDate: "2023-01-01",
         organisations: "organisations",
         entryDate: "2023-01-01",
         startDate: "2023-01-01",
@@ -326,8 +323,8 @@ const planTestCases: PlanTestCase[] = [
       },
     ],
     expectedCSV:
-      "reference,name,description,developmentPlanType,periodStartDate,periodEndDate,developmentPlanGeography,documentationUrl,adoptedDate,organisations,entryDate,startDate,endDate\n" +
-      "1,name,description,type,2023-01-01,2023-01-02,geography,url,2023-01-01,organisations,2023-01-01,2023-01-01,",
+      "reference,name,description,developmentPlanType,periodStartDate,periodEndDate,developmentPlanGeography,documentationUrl,organisations,entryDate,startDate,endDate\n" +
+      "1,name,description,type,2023-01-01,2023-01-02,geography,url,organisations,2023-01-01,2023-01-01,",
   },
   {
     name: "loaded plan with changes",
@@ -340,7 +337,6 @@ const planTestCases: PlanTestCase[] = [
       periodEndDate: "2023-01-02",
       developmentPlanGeography: "geography",
       documentationUrl: "url",
-      adoptedDate: "2023-01-01",
       organisations: "new organisations",
       entryDate: "2023-01-01",
       startDate: "2023-01-01",
@@ -356,7 +352,6 @@ const planTestCases: PlanTestCase[] = [
         periodEndDate: "2023-01-02",
         developmentPlanGeography: "geography",
         documentationUrl: "url",
-        adoptedDate: "2023-01-01",
         organisations: "organisations",
         entryDate: "2023-01-01",
         startDate: "2023-01-01",
@@ -364,9 +359,9 @@ const planTestCases: PlanTestCase[] = [
       },
     ],
     expectedCSV:
-      "reference,name,description,developmentPlanType,periodStartDate,periodEndDate,developmentPlanGeography,documentationUrl,adoptedDate,organisations,entryDate,startDate,endDate\n" +
-      `1,name,description,type,2023-01-01,2023-01-02,geography,url,2023-01-01,organisations,2023-01-01,2023-01-01,${currentDate}\n` +
-      `2,name,description,type,2023-01-01,2023-01-02,geography,url,2023-01-01,new organisations,${currentDate},${currentDate},`,
+      "reference,name,description,developmentPlanType,periodStartDate,periodEndDate,developmentPlanGeography,documentationUrl,organisations,entryDate,startDate,endDate\n" +
+      `1,name,description,type,2023-01-01,2023-01-02,geography,url,organisations,2023-01-01,2023-01-01,${currentDate}\n` +
+      `2,name,description,type,2023-01-01,2023-01-02,geography,url,new organisations,${currentDate},${currentDate},`,
   },
   {
     name: "loaded plan with changes and previously invalidated row",
@@ -379,7 +374,6 @@ const planTestCases: PlanTestCase[] = [
       periodEndDate: "2023-01-02",
       developmentPlanGeography: "geography",
       documentationUrl: "url",
-      adoptedDate: "2023-01-01",
       organisations: "new organisations",
       entryDate: "2023-01-01",
       startDate: "2023-01-01",
@@ -395,7 +389,6 @@ const planTestCases: PlanTestCase[] = [
         periodEndDate: "2023-01-02",
         developmentPlanGeography: "geography",
         documentationUrl: "url",
-        adoptedDate: "2023-01-01",
         organisations: "old organisations",
         entryDate: "2023-01-01",
         startDate: "2023-01-01",
@@ -410,7 +403,6 @@ const planTestCases: PlanTestCase[] = [
         periodEndDate: "2023-01-02",
         developmentPlanGeography: "geography",
         documentationUrl: "url",
-        adoptedDate: "2023-01-01",
         organisations: "organisations",
         entryDate: "2023-02-03",
         startDate: "2023-02-03",
@@ -418,10 +410,10 @@ const planTestCases: PlanTestCase[] = [
       },
     ],
     expectedCSV:
-      "reference,name,description,developmentPlanType,periodStartDate,periodEndDate,developmentPlanGeography,documentationUrl,adoptedDate,organisations,entryDate,startDate,endDate\n" +
-      "1,name,description,type,2023-01-01,2023-01-02,geography,url,2023-01-01,old organisations,2023-01-01,2023-01-01,2023-02-03\n" +
-      `2,name,description,type,2023-01-01,2023-01-02,geography,url,2023-01-01,organisations,2023-02-03,2023-02-03,${currentDate}\n` +
-      `3,name,description,type,2023-01-01,2023-01-02,geography,url,2023-01-01,new organisations,${currentDate},${currentDate},`,
+      "reference,name,description,developmentPlanType,periodStartDate,periodEndDate,developmentPlanGeography,documentationUrl,organisations,entryDate,startDate,endDate\n" +
+      "1,name,description,type,2023-01-01,2023-01-02,geography,url,old organisations,2023-01-01,2023-01-01,2023-02-03\n" +
+      `2,name,description,type,2023-01-01,2023-01-02,geography,url,organisations,2023-02-03,2023-02-03,${currentDate}\n` +
+      `3,name,description,type,2023-01-01,2023-01-02,geography,url,new organisations,${currentDate},${currentDate},`,
   },
 ];
 

@@ -8,12 +8,14 @@ interface AutocompleteProps {
   label: string;
   onChange: (value: string) => void;
   source: string[];
+  value:string;
 }
 
 export const Autocomplete = ({
   label,
   onChange,
   source,
+  value
 }: AutocompleteProps) => {
   const suggest: SourceFunction = (query, populateResults) => {
     const filteredResults = source.filter((entry: string) =>
@@ -32,6 +34,7 @@ export const Autocomplete = ({
           onConfirm={onChange}
           confirmOnBlur={false}
           autoselect={true}
+          defaultValue={value}
         />
       </label>
     </div>

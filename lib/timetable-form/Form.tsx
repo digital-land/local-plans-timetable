@@ -144,6 +144,7 @@ export const Form = (props: React.HTMLAttributes<HTMLDivElement>) => {
             }))
           }
           source={LPAs}
+          value={developmentPlan.organisations}
         />
       </div>
       {timetableEvents.map((event) => (
