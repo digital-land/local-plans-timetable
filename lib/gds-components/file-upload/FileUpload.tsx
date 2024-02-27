@@ -21,7 +21,7 @@ export const FileUpload = ({
 
   return (
     <div className="govuk-form-group">
-      <label className="govuk-label" htmlFor="file-upload">
+      <label className="govuk-label govuk-label--m" htmlFor="file-upload">
         {label}
       </label>
       <input
