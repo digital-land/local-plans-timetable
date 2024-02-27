@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
-import cn from "classnames";
 
 import { Button } from "@lib/gds-components";
 import {
@@ -9,7 +8,6 @@ import {
 } from "@lib/utils/timetable";
 import { PlanViewer } from "@lib/timetable-visualisation/PlanViewer";
 import { useFormContext } from "../../context/use-form-context";
-import styles from "./ExportPage.module.css";
 
 export const ExportPage = () => {
   const { developmentPlan, timetableEvents } = useFormContext();
@@ -67,7 +65,7 @@ export const ExportPage = () => {
         </Link>
       </p>
 
-      <p className={cn("govuk-body", styles.exportButtonContainer)}>
+      <div>
         <a
           role="button"
           type="button"
@@ -77,9 +75,9 @@ export const ExportPage = () => {
         >
           <Button>Export timetable CSV</Button>
         </a>
-      </p>
+      </div>
 
-      <p className={cn("govuk-body", styles.exportButtonContainer)}>
+      <div>
         <a
           role="button"
           type="button"
@@ -88,7 +86,7 @@ export const ExportPage = () => {
         >
           <Button>Export development plan CSV</Button>
         </a>
-      </p>
+      </div>
 
       <h2 className="govuk-heading-l govuk-!-margin-top-6">
         Preview your timetable
