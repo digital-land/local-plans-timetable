@@ -25,8 +25,16 @@ export const FormPageHoC = <P extends Record<string, unknown>>(
   ) => ValidationErrorItem[]
 ) => {
   const InnerComponent = () => {
-    const { developmentPlan, timetableEvents } = useFormContext();
-    const { previousPage, navigateNext } = useSequence();
+    const {
+      developmentPlan,
+      timetableEvents,
+      loadedDevelopmentPlan,
+      loadedTimetableEvents,
+    } = useFormContext();
+
+    const isCreateFlow = !loadedDevelopmentPlan && !loadedTimetableEvents;
+
+    const { previousPage, navigateNext } = useSequence(isCreateFlow);
     const [errors, setErrors] = useState<ValidationErrorItem[]>();
 
     const handleClick = () => {
