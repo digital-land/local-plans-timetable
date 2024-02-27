@@ -10,25 +10,30 @@ import { PlanViewer } from "@lib/timetable-visualisation/PlanViewer";
 import { useFormContext } from "../../context/use-form-context";
 
 export const ExportPage = () => {
-  const { developmentPlan, timetableEvents } = useFormContext();
+  const {
+    developmentPlan,
+    loadedDevelopmentPlan,
+    timetableEvents,
+    loadedTimetableEvents,
+  } = useFormContext();
 
   const developmentPlanDownloadLink = useMemo(() => {
     const timetableCSV = resolveDevelopmentPlanCSV(
       developmentPlan,
-      null // TODO: Replace with loaded development plan in update journey
+      loadedDevelopmentPlan
     );
 
     return `data:text/csv;charset=urf-8,${timetableCSV}`;
-  }, [developmentPlan]);
+  }, [developmentPlan, loadedDevelopmentPlan]);
 
   const timetableEventsDownloadLink = useMemo(() => {
     const timetableCSV = resolveTimetableEventsCSV(
       timetableEvents,
-      null // TODO: Replace with loaded timetable events in update journey
+      loadedTimetableEvents
     );
 
     return `data:text/csv;charset=urf-8,${timetableCSV}`;
-  }, [timetableEvents]);
+  }, [timetableEvents, loadedTimetableEvents]);
 
   return (
     <>

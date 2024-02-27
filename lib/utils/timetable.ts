@@ -73,8 +73,11 @@ export const resolveDevelopmentPlanCSV = (
     JSON.stringify(loadedDevelopmentPlan)
   );
   const latestPlan = planToDownload.slice(-1)[0];
-  // TODO: More comparisons to make as we capture more fields
-  if (developmentPlan.organisations !== latestPlan.organisations) {
+  if (
+    developmentPlan.organisations !== latestPlan.organisations ||
+    developmentPlan.name !== latestPlan.name ||
+    developmentPlan.description !== latestPlan.description
+  ) {
     const currentDate = getFormattedDate();
     latestPlan.endDate = currentDate;
     planToDownload.push({
