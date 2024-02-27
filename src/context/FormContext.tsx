@@ -51,7 +51,8 @@ export const FormProvider = (props: { children: ReactNode }) => {
     DEFAULT_DEVELOPMENT_PLAN
   );
 
-  const [, setLoadedDevelopmentPlan] = useState<
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [loadedDevelopmentPlan, setLoadedDevelopmentPlan] = useState<
     DevelopmentPlan[] | null
   >(null);
 
@@ -59,7 +60,8 @@ export const FormProvider = (props: { children: ReactNode }) => {
     DevelopmentPlanTimetable[]
   >(DEFAULT_TIMETABLE_EVENTS);
 
-  const [, setLoadedTimetableEvents] = useState<
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [loadedTimetableEvents, setLoadedTimetableEvents] = useState<
     DevelopmentPlanTimetable[] | null
   >(null);
 
