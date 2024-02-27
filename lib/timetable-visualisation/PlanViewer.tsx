@@ -28,7 +28,7 @@ export const PlanViewer = ({
   return (
     <div data-testid="plan-viewer">
       <div>
-        <h1 className="govuk-heading-xl">{name}</h1>
+        <h2 className="govuk-heading-l">{name}</h2>
         <p className="govuk-body-l">{description}</p>
       </div>
       <div className="govuk-body">

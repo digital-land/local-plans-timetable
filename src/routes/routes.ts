@@ -10,5 +10,6 @@ export enum PageRoute {
   Submission = "/submission",
   IndependentExamination = "/independent-examination-stage",
   PlanAdopted = "/plan-adopted",
-  UploadTimetable = "/upload-timetable" // TBC
+  UploadTimetable = "/upload-timetable", // TBC
+  Export = "/export-your-timetable",
 }

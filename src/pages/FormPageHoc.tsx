@@ -50,7 +50,7 @@ export const FormPageHoC = <P extends Record<string, unknown>>(
           Back
         </Link>
         <FormComponent {...formProps} errors={errors} />
-        <Button onClick={handleClick}>Continue</Button>
+        {navigateNext && <Button onClick={handleClick}>Continue</Button>}
       </div>
     );
   };
