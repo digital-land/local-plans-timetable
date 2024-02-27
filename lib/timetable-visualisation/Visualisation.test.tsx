@@ -10,7 +10,7 @@ jest.mock("../timetable-visualisation/PlanViewer");
 jest.mock("csvtojson", () => ({ default: jest.fn() }));
 
 const developmentPlanFilepath = "/development-plan";
-const timetableEventsFilepath = "/development-plan-timetable";
+const timetableEventsFilepath = "/timetable";
 
 describe("Visualisation", () => {
   beforeEach(() => {
