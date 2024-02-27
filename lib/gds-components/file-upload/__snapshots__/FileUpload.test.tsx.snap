@@ -6,7 +6,7 @@ exports[`FileUpload calls onChange with the right value when input changes 1`] =
     class="govuk-form-group"
   >
     <label
-      class="govuk-label"
+      class="govuk-label govuk-label--m"
       for="file-upload"
     >
       Upload a file

@@ -1,4 +1,3 @@
-import { ReactNode, createContext, useCallback, useState } from "react";
 import {
   DEFAULT_DEVELOPMENT_PLAN,
   DEFAULT_TIMETABLE_EVENTS,
@@ -8,30 +7,55 @@ import {
   DevelopmentPlan,
   DevelopmentPlanTimetable,
 } from "@lib/types/timetable";
+import {
+  Dispatch,
+  ReactNode,
+  createContext,
+  useCallback,
+  useState,
+} from "react";
 
 type TimetableEventEditableField = keyof Pick<
   DevelopmentPlanTimetable,
   "eventDate" | "notes"
 >;
 
+const contextDefaultFunction = () => {
+  throw new Error("no provider");
+};
+
 export const FormContext = createContext<{
   developmentPlan: DevelopmentPlan;
   timetableEvents: DevelopmentPlanTimetable[];
+  loadedDevelopmentPlan: DevelopmentPlan[] | null;
+  loadedTimetableEvents: DevelopmentPlanTimetable[] | null;
   updateTimetableEvent: (
     event: TimetableEventKey,
     key: TimetableEventEditableField,
     value: string
   ) => void;
   updateDevelopmentPlan: (key: keyof DevelopmentPlan, value: string) => void;
+  setDevelopmentPlan: Dispatch<React.SetStateAction<DevelopmentPlan>>;
+  setLoadedDevelopmentPlan: Dispatch<
+    React.SetStateAction<DevelopmentPlan[] | null>
+  >;
+  setTimetableEvents: Dispatch<
+    React.SetStateAction<DevelopmentPlanTimetable[]>
+  >;
+  setLoadedTimetableEvents: Dispatch<
+    React.SetStateAction<DevelopmentPlanTimetable[] | null>
+  >;
 }>({
   developmentPlan: DEFAULT_DEVELOPMENT_PLAN,
   timetableEvents: DEFAULT_TIMETABLE_EVENTS,
-  updateTimetableEvent: () => {
-    throw new Error("no provider");
-  },
-  updateDevelopmentPlan: () => {
-    throw new Error("no provider");
-  },
+  loadedDevelopmentPlan: null,
+  loadedTimetableEvents: null,
+  updateTimetableEvent: contextDefaultFunction,
+  updateDevelopmentPlan: contextDefaultFunction,
+  setDevelopmentPlan: contextDefaultFunction,
+  setLoadedDevelopmentPlan: contextDefaultFunction,
+  setTimetableEvents: contextDefaultFunction,
+  setLoadedTimetableEvents: contextDefaultFunction,
 });
 
 export const FormProvider = (props: { children: ReactNode }) => {
@@ -39,9 +63,17 @@ export const FormProvider = (props: { children: ReactNode }) => {
     DEFAULT_DEVELOPMENT_PLAN
   );
 
+  const [loadedDevelopmentPlan, setLoadedDevelopmentPlan] = useState<
+    DevelopmentPlan[] | null
+  >(null);
+
   const [timetableEvents, setTimetableEvents] = useState<
     DevelopmentPlanTimetable[]
   >(DEFAULT_TIMETABLE_EVENTS);
+
+  const [loadedTimetableEvents, setLoadedTimetableEvents] = useState<
+    DevelopmentPlanTimetable[] | null
+  >(null);
 
   const updateTimetableEvent = useCallback(
     (
@@ -75,6 +107,12 @@ export const FormProvider = (props: { children: ReactNode }) => {
         timetableEvents,
         updateTimetableEvent,
         updateDevelopmentPlan,
+        loadedDevelopmentPlan,
+        loadedTimetableEvents,
+        setLoadedDevelopmentPlan,
+        setLoadedTimetableEvents,
+        setDevelopmentPlan,
+        setTimetableEvents,
       }}
     >
       {props.children}
