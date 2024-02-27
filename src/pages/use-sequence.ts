@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { PageRoute } from "../routes/routes";
 import { stages } from "./stages";
 
-const sequence = [
+const createFlowSequence = [
   PageRoute.LPA,
   PageRoute.Title,
   PageRoute.Description,
@@ -11,9 +11,22 @@ const sequence = [
   PageRoute.Export,
 ];
 
-export const useSequence = () => {
+const editFlowSequence = [
+  PageRoute.UploadTimetable,
+  PageRoute.LPA,
+  PageRoute.Title,
+  PageRoute.Description,
+  // missing pages
+  PageRoute.PublishLocalDevelopmentScheme,
+  ...stages.map((stage) => stage.key),
+  PageRoute.Export,
+];
+
+export const useSequence = (isCreateFlow: boolean) => {
   const navigate = useNavigate();
   const { pathname } = useLocation() as { pathname: PageRoute };
+
+  const sequence = isCreateFlow ? createFlowSequence : editFlowSequence;
 
   const currentPageIndex = sequence.indexOf(pathname);
 
