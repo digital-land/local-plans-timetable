@@ -19,6 +19,7 @@ const editFlowSequence = [
   // missing pages
   PageRoute.PublishLocalDevelopmentScheme,
   ...stages.map((stage) => stage.key),
+  PageRoute.Export,
 ];
 
 export const useSequence = (isCreateFlow: boolean) => {
