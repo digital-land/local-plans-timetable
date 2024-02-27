@@ -9,7 +9,6 @@ export type DevelopmentPlan = {
   periodEndDate?: string;
   developmentPlanGeography: string;
   documentationUrl: string;
-  adoptedDate: string;
   organisations: string;
   entryDate: string;
   startDate: string;

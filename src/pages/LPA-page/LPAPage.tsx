@@ -7,7 +7,7 @@ import { useFormContext } from "../../context/use-form-context";
 export const LPAPage = (): JSX.Element => {
   const [LPAs, setLPAs] = useState<string[]>([]);
 
-  const { updateDevelopmentPlan } = useFormContext();
+  const { developmentPlan, updateDevelopmentPlan } = useFormContext();
 
   useEffect(() => {
     const loadLpas = async () => {
@@ -33,6 +33,7 @@ export const LPAPage = (): JSX.Element => {
         label=""
         onChange={(value) => updateDevelopmentPlan("organisations", value)}
         source={LPAs}
+        value={developmentPlan.organisations}
       />
     </>
   );
