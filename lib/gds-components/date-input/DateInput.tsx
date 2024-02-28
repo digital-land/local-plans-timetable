@@ -37,7 +37,7 @@ export const DateInput = ({
           </legend>
         )}
         {error && (
-          <p id="passport-issued-error" className="govuk-error-message">
+          <p className="govuk-error-message">
             <span className="govuk-visually-hidden">Error:</span> {error}
           </p>
         )}

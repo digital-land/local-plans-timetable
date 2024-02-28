@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Radios calls onChange 1`] = `
+<DocumentFragment>
+  <div
+    class="govuk-form-group"
+  >
+    <fieldset
+      class="govuk-fieldset"
+    >
+      <legend
+        class="govuk-fieldset__legend govuk-fieldset__legend--l"
+      >
+        <h1
+          class="govuk-fieldset__heading"
+        >
+          radio
+        </h1>
+      </legend>
+      <div
+        class="govuk-radios"
+        data-module="govuk-radios"
+      >
+        <div
+          class="govuk-radios__item"
+        >
+          <input
+            class="govuk-radios__input"
+            id="Yes"
+            name="radios"
+            role="radio-input"
+            type="radio"
+            value="y"
+          />
+          <label
+            class="govuk-label govuk-radios__label"
+            for="Yes"
+          >
+            Yes
+          </label>
+        </div>
+        <div
+          class="govuk-radios__item"
+        >
+          <input
+            class="govuk-radios__input"
+            id="No"
+            name="radios"
+            role="radio-input"
+            type="radio"
+            value="n"
+          />
+          <label
+            class="govuk-label govuk-radios__label"
+            for="No"
+          >
+            No
+          </label>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Radios displays 1 radio input for each option 1`] = `
+<DocumentFragment>
+  <div
+    class="govuk-form-group"
+  >
+    <fieldset
+      class="govuk-fieldset"
+    >
+      <legend
+        class="govuk-fieldset__legend govuk-fieldset__legend--l"
+      >
+        <h1
+          class="govuk-fieldset__heading"
+        >
+          radio
+        </h1>
+      </legend>
+      <div
+        class="govuk-radios"
+        data-module="govuk-radios"
+      >
+        <div
+          class="govuk-radios__item"
+        >
+          <input
+            class="govuk-radios__input"
+            id="Yes"
+            name="radios"
+            role="radio-input"
+            type="radio"
+            value="y"
+          />
+          <label
+            class="govuk-label govuk-radios__label"
+            for="Yes"
+          >
+            Yes
+          </label>
+        </div>
+        <div
+          class="govuk-radios__item"
+        >
+          <input
+            class="govuk-radios__input"
+            id="No"
+            name="radios"
+            role="radio-input"
+            type="radio"
+            value="n"
+          />
+          <label
+            class="govuk-label govuk-radios__label"
+            for="No"
+          >
+            No
+          </label>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+</DocumentFragment>
+`;
