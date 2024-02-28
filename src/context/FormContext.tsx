@@ -14,6 +14,7 @@ import {
   useCallback,
   useState,
 } from "react";
+import { Journeys } from "src/routes/routes";
 
 type TimetableEventEditableField = keyof Pick<
   DevelopmentPlanTimetable,
@@ -29,7 +30,7 @@ export const FormContext = createContext<{
   timetableEvents: DevelopmentPlanTimetable[];
   loadedDevelopmentPlan: DevelopmentPlan[] | null;
   loadedTimetableEvents: DevelopmentPlanTimetable[] | null;
-  userFlow: string | null;
+  userFlow: Journeys | null;
   updateTimetableEvent: (
     event: TimetableEventKey,
     key: TimetableEventEditableField,
@@ -46,7 +47,7 @@ export const FormContext = createContext<{
   setLoadedTimetableEvents: Dispatch<
     React.SetStateAction<DevelopmentPlanTimetable[] | null>
   >;
-  setUserFlow: Dispatch<React.SetStateAction<string | null>>;
+  setUserFlow: Dispatch<React.SetStateAction<Journeys | null>>;
 }>({
   developmentPlan: DEFAULT_DEVELOPMENT_PLAN,
   timetableEvents: DEFAULT_TIMETABLE_EVENTS,
@@ -79,7 +80,7 @@ export const FormProvider = (props: { children: ReactNode }) => {
     DevelopmentPlanTimetable[] | null
   >(null);
 
-  const [userFlow, setUserFlow] = useState<string | null>(null);
+  const [userFlow, setUserFlow] = useState<Journeys | null>(null);
 
   const updateTimetableEvent = useCallback(
     (

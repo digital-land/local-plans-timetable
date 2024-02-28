@@ -28,7 +28,6 @@ export const FormPageHoC = <P extends Record<string, unknown>>(
   const InnerComponent = () => {
     const { developmentPlan, timetableEvents, userFlow } = useFormContext();
 
-    //const isCreateFlow = userFlow === Journeys.Create;
     const { previousPage, navigateNext } = useSequence(Journeys.Create);
     const [errors, setErrors] = useState<ValidationErrorItem[]>();
 
@@ -49,7 +48,6 @@ export const FormPageHoC = <P extends Record<string, unknown>>(
 
     const navigate = useNavigate();
     useEffect(() => {
-      console.log(userFlow);
       if (!userFlow) {
         navigate(PageRoute.Root);
       }
