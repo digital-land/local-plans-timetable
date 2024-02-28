@@ -13,3 +13,8 @@ export enum PageRoute {
   UploadTimetable = "/upload-timetable", // TBC
   Export = "/export-your-timetable",
 }
+
+export enum Journey {
+  Create = "create",
+  Update = "update",
+}
