@@ -171,7 +171,7 @@ exports[`shows input for day when withDay is true 1`] = `
         class="govuk-hint"
         id="date-hint"
       >
-        For example, 8 2024
+        For example, 12 8 2024
       </div>
       <div
         class="govuk-date-input"
