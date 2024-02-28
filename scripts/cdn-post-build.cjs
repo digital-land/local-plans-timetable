@@ -2,9 +2,9 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const fs = require("fs");
 
-const { copyFonts } = require("./copy-fonts.cjs");
+const { copyAssets } = require("./copy-assets.cjs");
 
-copyFonts("dist-cdn");
+copyAssets("fonts", "dist-cdn");
 
 // Rewrite the font paths
 const css = fs
