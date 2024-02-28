@@ -42,7 +42,7 @@ export const DateInput = ({
           </p>
         )}
         <div id={`${name}-hint`} className="govuk-hint">
-          For example, 8 2024
+          For example,{withDay ? " 12" : ""} 8 2024
         </div>
         <div className="govuk-date-input">
           {withDay && (
