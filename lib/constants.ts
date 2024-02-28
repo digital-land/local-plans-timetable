@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { DevelopmentPlan } from "./types/timetable";
+import { DevelopmentPlan, DevelopmentPlanTimetable } from "./types/timetable";
 
 export const developmentPlanTimetableEvents = [
   { name: "Timetable updated", key: "timetable-updated" },
@@ -28,10 +28,27 @@ export const developmentPlanTimetableEvents = [
     name: "Plan found unsound",
     key: "plan-found-unsound",
   },
+  {
+    name: "Plan not adopted",
+    key: "plan-not-adopted",
+  },
+
 ] as const;
 
 export type TimetableEventKey =
   (typeof developmentPlanTimetableEvents)[number]["key"];
+
+export type StatusChangeEventsKey = Extract<
+TimetableEventKey,
+"plan-found-unsound" | "plan-withdrawn" | "plan-paused" | "plan-not-adopted"
+>;
+
+export type StatusChangeEvent = Omit<
+  DevelopmentPlanTimetable,
+  "developmentPlanEvent"
+> & {
+  developmentPlanEvent?: StatusChangeEventsKey;
+};
 
 const eventKeyToNameMap = developmentPlanTimetableEvents.reduce<
   Record<TimetableEventKey, string>
@@ -58,17 +75,24 @@ export const DEFAULT_DEVELOPMENT_PLAN: DevelopmentPlan = {
   startDate: "",
 };
 
+export const DEFAULT_TIMETABLE_EVENT: Omit<
+  DevelopmentPlanTimetable,
+  "developmentPlanEvent"
+> = {
+  reference: uuidv4(),
+  name: "",
+  developmentPlan: "",
+  eventDate: "",
+  notes: "",
+  organisation: "",
+  entryDate: getFormattedDate(),
+  startDate: getFormattedDate(),
+  endDate: "",
+};
+
 export const DEFAULT_TIMETABLE_EVENTS = developmentPlanTimetableEvents.map(
   ({ key }) => ({
-    reference: uuidv4(),
-    name: "",
-    developmentPlan: "",
+    ...DEFAULT_TIMETABLE_EVENT,
     developmentPlanEvent: key,
-    eventDate: "",
-    notes: "",
-    organisation: "",
-    entryDate: getFormattedDate(),
-    startDate: getFormattedDate(),
-    endDate: "",
   })
 );

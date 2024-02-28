@@ -6,6 +6,7 @@ import {
   resolveDevelopmentPlanCSV,
   resolveTimetableEventsCSV,
 } from "@lib/utils/timetable";
+import { DevelopmentPlanTimetable } from "@lib/types/timetable";
 import { PlanViewer } from "@lib/timetable-visualisation/PlanViewer";
 import { useFormContext } from "../../context/use-form-context";
 
@@ -15,6 +16,7 @@ export const ExportPage = () => {
     loadedDevelopmentPlan,
     timetableEvents,
     loadedTimetableEvents,
+    statusChangeEvent,
   } = useFormContext();
 
   const developmentPlanDownloadLink = useMemo(() => {
@@ -28,12 +30,14 @@ export const ExportPage = () => {
 
   const timetableEventsDownloadLink = useMemo(() => {
     const timetableCSV = resolveTimetableEventsCSV(
-      timetableEvents,
+      statusChangeEvent
+        ? [...timetableEvents, statusChangeEvent as DevelopmentPlanTimetable]
+        : timetableEvents,
       loadedTimetableEvents
     );
 
     return `data:text/csv;charset=urf-8,${timetableCSV}`;
-  }, [timetableEvents, loadedTimetableEvents]);
+  }, [statusChangeEvent, timetableEvents, loadedTimetableEvents]);
 
   return (
     <>
@@ -116,7 +120,14 @@ export const ExportPage = () => {
 
       <PlanViewer
         developmentPlan={developmentPlan}
-        timetableEvents={timetableEvents}
+        timetableEvents={
+          statusChangeEvent
+            ? [
+                ...timetableEvents,
+                statusChangeEvent as DevelopmentPlanTimetable,
+              ]
+            : timetableEvents
+        }
       />
     </>
   );

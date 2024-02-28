@@ -1,16 +1,14 @@
 import { DevelopmentPlan, DevelopmentPlanTimetable } from "@lib/types/timetable";
-import Joi, { ValidationErrorItem } from "joi";
+import { ValidationErrorItem } from "joi";
 import { StagePageProps } from "./StagePage";
-import { eventDateSchema } from "../event-date-schema";
-
-const schema = Joi.object({
-  eventDate: eventDateSchema,
-  notes: Joi.string().allow(""),
-});
+import { eventSchema } from "../event-schema";
+import { StatusChangeEvent } from "@lib/constants";
 
 export const validateTimetableStage = (
   _developmentPlan: DevelopmentPlan,
   developmentPlanEvents: DevelopmentPlanTimetable[],
+  _statusChangeEvent: StatusChangeEvent | null,
+  _statusHasChanged: boolean | null, 
   formProps: StagePageProps
 ) => {
   const { startEventKey, endEventKey } = formProps;
@@ -29,7 +27,7 @@ export const validateTimetableStage = (
 
   const errors: ValidationErrorItem[] = [];
 
-  const startEventValidation = schema.validate({
+  const startEventValidation = eventSchema.validate({
     eventDate: startEvent.eventDate,
     notes: startEvent.notes,
   });
@@ -44,7 +42,7 @@ export const validateTimetableStage = (
   }
 
   if (endEvent && endEventKey) {
-    const endEventValidation = schema.validate({
+    const endEventValidation = eventSchema.validate({
       eventDate: endEvent.eventDate,
       notes: endEvent.notes,
     });

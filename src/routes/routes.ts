@@ -12,6 +12,8 @@ export enum PageRoute {
   PlanAdopted = "/plan-adopted",
   UploadTimetable = "/upload-timetable", // TBC
   Export = "/export-your-timetable",
+  UpdateTimetableStatus = "/update-timetable-status", // TBC
+  StatusChangeEvent = "/status-change-reason", // TBC
 }
 
 export enum Journey {

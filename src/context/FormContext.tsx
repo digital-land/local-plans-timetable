@@ -1,6 +1,8 @@
 import {
   DEFAULT_DEVELOPMENT_PLAN,
+  DEFAULT_TIMETABLE_EVENT,
   DEFAULT_TIMETABLE_EVENTS,
+  StatusChangeEvent,
   TimetableEventKey,
 } from "@lib/constants";
 import {
@@ -10,8 +12,10 @@ import {
 import {
   Dispatch,
   ReactNode,
+  SetStateAction,
   createContext,
   useCallback,
+  useEffect,
   useState,
 } from "react";
 import { Journey } from "src/routes/routes";
@@ -37,17 +41,20 @@ export const FormContext = createContext<{
     value: string
   ) => void;
   updateDevelopmentPlan: (key: keyof DevelopmentPlan, value: string) => void;
-  setDevelopmentPlan: Dispatch<React.SetStateAction<DevelopmentPlan>>;
-  setLoadedDevelopmentPlan: Dispatch<
-    React.SetStateAction<DevelopmentPlan[] | null>
-  >;
-  setTimetableEvents: Dispatch<
-    React.SetStateAction<DevelopmentPlanTimetable[]>
-  >;
+  setDevelopmentPlan: Dispatch<SetStateAction<DevelopmentPlan>>;
+  setLoadedDevelopmentPlan: Dispatch<SetStateAction<DevelopmentPlan[] | null>>;
+  setTimetableEvents: Dispatch<SetStateAction<DevelopmentPlanTimetable[]>>;
   setLoadedTimetableEvents: Dispatch<
-    React.SetStateAction<DevelopmentPlanTimetable[] | null>
+    SetStateAction<DevelopmentPlanTimetable[] | null>
   >;
   setUserFlow: Dispatch<React.SetStateAction<Journey | null>>;
+  statusChangeEvent: StatusChangeEvent | null;
+  statusHasChanged: boolean | null;
+  setStatusHasChanged: Dispatch<SetStateAction<boolean | null>>;
+  updateStatusChangeEvent: (
+    key: keyof DevelopmentPlanTimetable,
+    value: string
+  ) => void;
 }>({
   developmentPlan: DEFAULT_DEVELOPMENT_PLAN,
   timetableEvents: DEFAULT_TIMETABLE_EVENTS,
@@ -61,6 +68,10 @@ export const FormContext = createContext<{
   setTimetableEvents: contextDefaultFunction,
   setLoadedTimetableEvents: contextDefaultFunction,
   setUserFlow: contextDefaultFunction,
+  statusHasChanged: null,
+  setStatusHasChanged: contextDefaultFunction,
+  statusChangeEvent: null,
+  updateStatusChangeEvent: contextDefaultFunction,
 });
 
 export const FormProvider = (props: { children: ReactNode }) => {
@@ -82,6 +93,13 @@ export const FormProvider = (props: { children: ReactNode }) => {
 
   const [userFlow, setUserFlow] = useState<Journey | null>(null);
 
+  const [statusHasChanged, setStatusHasChanged] = useState<boolean | null>(
+    null
+  );
+
+  const [statusChangeEvent, setStatusChangeEvent] =
+    useState<StatusChangeEvent | null>(null);
+
   const updateTimetableEvent = useCallback(
     (
       event: TimetableEventKey,
@@ -97,6 +115,19 @@ export const FormProvider = (props: { children: ReactNode }) => {
     []
   );
 
+  const updateStatusChangeEvent = useCallback(
+    (key: keyof DevelopmentPlanTimetable, value: string) => {
+      if (!statusChangeEvent) {
+        throw new Error("status change event not found");
+      }
+
+      const updatedEvent = { ...statusChangeEvent, [key]: value };
+
+      setStatusChangeEvent(updatedEvent);
+    },
+    [statusChangeEvent]
+  );
+
   const updateDevelopmentPlan = useCallback(
     (key: keyof DevelopmentPlan, value: string) => {
       setDevelopmentPlan((prev) => ({
@@ -106,6 +137,12 @@ export const FormProvider = (props: { children: ReactNode }) => {
     },
     []
   );
+
+  useEffect(() => {
+    if (statusHasChanged) {
+      setStatusChangeEvent(DEFAULT_TIMETABLE_EVENT);
+    }
+  }, [statusHasChanged]);
 
   return (
     <FormContext.Provider
@@ -122,6 +159,10 @@ export const FormProvider = (props: { children: ReactNode }) => {
         setLoadedTimetableEvents,
         setDevelopmentPlan,
         setTimetableEvents,
+        statusHasChanged,
+        setStatusHasChanged,
+        statusChangeEvent,
+        updateStatusChangeEvent,
       }}
     >
       {props.children}

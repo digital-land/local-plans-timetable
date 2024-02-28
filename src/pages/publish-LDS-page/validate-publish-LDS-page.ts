@@ -4,7 +4,7 @@ import {
 } from "@lib/types/timetable";
 import Joi, { ValidationErrorItem } from "joi";
 import { publishLDSEventKey } from "./PublishLDSPage";
-import { eventDateSchema } from "../event-date-schema";
+import { eventDateSchema } from "../event-schema";
 
 const schema = Joi.object({
   eventDate: eventDateSchema,

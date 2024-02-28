@@ -16,18 +16,26 @@ const editFlowSequence = [
   PageRoute.LPA,
   PageRoute.Title,
   PageRoute.Description,
-  // missing pages
+  PageRoute.UpdateTimetableStatus,
+  PageRoute.StatusChangeEvent,
   PageRoute.PublishLocalDevelopmentScheme,
   ...stages.map((stage) => stage.key),
   PageRoute.Export,
 ];
 
-export const useSequence = (userJourney: Journey | null) => {
+export const useSequence = (
+  userJourney: Journey | null,
+  timetableStatusHasChanged?: boolean
+) => {
   const navigate = useNavigate();
   const { pathname } = useLocation() as { pathname: PageRoute };
 
   const sequence =
-    userJourney == Journey.Create ? createFlowSequence : editFlowSequence;
+    userJourney == Journey.Create
+      ? createFlowSequence
+      : timetableStatusHasChanged
+      ? editFlowSequence
+      : editFlowSequence.filter((page) => page !== PageRoute.StatusChangeEvent);
 
   const currentPageIndex = sequence.indexOf(pathname);
 
