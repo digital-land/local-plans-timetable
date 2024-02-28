@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { PageRoute, Journeys } from "../routes/routes";
+import { PageRoute, Journey } from "../routes/routes";
 import { stages } from "./stages";
 
 const createFlowSequence = [
@@ -22,12 +22,12 @@ const editFlowSequence = [
   PageRoute.Export,
 ];
 
-export const useSequence = (userJourney: Journeys | null) => {
+export const useSequence = (userJourney: Journey | null) => {
   const navigate = useNavigate();
   const { pathname } = useLocation() as { pathname: PageRoute };
 
   const sequence =
-    userJourney == Journeys.Create ? createFlowSequence : editFlowSequence;
+    userJourney == Journey.Create ? createFlowSequence : editFlowSequence;
 
   const currentPageIndex = sequence.indexOf(pathname);
 

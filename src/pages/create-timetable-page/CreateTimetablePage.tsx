@@ -4,7 +4,7 @@ import {
   DEFAULT_TIMETABLE_EVENTS,
 } from "@lib/constants";
 import { Link } from "react-router-dom";
-import { PageRoute, Journeys } from "../../routes/routes";
+import { PageRoute, Journey } from "../../routes/routes";
 import { useFormContext } from "../../context/use-form-context";
 import styles from "./create-timetable.module.css";
 import { useEffect } from "react";
@@ -100,14 +100,14 @@ export const CreateTimetablePage = () => {
           </li>
         </ul>
         <div>
-          <Link to={PageRoute.LPA} onClick={() => setUserFlow(Journeys.Create)}>
+          <Link to={PageRoute.LPA} onClick={() => setUserFlow(Journey.Create)}>
             <Button>Start a new timetable</Button>
           </Link>
         </div>
         <div>
           <Link
             to={PageRoute.UploadTimetable}
-            onClick={() => setUserFlow(Journeys.Update)}
+            onClick={() => setUserFlow(Journey.Update)}
           >
             <Button>Upload and edit an existing timetable CSV</Button>
           </Link>

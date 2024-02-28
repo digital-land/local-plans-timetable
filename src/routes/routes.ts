@@ -14,7 +14,7 @@ export enum PageRoute {
   Export = "/export-your-timetable",
 }
 
-export enum Journeys {
+export enum Journey {
   Create = "create",
   Update = "update",
 }
