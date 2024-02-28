@@ -12,7 +12,7 @@ import { useFormContext } from "../context/use-form-context";
 import { useSequence } from "./use-sequence";
 
 import styles from "./form-page.module.css";
-import { PageRoute, Journeys } from "../routes/routes";
+import { PageRoute } from "../routes/routes";
 
 export const FormPageHoC = <P extends Record<string, unknown>>(
   FormComponent: (
@@ -28,7 +28,7 @@ export const FormPageHoC = <P extends Record<string, unknown>>(
   const InnerComponent = () => {
     const { developmentPlan, timetableEvents, userFlow } = useFormContext();
 
-    const { previousPage, navigateNext } = useSequence(Journeys.Create);
+    const { previousPage, navigateNext } = useSequence(userFlow);
     const [errors, setErrors] = useState<ValidationErrorItem[]>();
 
     const handleClick = () => {
@@ -51,7 +51,7 @@ export const FormPageHoC = <P extends Record<string, unknown>>(
       if (!userFlow) {
         navigate(PageRoute.Root);
       }
-    });
+    },[navigate, userFlow]);
 
     return (
       <div className={styles.form}>

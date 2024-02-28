@@ -22,7 +22,7 @@ const editFlowSequence = [
   PageRoute.Export,
 ];
 
-export const useSequence = (userJourney: Journeys) => {
+export const useSequence = (userJourney: Journeys | null) => {
   const navigate = useNavigate();
   const { pathname } = useLocation() as { pathname: PageRoute };
 

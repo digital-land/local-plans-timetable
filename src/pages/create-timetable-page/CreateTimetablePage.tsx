@@ -23,7 +23,7 @@ export const CreateTimetablePage = () => {
     setDevelopmentPlan(DEFAULT_DEVELOPMENT_PLAN);
     setLoadedTimetableEvents(null);
     setLoadedDevelopmentPlan(null);
-  });
+  }, []);
 
   return (
     <div className="govuk-grid-row">
