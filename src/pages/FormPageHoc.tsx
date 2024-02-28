@@ -11,7 +11,6 @@ import {
 import { useFormContext } from "../context/use-form-context";
 import { useSequence } from "./use-sequence";
 
-import styles from "./form-page.module.css";
 import { PageRoute } from "../routes/routes";
 
 export const FormPageHoC = <P extends Record<string, unknown>>(
@@ -51,16 +50,16 @@ export const FormPageHoC = <P extends Record<string, unknown>>(
       if (!userFlow) {
         navigate(PageRoute.Root);
       }
-    },[navigate, userFlow]);
+    }, [navigate, userFlow]);
 
     return (
-      <div className={styles.form}>
+      <>
         <Link to={previousPage} className="govuk-back-link">
           Back
         </Link>
         <FormComponent {...formProps} errors={errors} />
         {navigateNext && <Button onClick={handleClick}>Continue</Button>}
-      </div>
+      </>
     );
   };
 
