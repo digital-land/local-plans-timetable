@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import { ValidationErrorItem } from "joi";
 
@@ -12,6 +12,7 @@ import { useFormContext } from "../context/use-form-context";
 import { useSequence } from "./use-sequence";
 
 import styles from "./form-page.module.css";
+import { PageRoute, Journeys } from "../routes/routes";
 
 export const FormPageHoC = <P extends Record<string, unknown>>(
   FormComponent: (
@@ -25,16 +26,10 @@ export const FormPageHoC = <P extends Record<string, unknown>>(
   ) => ValidationErrorItem[]
 ) => {
   const InnerComponent = () => {
-    const {
-      developmentPlan,
-      timetableEvents,
-      loadedDevelopmentPlan,
-      loadedTimetableEvents,
-    } = useFormContext();
+    const { developmentPlan, timetableEvents, userFlow } = useFormContext();
 
-    const isCreateFlow = !loadedDevelopmentPlan && !loadedTimetableEvents;
-
-    const { previousPage, navigateNext } = useSequence(isCreateFlow);
+    //const isCreateFlow = userFlow === Journeys.Create;
+    const { previousPage, navigateNext } = useSequence(Journeys.Create);
     const [errors, setErrors] = useState<ValidationErrorItem[]>();
 
     const handleClick = () => {
@@ -51,6 +46,14 @@ export const FormPageHoC = <P extends Record<string, unknown>>(
 
       navigateNext?.();
     };
+
+    const navigate = useNavigate();
+    useEffect(() => {
+      console.log(userFlow);
+      if (!userFlow) {
+        navigate(PageRoute.Root);
+      }
+    });
 
     return (
       <div className={styles.form}>

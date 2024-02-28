@@ -29,6 +29,7 @@ export const FormContext = createContext<{
   timetableEvents: DevelopmentPlanTimetable[];
   loadedDevelopmentPlan: DevelopmentPlan[] | null;
   loadedTimetableEvents: DevelopmentPlanTimetable[] | null;
+  userFlow: string | null;
   updateTimetableEvent: (
     event: TimetableEventKey,
     key: TimetableEventEditableField,
@@ -45,17 +46,20 @@ export const FormContext = createContext<{
   setLoadedTimetableEvents: Dispatch<
     React.SetStateAction<DevelopmentPlanTimetable[] | null>
   >;
+  setUserFlow: Dispatch<React.SetStateAction<string | null>>;
 }>({
   developmentPlan: DEFAULT_DEVELOPMENT_PLAN,
   timetableEvents: DEFAULT_TIMETABLE_EVENTS,
   loadedDevelopmentPlan: null,
   loadedTimetableEvents: null,
+  userFlow: null,
   updateTimetableEvent: contextDefaultFunction,
   updateDevelopmentPlan: contextDefaultFunction,
   setDevelopmentPlan: contextDefaultFunction,
   setLoadedDevelopmentPlan: contextDefaultFunction,
   setTimetableEvents: contextDefaultFunction,
   setLoadedTimetableEvents: contextDefaultFunction,
+  setUserFlow: contextDefaultFunction,
 });
 
 export const FormProvider = (props: { children: ReactNode }) => {
@@ -74,6 +78,8 @@ export const FormProvider = (props: { children: ReactNode }) => {
   const [loadedTimetableEvents, setLoadedTimetableEvents] = useState<
     DevelopmentPlanTimetable[] | null
   >(null);
+
+  const [userFlow, setUserFlow] = useState<string | null>(null);
 
   const updateTimetableEvent = useCallback(
     (
@@ -105,6 +111,8 @@ export const FormProvider = (props: { children: ReactNode }) => {
       value={{
         developmentPlan,
         timetableEvents,
+        userFlow,
+        setUserFlow,
         updateTimetableEvent,
         updateDevelopmentPlan,
         loadedDevelopmentPlan,

@@ -1,9 +1,30 @@
 import { Button } from "@lib/gds-components";
+import {
+  DEFAULT_DEVELOPMENT_PLAN,
+  DEFAULT_TIMETABLE_EVENTS,
+} from "@lib/constants";
 import { Link } from "react-router-dom";
-import { PageRoute } from "../../routes/routes";
+import { PageRoute, Journeys } from "../../routes/routes";
+import { useFormContext } from "../../context/use-form-context";
 import styles from "./create-timetable.module.css";
+import { useEffect } from "react";
 
 export const CreateTimetablePage = () => {
+  const {
+    setTimetableEvents,
+    setDevelopmentPlan,
+    setLoadedTimetableEvents,
+    setLoadedDevelopmentPlan,
+    setUserFlow,
+  } = useFormContext();
+
+  useEffect(() => {
+    setTimetableEvents(DEFAULT_TIMETABLE_EVENTS);
+    setDevelopmentPlan(DEFAULT_DEVELOPMENT_PLAN);
+    setLoadedTimetableEvents(null);
+    setLoadedDevelopmentPlan(null);
+  });
+
   return (
     <div className="govuk-grid-row">
       <div className="govuk-grid-column-one-third">
@@ -79,12 +100,15 @@ export const CreateTimetablePage = () => {
           </li>
         </ul>
         <div>
-          <Link to={PageRoute.LPA}>
+          <Link to={PageRoute.LPA} onClick={() => setUserFlow(Journeys.Create)}>
             <Button>Start a new timetable</Button>
           </Link>
         </div>
         <div>
-          <Link to={PageRoute.UploadTimetable}>
+          <Link
+            to={PageRoute.UploadTimetable}
+            onClick={() => setUserFlow(Journeys.Update)}
+          >
             <Button>Upload and edit an existing timetable CSV</Button>
           </Link>
         </div>
