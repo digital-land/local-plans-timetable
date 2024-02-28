@@ -64,6 +64,7 @@ export const ExportPage = () => {
         CSV files you’ve just downloaded to publish the timetable on your
         website:{" "}
         <Link
+          className="govuk-link"
           to="#" /* Replace with path to real page once it's been created */
         >
           Publishing a local plan timetable online: guidance for web teams
