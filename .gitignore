@@ -15,8 +15,8 @@ storybook-static
 dist-cdn
 dist-lib
 
-# Ignoring the public assets folder as it's only used for fonts
-public/assets/*
+# Ignoring the public folder as it's only used for govuk assets
+public
 
 # Editor directories and files
 .vscode/*
