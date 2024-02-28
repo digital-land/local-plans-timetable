@@ -12,6 +12,7 @@
     "prebuild": "node ./scripts/wrapper-pre-build.cjs",
     "dev": "npm run prebuild && vite --open",
     "build": "tsc && vite build",
+    "postbuild": "node ./scripts/wrapper-post-build.cjs",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",

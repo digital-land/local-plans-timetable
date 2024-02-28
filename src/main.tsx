@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createHashRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import {
   LPAPage,
   TitlePage,
@@ -24,45 +24,48 @@ import "./main.css";
 
 import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
 
-const router = createHashRouter([
-  {
-    element: <Page />,
-    children: [
-      {
-        path: PageRoute.Root,
-        element: <CreateTimetablePage />,
-      },
-      {
-        path: PageRoute.UploadTimetable,
-        element: FormPageHoC(UploadTimetablePage, {}),
-      },
-      {
-        path: PageRoute.LPA,
-        element: FormPageHoC(LPAPage, {}),
-      },
-      {
-        path: PageRoute.Title,
-        element: FormPageHoC(TitlePage, {}, validateTitle),
-      },
-      {
-        path: PageRoute.Description,
-        element: FormPageHoC(DescriptionPage, {}, validateDescription),
-      },
-      {
-        path: PageRoute.PublishLocalDevelopmentScheme,
-        element: FormPageHoC(PublishLDSPage, {}, validatePublishLDSEvent),
-      },
-      ...stages.map(({ key, ...otherProps }) => ({
-        path: key,
-        element: FormPageHoC(StagePage, otherProps, validateTimetableStage),
-      })),
-      {
-        path: PageRoute.Export,
-        element: FormPageHoC(ExportPage, {}),
-      },
-    ],
-  },
-]);
+const router = createBrowserRouter(
+  [
+    {
+      element: <Page />,
+      children: [
+        {
+          path: PageRoute.Root,
+          element: <CreateTimetablePage />,
+        },
+        {
+          path: PageRoute.UploadTimetable,
+          element: FormPageHoC(UploadTimetablePage, {}),
+        },
+        {
+          path: PageRoute.LPA,
+          element: FormPageHoC(LPAPage, {}),
+        },
+        {
+          path: PageRoute.Title,
+          element: FormPageHoC(TitlePage, {}, validateTitle),
+        },
+        {
+          path: PageRoute.Description,
+          element: FormPageHoC(DescriptionPage, {}, validateDescription),
+        },
+        {
+          path: PageRoute.PublishLocalDevelopmentScheme,
+          element: FormPageHoC(PublishLDSPage, {}, validatePublishLDSEvent),
+        },
+        ...stages.map(({ key, ...otherProps }) => ({
+          path: key,
+          element: FormPageHoC(StagePage, otherProps, validateTimetableStage),
+        })),
+        {
+          path: PageRoute.Export,
+          element: FormPageHoC(ExportPage, {}),
+        },
+      ],
+    },
+  ],
+  { basename: PageRoute.Base }
+);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
