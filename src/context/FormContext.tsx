@@ -1,9 +1,9 @@
 import {
   DEFAULT_DEVELOPMENT_PLAN,
-  DEFAULT_TIMETABLE_EVENT,
   DEFAULT_TIMETABLE_EVENTS,
   StatusChangeEvent,
   TimetableEventKey,
+  getDefaultTimetableEvent,
 } from "@lib/constants";
 import {
   DevelopmentPlan,
@@ -140,7 +140,7 @@ export const FormProvider = (props: { children: ReactNode }) => {
 
   useEffect(() => {
     if (statusHasChanged) {
-      setStatusChangeEvent(DEFAULT_TIMETABLE_EVENT);
+      setStatusChangeEvent(getDefaultTimetableEvent());
     }
   }, [statusHasChanged]);
 

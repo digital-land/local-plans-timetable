@@ -33,15 +33,14 @@ export const developmentPlanTimetableEvents = [
     name: "Plan not adopted",
     key: "plan-not-adopted",
   },
-
 ] as const;
 
 export type TimetableEventKey =
   (typeof developmentPlanTimetableEvents)[number]["key"];
 
 export type StatusChangeEventsKey = Extract<
-TimetableEventKey,
-"plan-found-unsound" | "plan-withdrawn" | "plan-paused" | "plan-not-adopted"
+  TimetableEventKey,
+  "plan-found-unsound" | "plan-withdrawn" | "plan-paused" | "plan-not-adopted"
 >;
 
 export type StatusChangeEvent = Omit<
@@ -85,17 +84,24 @@ const eventsToExclude = new Set<TimetableEventKey>([
   "plan-not-adopted",
 ]);
 
+export const getDefaultTimetableEvent = (): Omit<
+  DevelopmentPlanTimetable,
+  "developmentPlanEvent"
+> => ({
+  reference: uuidv4(),
+  name: "",
+  developmentPlan: "",
+  eventDate: "",
+  notes: "",
+  organisation: "",
+  entryDate: getFormattedDate(),
+  startDate: getFormattedDate(),
+  endDate: "",
+});
+
 export const DEFAULT_TIMETABLE_EVENTS = developmentPlanTimetableEvents
   .filter(({ key }) => !eventsToExclude.has(key))
   .map(({ key }) => ({
-    reference: uuidv4(),
-    name: "",
-    developmentPlan: "",
     developmentPlanEvent: key,
-    eventDate: "",
-    notes: "",
-    organisation: "",
-    entryDate: getFormattedDate(),
-    startDate: getFormattedDate(),
-    endDate: "",
+    ...getDefaultTimetableEvent(),
   }));
