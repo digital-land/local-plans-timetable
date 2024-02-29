@@ -6,17 +6,17 @@ import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
 const objectArrayToCSVString = (
   objArr: { [key: string]: unknown }[]
 ): string => {
-  const headLine = Object.keys(objArr[0]).join(",");
+  const headers = Object.keys(objArr[0]);
 
-  const CSVRows = objArr.reduce(
-    (array, timetableItem) => [
-      ...array,
-      Object.values(timetableItem).join(","),
-    ],
-    [headLine]
-  );
+  const headLine = headers.join(",");
 
-  return CSVRows.join("\n");
+  const CSVRows = objArr.map((timetableItem) => {
+    const values = headers.map((header) => timetableItem[header]);
+
+    return values.join(",");
+  });
+
+  return [headLine, ...CSVRows].join("\n");
 };
 
 export const resolveTimetableEventsCSV = (
@@ -57,6 +57,17 @@ export const resolveTimetableEventsCSV = (
       });
     }
   });
+
+  const newEvents = JSON.parse(
+    JSON.stringify(
+      timetableEvents.filter(
+        (event) =>
+          !eventsToDownload.some((e) => e.reference === event.reference)
+      )
+    )
+  );
+
+  eventsToDownload.push(...newEvents);
 
   return objectArrayToCSVString(eventsToDownload);
 };
