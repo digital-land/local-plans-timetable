@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid";
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 
@@ -8,6 +9,8 @@ import {
 } from "@lib/utils/timetable";
 import { PlanViewer } from "@lib/timetable-visualisation/PlanViewer";
 import { useFormContext } from "../../context/use-form-context";
+import { DevelopmentPlanTimetable } from "@lib/types/timetable";
+import { getFormattedDate } from "@lib/constants";
 
 export const ExportPage = () => {
   const {
@@ -16,6 +19,24 @@ export const ExportPage = () => {
     timetableEvents,
     loadedTimetableEvents,
   } = useFormContext();
+
+  const updatedTimetableEvents = useMemo<DevelopmentPlanTimetable[]>(() => {
+    return [
+      ...timetableEvents,
+      {
+        reference: uuidv4(),
+        name: "",
+        developmentPlan: "",
+        developmentPlanEvent: "timetable-updated",
+        eventDate: getFormattedDate(),
+        notes: "",
+        organisation: "",
+        entryDate: getFormattedDate(),
+        startDate: getFormattedDate(),
+        endDate: "",
+      },
+    ];
+  }, [timetableEvents]);
 
   const developmentPlanDownloadLink = useMemo(() => {
     const timetableCSV = resolveDevelopmentPlanCSV(
@@ -28,12 +49,12 @@ export const ExportPage = () => {
 
   const timetableEventsDownloadLink = useMemo(() => {
     const timetableCSV = resolveTimetableEventsCSV(
-      timetableEvents,
+      updatedTimetableEvents,
       loadedTimetableEvents
     );
 
     return `data:text/csv;charset=urf-8,${timetableCSV}`;
-  }, [timetableEvents, loadedTimetableEvents]);
+  }, [updatedTimetableEvents, loadedTimetableEvents]);
 
   return (
     <>
@@ -116,7 +137,7 @@ export const ExportPage = () => {
 
       <PlanViewer
         developmentPlan={developmentPlan}
-        timetableEvents={timetableEvents}
+        timetableEvents={updatedTimetableEvents}
       />
     </>
   );
