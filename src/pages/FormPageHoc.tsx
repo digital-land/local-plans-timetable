@@ -13,27 +13,28 @@ import { useFormContext } from "../context/use-form-context";
 import { useSequence } from "./use-sequence";
 import { PageRoute } from "../routes/routes";
 
+export type ValidateFormParams<P> = {
+  developmentPlan: DevelopmentPlan;
+  timetableEvents: DevelopmentPlanTimetable[];
+  statusChangeEvent: StatusChangeEvent | null;
+  statusHasChanged: boolean | null;
+  formProps: P;
+};
+
 export const FormPageHoC = <P extends Record<string, unknown>>(
   FormComponent: (
     props: P & { errors: ValidationErrorItem[] | undefined }
   ) => JSX.Element,
   formProps: P,
-  validatePage?: (
-    developmentPlan: DevelopmentPlan,
-    developmentPlanTimetable: DevelopmentPlanTimetable[],
-    statusChangeEvent:StatusChangeEvent | null,
-    statusHasChanged: boolean | null,
-    formProps: P
-  ) => ValidationErrorItem[]
+  validatePage?: (params: ValidateFormParams<P>) => ValidationErrorItem[]
 ) => {
   const InnerComponent = () => {
-
     const {
       developmentPlan,
       timetableEvents,
       statusChangeEvent,
       statusHasChanged,
-      userFlow
+      userFlow,
     } = useFormContext();
 
     const { previousPage, navigateNext } = useSequence(
@@ -43,13 +44,13 @@ export const FormPageHoC = <P extends Record<string, unknown>>(
     const [errors, setErrors] = useState<ValidationErrorItem[]>();
 
     const handleClick = () => {
-      const errors = validatePage?.(
+      const errors = validatePage?.({
         developmentPlan,
         timetableEvents,
         statusChangeEvent,
         statusHasChanged,
         formProps,
-      );
+      });
 
       if (errors && errors.length > 0) {
         setErrors(errors);

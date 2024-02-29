@@ -1,20 +1,13 @@
 import Joi, { ValidationErrorItem } from "joi";
-import { StatusChangeEvent } from "@lib/constants";
-import {
-  DevelopmentPlan,
-  DevelopmentPlanTimetable,
-} from "@lib/types/timetable";
+import { ValidateFormParams } from "../FormPageHoc";
 
 const statusChangeEventSchema = Joi.boolean().messages({
   "boolean.base": `Answer is required`,
 });
 
-export const validateUpdateTimetableStatus = (
-  _developmentPlan: DevelopmentPlan,
-  _developmentPlanEvents: DevelopmentPlanTimetable[],
-  _statusChangeEvent: StatusChangeEvent | null,
-  statusHasChanged: boolean | null
-) => {
+export const validateUpdateTimetableStatus = ({
+  statusHasChanged,
+}: ValidateFormParams<Record<string, never>>) => {
   const errors: ValidationErrorItem[] = [];
 
   const validationResult = statusChangeEventSchema.validate(statusHasChanged);

@@ -1,23 +1,20 @@
-import { DevelopmentPlan, DevelopmentPlanTimetable } from "@lib/types/timetable";
 import { ValidationErrorItem } from "joi";
-import { StagePageProps } from "./StagePage";
+import { ValidateFormParams } from "../FormPageHoc";
 import { eventSchema } from "../event-schema";
-import { StatusChangeEvent } from "@lib/constants";
+import { StagePageProps } from "./StagePage";
 
-export const validateTimetableStage = (
-  _developmentPlan: DevelopmentPlan,
-  developmentPlanEvents: DevelopmentPlanTimetable[],
-  _statusChangeEvent: StatusChangeEvent | null,
-  _statusHasChanged: boolean | null, 
-  formProps: StagePageProps
+export const validateTimetableStage = ({
+  timetableEvents,
+  formProps
+}: ValidateFormParams<StagePageProps>
 ) => {
   const { startEventKey, endEventKey } = formProps;
 
-  const startEvent = developmentPlanEvents.find(
+  const startEvent = timetableEvents.find(
     (e) => e.developmentPlanEvent === startEventKey
   );
 
-  const endEvent = developmentPlanEvents.find(
+  const endEvent = timetableEvents.find(
     (e) => e.developmentPlanEvent === endEventKey
   );
 

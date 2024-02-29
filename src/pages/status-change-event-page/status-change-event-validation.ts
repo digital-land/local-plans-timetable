@@ -1,9 +1,5 @@
 import Joi, { ValidationErrorItem } from "joi";
-import { StatusChangeEvent } from "@lib/constants";
-import {
-  DevelopmentPlan,
-  DevelopmentPlanTimetable,
-} from "@lib/types/timetable";
+import { ValidateFormParams } from "../FormPageHoc";
 import { eventSchema } from "../event-schema";
 
 const statusChangeEventSchema = eventSchema.concat(
@@ -14,11 +10,9 @@ const statusChangeEventSchema = eventSchema.concat(
   })
 );
 
-export const validateStatusChangeEvent = (
-  _developmentPlan: DevelopmentPlan,
-  _developmentPlanEvents: DevelopmentPlanTimetable[],
-  statusChangeEvent: StatusChangeEvent | null
-) => {
+export const validateStatusChangeEvent = ({
+  statusChangeEvent,
+}: ValidateFormParams<Record<string, never>>) => {
   const errors: ValidationErrorItem[] = [];
 
   if (!statusChangeEvent) {

@@ -1,20 +1,16 @@
-import {
-  DevelopmentPlan,
-  DevelopmentPlanTimetable,
-} from "@lib/types/timetable";
 import Joi, { ValidationErrorItem } from "joi";
 import { publishLDSEventKey } from "./PublishLDSPage";
 import { eventDateSchema } from "../event-schema";
+import { ValidateFormParams } from "../FormPageHoc";
 
 const schema = Joi.object({
   eventDate: eventDateSchema,
 });
 
-export const validatePublishLDSEvent = (
-  _developmentPlan: DevelopmentPlan,
-  developmentPlanEvents: DevelopmentPlanTimetable[]
-) => {
-  const publishLDSEvent = developmentPlanEvents.find(
+export const validatePublishLDSEvent = ({
+  timetableEvents,
+}: ValidateFormParams<Record<string, never>>) => {
+  const publishLDSEvent = timetableEvents.find(
     (e) => e.developmentPlanEvent === publishLDSEventKey
   );
 
