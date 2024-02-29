@@ -20,7 +20,7 @@ describe("StagePage", () => {
         <StagePage
           title={""}
           description={undefined}
-          startEventKey="plan-paused"
+          startEventKey="plan-submitted-for-examination"
         />
       );
     });
@@ -34,8 +34,8 @@ describe("StagePage", () => {
         <StagePage
           title={""}
           description={undefined}
-          startEventKey={"examination-hearing-start"}
-          endEventKey={"examination-hearing-end"}
+          startEventKey="examination-hearing-start"
+          endEventKey="examination-hearing-end"
         />
       );
     });
