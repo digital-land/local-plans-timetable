@@ -12,7 +12,7 @@ import { useFormContext } from "../../context/use-form-context";
 import { DevelopmentPlanTimetable } from "@lib/types/timetable";
 import { getFormattedDate } from "@lib/constants";
 
- export const ExportPage = () => {
+export const ExportPage = () => {
   const {
     developmentPlan,
     loadedDevelopmentPlan,
