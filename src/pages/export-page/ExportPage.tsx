@@ -19,6 +19,14 @@ export const ExportPage = () => {
     statusChangeEvent,
   } = useFormContext();
 
+  const allTimetableEvents = useMemo<DevelopmentPlanTimetable[]>(
+    () =>
+      !statusChangeEvent?.developmentPlanEvent
+        ? timetableEvents
+        : [...timetableEvents, statusChangeEvent as DevelopmentPlanTimetable],
+    [statusChangeEvent, timetableEvents]
+  );
+
   const developmentPlanDownloadLink = useMemo(() => {
     const timetableCSV = resolveDevelopmentPlanCSV(
       developmentPlan,
@@ -30,14 +38,12 @@ export const ExportPage = () => {
 
   const timetableEventsDownloadLink = useMemo(() => {
     const timetableCSV = resolveTimetableEventsCSV(
-      statusChangeEvent
-        ? [...timetableEvents, statusChangeEvent as DevelopmentPlanTimetable]
-        : timetableEvents,
+      allTimetableEvents,
       loadedTimetableEvents
     );
 
     return `data:text/csv;charset=urf-8,${timetableCSV}`;
-  }, [statusChangeEvent, timetableEvents, loadedTimetableEvents]);
+  }, [allTimetableEvents, loadedTimetableEvents]);
 
   return (
     <>
@@ -120,14 +126,7 @@ export const ExportPage = () => {
 
       <PlanViewer
         developmentPlan={developmentPlan}
-        timetableEvents={
-          statusChangeEvent
-            ? [
-                ...timetableEvents,
-                statusChangeEvent as DevelopmentPlanTimetable,
-              ]
-            : timetableEvents
-        }
+        timetableEvents={allTimetableEvents}
       />
     </>
   );
