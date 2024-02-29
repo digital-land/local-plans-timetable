@@ -58,13 +58,8 @@ export const resolveTimetableEventsCSV = (
     }
   });
 
-  const newEvents = JSON.parse(
-    JSON.stringify(
-      timetableEvents.filter(
-        (event) =>
-          !eventsToDownload.some((e) => e.reference === event.reference)
-      )
-    )
+  const newEvents = timetableEvents.filter(
+    (event) => !eventsToDownload.some((e) => e.reference === event.reference)
   );
 
   eventsToDownload.push(...newEvents);
