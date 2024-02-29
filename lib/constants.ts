@@ -44,6 +44,7 @@ export const getTimetableEventName = (key: TimetableEventKey) =>
   eventKeyToNameMap[key];
 
 export const getFormattedDate = () => new Date().toISOString().split("T")[0];
+export const getFormattedLongDate = () => new Date().toISOString();
 
 export const DEFAULT_DEVELOPMENT_PLAN: DevelopmentPlan = {
   reference: uuidv4(),
@@ -67,8 +68,8 @@ export const DEFAULT_TIMETABLE_EVENTS = developmentPlanTimetableEvents.map(
     eventDate: "",
     notes: "",
     organisation: "",
-    entryDate: getFormattedDate(),
-    startDate: getFormattedDate(),
+    entryDate: getFormattedLongDate(),
+    startDate: getFormattedLongDate(),
     endDate: "",
   })
 );
