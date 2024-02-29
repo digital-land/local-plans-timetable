@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid";
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 
@@ -8,8 +9,10 @@ import {
 } from "@lib/utils/timetable";
 import { PlanViewer } from "@lib/timetable-visualisation/PlanViewer";
 import { useFormContext } from "../../context/use-form-context";
+import { DevelopmentPlanTimetable } from "@lib/types/timetable";
+import { getFormattedDate } from "@lib/constants";
 
-export const ExportPage = () => {
+ export const ExportPage = () => {
   const {
     developmentPlan,
     loadedDevelopmentPlan,
@@ -17,12 +20,22 @@ export const ExportPage = () => {
     loadedTimetableEvents,
   } = useFormContext();
 
-  const updatedTimetableEvents = useMemo(() => {
-    return timetableEvents.map((x) =>
-      x.developmentPlanEvent == "timetable-updated"
-        ? { ...x, eventDate: new Date().toISOString() }
-        : x
-    );
+  const updatedTimetableEvents = useMemo<DevelopmentPlanTimetable[]>(() => {
+    return [
+      ...timetableEvents,
+      {
+        reference: uuidv4(),
+        name: "",
+        developmentPlan: "",
+        developmentPlanEvent: "timetable-updated",
+        eventDate: getFormattedDate(),
+        notes: "",
+        organisation: "",
+        entryDate: getFormattedDate(),
+        startDate: getFormattedDate(),
+        endDate: "",
+      },
+    ];
   }, [timetableEvents]);
 
   const developmentPlanDownloadLink = useMemo(() => {
