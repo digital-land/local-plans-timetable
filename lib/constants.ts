@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { DevelopmentPlan } from "./types/timetable";
 
+// TODO: When we align the visualisation to the design, we won't need the event names here
 export const developmentPlanTimetableEvents = [
   { name: "Timetable updated", key: "timetable-updated" },
   {
@@ -27,6 +28,10 @@ export const developmentPlanTimetableEvents = [
   {
     name: "Plan found unsound",
     key: "plan-found-unsound",
+  },
+  {
+    name: "Plan not adopted",
+    key: "plan-not-adopted",
   },
 ] as const;
 
@@ -58,8 +63,18 @@ export const DEFAULT_DEVELOPMENT_PLAN: DevelopmentPlan = {
   startDate: "",
 };
 
-export const DEFAULT_TIMETABLE_EVENTS = developmentPlanTimetableEvents.map(
-  ({ key }) => ({
+const eventsToExclude = new Set<TimetableEventKey>([
+  "timetable-updated",
+  "plan-paused",
+  "plan-withdrawn",
+  "plan-found-sound",
+  "plan-found-unsound",
+  "plan-not-adopted",
+]);
+
+export const DEFAULT_TIMETABLE_EVENTS = developmentPlanTimetableEvents
+  .filter(({ key }) => !eventsToExclude.has(key))
+  .map(({ key }) => ({
     reference: uuidv4(),
     name: "",
     developmentPlan: "",
@@ -70,5 +85,4 @@ export const DEFAULT_TIMETABLE_EVENTS = developmentPlanTimetableEvents.map(
     entryDate: getFormattedDate(),
     startDate: getFormattedDate(),
     endDate: "",
-  })
-);
+  }));
