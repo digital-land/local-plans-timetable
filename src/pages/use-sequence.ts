@@ -1,27 +1,40 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { PageRoute, Journey } from "../routes/routes";
 import { stages } from "./stages";
+import { useMemo } from "react";
 
-const createFlowSequence = [
-  PageRoute.LPA,
-  PageRoute.Title,
-  PageRoute.Description,
-  PageRoute.PublishLocalDevelopmentScheme,
-  ...stages.map((stage) => stage.key),
-  PageRoute.Export,
-];
+const routesOnCondition = (condition: boolean, ...routes: PageRoute[]) =>
+  condition ? routes : [];
 
-const editFlowSequence = [
-  PageRoute.UploadTimetable,
-  PageRoute.LPA,
-  PageRoute.Title,
-  PageRoute.Description,
-  PageRoute.UpdateTimetableStatus,
-  PageRoute.StatusChangeEvent,
-  PageRoute.PublishLocalDevelopmentScheme,
-  ...stages.map((stage) => stage.key),
-  PageRoute.Export,
-];
+const getSequence = (
+  userJourney: Journey | null,
+  timetableStatusHasChanged?: boolean
+) => {
+  if (!userJourney) {
+    return [];
+  }
+
+  return [
+    ...routesOnCondition(
+      userJourney === Journey.Update,
+      PageRoute.UploadTimetable
+    ),
+    PageRoute.LPA,
+    PageRoute.Title,
+    PageRoute.Description,
+    ...routesOnCondition(
+      userJourney === Journey.Update,
+      PageRoute.UpdateTimetableStatus
+    ),
+    ...routesOnCondition(
+      userJourney === Journey.Update && !!timetableStatusHasChanged,
+      PageRoute.StatusChangeEvent
+    ),
+    PageRoute.PublishLocalDevelopmentScheme,
+    ...stages.map((stage) => stage.key),
+    PageRoute.Export,
+  ];
+};
 
 export const useSequence = (
   userJourney: Journey | null,
@@ -30,12 +43,10 @@ export const useSequence = (
   const navigate = useNavigate();
   const { pathname } = useLocation() as { pathname: PageRoute };
 
-  const sequence =
-    userJourney == Journey.Create
-      ? createFlowSequence
-      : timetableStatusHasChanged
-      ? editFlowSequence
-      : editFlowSequence.filter((page) => page !== PageRoute.StatusChangeEvent);
+  const sequence = useMemo(
+    () => getSequence(userJourney, timetableStatusHasChanged),
+    [userJourney, timetableStatusHasChanged]
+  );
 
   const currentPageIndex = sequence.indexOf(pathname);
 
