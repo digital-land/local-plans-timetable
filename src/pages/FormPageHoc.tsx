@@ -43,7 +43,8 @@ export const FormPageHoC = <P extends Record<string, unknown>>(
     );
     const [errors, setErrors] = useState<ValidationErrorItem[]>();
 
-    const handleClick = () => {
+    const handleClick = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
       const errors = validatePage?.({
         developmentPlan,
         timetableEvents,
@@ -72,8 +73,10 @@ export const FormPageHoC = <P extends Record<string, unknown>>(
         <Link to={previousPage} className="govuk-back-link">
           Back
         </Link>
-        <FormComponent {...formProps} errors={errors} />
-        {navigateNext && <Button onClick={handleClick}>Continue</Button>}
+        <form onSubmit={handleClick}>
+          <FormComponent {...formProps} errors={errors} />
+          {navigateNext && <Button type="submit">Continue</Button>}
+        </form>
       </>
     );
   };

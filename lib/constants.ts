@@ -60,7 +60,7 @@ const eventKeyToNameMap = developmentPlanTimetableEvents.reduce<
 export const getTimetableEventName = (key: TimetableEventKey) =>
   eventKeyToNameMap[key];
 
-export const getFormattedDate = () => new Date().toISOString().split("T")[0];
+export const getFormattedDate = () => new Date().toISOString();
 
 export const DEFAULT_DEVELOPMENT_PLAN: DevelopmentPlan = {
   reference: uuidv4(),
@@ -99,6 +99,7 @@ export const getDefaultTimetableEvent = (): Omit<
   endDate: "",
 });
 
+//These dates will be set on start of form rather than end (opposite to updated events)
 export const DEFAULT_TIMETABLE_EVENTS = developmentPlanTimetableEvents
   .filter(({ key }) => !eventsToExclude.has(key))
   .map(({ key }) => ({

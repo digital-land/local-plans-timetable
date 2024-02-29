@@ -1,13 +1,15 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
+import { getFormattedDate } from "@lib/constants";
 import { Button } from "@lib/gds-components";
+import { PlanViewer } from "@lib/timetable-visualisation/PlanViewer";
+import { DevelopmentPlanTimetable } from "@lib/types/timetable";
 import {
   resolveDevelopmentPlanCSV,
   resolveTimetableEventsCSV,
 } from "@lib/utils/timetable";
-import { DevelopmentPlanTimetable } from "@lib/types/timetable";
-import { PlanViewer } from "@lib/timetable-visualisation/PlanViewer";
 import { useFormContext } from "../../context/use-form-context";
 
 export const ExportPage = () => {
@@ -19,13 +21,26 @@ export const ExportPage = () => {
     statusChangeEvent,
   } = useFormContext();
 
-  const allTimetableEvents = useMemo<DevelopmentPlanTimetable[]>(
-    () =>
-      !statusChangeEvent?.developmentPlanEvent
-        ? timetableEvents
-        : [...timetableEvents, statusChangeEvent as DevelopmentPlanTimetable],
-    [statusChangeEvent, timetableEvents]
-  );
+  const updatedTimetableEvents = useMemo<DevelopmentPlanTimetable[]>(() => {
+    return [
+      ...timetableEvents,
+      ...(statusChangeEvent?.developmentPlanEvent
+        ? [statusChangeEvent as DevelopmentPlanTimetable]
+        : []),
+      {
+        reference: uuidv4(),
+        name: "",
+        developmentPlan: "",
+        developmentPlanEvent: "timetable-updated",
+        eventDate: getFormattedDate(),
+        notes: "",
+        organisation: "",
+        entryDate: getFormattedDate(),
+        startDate: getFormattedDate(),
+        endDate: "",
+      },
+    ];
+  }, [statusChangeEvent, timetableEvents]);
 
   const developmentPlanDownloadLink = useMemo(() => {
     const timetableCSV = resolveDevelopmentPlanCSV(
@@ -38,12 +53,12 @@ export const ExportPage = () => {
 
   const timetableEventsDownloadLink = useMemo(() => {
     const timetableCSV = resolveTimetableEventsCSV(
-      allTimetableEvents,
+      updatedTimetableEvents,
       loadedTimetableEvents
     );
 
     return `data:text/csv;charset=urf-8,${timetableCSV}`;
-  }, [allTimetableEvents, loadedTimetableEvents]);
+  }, [updatedTimetableEvents, loadedTimetableEvents]);
 
   return (
     <>
@@ -126,7 +141,7 @@ export const ExportPage = () => {
 
       <PlanViewer
         developmentPlan={developmentPlan}
-        timetableEvents={allTimetableEvents}
+        timetableEvents={updatedTimetableEvents}
       />
     </>
   );
