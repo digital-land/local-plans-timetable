@@ -40,7 +40,7 @@ export const StagePage = ({
         className="govuk-heading-xl govuk-!-margin-top-6"
         data-testid="form-title"
       >
-        {title} Stage
+        {title}
         <span className="govuk-caption-m govuk-!-margin-top-2">
           {description}
         </span>
