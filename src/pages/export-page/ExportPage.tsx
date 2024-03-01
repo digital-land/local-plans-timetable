@@ -1,16 +1,15 @@
-import { v4 as uuidv4 } from "uuid";
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 
+import { getDefaultTimetableEvent, getFormattedDate } from "@lib/constants";
 import { Button } from "@lib/gds-components";
+import { PlanViewer } from "@lib/timetable-visualisation/PlanViewer";
+import { DevelopmentPlanTimetable } from "@lib/types/timetable";
 import {
   resolveDevelopmentPlanCSV,
   resolveTimetableEventsCSV,
 } from "@lib/utils/timetable";
-import { PlanViewer } from "@lib/timetable-visualisation/PlanViewer";
 import { useFormContext } from "../../context/use-form-context";
-import { DevelopmentPlanTimetable } from "@lib/types/timetable";
-import { getFormattedDate } from "@lib/constants";
 
 export const ExportPage = () => {
   const {
@@ -18,29 +17,28 @@ export const ExportPage = () => {
     loadedDevelopmentPlan,
     timetableEvents,
     loadedTimetableEvents,
+    statusChangeEvent,
   } = useFormContext();
 
   const updatedTimetableEvents = useMemo<DevelopmentPlanTimetable[]>(() => {
+    const timetableUpdatedEvent = loadedTimetableEvents?.find(
+      ({ developmentPlanEvent }) => developmentPlanEvent === "timetable-updated"
+    );
     return [
       ...timetableEvents,
+      ...(statusChangeEvent?.developmentPlanEvent
+        ? [statusChangeEvent as DevelopmentPlanTimetable]
+        : []),
       {
-        reference:
-          loadedTimetableEvents?.find(
-            ({ developmentPlanEvent }) =>
-              developmentPlanEvent === "timetable-updated"
-          )?.reference ?? uuidv4(),
-        name: "",
-        developmentPlan: "",
+        ...getDefaultTimetableEvent(),
         developmentPlanEvent: "timetable-updated",
+        ...(timetableUpdatedEvent && {
+          reference: timetableUpdatedEvent.reference,
+        }),
         eventDate: getFormattedDate(),
-        notes: "",
-        organisation: "",
-        entryDate: getFormattedDate(),
-        startDate: getFormattedDate(),
-        endDate: "",
       },
     ];
-  }, [timetableEvents, loadedTimetableEvents]);
+  }, [loadedTimetableEvents, statusChangeEvent, timetableEvents]);
 
   const developmentPlanDownloadLink = useMemo(() => {
     const timetableCSV = resolveDevelopmentPlanCSV(

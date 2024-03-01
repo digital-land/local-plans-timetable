@@ -1,33 +1,52 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { PageRoute, Journey } from "../routes/routes";
 import { stages } from "./stages";
+import { useMemo } from "react";
 
-const createFlowSequence = [
-  PageRoute.LPA,
-  PageRoute.Title,
-  PageRoute.Description,
-  PageRoute.PublishLocalDevelopmentScheme,
-  ...stages.map((stage) => stage.key),
-  PageRoute.Export,
-];
+const routesOnCondition = (condition: boolean, ...routes: PageRoute[]) =>
+  condition ? routes : [];
 
-const editFlowSequence = [
-  PageRoute.UploadTimetable,
-  PageRoute.LPA,
-  PageRoute.Title,
-  PageRoute.Description,
-  // missing pages
-  PageRoute.PublishLocalDevelopmentScheme,
-  ...stages.map((stage) => stage.key),
-  PageRoute.Export,
-];
+const getSequence = (
+  userJourney: Journey | null,
+  timetableStatusHasChanged?: boolean
+) => {
+  if (!userJourney) {
+    return [];
+  }
 
-export const useSequence = (userJourney: Journey | null) => {
+  return [
+    ...routesOnCondition(
+      userJourney === Journey.Update,
+      PageRoute.UploadTimetable
+    ),
+    PageRoute.LPA,
+    PageRoute.Title,
+    PageRoute.Description,
+    ...routesOnCondition(
+      userJourney === Journey.Update,
+      PageRoute.UpdateTimetableStatus
+    ),
+    ...routesOnCondition(
+      userJourney === Journey.Update && !!timetableStatusHasChanged,
+      PageRoute.StatusChangeEvent
+    ),
+    PageRoute.PublishLocalDevelopmentScheme,
+    ...stages.map((stage) => stage.key),
+    PageRoute.Export,
+  ];
+};
+
+export const useSequence = (
+  userJourney: Journey | null,
+  timetableStatusHasChanged?: boolean
+) => {
   const navigate = useNavigate();
   const { pathname } = useLocation() as { pathname: PageRoute };
 
-  const sequence =
-    userJourney == Journey.Create ? createFlowSequence : editFlowSequence;
+  const sequence = useMemo(
+    () => getSequence(userJourney, timetableStatusHasChanged),
+    [userJourney, timetableStatusHasChanged]
+  );
 
   const currentPageIndex = sequence.indexOf(pathname);
 

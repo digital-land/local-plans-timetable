@@ -22,6 +22,10 @@ export const DateInput = ({
 }: DateInputProps) => {
   const [year = "", month = "", day = ""] = value.split("-");
 
+  const handleChange = (value: string) => {
+    onChange(value.replace(/-/g, "").length ? value : "");
+  };
+
   return (
     <div
       className={cn("govuk-form-group", { "govuk-form-group--error": error })}
@@ -37,7 +41,7 @@ export const DateInput = ({
           </legend>
         )}
         {error && (
-          <p id="passport-issued-error" className="govuk-error-message">
+          <p className="govuk-error-message">
             <span className="govuk-visually-hidden">Error:</span> {error}
           </p>
         )}
@@ -62,11 +66,11 @@ export const DateInput = ({
                   inputMode="numeric"
                   value={day}
                   onChange={(e) =>
-                    onChange(`${year}-${month}-${e.target.value}`)
+                    handleChange(`${year}-${month}-${e.target.value}`)
                   }
                   onBlur={(e) =>
                     e.target.value.length == 1 &&
-                    onChange(`${year}-${month}-${"0" + e.target.value}`)
+                    handleChange(`${year}-${month}-${"0" + e.target.value}`)
                   }
                   maxLength={2}
                 />
@@ -89,13 +93,13 @@ export const DateInput = ({
                 inputMode="numeric"
                 value={month}
                 onChange={(e) =>
-                  onChange(
+                  handleChange(
                     `${year}-${e.target.value}${withDay ? `-${day}` : ""}`
                   )
                 }
                 onBlur={(e) =>
                   e.target.value.length == 1 &&
-                  onChange(
+                  handleChange(
                     `${year}-${"0" + e.target.value}${withDay ? `-${day}` : ""}`
                   )
                 }
@@ -119,7 +123,7 @@ export const DateInput = ({
                 inputMode="numeric"
                 value={year}
                 onChange={(e) =>
-                  onChange(
+                  handleChange(
                     `${e.target.value}-${month}${withDay ? `-${day}` : ""}`
                   )
                 }

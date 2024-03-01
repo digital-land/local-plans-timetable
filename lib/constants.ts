@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
-import { DevelopmentPlan } from "./types/timetable";
+import { DevelopmentPlan, DevelopmentPlanTimetable } from "./types/timetable";
 
 // TODO: When we align the visualisation to the design, we won't need the event names here
 export const developmentPlanTimetableEvents = [
@@ -38,6 +38,18 @@ export const developmentPlanTimetableEvents = [
 export type TimetableEventKey =
   (typeof developmentPlanTimetableEvents)[number]["key"];
 
+export type StatusChangeEventsKey = Extract<
+  TimetableEventKey,
+  "plan-found-unsound" | "plan-withdrawn" | "plan-paused" | "plan-not-adopted"
+>;
+
+export type StatusChangeEvent = Omit<
+  DevelopmentPlanTimetable,
+  "developmentPlanEvent"
+> & {
+  developmentPlanEvent?: StatusChangeEventsKey;
+};
+
 const eventKeyToNameMap = developmentPlanTimetableEvents.reduce<
   Record<TimetableEventKey, string>
 >(
@@ -72,18 +84,25 @@ const eventsToExclude = new Set<TimetableEventKey>([
   "plan-not-adopted",
 ]);
 
+export const getDefaultTimetableEvent = (): Omit<
+  DevelopmentPlanTimetable,
+  "developmentPlanEvent"
+> => ({
+  reference: uuidv4(),
+  name: "",
+  developmentPlan: "",
+  eventDate: "",
+  notes: "",
+  organisation: "",
+  entryDate: getFormattedDate(),
+  startDate: getFormattedDate(),
+  endDate: "",
+});
+
 //These dates will be set on start of form rather than end (opposite to updated events)
 export const DEFAULT_TIMETABLE_EVENTS = developmentPlanTimetableEvents
   .filter(({ key }) => !eventsToExclude.has(key))
   .map(({ key }) => ({
-    reference: uuidv4(),
-    name: "",
-    developmentPlan: "",
     developmentPlanEvent: key,
-    eventDate: "",
-    notes: "",
-    organisation: "",
-    entryDate: getFormattedDate(),
-    startDate: getFormattedDate(),
-    endDate: "",
+    ...getDefaultTimetableEvent(),
   }));

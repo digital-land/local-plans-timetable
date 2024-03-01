@@ -4,3 +4,7 @@ export { DescriptionPage } from "./description-page/DescriptionPage";
 export { StagePage } from "./stage-page/StagePage";
 export { PublishLDSPage } from "./publish-LDS-page/PublishLDSPage";
 export { UploadTimetablePage } from "./upload-timetable-page/UploadTimetablePage";
+export { UpdateTimetableStatusPage } from "./update-timetable-status-page/UpdateTimetableStatusPage";
+export { StatusChangeEventPage } from "./status-change-event-page/StatusChangeEventPage";
+export { CreateTimetablePage } from "./create-timetable-page/CreateTimetablePage";
+export { ExportPage } from "./export-page/ExportPage";

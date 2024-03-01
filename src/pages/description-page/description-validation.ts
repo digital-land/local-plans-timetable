@@ -1,19 +1,22 @@
-import { DevelopmentPlan } from "@lib/types/timetable";
 import Joi, { ValidationErrorItem } from "joi";
+import { ValidateFormParams } from "../FormPageHoc";
 
-const descriptionSchema = Joi.string().max(100).messages({
-  "string.max": `Description must be less must be less than or equal to 100 characters long`,
+const descriptionSchema = Joi.string().max(400).messages({
+  "string.max": `Description must be less than or equal to 400 characters long`,
   "string.empty": "Description is not allowed to be empty",
 });
 
-export const validateDescription = (
-  developmentPlan: DevelopmentPlan
-) => {
+export const validateDescription = ({
+  developmentPlan,
+}: ValidateFormParams<Record<string, never>>) => {
   const errors: ValidationErrorItem[] = [];
 
-  const validationResult = descriptionSchema.validate(developmentPlan.description, {
-    abortEarly: false,
-  });
+  const validationResult = descriptionSchema.validate(
+    developmentPlan.description,
+    {
+      abortEarly: false,
+    }
+  );
 
   if (validationResult.error) {
     errors.push(...validationResult.error.details);
