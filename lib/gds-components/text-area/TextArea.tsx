@@ -8,7 +8,7 @@ interface TextAreaProps {
   onChange: (value: string) => void;
   value: string;
   id: string;
-  hint?: string;
+  hint?: string | number;
   error?: string;
 }
 
@@ -42,9 +42,14 @@ export const TextArea = ({
         onChange={(e) => onChange(e.target.value)}
         id={id}
       />
-      {hint && (
+      {typeof hint == "string" && (
         <div id="more-detail-hint" className="govuk-hint">
           {hint}
+        </div>
+      )}
+      {typeof hint == "number" && (
+        <div id="more-detail-hint" className="govuk-hint">
+          You have {hint - value.length} characters remaining
         </div>
       )}
     </div>

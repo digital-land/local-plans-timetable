@@ -85,7 +85,7 @@ export const StagePage = ({
           updateTimetableEvent(startEventKey, "notes", value)
         }
         value={startEvent.notes}
-        hint="You can enter up to 100 characters"
+        hint={100}
         error={
           errors?.find(
             (error) =>
