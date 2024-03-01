@@ -1,8 +1,7 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
 
-import { getFormattedDate } from "@lib/constants";
+import { getDefaultTimetableEvent, getFormattedDate } from "@lib/constants";
 import { Button } from "@lib/gds-components";
 import { PlanViewer } from "@lib/timetable-visualisation/PlanViewer";
 import { DevelopmentPlanTimetable } from "@lib/types/timetable";
@@ -22,26 +21,21 @@ export const ExportPage = () => {
   } = useFormContext();
 
   const updatedTimetableEvents = useMemo<DevelopmentPlanTimetable[]>(() => {
+    const timetableUpdatedEvent = loadedTimetableEvents?.find(
+      ({ developmentPlanEvent }) => developmentPlanEvent === "timetable-updated"
+    );
     return [
       ...timetableEvents,
       ...(statusChangeEvent?.developmentPlanEvent
         ? [statusChangeEvent as DevelopmentPlanTimetable]
         : []),
       {
-        reference:
-          loadedTimetableEvents?.find(
-            ({ developmentPlanEvent }) =>
-              developmentPlanEvent === "timetable-updated"
-          )?.reference ?? uuidv4(),
-        name: "",
-        developmentPlan: "",
+        ...getDefaultTimetableEvent(),
         developmentPlanEvent: "timetable-updated",
+        ...(timetableUpdatedEvent && {
+          reference: timetableUpdatedEvent.reference,
+        }),
         eventDate: getFormattedDate(),
-        notes: "",
-        organisation: "",
-        entryDate: getFormattedDate(),
-        startDate: getFormattedDate(),
-        endDate: "",
       },
     ];
   }, [loadedTimetableEvents, statusChangeEvent, timetableEvents]);
