@@ -1,9 +1,9 @@
 import { Outlet } from "react-router";
 
 import { Header, Footer } from "@lib/gds-components";
-import { PageRoute } from "./routes";
 import { FormProvider } from "../context/FormContext";
-import ScrollToTop from "./ScrollToTop";
+import { PageRoute } from "./routes";
+import {ScrollToTop} from "./ScrollToTop";
 
 export const Page = () => (
   <>
