@@ -71,15 +71,12 @@ export const PlanViewer = ({
 
   return (
     <div className="govuk-body" data-testid="plan-viewer">
-      <h2 className="govuk-heading-l">{name}</h2>
+      <h2 className="govuk-heading-l">{name} timetable</h2>
       <p className="govuk-body-l">{description}</p>
       <hr />
       <h3 className="govuk-table__caption govuk-table__caption--l">
         Timetable
       </h3>
-      <p>{`Published: ${toDefaultLocalDateString(
-        publishedEvent.eventDate
-      )}`}</p>
       {updatedEvent && (
         <p>{`Last updated: ${toDefaultLocalDateString(
           updatedEvent.eventDate
