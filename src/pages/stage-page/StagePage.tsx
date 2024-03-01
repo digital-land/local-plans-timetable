@@ -89,6 +89,13 @@ export const StagePage = ({
         }
         value={startEvent.notes}
         hint="You can enter up to 100 characters"
+        error={
+          errors?.find(
+            (error) =>
+              error.path[0] === startEvent.developmentPlanEvent &&
+              error.path[1] === "notes"
+          )?.message
+        }
       />
     </>
   );
