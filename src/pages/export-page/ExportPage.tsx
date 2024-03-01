@@ -28,7 +28,11 @@ export const ExportPage = () => {
         ? [statusChangeEvent as DevelopmentPlanTimetable]
         : []),
       {
-        reference: uuidv4(),
+        reference:
+          loadedTimetableEvents?.find(
+            ({ developmentPlanEvent }) =>
+              developmentPlanEvent === "timetable-updated"
+          )?.reference ?? uuidv4(),
         name: "",
         developmentPlan: "",
         developmentPlanEvent: "timetable-updated",
@@ -40,7 +44,7 @@ export const ExportPage = () => {
         endDate: "",
       },
     ];
-  }, [statusChangeEvent, timetableEvents]);
+  }, [loadedTimetableEvents, statusChangeEvent, timetableEvents]);
 
   const developmentPlanDownloadLink = useMemo(() => {
     const timetableCSV = resolveDevelopmentPlanCSV(

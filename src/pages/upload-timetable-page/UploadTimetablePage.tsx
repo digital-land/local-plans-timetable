@@ -18,47 +18,58 @@ export const UploadTimetablePage = (): JSX.Element => {
     setLoadedDevelopmentPlan,
   } = useFormContext();
 
-  const handleDevelopmentPlanUpload = useCallback((file: File) => {
-    reader.onload = (event) => {
-      const csvString = event.target?.result?.toString();
+  const handleDevelopmentPlanUpload = useCallback(
+    (file: File) => {
+      reader.onload = (event) => {
+        const csvString = event.target?.result?.toString();
 
-      if (csvString) {
-        const developmentPlan = fromCSVString<DevelopmentPlan>(csvString);
-        setLoadedDevelopmentPlan(developmentPlan);
-        // This assumes the last row is the current row
-        setDevelopmentPlan(developmentPlan.slice(-1)[0]);
-      }
-    };
+        if (csvString) {
+          const developmentPlan = fromCSVString<DevelopmentPlan>(csvString);
+          setLoadedDevelopmentPlan(developmentPlan);
+          // This assumes the last row is the current row
+          setDevelopmentPlan(developmentPlan.slice(-1)[0]);
+        }
+      };
 
-    reader.readAsText(file);
-  }, [setDevelopmentPlan, setLoadedDevelopmentPlan]);
+      reader.readAsText(file);
+    },
+    [setDevelopmentPlan, setLoadedDevelopmentPlan]
+  );
 
-  const handleTimetableUpload = useCallback((file: File) => {
-    reader.onload = (event) => {
-      const csvString = event.target?.result?.toString();
+  const handleTimetableUpload = useCallback(
+    (file: File) => {
+      reader.onload = (event) => {
+        const csvString = event.target?.result?.toString();
 
-      if (csvString) {
-        const loadedEvents = fromCSVString<DevelopmentPlanTimetable>(csvString);
-        setLoadedTimetableEvents(loadedEvents);
-        setTimetableEvents(
-          loadedEvents
-            // This assumes any row with an end date is invalid
-            .filter((event) => !event.endDate)
-            .sort(
-              (a, b) =>
-                developmentPlanTimetableEvents.findIndex(
-                  (s) => s.key === a.developmentPlanEvent
-                ) -
-                developmentPlanTimetableEvents.findIndex(
-                  (s) => s.key === b.developmentPlanEvent
-                )
-            )
-        );
-      }
-    };
+        if (csvString) {
+          const loadedEvents =
+            fromCSVString<DevelopmentPlanTimetable>(csvString);
+          setLoadedTimetableEvents(loadedEvents);
+          setTimetableEvents(
+            loadedEvents
+              // This assumes any row with an end date is invalid
+              .filter(
+                (event) =>
+                  !event.endDate &&
+                  event.developmentPlanEvent !== "timetable-updated"
+              )
+              .sort(
+                (a, b) =>
+                  developmentPlanTimetableEvents.findIndex(
+                    (s) => s.key === a.developmentPlanEvent
+                  ) -
+                  developmentPlanTimetableEvents.findIndex(
+                    (s) => s.key === b.developmentPlanEvent
+                  )
+              )
+          );
+        }
+      };
 
-    reader.readAsText(file);
-  }, [setLoadedTimetableEvents, setTimetableEvents]);
+      reader.readAsText(file);
+    },
+    [setLoadedTimetableEvents, setTimetableEvents]
+  );
 
   return (
     <>
