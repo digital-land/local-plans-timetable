@@ -50,7 +50,11 @@ export const StatusChangeEventPage = ({
           How has the plan changed, you need to follow legal requirements for
           showing <br />
           up to date information. You can read more about the
-          <a href={""}>
+          <a
+            href="https://www.legislation.gov.uk/ukpga/2004/5/section/15"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             requirements in the <br />
             Planning and Compulsory Purchase Act 2004, Section 15 Regulation 18
             on <br />
