@@ -1,14 +1,15 @@
+import { useMemo } from "react";
+
 import { getTimetableEventName } from "@lib/constants";
 import { Tag } from "@lib/gds-components";
 import {
   getStageProgress,
   toDefaultLocalDateString,
 } from "@lib/utils/timetable";
-import { stages } from "../../src/pages/stages";
 import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
 
 import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
-import { useMemo } from "react";
+import { stages } from "./stages";
 
 type PlanViewerProps = {
   developmentPlan: DevelopmentPlan;
