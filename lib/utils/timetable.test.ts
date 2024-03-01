@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
 import {
+  getStageProgress,
   resolveDevelopmentPlanCSV,
   resolveTimetableEventsCSV,
 } from "./timetable";
@@ -417,11 +418,9 @@ const planTestCases: PlanTestCase[] = [
   },
 ];
 
-beforeAll(()=>{
-  jest
-  .useFakeTimers()
-  .setSystemTime(new Date(currentDate));
-})
+beforeAll(() => {
+  jest.useFakeTimers().setSystemTime(new Date(currentDate));
+});
 
 describe("resolveTimetableEventsCSV", () => {
   test.each(eventsTestCases)("returns the correct CSV - $name", (testCase) => {
@@ -449,5 +448,69 @@ describe("resolveDevelopmentPlanCSV", () => {
     );
 
     expect(csv).toBe(testCase.expectedCSV);
+  });
+});
+
+describe("getStageProgress", () => {
+  test("returns IN PROGRESS when startDate is current date", () => {
+    const startDate = new Date();
+
+    const progress = getStageProgress(startDate.toISOString());
+
+    expect(progress).toBe("IN PROGRESS");
+  });
+
+  test("returns NOT STARTED when startDate is in the future", () => {
+    const startDate = new Date();
+
+    startDate.setMonth(startDate.getMonth() + 1);
+
+    const progress = getStageProgress(startDate.toISOString());
+
+    expect(progress).toBe("NOT STARTED");
+  });
+
+  test("returns FINISHED when startDate is in the past and there is no endDate", () => {
+    const startDate = new Date();
+
+    startDate.setMonth(startDate.getMonth() - 1);
+
+    const progress = getStageProgress(startDate.toISOString());
+
+    expect(progress).toBe("FINISHED");
+  });
+
+  test("returns IN PROGRESS when startDate is in the past and endDate is in the future date", () => {
+    const startDate = new Date();
+
+    startDate.setMonth(startDate.getMonth() - 1);
+
+    const endDate = new Date();
+
+    endDate.setMonth(startDate.getMonth() + 1);
+
+    const progress = getStageProgress(
+      startDate.toISOString(),
+      endDate.toISOString()
+    );
+
+    expect(progress).toBe("IN PROGRESS");
+  });
+
+  test("returns FINISHED when endDate date is in the past", () => {
+    const startDate = new Date();
+
+    startDate.setMonth(startDate.getMonth() - 2);
+
+    const endDate = new Date();
+
+    endDate.setMonth(startDate.getMonth() - 2);
+
+    const progress = getStageProgress(
+      startDate.toISOString(),
+      endDate.toISOString()
+    );
+
+    expect(progress).toBe("FINISHED");
   });
 });
