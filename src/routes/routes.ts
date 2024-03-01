@@ -10,10 +10,10 @@ export enum PageRoute {
   Submission = "/submission",
   IndependentExamination = "/independent-examination-stage",
   PlanAdopted = "/plan-adopted",
-  UploadTimetable = "/upload-timetable", // TBC
+  UploadTimetable = "/upload-your-timetable",
   Export = "/export-your-timetable",
-  UpdateTimetableStatus = "/update-timetable-status", // TBC
-  StatusChangeEvent = "/status-change-reason", // TBC
+  UpdateTimetableStatus = "/update-your-timetable-status",
+  StatusChangeEvent = "/about-the-status-change",
 }
 
 export enum Journey {
