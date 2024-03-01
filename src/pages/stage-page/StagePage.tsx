@@ -40,7 +40,7 @@ export const StagePage = ({
         className="govuk-heading-xl govuk-!-margin-top-6"
         data-testid="form-title"
       >
-        {title} Stage
+        {title}
         <span className="govuk-caption-m govuk-!-margin-top-2">
           {description}
         </span>
@@ -89,6 +89,13 @@ export const StagePage = ({
         }
         value={startEvent.notes}
         hint="You can enter up to 100 characters"
+        error={
+          errors?.find(
+            (error) =>
+              error.path[0] === startEvent.developmentPlanEvent &&
+              error.path[1] === "notes"
+          )?.message
+        }
       />
     </>
   );

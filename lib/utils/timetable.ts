@@ -112,9 +112,34 @@ export const fromCSVString = <Row>(csvString: string): Row[] => {
 export const loadCSV = async (filepath: string) =>
   await fetch(filepath).then((res) => res.text());
 
-export const dateToDefaultLocalDateString = (date: Date) =>
-  new Date(date).toLocaleDateString("en-uk", {
-    day: "numeric",
+export const toDefaultLocalDateString = (dateString: string) => {
+  const date = dateString.split("T")[0];
+  const [, , day] = date.split("-");
+
+  return new Date(dateString).toLocaleDateString("en-uk", {
+    ...(day && { day: "numeric" }),
     year: "numeric",
     month: "long",
   });
+};
+
+type StageProgress = "IN PROGRESS" | "FINISHED" | "NOT STARTED";
+
+export const getStageProgress = (
+  startEventDate: string,
+  endEventDate?: string
+): StageProgress => {
+  const startDate = new Date(startEventDate);
+  const currentDate = new Date();
+
+  if (startDate.getTime() > currentDate.getTime()) return "NOT STARTED";
+
+  if (!endEventDate) {
+    if (startDate.getTime() < currentDate.getTime()) return "FINISHED";
+    else return "IN PROGRESS";
+  }
+  const endDate = new Date(endEventDate);
+
+  if (endDate.getTime() < currentDate.getTime()) return "FINISHED";
+  else return "IN PROGRESS";
+};

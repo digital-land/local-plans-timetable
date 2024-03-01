@@ -6,3 +6,4 @@ export { ErrorSummary } from "./error-summary/ErrorSummary";
 export { TextArea } from "./text-area/TextArea";
 export { Header } from "./header/Header";
 export { Footer } from "./footer/Footer";
+export { Tag } from "./tag/Tag";

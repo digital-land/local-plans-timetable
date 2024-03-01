@@ -8,7 +8,7 @@ export type Stage = StagePageProps & {
 export const stages: Stage[] = [
   {
     key: PageRoute.PublicConsultation,
-    title: "Public consultation",
+    title: "Public consultation stage",
     description: (
       <p className="govuk-body">
         Regulation 18 consultation, also known as issues and options.
@@ -30,7 +30,7 @@ export const stages: Stage[] = [
   },
   {
     key: PageRoute.Publication,
-    title: "Publication",
+    title: "Publication stage",
     description: (
       <p className="govuk-body">
         Regulation 19 consultation.
@@ -52,7 +52,7 @@ export const stages: Stage[] = [
   },
   {
     key: PageRoute.Submission,
-    title: "Submission",
+    title: "Submission stage",
     description: (
       <p className="govuk-body">
         The date the plan is submitted to the Planning Inspectorate
@@ -67,7 +67,7 @@ export const stages: Stage[] = [
   },
   {
     key: PageRoute.IndependentExamination,
-    title: "Independent examination",
+    title: "Independent examination stage",
     description: (
       <p className="govuk-body">
         Local Plan examination hearing dates set by the Planning Inspectorate
