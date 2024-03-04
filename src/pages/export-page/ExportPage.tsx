@@ -8,6 +8,7 @@ import { DevelopmentPlanTimetable } from "@lib/types/timetable";
 import {
   resolveDevelopmentPlanCSV,
   resolveTimetableEventsCSV,
+  toDataURL,
 } from "@lib/utils/timetable";
 import { useFormContext } from "../../context/use-form-context";
 
@@ -41,12 +42,12 @@ export const ExportPage = () => {
   }, [loadedTimetableEvents, statusChangeEvent, timetableEvents]);
 
   const developmentPlanDownloadLink = useMemo(() => {
-    const timetableCSV = resolveDevelopmentPlanCSV(
+    const developmentPlanCSV = resolveDevelopmentPlanCSV(
       developmentPlan,
       loadedDevelopmentPlan
     );
 
-    return `data:text/csv;charset=urf-8,${timetableCSV}`;
+    return toDataURL(developmentPlanCSV);
   }, [developmentPlan, loadedDevelopmentPlan]);
 
   const timetableEventsDownloadLink = useMemo(() => {
@@ -55,7 +56,7 @@ export const ExportPage = () => {
       loadedTimetableEvents
     );
 
-    return `data:text/csv;charset=urf-8,${timetableCSV}`;
+    return toDataURL(timetableCSV);
   }, [updatedTimetableEvents, loadedTimetableEvents]);
 
   return (

@@ -97,16 +97,9 @@ export const resolveDevelopmentPlanCSV = (
   return objectArrayToCSVString(planToDownload);
 };
 
-export const fromCSVString = <Row>(csvString: string): Row[] => {
-  const [headLine, ...data] = csvString.split("\r\n");
-  const keys = headLine.split(",");
-
-  return data.map((row) => {
-    const values = row.split(",");
-    const entries = keys.map((key, i) => [key, values[i]]);
-
-    return Object.fromEntries(entries);
-  });
+export const toDataURL = (data: BlobPart): string => {
+  const blob = new Blob([data], { type: "text/csv;charset=utf-8" });
+  return URL.createObjectURL(blob);
 };
 
 export const loadCSV = async (filepath: string) =>
