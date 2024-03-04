@@ -3,6 +3,17 @@
  */
 import cn from "classnames";
 
+const getRemainingCharactersMessage = (
+  numberOfCharacters: number,
+  characterLimit: number
+) => {
+  const remainingCharacters = characterLimit - numberOfCharacters;
+
+  return `You have ${remainingCharacters} character${
+    Math.abs(remainingCharacters) === 1 ? "" : "s"
+  } ${remainingCharacters < 0 ? "too many" : "remaining"}`;
+};
+
 interface TextAreaProps {
   label?: string;
   onChange: (value: string) => void;
@@ -44,7 +55,7 @@ export const TextArea = ({
       />
       {characterLimit && (
         <div id="more-detail-hint" className="govuk-hint">
-          You have {characterLimit - value.length} characters remaining
+          {getRemainingCharactersMessage(value.length, characterLimit)}
         </div>
       )}
     </div>
