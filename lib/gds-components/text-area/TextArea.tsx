@@ -24,7 +24,11 @@ export const TextArea = ({
     <div
       className={cn("govuk-form-group", { "govuk-form-group--error": error })}
     >
-      {label && <label className="govuk-label govuk-label--m">{label}</label>}
+      {label && (
+        <label className="govuk-label govuk-label--m" htmlFor={id}>
+          {label}
+        </label>
+      )}
       {error && (
         <p className="govuk-error-message">
           <span className="govuk-visually-hidden">Error:</span> {error}

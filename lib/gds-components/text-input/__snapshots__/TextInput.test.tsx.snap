@@ -4,14 +4,15 @@ exports[`returns the plain text value 1`] = `
 <DocumentFragment>
   <div
     class="govuk-form-group"
-    id="text-input"
   >
     <label
       class="govuk-label"
+      for="text-input"
     >
       input
       <input
         class="govuk-input"
+        id="text-input"
         type="text"
         value=""
       />

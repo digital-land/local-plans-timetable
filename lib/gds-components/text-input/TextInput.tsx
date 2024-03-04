@@ -20,11 +20,8 @@ export const TextInput = ({
   id,
   error,
 }: TextInputProps) => (
-  <div
-    className={cn("govuk-form-group", { "govuk-form-group--error": error })}
-    id={id}
-  >
-    <label className="govuk-label">
+  <div className={cn("govuk-form-group", { "govuk-form-group--error": error })}>
+    <label className="govuk-label" htmlFor={id}>
       {label && label}
       {error && (
         <p className="govuk-error-message">
@@ -36,6 +33,7 @@ export const TextInput = ({
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
+        id={id}
       />
     </label>
     {hint && (

@@ -20,12 +20,11 @@ export const Radios = ({
   inline = false,
   options,
   error,
-  id
+  id,
 }: RadiosProps): JSX.Element => {
   return (
     <div
       className={cn("govuk-form-group", { "govuk-form-group--error": error })}
-      id={id}
     >
       <fieldset className="govuk-fieldset">
         {label && (
@@ -48,15 +47,12 @@ export const Radios = ({
                 className="govuk-radios__input"
                 type="radio"
                 value={value}
-                id={label.replace(/ /g, "-")}
+                id={id}
                 name="radios"
                 role="radio-input"
                 onChange={(e) => onChange(e.target.value)}
               />
-              <label
-                className="govuk-label govuk-radios__label"
-                htmlFor={label.replace(/ /g, "-")}
-              >
+              <label className="govuk-label govuk-radios__label" htmlFor={id}>
                 {label}
               </label>
             </div>
