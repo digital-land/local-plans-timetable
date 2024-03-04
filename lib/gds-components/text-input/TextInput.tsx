@@ -2,6 +2,7 @@
  * GDS component: https://design-system.service.gov.uk/components/text-input/
  */
 import cn from "classnames";
+import { CharacterCount } from "../character-count/CharacterCount";
 
 interface TextInputProps {
   label?: string;
@@ -9,14 +10,14 @@ interface TextInputProps {
   value: string;
   id: string;
   error?: string;
-  hint?: string;
+  characterLimit?: number;
 }
 
 export const TextInput = ({
   label,
   onChange,
   value,
-  hint,
+  characterLimit,
   id,
   error,
 }: TextInputProps) => (
@@ -34,12 +35,15 @@ export const TextInput = ({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         id={id}
+        aria-describedby={characterLimit ? `${id}-character-count` : undefined}
       />
     </label>
-    {hint && (
-      <div id="more-detail-hint" className="govuk-hint">
-        {hint}
-      </div>
+    {characterLimit && (
+      <CharacterCount
+        characterLimit={characterLimit}
+        id={`${id}-character-count`}
+        numberOfCharacters={value.length}
+      />
     )}
   </div>
 );
