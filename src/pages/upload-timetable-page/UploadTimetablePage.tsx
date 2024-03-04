@@ -1,11 +1,8 @@
+import csvToJson from "csvtojson";
+
 import { FileUpload } from "@lib/gds-components";
 import { useFormContext } from "../../context/use-form-context";
 import { developmentPlanTimetableEvents } from "@lib/constants";
-import {
-  DevelopmentPlan,
-  DevelopmentPlanTimetable,
-} from "@lib/types/timetable";
-import { fromCSVString } from "@lib/utils/timetable";
 import { useCallback } from "react";
 
 const reader = new FileReader();
@@ -20,11 +17,11 @@ export const UploadTimetablePage = (): JSX.Element => {
 
   const handleDevelopmentPlanUpload = useCallback(
     (file: File) => {
-      reader.onload = (event) => {
+      reader.onload = async (event) => {
         const csvString = event.target?.result?.toString();
 
         if (csvString) {
-          const developmentPlan = fromCSVString<DevelopmentPlan>(csvString);
+          const developmentPlan = await csvToJson().fromString(csvString);
           setLoadedDevelopmentPlan(developmentPlan);
           // This assumes the last row is the current row
           setDevelopmentPlan(developmentPlan.slice(-1)[0]);
@@ -38,12 +35,11 @@ export const UploadTimetablePage = (): JSX.Element => {
 
   const handleTimetableUpload = useCallback(
     (file: File) => {
-      reader.onload = (event) => {
+      reader.onload = async (event) => {
         const csvString = event.target?.result?.toString();
 
         if (csvString) {
-          const loadedEvents =
-            fromCSVString<DevelopmentPlanTimetable>(csvString);
+          const loadedEvents = await csvToJson().fromString(csvString);
           setLoadedTimetableEvents(loadedEvents);
           setTimetableEvents(
             loadedEvents
