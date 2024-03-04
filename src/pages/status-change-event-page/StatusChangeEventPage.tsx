@@ -40,10 +40,10 @@ export const StatusChangeEventPage = ({
 
   return (
     <>
+      <ErrorSummary errors={errors} />
       <h1 className="govuk-heading-xl govuk-!-margin-top-6">
         Tell us about the status change
       </h1>
-      <ErrorSummary errors={errors} />
       <h2 className="govuk-heading-l govuk-!-margin-top-6">
         What is the status of your Local Plan?
         <span className="govuk-caption-m govuk-!-margin-top-3">
@@ -80,14 +80,14 @@ export const StatusChangeEventPage = ({
         error={errors?.find((error) => error.path[0] === "eventDate")?.message}
         withDay
         onChange={(value) => updateStatusChangeEvent("eventDate", value)}
-        id = "eventDate"
+        id="eventDate"
       />
       <TextArea
         label="Additional Information (optional)"
         onChange={(value) => updateStatusChangeEvent("notes", value)}
         value={statusChangeEvent.notes}
         hint="You can enter up to 100 characters"
-        id = "notes"
+        id="notes"
         error={errors?.find((error) => error.path[0] === "notes")?.message}
       />
     </>

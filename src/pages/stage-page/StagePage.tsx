@@ -36,6 +36,7 @@ export const StagePage = ({
 
   return (
     <>
+      <ErrorSummary errors={errors} />
       <h1
         className="govuk-heading-xl govuk-!-margin-top-6"
         data-testid="form-title"
@@ -45,7 +46,6 @@ export const StagePage = ({
           {description}
         </span>
       </h1>
-      <ErrorSummary errors={errors} />
       <DateInput
         value={startEvent.eventDate}
         label={endEvent ? "Start Date" : "Date"}

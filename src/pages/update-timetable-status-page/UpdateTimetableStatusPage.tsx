@@ -14,10 +14,10 @@ export const UpdateTimetableStatusPage = ({
 
   return (
     <>
+      <ErrorSummary errors={errors} />
       <h1 className="govuk-heading-xl govuk-!-margin-top-6">
         Do you need to update the status of your Local Plan timetable?
       </h1>
-      <ErrorSummary errors={errors} />
       <ul className="govuk-list govuk-list--bullet">
         <li>paused</li>
         <li>withdrawn</li>

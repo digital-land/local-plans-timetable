@@ -25,6 +25,7 @@ export const PublishLDSPage = ({
 
   return (
     <>
+      <ErrorSummary errors={errors} />
       <h1 className="govuk-heading-xl govuk-!-margin-top-6">
         When will you publish your local development scheme (LDS)?
         <span className="govuk-caption-m govuk-!-margin-top-3">
@@ -32,7 +33,6 @@ export const PublishLDSPage = ({
           website.
         </span>
       </h1>
-      <ErrorSummary errors={errors} />
       <DateInput
         value={publishLDSEvent.eventDate}
         name="publish-LDS-date"

@@ -11,13 +11,13 @@ export const TitlePage = ({ errors }: TitlePageProps): JSX.Element => {
 
   return (
     <>
+      <ErrorSummary errors={errors} />
       <h1 className="govuk-heading-xl govuk-!-margin-top-6">
         Title of the Local Plan
         <span className="govuk-caption-m govuk-!-margin-top-3">
           For example, Birmingham Local Plan
         </span>
       </h1>
-      <ErrorSummary errors={errors} />
       <TextInput
         onChange={(value) => updateDevelopmentPlan("name", value)}
         value={developmentPlan.name}
