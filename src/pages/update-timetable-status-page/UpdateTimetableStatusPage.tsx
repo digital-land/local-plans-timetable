@@ -34,6 +34,7 @@ export const UpdateTimetableStatusPage = ({
           { label: "No", value: "n" },
         ]}
         error={errors?.[0].message}
+        id="updateStatus"
       />
     </>
   );

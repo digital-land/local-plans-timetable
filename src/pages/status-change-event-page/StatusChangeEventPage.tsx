@@ -71,6 +71,7 @@ export const StatusChangeEventPage = ({
           errors?.find((error) => error.path[0] === "developmentPlanEvent")
             ?.message
         }
+        id="developmentPlanEvent"
       />
       <DateInput
         value={statusChangeEvent.eventDate}
@@ -79,12 +80,15 @@ export const StatusChangeEventPage = ({
         error={errors?.find((error) => error.path[0] === "eventDate")?.message}
         withDay
         onChange={(value) => updateStatusChangeEvent("eventDate", value)}
+        id = "eventDate"
       />
       <TextArea
         label="Additional Information (optional)"
         onChange={(value) => updateStatusChangeEvent("notes", value)}
         value={statusChangeEvent.notes}
         hint="You can enter up to 100 characters"
+        id = "notes"
+        error={errors?.find((error) => error.path[0] === "notes")?.message}
       />
     </>
   );

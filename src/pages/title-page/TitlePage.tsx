@@ -22,6 +22,8 @@ export const TitlePage = ({ errors }: TitlePageProps): JSX.Element => {
         onChange={(value) => updateDevelopmentPlan("name", value)}
         value={developmentPlan.name}
         hint="You can enter up to 100 characters"
+        id="title"
+        error={errors?.find((error) => error.path[0] === "title")?.message}
       />
     </>
   );

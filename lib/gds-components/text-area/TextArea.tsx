@@ -7,6 +7,7 @@ interface TextAreaProps {
   label?: string;
   onChange: (value: string) => void;
   value: string;
+  id: string;
   hint?: string;
   error?: string;
 }
@@ -17,6 +18,7 @@ export const TextArea = ({
   value,
   hint,
   error,
+  id,
 }: TextAreaProps) => {
   return (
     <div
@@ -34,6 +36,7 @@ export const TextArea = ({
         rows={5}
         value={value}
         onChange={(e) => onChange(e.target.value)}
+        id={id}
       />
       {hint && (
         <div id="more-detail-hint" className="govuk-hint">

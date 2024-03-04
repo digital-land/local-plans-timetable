@@ -9,6 +9,7 @@ type RadiosProps = {
   label?: string;
   onChange: (value: string) => void;
   options: RadioOption[];
+  id: string;
   inline?: boolean;
   error?: string;
 };
@@ -19,11 +20,12 @@ export const Radios = ({
   inline = false,
   options,
   error,
-}:
-RadiosProps): JSX.Element => {
+  id
+}: RadiosProps): JSX.Element => {
   return (
     <div
       className={cn("govuk-form-group", { "govuk-form-group--error": error })}
+      id={id}
     >
       <fieldset className="govuk-fieldset">
         {label && (

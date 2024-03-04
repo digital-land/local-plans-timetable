@@ -1,9 +1,11 @@
 import Joi, { ValidationErrorItem } from "joi";
 import { ValidateFormParams } from "../FormPageHoc";
 
-const titleSchema = Joi.string().max(100).messages({
-  "string.max": `Title must be less must be less than or equal to 100 characters long`,
-  "string.empty": "Title is not allowed to be empty",
+const titleSchema = Joi.object({
+  title: Joi.string().max(100).messages({
+    "string.max": `Title must be less must be less than or equal to 100 characters long`,
+    "string.empty": "Title is not allowed to be empty",
+  }),
 });
 
 export const validateTitle = ({
@@ -11,8 +13,8 @@ export const validateTitle = ({
 }: ValidateFormParams<Record<string, never>>) => {
   const errors: ValidationErrorItem[] = [];
 
-  const validationResult = titleSchema.validate(developmentPlan.name, {
-    abortEarly: false,
+  const validationResult = titleSchema.validate({
+    title: developmentPlan.name,
   });
 
   if (validationResult.error) {

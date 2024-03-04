@@ -24,6 +24,8 @@ export const DescriptionPage = ({
         onChange={(value) => updateDevelopmentPlan("description", value)}
         value={developmentPlan.description}
         hint="You can enter up to 400 characters"
+        id="description"
+        error={errors?.find((error) => error.path[0] === "description")?.message}
       />
     </>
   );

@@ -8,6 +8,7 @@ export interface DateInputProps {
   name: string;
   onChange: (value: string) => void;
   value: string;
+  id: string;
   error?: string;
   withDay?: boolean;
 }
@@ -18,6 +19,7 @@ export const DateInput = ({
   name,
   onChange,
   error,
+  id,
   withDay = false,
 }: DateInputProps) => {
   const [year = "", month = "", day = ""] = value.split("-");
@@ -29,6 +31,7 @@ export const DateInput = ({
   return (
     <div
       className={cn("govuk-form-group", { "govuk-form-group--error": error })}
+      id={id}
     >
       <fieldset
         className="govuk-fieldset"

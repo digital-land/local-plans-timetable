@@ -47,6 +47,7 @@ export const PublishLDSPage = ({
           updateTimetableEvent(publishLDSEventKey, "eventDate", value)
         }
         withDay
+        id={`${publishLDSEvent.developmentPlanEvent}-eventDate`}
       />
     </>
   );
