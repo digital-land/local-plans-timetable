@@ -6,7 +6,7 @@ import { TextArea } from "./TextArea";
 it("returns the plain text value", async () => {
   const onChange = jest.fn();
   const { asFragment } = render(
-    <TextArea label="input" onChange={onChange} value="" />
+    <TextArea label="input" onChange={onChange} value="" id="text-area" />
   );
 
   await userEvent.type(screen.getByTestId("input-text-area"), "a");

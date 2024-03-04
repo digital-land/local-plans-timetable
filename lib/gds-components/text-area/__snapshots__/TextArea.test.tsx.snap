@@ -13,6 +13,7 @@ exports[`returns the plain text value 1`] = `
     <textarea
       class="govuk-textarea govuk-!-margin-bottom-2"
       data-testid="input-text-area"
+      id="text-area"
       rows="5"
     />
   </div>

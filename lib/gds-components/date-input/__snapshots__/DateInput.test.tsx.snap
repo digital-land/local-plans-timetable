@@ -4,6 +4,7 @@ exports[`calls the onChange handler with the right value when the month input ch
 <DocumentFragment>
   <div
     class="govuk-form-group"
+    id="date"
   >
     <fieldset
       aria-describedby="date-hint"
@@ -80,6 +81,7 @@ exports[`calls the onChange handler with the right value when the year input cha
 <DocumentFragment>
   <div
     class="govuk-form-group"
+    id="date"
   >
     <fieldset
       aria-describedby="date-hint"
@@ -156,6 +158,7 @@ exports[`shows input for day when withDay is true 1`] = `
 <DocumentFragment>
   <div
     class="govuk-form-group"
+    id="date"
   >
     <fieldset
       aria-describedby="date-hint"
@@ -255,6 +258,7 @@ exports[`shows the right input values from the provided value 1`] = `
 <DocumentFragment>
   <div
     class="govuk-form-group"
+    id="date"
   >
     <fieldset
       aria-describedby="date-hint"
