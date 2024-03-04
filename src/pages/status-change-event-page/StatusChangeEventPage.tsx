@@ -85,7 +85,7 @@ export const StatusChangeEventPage = ({
         label="Additional Information (optional)"
         onChange={(value) => updateStatusChangeEvent("notes", value)}
         value={statusChangeEvent.notes}
-        hint={100}
+        characterLimit={100}
         id="notes"
         error={errors?.find((error) => error.path[0] === "notes")?.message}
       />

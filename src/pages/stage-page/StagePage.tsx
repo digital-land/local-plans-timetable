@@ -85,7 +85,7 @@ export const StagePage = ({
           updateTimetableEvent(startEventKey, "notes", value)
         }
         value={startEvent.notes}
-        hint={100}
+        characterLimit={100}
         error={
           errors?.find(
             (error) =>

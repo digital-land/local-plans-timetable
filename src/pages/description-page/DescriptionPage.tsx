@@ -22,7 +22,7 @@ export const DescriptionPage = ({
       <TextArea
         onChange={(value) => updateDevelopmentPlan("description", value)}
         value={developmentPlan.description}
-        hint={400}
+        characterLimit={400}
         id="description"
         error={
           errors?.find((error) => error.path[0] === "description")?.message
