@@ -127,8 +127,8 @@ export const ExportPage = () => {
       </p>
 
       <p className="govuk-body">
-        Rembmer to check the <strong>progress labels</strong> next to each stage
-        are accurate. These are calculated automatically base on the dates
+        Remember to check the <strong>progress labels</strong> next to each
+        stage are accurate. These are calculated automatically base on the dates
         you’ve entered. For example, if a stage is ‘not started’, ‘in progress’,
         or ‘finished’.
       </p>
