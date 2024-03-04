@@ -8,14 +8,14 @@ interface AutocompleteProps {
   label: string;
   onChange: (value: string) => void;
   source: string[];
-  value:string;
+  value: string;
 }
 
 export const Autocomplete = ({
   label,
   onChange,
   source,
-  value
+  value,
 }: AutocompleteProps) => {
   const suggest: SourceFunction = (query, populateResults) => {
     const filteredResults = source.filter((entry: string) =>
@@ -26,7 +26,7 @@ export const Autocomplete = ({
 
   return (
     <div className="govuk-form-group">
-      <label className="govuk-label">
+      <label className="govuk-label" htmlFor={`${label}autocomplete`}>
         {label}
         <AccessibleAutocomplete
           id={`${label}autocomplete`}

@@ -1,8 +1,8 @@
-import { DateInput, ErrorSummary, TextArea } from "@lib/gds-components";
-import { Radios, RadioOption } from "@lib/gds-components/radios/Radios";
-import { useFormContext } from "../../context/use-form-context";
-import { ValidationErrorItem } from "joi";
 import { StatusChangeEventsKey } from "@lib/constants";
+import { DateInput, TextArea } from "@lib/gds-components";
+import { RadioOption, Radios } from "@lib/gds-components/radios/Radios";
+import { ValidationErrorItem } from "joi";
+import { useFormContext } from "../../context/use-form-context";
 
 type ChangeEventOptions = Omit<RadioOption, "value"> & {
   value: StatusChangeEventsKey;
@@ -43,7 +43,6 @@ export const StatusChangeEventPage = ({
       <h1 className="govuk-heading-xl govuk-!-margin-top-6">
         Tell us about the status change
       </h1>
-      <ErrorSummary errors={errors} />
       <h2 className="govuk-heading-l govuk-!-margin-top-6">
         What is the status of your Local Plan?
         <span className="govuk-caption-m govuk-!-margin-top-3">
@@ -71,6 +70,7 @@ export const StatusChangeEventPage = ({
           errors?.find((error) => error.path[0] === "developmentPlanEvent")
             ?.message
         }
+        id="developmentPlanEvent"
       />
       <DateInput
         value={statusChangeEvent.eventDate}
@@ -79,12 +79,15 @@ export const StatusChangeEventPage = ({
         error={errors?.find((error) => error.path[0] === "eventDate")?.message}
         withDay
         onChange={(value) => updateStatusChangeEvent("eventDate", value)}
+        id="eventDate"
       />
       <TextArea
         label="Additional Information (optional)"
         onChange={(value) => updateStatusChangeEvent("notes", value)}
         value={statusChangeEvent.notes}
         hint="You can enter up to 100 characters"
+        id="notes"
+        error={errors?.find((error) => error.path[0] === "notes")?.message}
       />
     </>
   );

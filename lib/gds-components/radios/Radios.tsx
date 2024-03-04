@@ -9,6 +9,7 @@ type RadiosProps = {
   label?: string;
   onChange: (value: string) => void;
   options: RadioOption[];
+  id: string;
   inline?: boolean;
   error?: string;
 };
@@ -19,8 +20,8 @@ export const Radios = ({
   inline = false,
   options,
   error,
-}:
-RadiosProps): JSX.Element => {
+  id,
+}: RadiosProps): JSX.Element => {
   return (
     <div
       className={cn("govuk-form-group", { "govuk-form-group--error": error })}
@@ -46,15 +47,12 @@ RadiosProps): JSX.Element => {
                 className="govuk-radios__input"
                 type="radio"
                 value={value}
-                id={label.replace(/ /g, "-")}
+                id={id}
                 name="radios"
                 role="radio-input"
                 onChange={(e) => onChange(e.target.value)}
               />
-              <label
-                className="govuk-label govuk-radios__label"
-                htmlFor={label.replace(/ /g, "-")}
-              >
+              <label className="govuk-label govuk-radios__label" htmlFor={id}>
                 {label}
               </label>
             </div>

@@ -7,12 +7,14 @@ exports[`returns the plain text value 1`] = `
   >
     <label
       class="govuk-label govuk-label--m"
+      for="text-area"
     >
       input
     </label>
     <textarea
       class="govuk-textarea govuk-!-margin-bottom-2"
       data-testid="input-text-area"
+      id="text-area"
       rows="5"
     />
   </div>

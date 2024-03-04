@@ -12,7 +12,7 @@ const onChange = jest.fn();
 describe("Radios", () => {
   it("calls onChange", async () => {
     const { asFragment } = render(
-      <Radios label="radio" onChange={onChange} options={options} />
+      <Radios label="radio" onChange={onChange} options={options} id="radio" />
     );
 
     await userEvent.click(screen.getByLabelText(options[0].label));
@@ -20,11 +20,11 @@ describe("Radios", () => {
     expect(asFragment()).toMatchSnapshot();
     expect(onChange).toHaveBeenCalledWith(options[0].value);
   });
-  
+
   it("displays 1 radio input for each option", async () => {
     const onChange = jest.fn();
     const { asFragment } = render(
-      <Radios label="radio" onChange={onChange} options={options} />
+      <Radios label="radio" onChange={onChange} options={options} id="radio" />
     );
 
     const inputs = screen.queryAllByRole("radio-input");

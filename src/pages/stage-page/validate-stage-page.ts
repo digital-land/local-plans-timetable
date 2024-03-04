@@ -5,9 +5,8 @@ import { StagePageProps } from "./StagePage";
 
 export const validateTimetableStage = ({
   timetableEvents,
-  formProps
-}: ValidateFormParams<StagePageProps>
-) => {
+  formProps,
+}: ValidateFormParams<StagePageProps>) => {
   const { startEventKey, endEventKey } = formProps;
 
   const startEvent = timetableEvents.find(
@@ -24,10 +23,13 @@ export const validateTimetableStage = ({
 
   const errors: ValidationErrorItem[] = [];
 
-  const startEventValidation = eventSchema.validate({
-    eventDate: startEvent.eventDate,
-    notes: startEvent.notes,
-  });
+  const startEventValidation = eventSchema.validate(
+    {
+      eventDate: startEvent.eventDate,
+      notes: startEvent.notes,
+    },
+    { abortEarly: false }
+  );
 
   if (startEventValidation.error) {
     errors.push(
@@ -39,10 +41,13 @@ export const validateTimetableStage = ({
   }
 
   if (endEvent && endEventKey) {
-    const endEventValidation = eventSchema.validate({
-      eventDate: endEvent.eventDate,
-      notes: endEvent.notes,
-    });
+    const endEventValidation = eventSchema.validate(
+      {
+        eventDate: endEvent.eventDate,
+        notes: endEvent.notes,
+      },
+      { abortEarly: false }
+    );
 
     if (endEventValidation.error) {
       errors.push(

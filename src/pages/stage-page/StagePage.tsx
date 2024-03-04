@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 import { TimetableEventKey } from "@lib/constants";
-import { DateInput, ErrorSummary, TextArea } from "@lib/gds-components";
+import { DateInput, TextArea } from "@lib/gds-components";
 import { ValidationErrorItem } from "joi";
 import { useFormContext } from "../../context/use-form-context";
 
@@ -45,42 +45,39 @@ export const StagePage = ({
           {description}
         </span>
       </h1>
-      <ErrorSummary errors={errors} />
-      <div id={`${startEvent}-eventDate`}>
+      <DateInput
+        value={startEvent.eventDate}
+        label={endEvent ? "Start Date" : "Date"}
+        name={`${startEvent}-start-date`}
+        error={
+          errors?.find(
+            (error) =>
+              error.path[0] === startEvent.developmentPlanEvent &&
+              error.path[1] === "eventDate"
+          )?.message
+        }
+        onChange={(value) =>
+          updateTimetableEvent(startEventKey, "eventDate", value)
+        }
+        id={`${startEvent.developmentPlanEvent}-eventDate`}
+      />
+      {endEventKey && endEvent && (
         <DateInput
-          value={startEvent.eventDate}
-          label={endEvent ? "Start Date" : "Date"}
-          name={`${startEvent}-start-date`}
+          value={endEvent.eventDate}
+          label="End Date"
+          name={`${endEvent}-end-date`}
           error={
             errors?.find(
               (error) =>
-                error.path[0] === startEvent.developmentPlanEvent &&
+                error.path[0] === endEvent.developmentPlanEvent &&
                 error.path[1] === "eventDate"
             )?.message
           }
           onChange={(value) =>
-            updateTimetableEvent(startEventKey, "eventDate", value)
+            updateTimetableEvent(endEventKey, "eventDate", value)
           }
+          id={`${endEvent.developmentPlanEvent}-eventDate`}
         />
-      </div>
-      {endEventKey && endEvent && (
-        <div id={`${endEvent}-eventDate`}>
-          <DateInput
-            value={endEvent.eventDate}
-            label="End Date"
-            name={`${endEvent}-end-date`}
-            error={
-              errors?.find(
-                (error) =>
-                  error.path[0] === endEvent.developmentPlanEvent &&
-                  error.path[1] === "eventDate"
-              )?.message
-            }
-            onChange={(value) =>
-              updateTimetableEvent(endEventKey, "eventDate", value)
-            }
-          />
-        </div>
       )}
       <TextArea
         label="Additional Information (optional)"
@@ -96,6 +93,7 @@ export const StagePage = ({
               error.path[1] === "notes"
           )?.message
         }
+        id={`${startEvent.developmentPlanEvent}-notes`}
       />
     </>
   );

@@ -6,7 +6,7 @@ import { TextInput } from "./TextInput";
 it("returns the plain text value", async () => {
   const onChange = jest.fn();
   const { asFragment } = render(
-    <TextInput label="input" onChange={onChange} value="" />
+    <TextInput label="input" onChange={onChange} value="" id="text-input"/>
   );
 
   await userEvent.type(screen.getByLabelText("input"), "a");

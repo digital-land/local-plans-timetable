@@ -7,10 +7,12 @@ exports[`returns the plain text value 1`] = `
   >
     <label
       class="govuk-label"
+      for="text-input"
     >
       input
       <input
         class="govuk-input"
+        id="text-input"
         type="text"
         value=""
       />

@@ -1,4 +1,4 @@
-import { ErrorSummary, TextInput } from "@lib/gds-components";
+import { TextInput } from "@lib/gds-components";
 import { ValidationErrorItem } from "joi";
 import { useFormContext } from "../../context/use-form-context";
 
@@ -17,11 +17,12 @@ export const TitlePage = ({ errors }: TitlePageProps): JSX.Element => {
           For example, Birmingham Local Plan
         </span>
       </h1>
-      <ErrorSummary errors={errors} />
       <TextInput
         onChange={(value) => updateDevelopmentPlan("name", value)}
         value={developmentPlan.name}
         hint="You can enter up to 100 characters"
+        id="title"
+        error={errors?.find((error) => error.path[0] === "title")?.message}
       />
     </>
   );

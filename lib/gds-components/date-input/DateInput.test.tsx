@@ -26,6 +26,7 @@ const DateInputWrapper = ({
         setValue(value);
         onChange(value);
       }}
+      id="date"
     />
   );
 };

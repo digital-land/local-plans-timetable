@@ -7,6 +7,7 @@ interface TextAreaProps {
   label?: string;
   onChange: (value: string) => void;
   value: string;
+  id: string;
   hint?: string;
   error?: string;
 }
@@ -17,12 +18,17 @@ export const TextArea = ({
   value,
   hint,
   error,
+  id,
 }: TextAreaProps) => {
   return (
     <div
       className={cn("govuk-form-group", { "govuk-form-group--error": error })}
     >
-      {label && <label className="govuk-label govuk-label--m">{label}</label>}
+      {label && (
+        <label className="govuk-label govuk-label--m" htmlFor={id}>
+          {label}
+        </label>
+      )}
       {error && (
         <p className="govuk-error-message">
           <span className="govuk-visually-hidden">Error:</span> {error}
@@ -34,6 +40,7 @@ export const TextArea = ({
         rows={5}
         value={value}
         onChange={(e) => onChange(e.target.value)}
+        id={id}
       />
       {hint && (
         <div id="more-detail-hint" className="govuk-hint">

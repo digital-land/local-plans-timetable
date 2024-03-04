@@ -1,4 +1,3 @@
-import { ErrorSummary } from "@lib/gds-components";
 import { Radios } from "@lib/gds-components/radios/Radios";
 import { ValidationErrorItem } from "joi";
 import { useFormContext } from "../../context/use-form-context";
@@ -33,7 +32,6 @@ export const UpdateTimetableStatusPage = ({
           </p>
         </span>
       </h1>
-      <ErrorSummary errors={errors} />
       <Radios
         onChange={(value) => setStatusHasChanged(value === "y")}
         inline
@@ -42,6 +40,7 @@ export const UpdateTimetableStatusPage = ({
           { label: "No", value: "n" },
         ]}
         error={errors?.[0].message}
+        id="updateStatus"
       />
     </>
   );

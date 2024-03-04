@@ -1,4 +1,4 @@
-import { DateInput, ErrorSummary } from "@lib/gds-components";
+import { DateInput } from "@lib/gds-components";
 import { ValidationErrorItem } from "joi";
 import { useFormContext } from "../../context/use-form-context";
 import { TimetableEventKey } from "@lib/constants";
@@ -32,7 +32,6 @@ export const PublishLDSPage = ({
           website.
         </span>
       </h1>
-      <ErrorSummary errors={errors} />
       <DateInput
         value={publishLDSEvent.eventDate}
         name="publish-LDS-date"
@@ -47,6 +46,7 @@ export const PublishLDSPage = ({
           updateTimetableEvent(publishLDSEventKey, "eventDate", value)
         }
         withDay
+        id={`${publishLDSEvent.developmentPlanEvent}-eventDate`}
       />
     </>
   );
