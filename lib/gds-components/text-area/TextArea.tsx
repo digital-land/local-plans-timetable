@@ -2,13 +2,14 @@
  * GDS component: https://design-system.service.gov.uk/components/textarea/
  */
 import cn from "classnames";
+import { CharacterCount } from "../character-count/CharacterCount";
 
 interface TextAreaProps {
   label?: string;
   onChange: (value: string) => void;
   value: string;
   id: string;
-  hint?: string;
+  characterLimit?: number;
   error?: string;
 }
 
@@ -16,7 +17,7 @@ export const TextArea = ({
   label,
   onChange,
   value,
-  hint,
+  characterLimit,
   error,
   id,
 }: TextAreaProps) => {
@@ -41,11 +42,14 @@ export const TextArea = ({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         id={id}
+        aria-describedby={characterLimit ? `${id}-character-count` : undefined}
       />
-      {hint && (
-        <div id="more-detail-hint" className="govuk-hint">
-          {hint}
-        </div>
+      {characterLimit && (
+        <CharacterCount
+          characterLimit={characterLimit}
+          id={`${id}-character-count`}
+          numberOfCharacters={value.length}
+        />
       )}
     </div>
   );
