@@ -1,8 +1,8 @@
-import { DateInput, ErrorSummary, TextArea } from "@lib/gds-components";
-import { Radios, RadioOption } from "@lib/gds-components/radios/Radios";
-import { useFormContext } from "../../context/use-form-context";
-import { ValidationErrorItem } from "joi";
 import { StatusChangeEventsKey } from "@lib/constants";
+import { DateInput, TextArea } from "@lib/gds-components";
+import { RadioOption, Radios } from "@lib/gds-components/radios/Radios";
+import { ValidationErrorItem } from "joi";
+import { useFormContext } from "../../context/use-form-context";
 
 type ChangeEventOptions = Omit<RadioOption, "value"> & {
   value: StatusChangeEventsKey;
@@ -40,7 +40,6 @@ export const StatusChangeEventPage = ({
 
   return (
     <>
-      <ErrorSummary errors={errors} />
       <h1 className="govuk-heading-xl govuk-!-margin-top-6">
         Tell us about the status change
       </h1>

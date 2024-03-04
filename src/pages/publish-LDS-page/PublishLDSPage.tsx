@@ -1,4 +1,4 @@
-import { DateInput, ErrorSummary } from "@lib/gds-components";
+import { DateInput } from "@lib/gds-components";
 import { ValidationErrorItem } from "joi";
 import { useFormContext } from "../../context/use-form-context";
 import { TimetableEventKey } from "@lib/constants";
@@ -25,7 +25,6 @@ export const PublishLDSPage = ({
 
   return (
     <>
-      <ErrorSummary errors={errors} />
       <h1 className="govuk-heading-xl govuk-!-margin-top-6">
         When will you publish your local development scheme (LDS)?
         <span className="govuk-caption-m govuk-!-margin-top-3">

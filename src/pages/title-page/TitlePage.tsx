@@ -1,4 +1,4 @@
-import { ErrorSummary, TextInput } from "@lib/gds-components";
+import { TextInput } from "@lib/gds-components";
 import { ValidationErrorItem } from "joi";
 import { useFormContext } from "../../context/use-form-context";
 
@@ -11,7 +11,6 @@ export const TitlePage = ({ errors }: TitlePageProps): JSX.Element => {
 
   return (
     <>
-      <ErrorSummary errors={errors} />
       <h1 className="govuk-heading-xl govuk-!-margin-top-6">
         Title of the Local Plan
         <span className="govuk-caption-m govuk-!-margin-top-3">

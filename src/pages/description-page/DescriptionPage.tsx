@@ -1,4 +1,4 @@
-import { ErrorSummary, TextArea } from "@lib/gds-components";
+import { TextArea } from "@lib/gds-components";
 import { ValidationErrorItem } from "joi";
 import { useFormContext } from "../../context/use-form-context";
 
@@ -13,7 +13,6 @@ export const DescriptionPage = ({
 
   return (
     <>
-      <ErrorSummary errors={errors} />
       <h1 className="govuk-heading-xl govuk-!-margin-top-6">
         Local Plan description
         <span className="govuk-caption-m govuk-!-margin-top-3">

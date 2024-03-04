@@ -1,4 +1,3 @@
-import { ErrorSummary } from "@lib/gds-components";
 import { Radios } from "@lib/gds-components/radios/Radios";
 import { ValidationErrorItem } from "joi";
 import { useFormContext } from "../../context/use-form-context";
@@ -14,7 +13,6 @@ export const UpdateTimetableStatusPage = ({
 
   return (
     <>
-      <ErrorSummary errors={errors} />
       <h1 className="govuk-heading-xl govuk-!-margin-top-6">
         Do you need to update the status of your Local Plan timetable?
       </h1>

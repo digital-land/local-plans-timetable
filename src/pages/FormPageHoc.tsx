@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { ValidationErrorItem } from "joi";
 
-import { Button } from "@lib/gds-components";
+import { Button, ErrorSummary } from "@lib/gds-components";
 import {
   DevelopmentPlan,
   DevelopmentPlanTimetable,
@@ -74,6 +74,7 @@ export const FormPageHoC = <P extends Record<string, unknown>>(
           Back
         </Link>
         <form onSubmit={handleClick}>
+          <ErrorSummary errors={errors} />
           <FormComponent {...formProps} errors={errors} />
           {navigateNext && <Button type="submit">Continue</Button>}
         </form>

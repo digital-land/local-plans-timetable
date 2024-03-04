@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 import { TimetableEventKey } from "@lib/constants";
-import { DateInput, ErrorSummary, TextArea } from "@lib/gds-components";
+import { DateInput, TextArea } from "@lib/gds-components";
 import { ValidationErrorItem } from "joi";
 import { useFormContext } from "../../context/use-form-context";
 
@@ -36,7 +36,6 @@ export const StagePage = ({
 
   return (
     <>
-      <ErrorSummary errors={errors} />
       <h1
         className="govuk-heading-xl govuk-!-margin-top-6"
         data-testid="form-title"
