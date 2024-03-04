@@ -16,7 +16,7 @@ const objectArrayToCSVString = (
     return values.join(",");
   });
 
-  return [headLine, ...CSVRows].join("\n");
+  return [headLine, ...CSVRows].join("\r\n");
 };
 
 export const resolveTimetableEventsCSV = (
@@ -98,7 +98,7 @@ export const resolveDevelopmentPlanCSV = (
 };
 
 export const fromCSVString = <Row>(csvString: string): Row[] => {
-  const [headLine, ...data] = csvString.split("\n");
+  const [headLine, ...data] = csvString.split("\r\n");
   const keys = headLine.split(",");
 
   return data.map((row) => {
