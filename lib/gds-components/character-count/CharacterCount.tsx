@@ -2,9 +2,9 @@
  * GDS component: https://design-system.service.gov.uk/components/character-count/
  */
 
-interface CharacterCountProps {
+export interface CharacterCountProps {
   characterLimit: number;
-  id: string;
+  id?: string;
   numberOfCharacters: number;
 }
 

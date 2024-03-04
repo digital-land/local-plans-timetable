@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders the correct message for numberOfCharacters === 5, characterLimit === 10 1`] = `
+<DocumentFragment>
+  <div
+    class="govuk-hint"
+  >
+    You have 5 characters remaining
+  </div>
+</DocumentFragment>
+`;
+
+exports[`renders the correct message for numberOfCharacters === 9, characterLimit === 10 1`] = `
+<DocumentFragment>
+  <div
+    class="govuk-hint"
+  >
+    You have 1 character remaining
+  </div>
+</DocumentFragment>
+`;
+
+exports[`renders the correct message for numberOfCharacters === 10, characterLimit === 10 1`] = `
+<DocumentFragment>
+  <div
+    class="govuk-hint"
+  >
+    You have 0 characters remaining
+  </div>
+</DocumentFragment>
+`;
+
+exports[`renders the correct message for numberOfCharacters === 11, characterLimit === 10 1`] = `
+<DocumentFragment>
+  <div
+    class="govuk-hint"
+  >
+    You have 1 character too many
+  </div>
+</DocumentFragment>
+`;
+
+exports[`renders the correct message for numberOfCharacters === 15, characterLimit === 10 1`] = `
+<DocumentFragment>
+  <div
+    class="govuk-hint"
+  >
+    You have 5 characters too many
+  </div>
+</DocumentFragment>
+`;
