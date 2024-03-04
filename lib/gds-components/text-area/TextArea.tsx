@@ -2,17 +2,7 @@
  * GDS component: https://design-system.service.gov.uk/components/textarea/
  */
 import cn from "classnames";
-
-const getRemainingCharactersMessage = (
-  numberOfCharacters: number,
-  characterLimit: number
-) => {
-  const remainingCharacters = characterLimit - numberOfCharacters;
-
-  return `You have ${remainingCharacters} character${
-    Math.abs(remainingCharacters) === 1 ? "" : "s"
-  } ${remainingCharacters < 0 ? "too many" : "remaining"}`;
-};
+import { CharacterCount } from "../character-count/CharacterCount";
 
 interface TextAreaProps {
   label?: string;
@@ -52,11 +42,14 @@ export const TextArea = ({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         id={id}
+        aria-describedby={characterLimit ? `${id}-character-count` : undefined}
       />
       {characterLimit && (
-        <div id="more-detail-hint" className="govuk-hint">
-          {getRemainingCharactersMessage(value.length, characterLimit)}
-        </div>
+        <CharacterCount
+          characterLimit={characterLimit}
+          id={`${id}-character-count`}
+          numberOfCharacters={value.length}
+        />
       )}
     </div>
   );
