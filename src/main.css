@@ -1,3 +1,8 @@
 body {
   margin: 0;
 }
+
+.govuk-character-count__message.govuk-error-message {
+  /* This font-weight doesn't get overriden in the GDS example */
+  font-weight: 700;
+}

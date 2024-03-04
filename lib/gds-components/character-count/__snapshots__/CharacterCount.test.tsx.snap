@@ -3,7 +3,7 @@
 exports[`renders the correct message for numberOfCharacters === 5, characterLimit === 10 1`] = `
 <DocumentFragment>
   <div
-    class="govuk-hint"
+    class="govuk-character-count__message govuk-character-count__status govuk-hint"
   >
     You have 5 characters remaining
   </div>
@@ -13,7 +13,7 @@ exports[`renders the correct message for numberOfCharacters === 5, characterLimi
 exports[`renders the correct message for numberOfCharacters === 9, characterLimit === 10 1`] = `
 <DocumentFragment>
   <div
-    class="govuk-hint"
+    class="govuk-character-count__message govuk-character-count__status govuk-hint"
   >
     You have 1 character remaining
   </div>
@@ -23,7 +23,7 @@ exports[`renders the correct message for numberOfCharacters === 9, characterLimi
 exports[`renders the correct message for numberOfCharacters === 10, characterLimit === 10 1`] = `
 <DocumentFragment>
   <div
-    class="govuk-hint"
+    class="govuk-character-count__message govuk-character-count__status govuk-hint"
   >
     You have 0 characters remaining
   </div>
@@ -33,7 +33,7 @@ exports[`renders the correct message for numberOfCharacters === 10, characterLim
 exports[`renders the correct message for numberOfCharacters === 11, characterLimit === 10 1`] = `
 <DocumentFragment>
   <div
-    class="govuk-hint"
+    class="govuk-character-count__message govuk-character-count__status govuk-error-message"
   >
     You have 1 character too many
   </div>
@@ -43,7 +43,7 @@ exports[`renders the correct message for numberOfCharacters === 11, characterLim
 exports[`renders the correct message for numberOfCharacters === 15, characterLimit === 10 1`] = `
 <DocumentFragment>
   <div
-    class="govuk-hint"
+    class="govuk-character-count__message govuk-character-count__status govuk-error-message"
   >
     You have 5 characters too many
   </div>

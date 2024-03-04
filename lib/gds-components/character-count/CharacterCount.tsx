@@ -8,11 +8,7 @@ export interface CharacterCountProps {
   numberOfCharacters: number;
 }
 
-const getRemainingCharactersMessage = (
-  numberOfCharacters: number,
-  characterLimit: number
-) => {
-  const remainingCharacters = characterLimit - numberOfCharacters;
+const getRemainingCharactersMessage = (remainingCharacters: number) => {
   const absoluteRemainingCharacters = Math.abs(remainingCharacters);
 
   return `You have ${absoluteRemainingCharacters} character${
@@ -24,8 +20,18 @@ export const CharacterCount = ({
   characterLimit,
   id,
   numberOfCharacters,
-}: CharacterCountProps) => (
-  <div id={id} className="govuk-hint">
-    {getRemainingCharactersMessage(numberOfCharacters, characterLimit)}
-  </div>
-);
+}: CharacterCountProps) => {
+  const remainingCharacters = characterLimit - numberOfCharacters;
+  const isOverLimit = remainingCharacters < 0;
+
+  return (
+    <div
+      id={id}
+      className={`govuk-character-count__message govuk-character-count__status ${
+        isOverLimit ? "govuk-error-message" : "govuk-hint"
+      }`}
+    >
+      {getRemainingCharactersMessage(remainingCharacters)}
+    </div>
+  );
+};
