@@ -2,7 +2,7 @@
  * GDS component: https://design-system.service.gov.uk/components/notification-banner/
  */
 
-import { toDefaultLocalDateString } from "../..//utils/timetable";
+import { toDefaultLocalDateString } from "../../utils/timetable";
 
 type NotificationBannerProps = {
   title: string;
@@ -31,7 +31,7 @@ export const NotificationBanner = ({
             Date: {toDefaultLocalDateString(date)}
           </p>
         )}
-        <p className="govuk-body">{message}</p>
+        {message && <p className="govuk-body">{message}</p>}
       </div>
     </div>
   );

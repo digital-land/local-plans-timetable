@@ -51,12 +51,9 @@ export const DEFAULT_DEVELOPMENT_PLAN: DevelopmentPlan = {
 };
 
 const eventsToExclude = new Set<TimetableEventKey>([
+  ...statusChangeEvents,
   TimetableEventKey.TimetableUpdated,
-  TimetableEventKey.PlanPaused,
-  TimetableEventKey.PlanWithdrawn,
   TimetableEventKey.PlanFoundSound,
-  TimetableEventKey.PlanFoundUnsound,
-  TimetableEventKey.PlanNotAdopted,
 ]);
 
 export const getDefaultTimetableEvent = (): Omit<
