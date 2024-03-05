@@ -1,4 +1,4 @@
-import { TimetableEventKey } from "@lib/constants";
+import { TimetableEventKey } from "../constants";
 
 export type Stage = {
   title: string;
