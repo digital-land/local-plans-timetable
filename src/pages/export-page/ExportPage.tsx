@@ -1,7 +1,11 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 
-import { getDefaultTimetableEvent, getFormattedDate } from "@lib/constants";
+import {
+  TimetableEventKey,
+  getDefaultTimetableEvent,
+  getFormattedDate,
+} from "@lib/constants";
 import { Button } from "@lib/gds-components";
 import { PlanViewer } from "@lib/timetable-visualisation/PlanViewer";
 import { DevelopmentPlanTimetable } from "@lib/types/timetable";
@@ -23,7 +27,8 @@ export const ExportPage = () => {
 
   const updatedTimetableEvents = useMemo<DevelopmentPlanTimetable[]>(() => {
     const timetableUpdatedEvent = loadedTimetableEvents?.find(
-      ({ developmentPlanEvent }) => developmentPlanEvent === "timetable-updated"
+      ({ developmentPlanEvent }) =>
+        developmentPlanEvent === TimetableEventKey.TimetableUpdated
     );
     return [
       ...timetableEvents,
@@ -32,7 +37,7 @@ export const ExportPage = () => {
         : []),
       {
         ...getDefaultTimetableEvent(),
-        developmentPlanEvent: "timetable-updated",
+        developmentPlanEvent: TimetableEventKey.TimetableUpdated,
         ...(timetableUpdatedEvent && {
           reference: timetableUpdatedEvent.reference,
         }),

@@ -2,6 +2,7 @@ import "@testing-library/jest-dom";
 import { act, render } from "@testing-library/react";
 import { StagePage } from "./StagePage";
 import { DateInput } from "@lib/gds-components";
+import { TimetableEventKey } from "@lib/constants";
 
 jest.mock("@lib/gds-components");
 
@@ -20,7 +21,7 @@ describe("StagePage", () => {
         <StagePage
           title={""}
           description={undefined}
-          startEventKey="plan-submitted-for-examination"
+          startEventKey={TimetableEventKey.PlanSubmittedForExamination}
         />
       );
     });
@@ -34,8 +35,8 @@ describe("StagePage", () => {
         <StagePage
           title={""}
           description={undefined}
-          startEventKey="examination-hearing-start"
-          endEventKey="examination-hearing-end"
+          startEventKey={TimetableEventKey.ExaminationHearingStart}
+          endEventKey={TimetableEventKey.ExaminationHearingEnd}
         />
       );
     });

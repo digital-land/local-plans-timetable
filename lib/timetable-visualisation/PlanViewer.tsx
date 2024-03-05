@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 
-import { getTimetableEventName } from "../constants";
 import { Tag } from "../gds-components";
 import { getStageProgress, toDefaultLocalDateString } from "../utils/timetable";
 import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
@@ -39,7 +38,7 @@ export const PlanViewer = ({
   const stagesInfo = useMemo(
     () => [
       {
-        name: getTimetableEventName(publishedEvent.developmentPlanEvent),
+        name: "Local Development Scheme Published",
         startDate: publishedEvent.eventDate,
       },
       ...stages.map<StagePreviewInfo>((stage) => {

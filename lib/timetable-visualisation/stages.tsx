@@ -9,25 +9,25 @@ export type Stage = {
 export const stages: Stage[] = [
   {
     title: "Public consultation stage",
-    startEventKey: "public-consultation-start",
-    endEventKey: "public-consultation-end",
+    startEventKey: TimetableEventKey.PublicConsultationStart,
+    endEventKey: TimetableEventKey.PublicConsultationEnd,
   },
   {
     title: "Publication stage",
-    startEventKey: "publication-start",
-    endEventKey: "publication-end",
+    startEventKey: TimetableEventKey.PublicationStart,
+    endEventKey: TimetableEventKey.PublicationEnd,
   },
   {
     title: "Submission stage",
-    startEventKey: "plan-submitted-for-examination",
+    startEventKey: TimetableEventKey.PlanSubmittedForExamination,
   },
   {
     title: "Independent examination stage",
-    startEventKey: "examination-hearing-start",
-    endEventKey: "examination-hearing-end",
+    startEventKey: TimetableEventKey.ExaminationHearingStart,
+    endEventKey: TimetableEventKey.ExaminationHearingEnd,
   },
   {
     title: "Plan adopted",
-    startEventKey: "plan-adopted",
+    startEventKey: TimetableEventKey.PlanAdopted,
   },
 ];

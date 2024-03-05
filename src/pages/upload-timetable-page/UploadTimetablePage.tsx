@@ -1,9 +1,10 @@
+import { useCallback } from "react";
+
 import csvToJson from "csvtojson";
 
 import { FileUpload } from "@lib/gds-components";
+import { TimetableEventKey } from "@lib/constants";
 import { useFormContext } from "../../context/use-form-context";
-import { developmentPlanTimetableEvents } from "@lib/constants";
-import { useCallback } from "react";
 
 const reader = new FileReader();
 
@@ -47,16 +48,7 @@ export const UploadTimetablePage = (): JSX.Element => {
               .filter(
                 (event) =>
                   !event.endDate &&
-                  event.developmentPlanEvent !== "timetable-updated"
-              )
-              .sort(
-                (a, b) =>
-                  developmentPlanTimetableEvents.findIndex(
-                    (s) => s.key === a.developmentPlanEvent
-                  ) -
-                  developmentPlanTimetableEvents.findIndex(
-                    (s) => s.key === b.developmentPlanEvent
-                  )
+                  event.developmentPlanEvent !== TimetableEventKey.TimetableUpdated
               )
           );
         }
