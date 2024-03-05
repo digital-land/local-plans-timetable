@@ -1,4 +1,4 @@
-import { StatusChangeEventsKey } from "@lib/constants";
+import { StatusChangeEventsKey, TimetableEventKey } from "@lib/constants";
 import { DateInput, TextArea } from "@lib/gds-components";
 import { RadioOption, Radios } from "@lib/gds-components/radios/Radios";
 import { ValidationErrorItem } from "joi";
@@ -11,19 +11,19 @@ type ChangeEventOptions = Omit<RadioOption, "value"> & {
 const statusChangeOptions: ChangeEventOptions[] = [
   {
     label: "Paused",
-    value: "plan-paused",
+    value: TimetableEventKey.PlanPaused,
   },
   {
     label: "Withdrawn",
-    value: "plan-withdrawn",
+    value: TimetableEventKey.PlanWithdrawn,
   },
   {
     label: "Judged ‘unsound or legally non-compliant’",
-    value: "plan-found-unsound",
+    value: TimetableEventKey.PlanFoundUnsound,
   },
   {
     label: "Not adopted by the Local Authority",
-    value: "plan-not-adopted",
+    value: TimetableEventKey.PlanNotAdopted,
   },
 ];
 
