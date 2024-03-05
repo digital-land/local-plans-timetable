@@ -11,7 +11,7 @@ export const Page = () => (
     <Header homeURL={PageRoute.Base} />
     <FormProvider>
       <div className="govuk-width-container app-width-container">
-        <main className="govuk-main-wrapper">
+        <main className="govuk-main-wrapper govuk-!-padding-top-0">
           <Outlet />
         </main>
       </div>
