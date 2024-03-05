@@ -23,7 +23,12 @@ export const CreateTimetablePage = () => {
     setDevelopmentPlan(DEFAULT_DEVELOPMENT_PLAN);
     setLoadedTimetableEvents(null);
     setLoadedDevelopmentPlan(null);
-  }, [setDevelopmentPlan, setLoadedDevelopmentPlan, setLoadedTimetableEvents, setTimetableEvents]);
+  }, [
+    setDevelopmentPlan,
+    setLoadedDevelopmentPlan,
+    setLoadedTimetableEvents,
+    setTimetableEvents,
+  ]);
 
   return (
     <div className="govuk-grid-row">
@@ -48,7 +53,7 @@ export const CreateTimetablePage = () => {
             <li className={`${styles.appSubnavSectionItem}`}>
               <Link
                 className={`${styles.appSubnavLink} govuk-link  govuk-link--no-underline`}
-                to="#"
+                to={PageRoute.HowToPublish}
                 aria-current="page"
               >
                 How to publish a Local Plan timetable online
@@ -115,7 +120,7 @@ export const CreateTimetablePage = () => {
         <h2 className="govuk-heading-m">Before you start</h2>
         <p className="govuk-body">
           Read our guidance on{" "}
-          <Link className="govuk-link" to="#">
+          <Link className="govuk-link" to={PageRoute.HowToPublish}>
             How to publish a Local Plan online
           </Link>
         </p>
