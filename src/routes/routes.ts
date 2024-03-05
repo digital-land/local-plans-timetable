@@ -1,6 +1,7 @@
 export enum PageRoute {
   Base = "/local-plans-timetable",
   Root = "/",
+  HowToPublish = "/how-to-publish-a-timetable",
   LPA = "/what-is-your-local-authority",
   Title = "/title-of-local-plan",
   Description = "/local-plan-description",
