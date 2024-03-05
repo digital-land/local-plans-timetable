@@ -68,7 +68,7 @@ describe("Visualisation", () => {
     expect(screen.getByText("Plan viewer component")).toBeInTheDocument();
   });
 
-  it("filters and sorts the timetable events", async () => {
+  it("filters the timetable events", async () => {
     (csvToJson as jest.Mock).mockImplementation(() => ({
       fromString: jest.fn(
         () =>
@@ -126,18 +126,6 @@ describe("Visualisation", () => {
 
     expect((PlanViewer as jest.Mock).mock.calls[1][0].timetableEvents).toEqual([
       {
-        reference: "d30c1520-adc1-45e4-8898-b2c7aaa83db8",
-        name: "",
-        developmentPlan: "dorcester-new-local-plan",
-        developmentPlanEvent: "timetable-updated",
-        eventDate: "2024-03",
-        notes: "",
-        organisation: "",
-        entryDate: "2024-03-02T15:46:14.144Z",
-        startDate: "2024-03-02T15:46:14.144Z",
-        endDate: "",
-      },
-      {
         reference: "7336edfb-8db3-4bbc-806f-4a0895cdeea6",
         name: "",
         developmentPlan: "dorcester-new-local-plan",
@@ -147,6 +135,18 @@ describe("Visualisation", () => {
         organisation: "",
         entryDate: "2024-02-02T15:46:14.144Z",
         startDate: "2024-02-02T15:46:14.144Z",
+        endDate: "",
+      },
+      {
+        reference: "d30c1520-adc1-45e4-8898-b2c7aaa83db8",
+        name: "",
+        developmentPlan: "dorcester-new-local-plan",
+        developmentPlanEvent: "timetable-updated",
+        eventDate: "2024-03",
+        notes: "",
+        organisation: "",
+        entryDate: "2024-03-02T15:46:14.144Z",
+        startDate: "2024-03-02T15:46:14.144Z",
         endDate: "",
       },
     ]);
