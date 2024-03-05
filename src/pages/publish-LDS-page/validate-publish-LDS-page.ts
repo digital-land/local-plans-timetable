@@ -1,5 +1,6 @@
 import Joi, { ValidationErrorItem } from "joi";
-import { publishLDSEventKey } from "./PublishLDSPage";
+
+import { TimetableEventKey } from "@lib/constants";
 import { eventDateSchema } from "../event-schema";
 import { ValidateFormParams } from "../FormPageHoc";
 
@@ -11,7 +12,9 @@ export const validatePublishLDSEvent = ({
   timetableEvents,
 }: ValidateFormParams<Record<string, never>>) => {
   const publishLDSEvent = timetableEvents.find(
-    (e) => e.developmentPlanEvent === publishLDSEventKey
+    (e) =>
+      e.developmentPlanEvent ===
+      TimetableEventKey.LocalDevelopmentSchemePublished
   );
 
   if (!publishLDSEvent) {
@@ -28,7 +31,10 @@ export const validatePublishLDSEvent = ({
     errors.push(
       ...validationResult.error.details.map((error) => ({
         ...error,
-        path: [publishLDSEventKey, ...error.path],
+        path: [
+          TimetableEventKey.LocalDevelopmentSchemePublished,
+          ...error.path,
+        ],
       }))
     );
   }

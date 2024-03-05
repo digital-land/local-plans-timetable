@@ -1,14 +1,12 @@
-import { DateInput } from "@lib/gds-components";
 import { ValidationErrorItem } from "joi";
-import { useFormContext } from "../../context/use-form-context";
+
+import { DateInput } from "@lib/gds-components";
 import { TimetableEventKey } from "@lib/constants";
+import { useFormContext } from "../../context/use-form-context";
 
 type PublishLDSPageProps = {
   errors?: ValidationErrorItem[];
 };
-
-export const publishLDSEventKey: TimetableEventKey =
-  "local-development-scheme-published";
 
 export const PublishLDSPage = ({
   errors,
@@ -16,7 +14,9 @@ export const PublishLDSPage = ({
   const { timetableEvents, updateTimetableEvent } = useFormContext();
 
   const publishLDSEvent = timetableEvents.find(
-    (e) => e.developmentPlanEvent === publishLDSEventKey
+    (e) =>
+      e.developmentPlanEvent ===
+      TimetableEventKey.LocalDevelopmentSchemePublished
   );
 
   if (!publishLDSEvent) {
@@ -43,7 +43,11 @@ export const PublishLDSPage = ({
           )?.message
         }
         onChange={(value) =>
-          updateTimetableEvent(publishLDSEventKey, "eventDate", value)
+          updateTimetableEvent(
+            TimetableEventKey.LocalDevelopmentSchemePublished,
+            "eventDate",
+            value
+          )
         }
         withDay
         id={`${publishLDSEvent.developmentPlanEvent}-eventDate`}

@@ -1,3 +1,4 @@
+import { TimetableEventKey } from "@lib/constants";
 import { PageRoute } from "../routes/routes";
 import { StagePageProps } from "./stage-page/StagePage";
 
@@ -25,8 +26,8 @@ export const stages: Stage[] = [
         </a>
       </p>
     ),
-    startEventKey: "public-consultation-start",
-    endEventKey: "public-consultation-end",
+    startEventKey: TimetableEventKey.PublicConsultationStart,
+    endEventKey: TimetableEventKey.PublicConsultationEnd,
   },
   {
     key: PageRoute.Publication,
@@ -47,8 +48,8 @@ export const stages: Stage[] = [
         </a>
       </p>
     ),
-    startEventKey: "publication-start",
-    endEventKey: "publication-end",
+    startEventKey: TimetableEventKey.PublicationStart,
+    endEventKey: TimetableEventKey.PublicationEnd,
   },
   {
     key: PageRoute.Submission,
@@ -63,7 +64,7 @@ export const stages: Stage[] = [
         </div>
       </p>
     ),
-    startEventKey: "plan-submitted-for-examination",
+    startEventKey: TimetableEventKey.PlanSubmittedForExamination,
   },
   {
     key: PageRoute.IndependentExamination,
@@ -80,8 +81,8 @@ export const stages: Stage[] = [
         </div>
       </p>
     ),
-    startEventKey: "examination-hearing-start",
-    endEventKey: "examination-hearing-end",
+    startEventKey: TimetableEventKey.ExaminationHearingStart,
+    endEventKey: TimetableEventKey.ExaminationHearingEnd,
   },
   {
     key: PageRoute.PlanAdopted,
@@ -96,6 +97,6 @@ export const stages: Stage[] = [
         </div>
       </p>
     ),
-    startEventKey: "plan-adopted",
+    startEventKey: TimetableEventKey.PlanAdopted,
   },
 ];
