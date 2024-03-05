@@ -16,6 +16,7 @@ export const CreateTimetablePage = () => {
     setLoadedTimetableEvents,
     setLoadedDevelopmentPlan,
     setUserFlow,
+    setStatusHasChanged,
   } = useFormContext();
 
   useEffect(() => {
@@ -23,7 +24,14 @@ export const CreateTimetablePage = () => {
     setDevelopmentPlan(DEFAULT_DEVELOPMENT_PLAN);
     setLoadedTimetableEvents(null);
     setLoadedDevelopmentPlan(null);
-  }, [setDevelopmentPlan, setLoadedDevelopmentPlan, setLoadedTimetableEvents, setTimetableEvents]);
+    setStatusHasChanged(null);
+  }, [
+    setDevelopmentPlan,
+    setLoadedDevelopmentPlan,
+    setLoadedTimetableEvents,
+    setStatusHasChanged,
+    setTimetableEvents,
+  ]);
 
   return (
     <div className="govuk-grid-row">

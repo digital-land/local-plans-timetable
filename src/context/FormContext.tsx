@@ -142,6 +142,9 @@ export const FormProvider = (props: { children: ReactNode }) => {
     if (statusHasChanged) {
       setStatusChangeEvent(getDefaultTimetableEvent());
     }
+    else{
+      setStatusChangeEvent(null)
+    }
   }, [statusHasChanged]);
 
   return (

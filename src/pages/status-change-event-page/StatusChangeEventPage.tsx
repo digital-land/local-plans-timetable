@@ -1,11 +1,11 @@
-import { StatusChangeEventsKey, TimetableEventKey } from "@lib/constants";
+import { StatusChangeEventKey, TimetableEventKey } from "@lib/constants";
 import { DateInput, TextArea } from "@lib/gds-components";
 import { RadioOption, Radios } from "@lib/gds-components/radios/Radios";
 import { ValidationErrorItem } from "joi";
 import { useFormContext } from "../../context/use-form-context";
 
 type ChangeEventOptions = Omit<RadioOption, "value"> & {
-  value: StatusChangeEventsKey;
+  value: StatusChangeEventKey;
 };
 
 const statusChangeOptions: ChangeEventOptions[] = [

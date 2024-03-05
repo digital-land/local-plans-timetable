@@ -19,19 +19,20 @@ export enum TimetableEventKey {
   PlanNotAdopted = "plan-not-adopted",
 }
 
-export type StatusChangeEventsKey = Extract<
-  TimetableEventKey,
-  | TimetableEventKey.PlanFoundUnsound
-  | TimetableEventKey.PlanWithdrawn
-  | TimetableEventKey.PlanPaused
-  | TimetableEventKey.PlanNotAdopted
->;
+export const statusChangeEvents = [
+  TimetableEventKey.PlanFoundUnsound,
+  TimetableEventKey.PlanWithdrawn,
+  TimetableEventKey.PlanPaused,
+  TimetableEventKey.PlanNotAdopted,
+] as const;
+
+export type StatusChangeEventKey = (typeof statusChangeEvents)[number];
 
 export type StatusChangeEvent = Omit<
   DevelopmentPlanTimetable,
   "developmentPlanEvent"
 > & {
-  developmentPlanEvent?: StatusChangeEventsKey;
+  developmentPlanEvent?: StatusChangeEventKey;
 };
 
 export const getFormattedDate = () => new Date().toISOString();
