@@ -159,7 +159,7 @@ export const HowToPublishPage = () => (
       You can{" "}
       <a
         className="govuk-link"
-        href="#" /* TODO: Find the page this is meant to point to */
+        href="https://www.gov.uk/guidance/using-csv-file-format"
       >
         read more about using CSV files on GOV.UK
       </a>
