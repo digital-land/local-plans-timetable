@@ -8,7 +8,6 @@ import { PlanViewer } from "./PlanViewer";
 import {
   DEFAULT_DEVELOPMENT_PLAN,
   DEFAULT_TIMETABLE_EVENTS,
-  TimetableEventKey,
 } from "../constants";
 
 import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
