@@ -9,3 +9,4 @@ export { StatusChangeEventPage } from "./status-change-event-page/StatusChangeEv
 export { CreateTimetablePage } from "./create-timetable-page/CreateTimetablePage";
 export { HowToPublishPage } from "./how-to-publish-page/HowToPublishPage";
 export { ExportPage } from "./export-page/ExportPage";
+export { VisualisationExamplePage } from "./visualisation-example/VisualisationExamplePage";
