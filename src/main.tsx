@@ -22,6 +22,7 @@ import { validateTitle } from "./pages/title-page/validate-title-page";
 import { validatePublishLDSEvent } from "./pages/publish-LDS-page/validate-publish-LDS-page";
 import { validateStatusChangeEvent } from "./pages/status-change-event-page/status-change-event-validation";
 import { validateUpdateTimetableStatus } from "./pages/update-timetable-status-page/update-timetable-status-validation";
+import { validateLPA } from "./pages/LPA-page/lpa-validation";
 import { stages } from "./pages/stages";
 import { Page } from "./routes/Page";
 import { PageRoute } from "./routes/routes";
@@ -53,7 +54,7 @@ const router = createBrowserRouter(
         },
         {
           path: PageRoute.LPA,
-          element: FormPageHoC(LPAPage, {}),
+          element: FormPageHoC(LPAPage, {}, validateLPA),
         },
         {
           path: PageRoute.Title,
