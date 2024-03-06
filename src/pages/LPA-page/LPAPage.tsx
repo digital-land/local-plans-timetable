@@ -6,7 +6,7 @@ import { Autocomplete } from "@lib/autocomplete/Autocomplete";
 import { fetchLPAs } from "../../api";
 import { useFormContext } from "../../context/use-form-context";
 
-type LPAPageProps = { errors: ValidationErrorItem[] | undefined };
+type LPAPageProps = { errors?: ValidationErrorItem[] };
 
 export const LPAPage = ({ errors }: LPAPageProps): JSX.Element => {
   const [LPAs, setLPAs] = useState<string[]>([]);
