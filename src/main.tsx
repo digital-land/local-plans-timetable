@@ -12,6 +12,7 @@ import {
   StatusChangeEventPage,
   CreateTimetablePage,
   HowToPublishPage,
+  HowToUpdatePage,
   ExportPage,
 } from "./pages";
 import { FormPageHoC } from "./pages/FormPageHoc";
@@ -41,6 +42,10 @@ const router = createBrowserRouter(
         {
           path: PageRoute.HowToPublish,
           element: <HowToPublishPage />,
+        },
+        {
+          path: PageRoute.HowToUpdate,
+          element: <HowToUpdatePage />,
         },
         {
           path: PageRoute.UploadTimetable,

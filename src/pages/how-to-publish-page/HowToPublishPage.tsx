@@ -150,7 +150,7 @@ export const HowToPublishPage = () => (
       plan’ file which includes any additional information and descriptions
       you’ve entered. You’ll need to export both of these files to be able to
       publish the timetable. You’ll also need these files to be able to{" "}
-      <Link className="govuk-link" to="#" /* TODO: Add link when page exists */>
+      <Link className="govuk-link" to={PageRoute.HowToUpdate}>
         update a timetable
       </Link>
       .
