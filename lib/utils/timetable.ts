@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
-import { getFormattedDate } from "../constants";
+import { TimetableEventKey, getFormattedDate } from "../constants";
 import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
 
 const objectArrayToCSVString = (
@@ -135,4 +135,19 @@ export const getStageProgress = (
 
   if (endDate.getTime() < currentDate.getTime()) return "FINISHED";
   else return "IN PROGRESS";
+};
+
+export const getStatusChangeMessage = (key: TimetableEventKey): string => {
+  switch (key) {
+    case TimetableEventKey.PlanPaused:
+      return "has been paused";
+    case TimetableEventKey.PlanWithdrawn:
+      return "has been withdrawn";
+    case TimetableEventKey.PlanFoundUnsound:
+      return "has been judged not sound";
+    case TimetableEventKey.PlanNotAdopted:
+      return "has not been adopted by the Local Authority";
+    default:
+      throw new Error("invalid event");
+  }
 };

@@ -16,6 +16,7 @@ export const CreateTimetablePage = () => {
     setLoadedTimetableEvents,
     setLoadedDevelopmentPlan,
     setUserFlow,
+    setStatusHasChanged,
   } = useFormContext();
 
   useEffect(() => {
@@ -23,10 +24,12 @@ export const CreateTimetablePage = () => {
     setDevelopmentPlan(DEFAULT_DEVELOPMENT_PLAN);
     setLoadedTimetableEvents(null);
     setLoadedDevelopmentPlan(null);
+    setStatusHasChanged(null);
   }, [
     setDevelopmentPlan,
     setLoadedDevelopmentPlan,
     setLoadedTimetableEvents,
+    setStatusHasChanged,
     setTimetableEvents,
   ]);
 

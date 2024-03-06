@@ -1,7 +1,12 @@
 import { useMemo } from "react";
 
-import { Tag } from "../gds-components";
-import { getStageProgress, toDefaultLocalDateString } from "../utils/timetable";
+import { TimetableEventKey, statusChangeEvents } from "../constants";
+import { Tag, NotificationBanner } from "../gds-components";
+import {
+  getStageProgress,
+  getStatusChangeMessage,
+  toDefaultLocalDateString,
+} from "../utils/timetable";
 import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
 
 import { stages } from "./stages";
@@ -24,11 +29,18 @@ export const PlanViewer = ({
 }: PlanViewerProps) => {
   const publishedEvent = timetableEvents.find(
     (event) =>
-      event.developmentPlanEvent === "local-development-scheme-published"
+      event.developmentPlanEvent ===
+      TimetableEventKey.LocalDevelopmentSchemePublished
   );
 
   const updatedEvent = timetableEvents.find(
-    (event) => event.developmentPlanEvent === "timetable-updated"
+    (event) => event.developmentPlanEvent === TimetableEventKey.TimetableUpdated
+  );
+
+  const statusChangeEvent = timetableEvents.find(
+    (event) =>
+      statusChangeEvents.some((e) => e === event.developmentPlanEvent) &&
+      !event.endDate
   );
 
   if (!publishedEvent) {
@@ -68,6 +80,15 @@ export const PlanViewer = ({
     <div className="govuk-body" data-testid="plan-viewer">
       <h2 className="govuk-heading-l">{name} timetable</h2>
       <p className="govuk-body-l">{description}</p>
+      {statusChangeEvent?.developmentPlanEvent && (
+        <NotificationBanner
+          title={`This local plan ${getStatusChangeMessage(
+            statusChangeEvent.developmentPlanEvent
+          )}`}
+          date={statusChangeEvent.eventDate}
+          message={statusChangeEvent.notes}
+        />
+      )}
       <hr />
       <h3 className="govuk-table__caption govuk-table__caption--l">
         Timetable

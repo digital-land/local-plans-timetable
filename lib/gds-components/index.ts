@@ -7,3 +7,4 @@ export { TextArea } from "./text-area/TextArea";
 export { Header } from "./header/Header";
 export { Footer } from "./footer/Footer";
 export { Tag } from "./tag/Tag";
+export { NotificationBanner } from "./notification-banner/NotificationBanner";
