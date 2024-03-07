@@ -125,7 +125,15 @@ export const PlanViewer = ({
                 <div className="govuk-!-display-inline govuk-!-margin-right-3">
                   {name}
                 </div>
-                <Tag label={getStageProgress(startDate, endDate)} />
+                {updatedEvent && (
+                  <Tag
+                    label={getStageProgress(
+                      updatedEvent.eventDate,
+                      startDate,
+                      endDate
+                    )}
+                  />
+                )}
                 <div className="govuk-body govuk-!-margin-top-5">{info}</div>
               </th>
               <td className="govuk-table__cell govuk-!-padding-top-6">
