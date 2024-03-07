@@ -119,21 +119,22 @@ export const toDefaultLocalDateString = (dateString: string) => {
 type StageProgress = "IN PROGRESS" | "FINISHED" | "NOT STARTED";
 
 export const getStageProgress = (
+  lastUpdatedDate: string,
   startEventDate: string,
   endEventDate?: string
 ): StageProgress => {
   const startDate = new Date(startEventDate);
-  const currentDate = new Date();
+  const referenceDate = new Date(lastUpdatedDate);
 
-  if (startDate.getTime() > currentDate.getTime()) return "NOT STARTED";
+  if (startDate.getTime() > referenceDate.getTime()) return "NOT STARTED";
 
   if (!endEventDate) {
-    if (startDate.getTime() < currentDate.getTime()) return "FINISHED";
+    if (startDate.getTime() < referenceDate.getTime()) return "FINISHED";
     else return "IN PROGRESS";
   }
   const endDate = new Date(endEventDate);
 
-  if (endDate.getTime() < currentDate.getTime()) return "FINISHED";
+  if (endDate.getTime() < referenceDate.getTime()) return "FINISHED";
   else return "IN PROGRESS";
 };
 
