@@ -1,3 +1,4 @@
+import cn from "classnames";
 import AccessibleAutocomplete, {
   SourceFunction,
 } from "accessible-autocomplete/react";
@@ -9,6 +10,8 @@ interface AutocompleteProps {
   onChange: (value: string) => void;
   source: string[];
   value: string;
+  error?: string;
+  id: string;
 }
 
 export const Autocomplete = ({
@@ -16,6 +19,8 @@ export const Autocomplete = ({
   onChange,
   source,
   value,
+  error,
+  id,
 }: AutocompleteProps) => {
   const suggest: SourceFunction = (query, populateResults) => {
     const filteredResults = source.filter((entry: string) =>
@@ -25,11 +30,18 @@ export const Autocomplete = ({
   };
 
   return (
-    <div className="govuk-form-group">
-      <label className="govuk-label" htmlFor={`${label}autocomplete`}>
+    <div
+      className={cn("govuk-form-group", { "govuk-form-group--error": error })}
+    >
+      <label className="govuk-label" htmlFor={id}>
         {label}
+        {error && (
+          <p className="govuk-error-message">
+            <span className="govuk-visually-hidden">Error:</span> {error}
+          </p>
+        )}
         <AccessibleAutocomplete
-          id={`${label}autocomplete`}
+          id={id}
           source={suggest}
           onConfirm={onChange}
           confirmOnBlur={false}
