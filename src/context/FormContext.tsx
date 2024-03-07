@@ -1,9 +1,9 @@
 import {
   DEFAULT_DEVELOPMENT_PLAN,
-  DEFAULT_TIMETABLE_EVENTS,
   StatusChangeEvent,
   TimetableEventKey,
   getDefaultTimetableEvent,
+  getDefaultTimetableEvents,
 } from "@lib/constants";
 import {
   DevelopmentPlan,
@@ -57,7 +57,7 @@ export const FormContext = createContext<{
   ) => void;
 }>({
   developmentPlan: DEFAULT_DEVELOPMENT_PLAN,
-  timetableEvents: DEFAULT_TIMETABLE_EVENTS,
+  timetableEvents: getDefaultTimetableEvents(""),
   loadedDevelopmentPlan: null,
   loadedTimetableEvents: null,
   userFlow: null,
@@ -85,7 +85,7 @@ export const FormProvider = (props: { children: ReactNode }) => {
 
   const [timetableEvents, setTimetableEvents] = useState<
     DevelopmentPlanTimetable[]
-  >(DEFAULT_TIMETABLE_EVENTS);
+  >(getDefaultTimetableEvents(developmentPlan.reference));
 
   const [loadedTimetableEvents, setLoadedTimetableEvents] = useState<
     DevelopmentPlanTimetable[] | null
@@ -140,12 +140,14 @@ export const FormProvider = (props: { children: ReactNode }) => {
 
   useEffect(() => {
     if (statusHasChanged) {
-      setStatusChangeEvent(getDefaultTimetableEvent());
+      setStatusChangeEvent({
+        ...getDefaultTimetableEvent(),
+        developmentPlan: developmentPlan.reference,
+      });
+    } else {
+      setStatusChangeEvent(null);
     }
-    else{
-      setStatusChangeEvent(null)
-    }
-  }, [statusHasChanged]);
+  }, [developmentPlan.reference, statusHasChanged]);
 
   return (
     <FormContext.Provider

@@ -7,7 +7,7 @@ import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
 import { PlanViewer } from "./PlanViewer";
 import {
   DEFAULT_DEVELOPMENT_PLAN,
-  DEFAULT_TIMETABLE_EVENTS,
+  getDefaultTimetableEvents,
 } from "../constants";
 
 import "govuk-frontend/dist/govuk/govuk-frontend.min.css";
@@ -24,7 +24,7 @@ export const Visualisation = (props: VisualisationProps) => {
   );
   const [timetableEvents, setTimetableEvents] = useState<
     DevelopmentPlanTimetable[]
-  >(DEFAULT_TIMETABLE_EVENTS);
+  >(getDefaultTimetableEvents(developmentPlan.reference));
 
   const loadData = useCallback(async () => {
     const eventsData = await loadCSV(timetableEventsFilepath);
