@@ -11,8 +11,6 @@ import {
   UpdateTimetableStatusPage,
   StatusChangeEventPage,
   CreateTimetablePage,
-  HowToPublishPage,
-  HowToUpdatePage,
   ExportPage,
 } from "./pages";
 import { FormPageHoC } from "./pages/FormPageHoc";
@@ -41,11 +39,21 @@ const router = createBrowserRouter(
         },
         {
           path: PageRoute.HowToPublish,
-          element: <HowToPublishPage />,
+          lazy: async () => {
+            const { HowToPublishPage } = await import(
+              "./pages/how-to-publish-page/HowToPublishPage"
+            );
+            return { Component: HowToPublishPage };
+          },
         },
         {
           path: PageRoute.HowToUpdate,
-          element: <HowToUpdatePage />,
+          lazy: async () => {
+            const { HowToUpdatePage } = await import(
+              "./pages/how-to-update-page/HowToUpdatePage"
+            );
+            return { Component: HowToUpdatePage };
+          },
         },
         {
           path: PageRoute.UploadTimetable,
