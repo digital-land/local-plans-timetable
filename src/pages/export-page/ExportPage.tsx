@@ -37,6 +37,7 @@ export const ExportPage = () => {
         : []),
       {
         ...getDefaultTimetableEvent(),
+        developmentPlan: developmentPlan.reference,
         developmentPlanEvent: TimetableEventKey.TimetableUpdated,
         ...(timetableUpdatedEvent && {
           reference: timetableUpdatedEvent.reference,
@@ -44,7 +45,7 @@ export const ExportPage = () => {
         eventDate: getFormattedDate(),
       },
     ];
-  }, [loadedTimetableEvents, statusChangeEvent, timetableEvents]);
+  }, [developmentPlan.reference, loadedTimetableEvents, statusChangeEvent, timetableEvents]);
 
   const developmentPlanDownloadLink = useMemo(() => {
     const developmentPlanCSV = resolveDevelopmentPlanCSV(
