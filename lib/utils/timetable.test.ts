@@ -362,7 +362,7 @@ const planTestCases: PlanTestCase[] = [
     expectedCSV:
       "reference,name,description,developmentPlanType,periodStartDate,periodEndDate,developmentPlanGeography,documentationUrl,organisations,entryDate,startDate,endDate\r\n" +
       `1,name,description,type,2023-01-01,2023-01-02,geography,url,organisations,2023-01-01T00:00:00.000Z,2023-01-01T00:00:00.000Z,${currentDate}\r\n` +
-      `2,name,description,type,2023-01-01,2023-01-02,geography,url,new organisations,${currentDate},${currentDate},`,
+      `1,name,description,type,2023-01-01,2023-01-02,geography,url,new organisations,${currentDate},${currentDate},`,
   },
   {
     name: "loaded plan with changes and previously invalidated row",
@@ -414,7 +414,7 @@ const planTestCases: PlanTestCase[] = [
       "reference,name,description,developmentPlanType,periodStartDate,periodEndDate,developmentPlanGeography,documentationUrl,organisations,entryDate,startDate,endDate\r\n" +
       "1,name,description,type,2023-01-01,2023-01-02,geography,url,old organisations,2023-01-01T00:00:00.000Z,2023-01-01T00:00:00.000Z,2023-02-03\r\n" +
       `2,name,description,type,2023-01-01,2023-01-02,geography,url,organisations,2023-02-03T00:00:00.000Z,2023-02-03T00:00:00.000Z,${currentDate}\r\n` +
-      `3,name,description,type,2023-01-01,2023-01-02,geography,url,new organisations,${currentDate},${currentDate},`,
+      `2,name,description,type,2023-01-01,2023-01-02,geography,url,new organisations,${currentDate},${currentDate},`,
   },
 ];
 
