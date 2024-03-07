@@ -18,9 +18,8 @@ type PlanViewerProps = {
 
 type StagePreviewInfo = {
   name: string;
-  startDate: string;
-  endDate?: string;
-  info?: string;
+  startEvent: DevelopmentPlanTimetable;
+  endEvent?: DevelopmentPlanTimetable;
 };
 
 export const PlanViewer = ({
@@ -47,11 +46,11 @@ export const PlanViewer = ({
     throw new Error("published event not found");
   }
 
-  const stagesInfo = useMemo(
+  const stagesInfo = useMemo<StagePreviewInfo[]>(
     () => [
       {
         name: "Local Development Scheme Published",
-        startDate: publishedEvent.eventDate,
+        startEvent: publishedEvent,
       },
       ...stages.map<StagePreviewInfo>((stage) => {
         const startEvent = timetableEvents.find(
@@ -67,9 +66,8 @@ export const PlanViewer = ({
         }
         return {
           name: stage.title,
-          startDate: startEvent.eventDate,
-          endDate: endEvent?.eventDate,
-          info: startEvent.notes,
+          startEvent,
+          endEvent,
         };
       }),
     ],
@@ -116,7 +114,7 @@ export const PlanViewer = ({
           </tr>
         </thead>
         <tbody className="govuk-table__body">
-          {stagesInfo.map(({ name, startDate, endDate, info }) => (
+          {stagesInfo.map(({ name, startEvent, endEvent }) => (
             <tr className="govuk-table__row" key={name}>
               <th
                 scope="row"
@@ -125,23 +123,27 @@ export const PlanViewer = ({
                 <div className="govuk-!-display-inline govuk-!-margin-right-3">
                   {name}
                 </div>
-                {updatedEvent && (
-                  <Tag
-                    label={getStageProgress(
-                      updatedEvent.eventDate,
-                      startDate,
-                      endDate
-                    )}
-                  />
-                )}
-                <div className="govuk-body govuk-!-margin-top-5">{info}</div>
+                {updatedEvent &&
+                  startEvent.eventDate &&
+                  (!endEvent || endEvent.eventDate) && (
+                    <Tag
+                      label={getStageProgress(
+                        updatedEvent.eventDate,
+                        startEvent.eventDate,
+                        endEvent?.eventDate
+                      )}
+                    />
+                  )}
+                <div className="govuk-body govuk-!-margin-top-5">
+                  {startEvent.notes}
+                </div>
               </th>
               <td className="govuk-table__cell govuk-!-padding-top-6">
-                {endDate
+                {endEvent?.eventDate
                   ? `${toDefaultLocalDateString(
-                      startDate
-                    )} to ${toDefaultLocalDateString(endDate)}`
-                  : toDefaultLocalDateString(startDate)}
+                      startEvent.eventDate
+                    )} to ${toDefaultLocalDateString(endEvent?.eventDate)}`
+                  : toDefaultLocalDateString(startEvent.eventDate)}
               </td>
             </tr>
           ))}
