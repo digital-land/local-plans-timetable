@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 
+import { ValidationErrorItem } from "joi";
+
 import { Autocomplete } from "@lib/autocomplete/Autocomplete";
 import { fetchLPAs } from "../../api";
 import { useFormContext } from "../../context/use-form-context";
 
-export const LPAPage = (): JSX.Element => {
+type LPAPageProps = { errors?: ValidationErrorItem[] };
+
+export const LPAPage = ({ errors }: LPAPageProps): JSX.Element => {
   const [LPAs, setLPAs] = useState<string[]>([]);
 
   const { developmentPlan, updateDevelopmentPlan } = useFormContext();
@@ -34,6 +38,8 @@ export const LPAPage = (): JSX.Element => {
         onChange={(value) => updateDevelopmentPlan("organisations", value)}
         source={LPAs}
         value={developmentPlan.organisations}
+        error={errors?.find((error) => error.path[0] === "LPA")?.message}
+        id="LPA"
       />
     </>
   );
