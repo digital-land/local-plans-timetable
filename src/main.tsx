@@ -7,12 +7,11 @@ import {
   DescriptionPage,
   StagePage,
   PublishLDSPage,
-  // UploadTimetablePage,
+  UploadTimetablePage,
   UpdateTimetableStatusPage,
   StatusChangeEventPage,
-  ExportPage,
   CreateTimetablePage,
-  UploadTimetablePage,
+  ExportPage,
 } from "./pages";
 import { FormPageHoC } from "./pages/FormPageHoc";
 import { validateDescription } from "./pages/description-page/description-validation";
