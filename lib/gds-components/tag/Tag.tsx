@@ -2,8 +2,10 @@
  * GDS component: https://design-system.service.gov.uk/components/tag/
  */
 
-export type TagProps = {
-  label: "IN PROGRESS" | "FINISHED" | "NOT STARTED";
+export type TagLabel = "IN PROGRESS" | "FINISHED" | "NOT STARTED";
+
+type TagProps = {
+  label: TagLabel;
 };
 
 export const Tag = ({ label }: TagProps): JSX.Element => {
