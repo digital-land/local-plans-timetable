@@ -88,7 +88,6 @@ export const resolveDevelopmentPlanCSV = (
     latestPlan.endDate = currentDate;
     planToDownload.push({
       ...developmentPlan,
-      reference: uuidv4(),
       entryDate: currentDate,
       startDate: currentDate,
     });

@@ -1,7 +1,7 @@
 import { Button } from "@lib/gds-components";
 import {
   DEFAULT_DEVELOPMENT_PLAN,
-  DEFAULT_TIMETABLE_EVENTS,
+  getDefaultTimetableEvents,
 } from "@lib/constants";
 import { Link } from "react-router-dom";
 import { PageRoute, Journey } from "../../routes/routes";
@@ -20,7 +20,9 @@ export const CreateTimetablePage = () => {
   } = useFormContext();
 
   useEffect(() => {
-    setTimetableEvents(DEFAULT_TIMETABLE_EVENTS);
+    setTimetableEvents(
+      getDefaultTimetableEvents(DEFAULT_DEVELOPMENT_PLAN.reference)
+    );
     setDevelopmentPlan(DEFAULT_DEVELOPMENT_PLAN);
     setLoadedTimetableEvents(null);
     setLoadedDevelopmentPlan(null);
