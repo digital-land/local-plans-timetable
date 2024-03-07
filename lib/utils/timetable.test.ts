@@ -451,66 +451,61 @@ describe("resolveDevelopmentPlanCSV", () => {
   });
 });
 
+interface StageProgressTestCase {
+  lastUpdatedDate: string;
+  startDate: string;
+  endDate?: string;
+  expectedProgress: string;
+}
+
+const stageProgressTestCases: StageProgressTestCase[] = [
+  {
+    lastUpdatedDate: "2024-02-07T09:03:53.514Z",
+    startDate: "2024-03-02",
+    expectedProgress: "NOT STARTED",
+  },
+  {
+    lastUpdatedDate: "2024-02-07T09:03:53.514Z",
+    startDate: "2024-03",
+    expectedProgress: "NOT STARTED",
+  },
+  {
+    lastUpdatedDate: "2024-02-07T09:03:53.514Z",
+    startDate: "2024-01-02",
+    expectedProgress: "FINISHED",
+  },
+  {
+    lastUpdatedDate: "2024-02-07T09:03:53.514Z",
+    startDate: "2024-01",
+    expectedProgress: "FINISHED",
+  },
+  {
+    lastUpdatedDate: "2024-02-07T09:03:53.514Z",
+    startDate: "2024-03",
+    endDate: "2024-06",
+    expectedProgress: "NOT STARTED",
+  },
+  {
+    lastUpdatedDate: "2024-02-07T09:03:53.514Z",
+    startDate: "2024-01",
+    endDate: "2024-06",
+    expectedProgress: "IN PROGRESS",
+  },
+  {
+    lastUpdatedDate: "2024-02-07T09:03:53.514Z",
+    startDate: "2023-11",
+    endDate: "2024-01",
+    expectedProgress: "FINISHED",
+  },
+];
+
 describe("getStageProgress", () => {
-  test("returns IN PROGRESS when startDate is current date", () => {
-    const startDate = new Date();
+  test.each(stageProgressTestCases)(
+    "returns the correct progress status ($expectedProgress)",
+    ({ lastUpdatedDate, startDate, endDate, expectedProgress }) => {
+      const progress = getStageProgress(lastUpdatedDate, startDate, endDate);
 
-    const progress = getStageProgress(startDate.toISOString());
-
-    expect(progress).toBe("IN PROGRESS");
-  });
-
-  test("returns NOT STARTED when startDate is in the future", () => {
-    const startDate = new Date();
-
-    startDate.setMonth(startDate.getMonth() + 1);
-
-    const progress = getStageProgress(startDate.toISOString());
-
-    expect(progress).toBe("NOT STARTED");
-  });
-
-  test("returns FINISHED when startDate is in the past and there is no endDate", () => {
-    const startDate = new Date();
-
-    startDate.setMonth(startDate.getMonth() - 1);
-
-    const progress = getStageProgress(startDate.toISOString());
-
-    expect(progress).toBe("FINISHED");
-  });
-
-  test("returns IN PROGRESS when startDate is in the past and endDate is in the future date", () => {
-    const startDate = new Date();
-
-    startDate.setMonth(startDate.getMonth() - 1);
-
-    const endDate = new Date();
-
-    endDate.setMonth(startDate.getMonth() + 1);
-
-    const progress = getStageProgress(
-      startDate.toISOString(),
-      endDate.toISOString()
-    );
-
-    expect(progress).toBe("IN PROGRESS");
-  });
-
-  test("returns FINISHED when endDate date is in the past", () => {
-    const startDate = new Date();
-
-    startDate.setMonth(startDate.getMonth() - 2);
-
-    const endDate = new Date();
-
-    endDate.setMonth(startDate.getMonth() - 2);
-
-    const progress = getStageProgress(
-      startDate.toISOString(),
-      endDate.toISOString()
-    );
-
-    expect(progress).toBe("FINISHED");
-  });
+      expect(progress).toBe(expectedProgress);
+    }
+  );
 });

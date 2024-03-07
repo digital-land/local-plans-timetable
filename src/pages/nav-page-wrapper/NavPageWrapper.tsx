@@ -40,7 +40,7 @@ export const NavPageWrapper = ({
           <li className={styles.appSubnavSectionItem}>
             <Link
               className={`${styles.appSubnavLink} govuk-link  govuk-link--no-underline`}
-              to="#"
+              to={PageRoute.HowToUpdate}
               aria-current="page"
             >
               How to update a Local Plan timetable online

@@ -8,5 +8,6 @@ export { UpdateTimetableStatusPage } from "./update-timetable-status-page/Update
 export { StatusChangeEventPage } from "./status-change-event-page/StatusChangeEventPage";
 export { CreateTimetablePage } from "./create-timetable-page/CreateTimetablePage";
 export { HowToPublishPage } from "./how-to-publish-page/HowToPublishPage";
+export { HowToUpdatePage } from "./how-to-update-page/HowToUpdatePage";
 export { ExportPage } from "./export-page/ExportPage";
 export { VisualisationExamplePage } from "./visualisation-example/VisualisationExamplePage";
