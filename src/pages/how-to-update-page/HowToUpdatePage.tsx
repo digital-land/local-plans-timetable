@@ -27,7 +27,7 @@ export const HowToUpdatePage = () => (
         target="_blank"
       >
         Planning and Compulsory Purchase Act 2004, Section 15 Regulation 18 on
-        legislation.gov.uk (opens in new tab){" "}
+        legislation.gov.uk (opens in new tab)
       </Link>
       .
     </p>
@@ -37,8 +37,8 @@ export const HowToUpdatePage = () => (
     <p className="govuk-body">
       You can use the{" "}
       <Link className="govuk-link" to={PageRoute.Root}>
-        online timetable form{" "}
-      </Link>
+        online timetable form
+      </Link>{" "}
       to make updates. You’ll need to upload <strong>both</strong> CSV files,
       the ‘Timetable’ CSV and ‘Development plan’ CSV file. You’ll then be able
       to make your changes. For example, change or edit the dates for a
