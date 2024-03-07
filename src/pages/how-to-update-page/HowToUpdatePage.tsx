@@ -40,9 +40,9 @@ export const HowToUpdatePage = () => (
         online timetable form{" "}
       </Link>
       to make updates. You’ll need to upload <strong>both</strong> CSV files,
-      the ‘Timetable’ CSV and ‘Developer plan’ CSV file. You’ll then be able to
-      make your changes. For example, change or edit the dates for a particular
-      stage.
+      the ‘Timetable’ CSV and ‘Development plan’ CSV file. You’ll then be able
+      to make your changes. For example, change or edit the dates for a
+      particular stage.
     </p>
 
     <p className="govuk-body">
