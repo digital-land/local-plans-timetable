@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
+import { TagLabel } from "@lib/gds-components";
 import { TimetableEventKey, getFormattedDate } from "../constants";
 import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
 
@@ -115,26 +116,43 @@ export const toDefaultLocalDateString = (dateString: string) => {
   });
 };
 
-type StageProgress = "IN PROGRESS" | "FINISHED" | "NOT STARTED";
+const getDatePartFromISOString = (isoString: string, includeDays: boolean) => {
+  const date = isoString.split("T")[0];
+  return includeDays ? date : date.split("-").slice(0, 2).join("-");
+};
 
 export const getStageProgress = (
   lastUpdatedDate: string,
   startEventDate: string,
   endEventDate?: string
-): StageProgress => {
-  const startDate = new Date(startEventDate);
-  const referenceDate = new Date(lastUpdatedDate);
+): TagLabel => {
+  const includeDays = startEventDate.split("-").length > 2;
+  const startDate = new Date(
+    getDatePartFromISOString(startEventDate, includeDays)
+  );
+  const referenceDate = new Date(
+    getDatePartFromISOString(lastUpdatedDate, includeDays)
+  );
+  const endDate = endEventDate
+    ? new Date(getDatePartFromISOString(endEventDate, includeDays))
+    : null;
 
-  if (startDate.getTime() > referenceDate.getTime()) return "NOT STARTED";
-
-  if (!endEventDate) {
-    if (startDate.getTime() < referenceDate.getTime()) return "FINISHED";
-    else return "IN PROGRESS";
+  if (!endDate) {
+    return startDate.getTime() <= referenceDate.getTime()
+      ? "FINISHED"
+      : "NOT STARTED";
   }
-  const endDate = new Date(endEventDate);
 
-  if (endDate.getTime() < referenceDate.getTime()) return "FINISHED";
-  else return "IN PROGRESS";
+  if (
+    startDate.getTime() <= referenceDate.getTime() &&
+    endDate.getTime() >= referenceDate.getTime()
+  ) {
+    return "IN PROGRESS";
+  }
+
+  return endDate.getTime() < referenceDate.getTime()
+    ? "FINISHED"
+    : "NOT STARTED";
 };
 
 export const getStatusChangeMessage = (key: TimetableEventKey): string => {
