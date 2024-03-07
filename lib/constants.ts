@@ -58,11 +58,10 @@ const eventsToExclude = new Set<TimetableEventKey>([
 
 export const getDefaultTimetableEvent = (): Omit<
   DevelopmentPlanTimetable,
-  "developmentPlanEvent"
+  "developmentPlanEvent" | "developmentPlan"
 > => ({
   reference: uuidv4(),
   name: "",
-  developmentPlan: "",
   eventDate: "",
   notes: "",
   organisation: "",
@@ -72,9 +71,11 @@ export const getDefaultTimetableEvent = (): Omit<
 });
 
 //These dates will be set on start of form rather than end (opposite to updated events)
-export const DEFAULT_TIMETABLE_EVENTS = Object.values(TimetableEventKey)
-  .filter((key) => !eventsToExclude.has(key))
-  .map((key) => ({
-    developmentPlanEvent: key,
-    ...getDefaultTimetableEvent(),
-  }));
+export const getDefaultTimetableEvents = (devPlanReference: string) =>
+  Object.values(TimetableEventKey)
+    .filter((key) => !eventsToExclude.has(key))
+    .map((key) => ({
+      developmentPlanEvent: key,
+      developmentPlan: devPlanReference,
+      ...getDefaultTimetableEvent(),
+    }));
