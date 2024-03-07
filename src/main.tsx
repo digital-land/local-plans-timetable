@@ -99,6 +99,15 @@ const router = createBrowserRouter(
           path: PageRoute.Export,
           element: FormPageHoC(ExportPage, {}),
         },
+        {
+          path: PageRoute.VisualisationExample,
+          lazy: async () => {
+            const { VisualisationExamplePage } = await import(
+              "./pages/visualisation-example/VisualisationExamplePage"
+            );
+            return { Component: VisualisationExamplePage };
+          },
+        },
       ],
     },
   ],

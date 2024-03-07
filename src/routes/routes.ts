@@ -16,6 +16,7 @@ export enum PageRoute {
   Export = "/export-your-timetable",
   UpdateTimetableStatus = "/update-your-timetable-status",
   StatusChangeEvent = "/about-the-status-change",
+  VisualisationExample = "/visualisation-example"
 }
 
 export enum Journey {
