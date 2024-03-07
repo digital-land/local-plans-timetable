@@ -12,7 +12,6 @@ import {
   StatusChangeEventPage,
   CreateTimetablePage,
   ExportPage,
-  VisualisationExamplePage,
 } from "./pages";
 import { FormPageHoC } from "./pages/FormPageHoc";
 import { validateDescription } from "./pages/description-page/description-validation";
@@ -102,7 +101,12 @@ const router = createBrowserRouter(
         },
         {
           path: PageRoute.VisualisationExample,
-          element: <VisualisationExamplePage />,
+          lazy: async () => {
+            const { VisualisationExamplePage } = await import(
+              "./pages/visualisation-example/VisualisationExamplePage"
+            );
+            return { Component: VisualisationExamplePage };
+          },
         },
       ],
     },
