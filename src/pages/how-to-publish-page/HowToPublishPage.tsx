@@ -27,7 +27,11 @@ export const HowToPublishPage = () => (
       </li>
       <li>is clearer and more accessible for citizens</li>
     </ul>
-
+    <p className="govuk-body">
+      <Link className="govuk-link" to={PageRoute.VisualisationExample}>
+        View an example of a timetable created using the template.
+      </Link>
+    </p>
     <h2 className="govuk-heading-m">Why this is important</h2>
     <p className="govuk-body">
       Each Local Planning Authority must publish their own Local Plan timetable.
