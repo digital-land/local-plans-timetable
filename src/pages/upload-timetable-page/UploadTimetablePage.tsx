@@ -1,10 +1,13 @@
 import { useCallback } from "react";
 
-import csvToJson from "csvtojson";
-
 import { FileUpload } from "@lib/gds-components";
 import { TimetableEventKey } from "@lib/constants";
 import { useFormContext } from "../../context/use-form-context";
+import { csvToObjectArray } from "@lib/utils/timetable";
+import {
+  DevelopmentPlan,
+  DevelopmentPlanTimetable,
+} from "@lib/types/timetable";
 
 const reader = new FileReader();
 
@@ -22,7 +25,7 @@ export const UploadTimetablePage = (): JSX.Element => {
         const csvString = event.target?.result?.toString();
 
         if (csvString) {
-          const developmentPlan = await csvToJson().fromString(csvString);
+          const developmentPlan = csvToObjectArray<DevelopmentPlan>(csvString);
           setLoadedDevelopmentPlan(developmentPlan);
           // This assumes the last row is the current row
           setDevelopmentPlan(developmentPlan.slice(-1)[0]);
@@ -40,7 +43,7 @@ export const UploadTimetablePage = (): JSX.Element => {
         const csvString = event.target?.result?.toString();
 
         if (csvString) {
-          const loadedEvents = await csvToJson().fromString(csvString);
+          const loadedEvents = csvToObjectArray<DevelopmentPlanTimetable>(csvString);
           setLoadedTimetableEvents(loadedEvents);
           setTimetableEvents(
             loadedEvents
@@ -48,7 +51,8 @@ export const UploadTimetablePage = (): JSX.Element => {
               .filter(
                 (event) =>
                   !event.endDate &&
-                  event.developmentPlanEvent !== TimetableEventKey.TimetableUpdated
+                  event.developmentPlanEvent !==
+                    TimetableEventKey.TimetableUpdated
               )
           );
         }
