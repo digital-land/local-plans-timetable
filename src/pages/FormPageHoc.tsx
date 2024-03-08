@@ -18,6 +18,8 @@ export type ValidateFormParams<P> = {
   timetableEvents: DevelopmentPlanTimetable[];
   statusChangeEvent: StatusChangeEvent | null;
   statusHasChanged: boolean | null;
+  loadedDevelopmentPlan: DevelopmentPlan[] | null;
+  loadedTimetableEvents: DevelopmentPlanTimetable[] | null;
   formProps: P;
 };
 
@@ -35,6 +37,8 @@ export const FormPageHoC = <P extends Record<string, unknown>>(
       statusChangeEvent,
       statusHasChanged,
       userFlow,
+      loadedDevelopmentPlan,
+      loadedTimetableEvents,
     } = useFormContext();
 
     const { previousPage, navigateNext } = useSequence(
@@ -51,6 +55,8 @@ export const FormPageHoC = <P extends Record<string, unknown>>(
         statusChangeEvent,
         statusHasChanged,
         formProps,
+        loadedDevelopmentPlan,
+        loadedTimetableEvents,
       });
 
       if (errors && errors.length > 0) {

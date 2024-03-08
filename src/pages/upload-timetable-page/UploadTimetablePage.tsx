@@ -8,10 +8,17 @@ import {
   DevelopmentPlan,
   DevelopmentPlanTimetable,
 } from "@lib/types/timetable";
+import { ValidationErrorItem } from "joi";
 
 const reader = new FileReader();
 
-export const UploadTimetablePage = (): JSX.Element => {
+type UploadPageProps = {
+  errors?: ValidationErrorItem[];
+};
+
+export const UploadTimetablePage = ({
+  errors,
+}: UploadPageProps): JSX.Element => {
   const {
     setTimetableEvents,
     setLoadedTimetableEvents,
@@ -43,7 +50,8 @@ export const UploadTimetablePage = (): JSX.Element => {
         const csvString = event.target?.result?.toString();
 
         if (csvString) {
-          const loadedEvents = csvToObjectArray<DevelopmentPlanTimetable>(csvString);
+          const loadedEvents =
+            csvToObjectArray<DevelopmentPlanTimetable>(csvString);
           setLoadedTimetableEvents(loadedEvents);
           setTimetableEvents(
             loadedEvents
@@ -71,10 +79,18 @@ export const UploadTimetablePage = (): JSX.Element => {
       <FileUpload
         label="Upload timetable CSV"
         onChange={handleTimetableUpload}
+        id={"timetableEvents"}
+        error={
+          errors?.find((error) => error.path[0] === "timetableEvents")?.message
+        }
       />
       <FileUpload
         label="Upload development plan CSV"
         onChange={handleDevelopmentPlanUpload}
+        id={"developmentPlan"}
+        error={
+          errors?.find((error) => error.path[0] === "developmentPlan")?.message
+        }
       />
     </>
   );
