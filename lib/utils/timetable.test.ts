@@ -459,16 +459,7 @@ interface StageProgressTestCase {
 }
 
 const stageProgressTestCases: StageProgressTestCase[] = [
-  {
-    lastUpdatedDate: "2024-02-07T09:03:53.514Z",
-    startDate: "2024-03-02",
-    expectedProgress: "NOT STARTED",
-  },
-  {
-    lastUpdatedDate: "2024-02-07T09:03:53.514Z",
-    startDate: "2024-03",
-    expectedProgress: "NOT STARTED",
-  },
+  // Start date only - With day
   {
     lastUpdatedDate: "2024-02-07T09:03:53.514Z",
     startDate: "2024-01-02",
@@ -476,26 +467,66 @@ const stageProgressTestCases: StageProgressTestCase[] = [
   },
   {
     lastUpdatedDate: "2024-02-07T09:03:53.514Z",
+    startDate: "2024-02-07",
+    expectedProgress: "FINISHED",
+  },
+  {
+    lastUpdatedDate: "2024-02-07T09:03:53.514Z",
+    startDate: "2024-03-02",
+    expectedProgress: "NOT STARTED",
+  },
+  // Start date only - Without day
+  {
+    lastUpdatedDate: "2024-02-07T09:03:53.514Z",
     startDate: "2024-01",
+    expectedProgress: "FINISHED",
+  },
+  {
+    lastUpdatedDate: "2024-02-07T09:03:53.514Z",
+    startDate: "2024-02",
     expectedProgress: "FINISHED",
   },
   {
     lastUpdatedDate: "2024-02-07T09:03:53.514Z",
     startDate: "2024-03",
-    endDate: "2024-06",
+    expectedProgress: "NOT STARTED",
+  },
+  // Start and end events
+  {
+    lastUpdatedDate: "2024-02-07T09:03:53.514Z",
+    startDate: "2023-12",
+    endDate: "2024-01",
+    expectedProgress: "FINISHED",
+  },
+  {
+    lastUpdatedDate: "2024-02-07T09:03:53.514Z",
+    startDate: "2024-03",
+    endDate: "2024-04",
     expectedProgress: "NOT STARTED",
   },
   {
     lastUpdatedDate: "2024-02-07T09:03:53.514Z",
     startDate: "2024-01",
-    endDate: "2024-06",
+    endDate: "2024-03",
     expectedProgress: "IN PROGRESS",
   },
   {
     lastUpdatedDate: "2024-02-07T09:03:53.514Z",
-    startDate: "2023-11",
-    endDate: "2024-01",
-    expectedProgress: "FINISHED",
+    startDate: "2024-02",
+    endDate: "2024-03",
+    expectedProgress: "IN PROGRESS",
+  },
+  {
+    lastUpdatedDate: "2024-02-07T09:03:53.514Z",
+    startDate: "2024-01",
+    endDate: "2024-02",
+    expectedProgress: "IN PROGRESS",
+  },
+  {
+    lastUpdatedDate: "2024-02-07T09:03:53.514Z",
+    startDate: "2024-02",
+    endDate: "2024-02",
+    expectedProgress: "IN PROGRESS",
   },
 ];
 
