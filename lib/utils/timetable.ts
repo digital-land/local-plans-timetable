@@ -134,7 +134,9 @@ export const getStageProgress = (
   const referenceDate = new Date(
     getDatePartFromISOString(lastUpdatedDate, includeDays)
   );
-  const endDate = endEventDate ? new Date(endEventDate) : null;
+  const endDate = endEventDate
+    ? new Date(getDatePartFromISOString(endEventDate, includeDays))
+    : null;
 
   if (!endDate) {
     return startDate.getTime() <= referenceDate.getTime()
