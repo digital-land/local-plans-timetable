@@ -1,8 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
-import csvToJson from "csvtojson";
-
-import { loadCSV } from "../utils/timetable";
+import { csvToObjectArray, loadCSV } from "../utils/timetable";
 import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
 import { PlanViewer } from "./PlanViewer";
 import {
@@ -28,10 +26,10 @@ export const Visualisation = (props: VisualisationProps) => {
 
   const loadData = useCallback(async () => {
     const eventsData = await loadCSV(timetableEventsFilepath);
-    const events = await csvToJson().fromString(eventsData);
+    const events = csvToObjectArray<DevelopmentPlanTimetable>(eventsData);
 
     const developmentPlanData = await loadCSV(developmentPlanFilepath);
-    const developmentPlan = await csvToJson().fromString(developmentPlanData);
+    const developmentPlan = csvToObjectArray<DevelopmentPlan>(developmentPlanData);
 
     const loadedData: DevelopmentPlan = {
       ...DEFAULT_DEVELOPMENT_PLAN,

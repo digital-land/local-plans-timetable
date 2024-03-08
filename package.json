@@ -40,6 +40,7 @@
     "@testing-library/user-event": "^14.5.2",
     "@types/jest": "^29.5.11",
     "@types/node": "^20.11.10",
+    "@types/papaparse": "^5.3.14",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.14.0",
@@ -69,9 +70,9 @@
   "dependencies": {
     "accessible-autocomplete": "^2.0.4",
     "classnames": "^2.5.1",
-    "csvtojson": "^2.0.10",
     "govuk-frontend": "^5.0.0",
     "joi": "^17.12.1",
+    "papaparse": "^5.4.1",
     "react-router-dom": "^6.22.1",
     "uuid": "^9.0.1"
   }
