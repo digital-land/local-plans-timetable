@@ -164,8 +164,10 @@ export const HowToPublishPage = () => (
       <a
         className="govuk-link"
         href="https://www.gov.uk/guidance/using-csv-file-format"
+        target="_blank"
+        rel="noopener noreferrer"
       >
-        read more about using CSV files on GOV.UK
+        read more about using CSV files on GOV.UK (opens in new tab)
       </a>
       .
     </p>
