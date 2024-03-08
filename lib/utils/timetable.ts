@@ -1,23 +1,25 @@
 import { v4 as uuidv4 } from "uuid";
+import { unparse, parse } from "papaparse";
 
 import { TagLabel } from "@lib/gds-components";
 import { TimetableEventKey, getFormattedDate } from "../constants";
 import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
 
-const objectArrayToCSVString = (
-  objArr: { [key: string]: unknown }[]
-): string => {
-  const headers = Object.keys(objArr[0]);
-
-  const headLine = headers.join(",");
-
-  const CSVRows = objArr.map((timetableItem) => {
-    const values = headers.map((header) => timetableItem[header]);
-
-    return values.join(",");
+export const csvToObjectArray = <T>(CSVString: string): T[] => {
+  const json = parse<T>(CSVString, {
+    header: true,
   });
 
-  return [headLine, ...CSVRows].join("\r\n");
+  if (json.errors.length) {
+    throw new Error("Error parsing CSV");
+  }
+  return json.data;
+};
+
+export const objectArrayToCSVString = (
+  objArr: { [key: string]: unknown }[]
+): string => {
+  return unparse(objArr);
 };
 
 export const resolveTimetableEventsCSV = (
