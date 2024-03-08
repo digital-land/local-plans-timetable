@@ -16,6 +16,7 @@ import {
 import { FormPageHoC } from "./pages/FormPageHoc";
 import { validateDescription } from "./pages/description-page/description-validation";
 import { validateTimetableStage } from "./pages/stage-page/validate-stage-page";
+import { validateUpload } from "./pages/upload-timetable-page/validate-upload-timetable-page";
 import { validateTitle } from "./pages/title-page/validate-title-page";
 import { validatePublishLDSEvent } from "./pages/publish-LDS-page/validate-publish-LDS-page";
 import { validateStatusChangeEvent } from "./pages/status-change-event-page/status-change-event-validation";
@@ -58,7 +59,7 @@ const router = createBrowserRouter(
         },
         {
           path: PageRoute.UploadTimetable,
-          element: FormPageHoC(UploadTimetablePage, {}),
+          element: FormPageHoC(UploadTimetablePage, {}, validateUpload),
         },
         {
           path: PageRoute.LPA,
