@@ -12,7 +12,7 @@ export const NavPageWrapper = ({
   children,
   pageTitle,
 }: NavPageWrapperProps) => (
-  <div className="govuk-grid-row">
+  <div className="govuk-grid-row govuk-!-margin-top-9">
     <div className="govuk-grid-column-one-third">
       <nav className={styles.appSubnav} aria-labelledby="app-subnav-heading">
         <ul className={styles.appSubnavSection}>
@@ -53,6 +53,15 @@ export const NavPageWrapper = ({
               aria-current="page"
             >
               Publishing a local plan timetable online: guidance for web teams
+            </Link>
+          </li>
+          <li className={styles.appSubnavSectionItem}>
+            <Link
+              className={`${styles.appSubnavLink} govuk-link  govuk-link--no-underline`}
+              to={PageRoute.VisualisationExample}
+              aria-current="page"
+            >
+              What a Local Plan timetable created online looks like 
             </Link>
           </li>
         </ul>
