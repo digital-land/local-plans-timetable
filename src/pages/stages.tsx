@@ -55,14 +55,14 @@ export const stages: Stage[] = [
     key: PageRoute.Submission,
     title: "Submission stage",
     description: (
-      <p className="govuk-body">
+      <div className="govuk-body">
         The date the plan is submitted to the Planning Inspectorate
         <div className="govuk-inset-text">
           If you do not know the exact dates tell us predicted timescales.
           <br />
           You’ll need to update this form once a date is confirmed.
         </div>
-      </p>
+      </div>
     ),
     startEventKey: TimetableEventKey.PlanSubmittedForExamination,
   },
@@ -70,7 +70,7 @@ export const stages: Stage[] = [
     key: PageRoute.IndependentExamination,
     title: "Independent examination stage",
     description: (
-      <p className="govuk-body">
+      <div className="govuk-body">
         Local Plan examination hearing dates set by the Planning Inspectorate
         <div className="govuk-inset-text">
           If you do not know the exact dates tell us predicted timescales.
@@ -79,7 +79,7 @@ export const stages: Stage[] = [
           <br />
           confirmed. Usually, this phase takes around 6 months
         </div>
-      </p>
+      </div>
     ),
     startEventKey: TimetableEventKey.ExaminationHearingStart,
     endEventKey: TimetableEventKey.ExaminationHearingEnd,
@@ -88,14 +88,14 @@ export const stages: Stage[] = [
     key: PageRoute.PlanAdopted,
     title: "Plan adopted",
     description: (
-      <p className="govuk-body">
+      <div className="govuk-body">
         Date the plan is adopted and will inform development in the area
         <div className="govuk-inset-text">
           If you do not know the exact dates tell us predicted timescales.
           <br />
           You’ll need to update this form once the plan is adopted.
         </div>
-      </p>
+      </div>
     ),
     startEventKey: TimetableEventKey.PlanAdopted,
   },
