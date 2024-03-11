@@ -16,7 +16,7 @@ export const UpdateTimetableStatusPage = ({
       <h1 className="govuk-heading-xl govuk-!-margin-top-6">
         Do you need to update the status of your Local Plan timetable?
         <span className="govuk-caption-m govuk-!-margin-top-2">
-          <p className="govuk-body">
+          <div className="govuk-body">
             Has the plan been:
             <br />
             <br />
@@ -29,7 +29,7 @@ export const UpdateTimetableStatusPage = ({
               </li>
               <li>not adopted by the Local Authority</li>
             </ul>
-          </p>
+          </div>
         </span>
       </h1>
       <Radios
