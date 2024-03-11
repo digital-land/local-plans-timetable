@@ -9,7 +9,13 @@ type UpdateTimetableStatusPageProps = {
 export const UpdateTimetableStatusPage = ({
   errors,
 }: UpdateTimetableStatusPageProps): JSX.Element => {
-  const { setStatusHasChanged } = useFormContext();
+  const { setStatusHasChanged, statusHasChanged } = useFormContext();
+
+  const radioValue = statusHasChanged
+    ? "y"
+    : statusHasChanged == false
+    ? "n"
+    : undefined;
 
   return (
     <>
@@ -39,6 +45,7 @@ export const UpdateTimetableStatusPage = ({
           { label: "Yes", value: "y" },
           { label: "No", value: "n" },
         ]}
+        selectedOption={radioValue}
         error={errors?.[0].message}
         id="updateStatus"
       />

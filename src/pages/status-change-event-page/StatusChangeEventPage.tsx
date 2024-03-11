@@ -38,6 +38,10 @@ export const StatusChangeEventPage = ({
     throw new Error("No status change event");
   }
 
+  const radioValue = statusChangeOptions.find(
+    (event) => event.value === statusChangeEvent.developmentPlanEvent
+  )?.value;
+
   return (
     <>
       <h1 className="govuk-heading-xl govuk-!-margin-top-6">
@@ -71,6 +75,7 @@ export const StatusChangeEventPage = ({
             ?.message
         }
         id="developmentPlanEvent"
+        selectedOption={radioValue}
       />
       <DateInput
         value={statusChangeEvent.eventDate}
