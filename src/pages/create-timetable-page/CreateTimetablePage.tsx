@@ -79,9 +79,9 @@ export const CreateTimetablePage = () => {
       </p>
       <p className="govuk-body">
         Before you fill out the form, consider who else you might need to speak
-        to be able to give accurate timescales. You’ll need to give
-        <b> start and end</b> dates (months and years) for key stages of the
-        local plan.
+        to be able to give accurate timescales. You’ll need to give{" "}
+        <strong>start and end</strong> dates (months and years) for key stages
+        of the local plan.
       </p>
       <p className="govuk-body">
         Based on the dates you enter, the online form will automatically show if
