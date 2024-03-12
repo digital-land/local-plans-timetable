@@ -67,7 +67,7 @@ export const ExportPage = () => {
 
   return (
     <>
-      <h1 className="govuk-heading-xl govuk-!-margin-top-6">
+      <h1 className="govuk-heading-l govuk-!-margin-top-6">
         Export your timetable
       </h1>
 

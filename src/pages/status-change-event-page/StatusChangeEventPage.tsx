@@ -40,7 +40,7 @@ export const StatusChangeEventPage = ({
 
   return (
     <>
-      <h1 className="govuk-heading-xl govuk-!-margin-top-6">
+      <h1 className="govuk-heading-l govuk-!-margin-top-6">
         Tell us about the status change
       </h1>
       <h2 className="govuk-heading-l govuk-!-margin-top-6">
