@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 import { NavPageWrapper } from "../nav-page-wrapper/NavPageWrapper";
 import { PageRoute } from "../../routes/routes";
-import { GuidencePageStep4CodeSnippets } from "./code snippets/GuidencePageStep4CodeSnippets";
-import { JavaScriptTagCodeSnippet } from "./code snippets/JavaScriptTagCodeSnippet";
-import { CSSTagCodeSnippet } from "./code snippets/CSSTagCodeSnippet";
-import { GuidencePageExampleCodeSnippet } from "./code snippets/GuidencePageExampleCodeSnippet";
-import "./PublishOnlineGuidencePage.css";
+import { GuidencePageStep4CodeSnippets } from "./code-snippets/GuidencePageStep4CodeSnippets";
+import { JavaScriptTagCodeSnippet } from "./code-snippets/JavaScriptTagCodeSnippet";
+import { CSSTagCodeSnippet } from "./code-snippets/CSSTagCodeSnippet";
+import { GuidencePageExampleCodeSnippet } from "./code-snippets/GuidencePageExampleCodeSnippet";
 
 export const PublishOnlineGuidencePage = () => (
   <NavPageWrapper pageTitle="Publishing a Local Plan timetable online: guidance for web teams">
