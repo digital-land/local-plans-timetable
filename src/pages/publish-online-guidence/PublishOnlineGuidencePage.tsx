@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 import { NavPageWrapper } from "../nav-page-wrapper/NavPageWrapper";
 import { PageRoute } from "../../routes/routes";
+import { GuidencePageStep4CodeSnippets } from "./code snippets/GuidencePageStep4CodeSnippets";
+import { JavaScriptTagCodeSnippet } from "./code snippets/JavaScriptTagCodeSnippet";
+import { CSSTagCodeSnippet } from "./code snippets/CSSTagCodeSnippet";
+import { GuidencePageExampleCodeSnippet } from "./code snippets/GuidencePageExampleCodeSnippet";
 
 export const PublishOnlineGuidencePage = () => (
   <NavPageWrapper pageTitle="Publishing a Local Plan timetable online: guidance for web teams">
@@ -28,10 +32,11 @@ export const PublishOnlineGuidencePage = () => (
     </h3>
 
     <p className="govuk-body">
-      The
+      The{" "}
       <Link
         className="govuk-link"
         to="https://www.gov.uk/government/organisations/department-for-levelling-up-housing-and-communities"
+        target="_blank"
       >
         Department for Levelling Up, Housing and Communities (DLUHC) (opens in
         new tab)
@@ -198,16 +203,7 @@ export const PublishOnlineGuidencePage = () => (
       page’s HTML code.
     </p>
 
-    <div style={{ background: "#F3F2F1", padding: "10px" }}>
-      <code>
-        <span style={{ color: "red" }}>
-          &lt;link rel="stylesheet" type="text/css" href=
-        </span>
-        "https://cdn.statically.io/gh/digital-land/local-plans-timetable/master/timetable-visualisation.min.css"
-        <span style={{ color: "red" }}>/&gt;</span>
-      </code>
-    </div>
-    <br />
+    <CSSTagCodeSnippet />
 
     <p className="govuk-body">
       The following <strong>JavaScript tag</strong> will need to go inside the{" "}
@@ -215,14 +211,7 @@ export const PublishOnlineGuidencePage = () => (
       page’s HTML code.
     </p>
 
-    <div style={{ background: "#F3F2F1", padding: "10px" }}>
-      <code>
-        <span style={{ color: "red" }}>&lt;script src=</span>
-        "https://cdn.statically.io/gh/digital-land/local-plans-timetable/master/timetable-visualisation.min.js
-        <span style={{ color: "red" }}>/&gt;&lt;/script&gt;</span>
-      </code>
-    </div>
-    <br />
+    <JavaScriptTagCodeSnippet />
 
     <p className="govuk-body">
       The CSS and JavaScript are now available in your website.
@@ -253,22 +242,7 @@ export const PublishOnlineGuidencePage = () => (
       visualisation.
     </p>
 
-    <pre>
-      <code tabIndex={0}>
-        <span style={{ color: "green" }}> &lt;script&gt;</span>
-        window.DLUHC.renderTimetableVisualisation( &#123;
-        developmentPlanFilepath:
-        <span style={{ color: "red" }}>
-          "https://raw.githubusercontent.com/digital-land/local-plans-timetable/main/assets/development-plan.csv",
-        </span>
-        timetableEventsFilepath:
-        <span style={{ color: "red" }}>
-          "https://raw.githubusercontent.com/digital-land/local-plans-timetable/main/assets/timetable.csv",
-        </span>
-        &#125;, document.getElementById("timetable-visualisation") );
-        <span style={{ color: "green" }}>&lt;/script&gt;</span>
-      </code>
-    </pre>
+    <GuidencePageStep4CodeSnippets />
 
     <p className="govuk-body">
       <strong>An example of the component in a webpage</strong>
@@ -279,7 +253,7 @@ export const PublishOnlineGuidencePage = () => (
       webpage.
     </p>
 
-    <>code snippet</>
+    <GuidencePageExampleCodeSnippet />
 
     <h3 className="govuk-heading-s">
       Step 5: Preview the visualisation of the timetable
