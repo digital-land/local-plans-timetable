@@ -59,10 +59,7 @@ export const PublishOnlineGuidencePage = () => (
         automatically show if stages within the timetable are ‘not started’, ‘in
         progress’ or ‘finished’, based on the dates entered
       </li>
-      <li>
-        make the information clearer and more accessible for citizens and
-        property developers
-      </li>
+      <li>make the information clearer and more accessible for citizens</li>
     </ul>
 
     <p className="govuk-body">
@@ -163,7 +160,7 @@ export const PublishOnlineGuidencePage = () => (
     </h3>
 
     <p className="govuk-body">
-      Once your planning office colleague has completed the timetable online
+      Once your planning officer colleague has completed the timetable online
       form, they will need to export the following files and share them with
       you. Both are in CSV format.
     </p>
