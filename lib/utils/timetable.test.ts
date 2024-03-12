@@ -2,7 +2,9 @@ import { v4 as uuidv4 } from "uuid";
 
 import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
 import {
+  camelCaseToKebabCase,
   getStageProgress,
+  kebabCaseToCamelCase,
   resolveDevelopmentPlanCSV,
   resolveTimetableEventsCSV,
 } from "./timetable";
@@ -539,4 +541,22 @@ describe("getStageProgress", () => {
       expect(progress).toBe(expectedProgress);
     }
   );
+});
+
+describe("camelCaseToKebabCase", () => {
+  test("returns kebab-case string", () => {
+    const input = "camelCaseString";
+    const expectedResult = "camel-case-string";
+
+    expect(camelCaseToKebabCase(input)).toBe(expectedResult);
+  });
+});
+
+describe("kebabCaseToCamelCase", () => {
+  test("returns camelCase string", () => {
+    const input = "kebab-case-string";
+    const expectedResult = "kebabCaseString";
+
+    expect(kebabCaseToCamelCase(input)).toBe(expectedResult);
+  });
 });
