@@ -17,7 +17,7 @@ export const UpdateTimetableStatusPage = ({
         Do you need to update the status of your Local Plan timetable?
         <span className="govuk-caption-m govuk-!-margin-top-2">
           <p className="govuk-body">Has the plan been:</p>
-          <ul className="govuk-list govuk-list--bullet">
+          <ul className="govuk-list govuk-list--bullet govuk-!-margin-left-2">
             <li>paused</li>
             <li>withdrawn</li>
             <li>
