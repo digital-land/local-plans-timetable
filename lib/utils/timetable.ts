@@ -8,6 +8,7 @@ import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
 export const csvToObjectArray = <T>(CSVString: string): T[] => {
   const json = parse<T>(CSVString, {
     header: true,
+    transformHeader: (header) => kebabCaseToCamelCase(header),
   });
 
   if (json.errors.length) {
@@ -19,7 +20,22 @@ export const csvToObjectArray = <T>(CSVString: string): T[] => {
 export const objectArrayToCSVString = (
   objArr: { [key: string]: unknown }[]
 ): string => {
-  return unparse(objArr);
+  // ensure all objects keys are in the same order
+  const orderedObjectArray = objArr.map((object) =>
+    Object.keys(object)
+      .sort()
+      .reduce((obj: { [key: string]: unknown }, key) => {
+        obj[key] = object[key];
+        return obj;
+      }, {})
+  );
+
+  return unparse({
+    fields: Object.keys(orderedObjectArray[0]).map((header) =>
+      camelCaseToKebabCase(header)
+    ),
+    data: orderedObjectArray.map((obj) => Object.values(obj)),
+  });
 };
 
 export const resolveTimetableEventsCSV = (
@@ -170,4 +186,12 @@ export const getStatusChangeMessage = (key: TimetableEventKey): string => {
     default:
       throw new Error("invalid event");
   }
+};
+
+export const camelCaseToKebabCase = (str: string): string => {
+  return str.replace(/[A-Z]/g, (x) => `-${x[0].toLowerCase()}`);
+};
+
+export const kebabCaseToCamelCase = (str: string): string => {
+  return str.replace(/-./g, (x) => x[1].toUpperCase());
 };
