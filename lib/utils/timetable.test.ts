@@ -54,9 +54,9 @@ const eventsTestCases: EventsTestCase[] = [
     ],
     loadedData: null,
     expectedCSV:
-      "reference,name,developmentPlan,developmentPlanEvent,eventDate,notes,organisation,entryDate,startDate,endDate\r\n" +
-      "1,name,development-plan,public-consultation-start,2023-01-01,,organisation,2023-01-01T00:00:00.000Z,2023-01-01T00:00:00.000Z,\r\n" +
-      "2,name,development-plan,examination-hearing-start,2023-01-02,,organisation,2023-01-01T00:00:00.000Z,2023-01-01T00:00:00.000Z,",
+      "development-plan,development-plan-event,end-date,entry-date,event-date,name,notes,organisation,reference,start-date\r\n" +
+      "development-plan,public-consultation-start,,2023-01-01T00:00:00.000Z,2023-01-01,name,,organisation,1,2023-01-01T00:00:00.000Z\r\n" +
+      "development-plan,examination-hearing-start,,2023-01-01T00:00:00.000Z,2023-01-02,name,,organisation,2,2023-01-01T00:00:00.000Z",
   },
   {
     name: "loaded events with no changes",
@@ -113,9 +113,9 @@ const eventsTestCases: EventsTestCase[] = [
       },
     ],
     expectedCSV:
-      "reference,name,developmentPlan,developmentPlanEvent,eventDate,notes,organisation,entryDate,startDate,endDate\r\n" +
-      "1,name,development-plan,public-consultation-start,2023-01-01,,organisation,2023-01-01T00:00:00.000Z,2023-01-01T00:00:00.000Z,\r\n" +
-      "2,name,development-plan,examination-hearing-start,2023-01-02,,organisation,2023-01-01T00:00:00.000Z,2023-01-01T00:00:00.000Z,",
+      "development-plan,development-plan-event,end-date,entry-date,event-date,name,notes,organisation,reference,start-date\r\n" +
+      "development-plan,public-consultation-start,,2023-01-01T00:00:00.000Z,2023-01-01,name,,organisation,1,2023-01-01T00:00:00.000Z\r\n" +
+      "development-plan,examination-hearing-start,,2023-01-01T00:00:00.000Z,2023-01-02,name,,organisation,2,2023-01-01T00:00:00.000Z",
   },
   {
     name: "loaded events with changes",
@@ -172,10 +172,10 @@ const eventsTestCases: EventsTestCase[] = [
       },
     ],
     expectedCSV:
-      "reference,name,developmentPlan,developmentPlanEvent,eventDate,notes,organisation,entryDate,startDate,endDate\r\n" +
-      "1,name,development-plan,public-consultation-start,2023-01-01,,organisation,2023-01-01T00:00:00.000Z,2023-01-01T00:00:00.000Z,\r\n" +
-      `2,name,development-plan,examination-hearing-start,2023-01-03,,organisation,2023-01-01T00:00:00.000Z,2023-01-01T00:00:00.000Z,${currentDate}\r\n` +
-      `3,name,development-plan,examination-hearing-start,2023-01-02,,organisation,${currentDate},${currentDate},`,
+      "development-plan,development-plan-event,end-date,entry-date,event-date,name,notes,organisation,reference,start-date\r\n" +
+      "development-plan,public-consultation-start,,2023-01-01T00:00:00.000Z,2023-01-01,name,,organisation,1,2023-01-01T00:00:00.000Z\r\n" +
+      `development-plan,examination-hearing-start,${currentDate},2023-01-01T00:00:00.000Z,2023-01-03,name,,organisation,2,2023-01-01T00:00:00.000Z\r\n` +
+      `development-plan,examination-hearing-start,,${currentDate},2023-01-02,name,,organisation,3,${currentDate}`,
   },
   {
     name: "loaded events with changes and previously invalidated row",
@@ -256,11 +256,11 @@ const eventsTestCases: EventsTestCase[] = [
       },
     ],
     expectedCSV:
-      "reference,name,developmentPlan,developmentPlanEvent,eventDate,notes,organisation,entryDate,startDate,endDate\r\n" +
-      "1,name,development-plan,public-consultation-start,2023-01-03,,organisation,2022-12-20T00:00:00.000Z,2022-12-20T00:00:00.000Z,2023-01-01\r\n" +
-      "2,name,development-plan,public-consultation-start,2023-01-01,,organisation,2023-01-01T00:00:00.000Z,2023-01-01T00:00:00.000Z,\r\n" +
-      `3,name,development-plan,examination-hearing-start,2023-01-03,,organisation,2023-01-01T00:00:00.000Z,2023-01-01T00:00:00.000Z,${currentDate}\r\n` +
-      `4,name,development-plan,examination-hearing-start,2023-01-02,,organisation,${currentDate},${currentDate},`,
+      "development-plan,development-plan-event,end-date,entry-date,event-date,name,notes,organisation,reference,start-date\r\n" +
+      "development-plan,public-consultation-start,2023-01-01,2022-12-20T00:00:00.000Z,2023-01-03,name,,organisation,1,2022-12-20T00:00:00.000Z\r\n" +
+      "development-plan,public-consultation-start,,2023-01-01T00:00:00.000Z,2023-01-01,name,,organisation,2,2023-01-01T00:00:00.000Z\r\n" +
+      `development-plan,examination-hearing-start,${currentDate},2023-01-01T00:00:00.000Z,2023-01-03,name,,organisation,3,2023-01-01T00:00:00.000Z\r\n` +
+      `development-plan,examination-hearing-start,,${currentDate},2023-01-02,name,,organisation,4,${currentDate}`,
   },
 ];
 
@@ -290,8 +290,8 @@ const planTestCases: PlanTestCase[] = [
     },
     loadedData: null,
     expectedCSV:
-      "reference,name,description,developmentPlanType,periodStartDate,periodEndDate,developmentPlanGeography,documentationUrl,organisations,entryDate,startDate,endDate\r\n" +
-      "1,name,description,type,2023-01-01,2023-01-02,geography,url,organisations,2023-01-01T00:00:00.000Z,2023-01-01T00:00:00.000Z,",
+      "description,development-plan-geography,development-plan-type,documentation-url,end-date,entry-date,name,organisations,period-end-date,period-start-date,reference,start-date\r\n" +
+      "description,geography,type,url,,2023-01-01T00:00:00.000Z,name,organisations,2023-01-02,2023-01-01,1,2023-01-01T00:00:00.000Z",
   },
   {
     name: "loaded plan with no changes",
@@ -326,8 +326,8 @@ const planTestCases: PlanTestCase[] = [
       },
     ],
     expectedCSV:
-      "reference,name,description,developmentPlanType,periodStartDate,periodEndDate,developmentPlanGeography,documentationUrl,organisations,entryDate,startDate,endDate\r\n" +
-      "1,name,description,type,2023-01-01,2023-01-02,geography,url,organisations,2023-01-01T00:00:00.000Z,2023-01-01T00:00:00.000Z,",
+      "description,development-plan-geography,development-plan-type,documentation-url,end-date,entry-date,name,organisations,period-end-date,period-start-date,reference,start-date\r\n" +
+      "description,geography,type,url,,2023-01-01T00:00:00.000Z,name,organisations,2023-01-02,2023-01-01,1,2023-01-01T00:00:00.000Z",
   },
   {
     name: "loaded plan with changes",
@@ -362,9 +362,9 @@ const planTestCases: PlanTestCase[] = [
       },
     ],
     expectedCSV:
-      "reference,name,description,developmentPlanType,periodStartDate,periodEndDate,developmentPlanGeography,documentationUrl,organisations,entryDate,startDate,endDate\r\n" +
-      `1,name,description,type,2023-01-01,2023-01-02,geography,url,organisations,2023-01-01T00:00:00.000Z,2023-01-01T00:00:00.000Z,${currentDate}\r\n` +
-      `1,name,description,type,2023-01-01,2023-01-02,geography,url,new organisations,${currentDate},${currentDate},`,
+      "description,development-plan-geography,development-plan-type,documentation-url,end-date,entry-date,name,organisations,period-end-date,period-start-date,reference,start-date\r\n" +
+      `description,geography,type,url,${currentDate},2023-01-01T00:00:00.000Z,name,organisations,2023-01-02,2023-01-01,1,2023-01-01T00:00:00.000Z\r\n` +
+      `description,geography,type,url,,${currentDate},name,new organisations,2023-01-02,2023-01-01,1,${currentDate}`,
   },
   {
     name: "loaded plan with changes and previously invalidated row",
@@ -413,10 +413,10 @@ const planTestCases: PlanTestCase[] = [
       },
     ],
     expectedCSV:
-      "reference,name,description,developmentPlanType,periodStartDate,periodEndDate,developmentPlanGeography,documentationUrl,organisations,entryDate,startDate,endDate\r\n" +
-      "1,name,description,type,2023-01-01,2023-01-02,geography,url,old organisations,2023-01-01T00:00:00.000Z,2023-01-01T00:00:00.000Z,2023-02-03\r\n" +
-      `2,name,description,type,2023-01-01,2023-01-02,geography,url,organisations,2023-02-03T00:00:00.000Z,2023-02-03T00:00:00.000Z,${currentDate}\r\n` +
-      `2,name,description,type,2023-01-01,2023-01-02,geography,url,new organisations,${currentDate},${currentDate},`,
+      "description,development-plan-geography,development-plan-type,documentation-url,end-date,entry-date,name,organisations,period-end-date,period-start-date,reference,start-date\r\n" +
+      "description,geography,type,url,2023-02-03,2023-01-01T00:00:00.000Z,name,old organisations,2023-01-02,2023-01-01,1,2023-01-01T00:00:00.000Z\r\n" +
+      `description,geography,type,url,${currentDate},2023-02-03T00:00:00.000Z,name,organisations,2023-01-02,2023-01-01,2,2023-02-03T00:00:00.000Z\r\n` +
+      `description,geography,type,url,,${currentDate},name,new organisations,2023-01-02,2023-01-01,2,${currentDate}`,
   },
 ];
 
