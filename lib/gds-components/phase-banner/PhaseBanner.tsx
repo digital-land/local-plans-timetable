@@ -11,11 +11,7 @@ export const PhaseBanner = () => {
             Beta
           </strong>
           <span className="govuk-phase-banner__text">
-            This is a new service – your{" "}
-            <a className="govuk-link" href="/">
-              feedback
-            </a>{" "}
-            will help us to improve it.
+            This is a new service – your feedback will help us to improve it.
           </span>
         </p>
       </div>
