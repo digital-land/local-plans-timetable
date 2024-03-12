@@ -264,10 +264,7 @@ export const PublishOnlineGuidencePage = () => (
 
     <p className="govuk-body">
       You can{" "}
-      <Link
-        className="govuk-link"
-        to="#" /*todo add correct link to the visulaisation*/
-      >
+      <Link className="govuk-link" to={PageRoute.VisualisationExample}>
         view an example of what the timetable visualisation will look like.
       </Link>
     </p>
