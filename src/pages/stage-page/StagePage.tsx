@@ -37,7 +37,7 @@ export const StagePage = ({
   return (
     <>
       <h1
-        className="govuk-heading-xl govuk-!-margin-top-6"
+        className="govuk-heading-l govuk-!-margin-top-6"
         data-testid="form-title"
       >
         {title}
