@@ -9,3 +9,4 @@ export { Footer } from "./footer/Footer";
 export { Tag } from "./tag/Tag";
 export type { TagLabel } from "./tag/Tag";
 export { NotificationBanner } from "./notification-banner/NotificationBanner";
+export { PhaseBanner } from "./phase-banner/PhaseBanner";
