@@ -39,10 +39,10 @@ export const CreateTimetablePage = () => {
     <NavPageWrapper pageTitle="Create or update a Local Plan timetable">
       <p className="govuk-body">
         Use this online form if you work in a Local Planning Authority and need
-        tocreate a new Local Plan timetable or update an existing one.
+        to create a new Local Plan timetable or update an existing one.
       </p>
       <p className="govuk-body"> You can use this online form to:</p>
-      <ul className="govuk-list govuk-list--bullet">
+      <ul className="govuk-list govuk-list--bullet govuk-!-margin-left-2">
         <li>
           create an accessible, online timetable to publish on your
           organisation’s website
@@ -79,9 +79,9 @@ export const CreateTimetablePage = () => {
       </p>
       <p className="govuk-body">
         Before you fill out the form, consider who else you might need to speak
-        to be able to give accurate timescales. You’ll need to give
-        <b> start and end</b> dates (months and years) for key stages of the
-        local plan.
+        to be able to give accurate timescales. You’ll need to give{" "}
+        <strong>start and end</strong> dates (months and years) for key stages
+        of the local plan.
       </p>
       <p className="govuk-body">
         Based on the dates you enter, the online form will automatically show if
