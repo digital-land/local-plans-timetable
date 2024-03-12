@@ -44,10 +44,10 @@ export const StatusChangeEventPage = ({
 
   return (
     <>
-      <h1 className="govuk-heading-xl govuk-!-margin-top-6">
+      <h1 className="govuk-heading-l govuk-!-margin-top-6">
         Tell us about the status change
       </h1>
-      <h2 className="govuk-heading-l govuk-!-margin-top-6">
+      <h2 className="govuk-heading-m govuk-!-margin-top-6">
         What is the status of your Local Plan?
         <span className="govuk-caption-m govuk-!-margin-top-3">
           How has the plan changed, you need to follow legal requirements for

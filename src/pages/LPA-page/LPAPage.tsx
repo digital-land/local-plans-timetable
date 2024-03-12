@@ -27,7 +27,7 @@ export const LPAPage = ({ errors }: LPAPageProps): JSX.Element => {
 
   return (
     <>
-      <h1 className="govuk-heading-xl govuk-!-margin-top-6">
+      <h1 className="govuk-heading-l govuk-!-margin-top-6">
         What is your Local Authority?
         <span className="govuk-caption-m govuk-!-margin-top-3">
           For example, Birmingham City Council
