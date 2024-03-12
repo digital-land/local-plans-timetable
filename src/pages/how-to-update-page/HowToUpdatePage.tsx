@@ -9,7 +9,7 @@ export const HowToUpdatePage = () => (
     </p>
     <p className="govuk-body">You'll need to use the online form to tell us:</p>
 
-    <ul className="govuk-list govuk-list--bullet">
+    <ul className="govuk-list govuk-list--bullet govuk-!-margin-left-2">
       <li>if the timescales for certain stages need to change</li>
       <li>
         if you need to add dates, for example, once examination dates are
@@ -69,7 +69,7 @@ export const HowToUpdatePage = () => (
 
     <p className="govuk-body">For example, if:</p>
 
-    <ul className="govuk-list govuk-list--bullet">
+    <ul className="govuk-list govuk-list--bullet govuk-!-margin-left-2">
       <li>the plan is paused</li>
       <li>the plan is withdrawn</li>
       <li>
