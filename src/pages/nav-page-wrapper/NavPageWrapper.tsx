@@ -68,7 +68,7 @@ export const NavPageWrapper = ({
       </nav>
     </div>
     <div className="govuk-grid-column-two-thirds">
-      <h1 className="govuk-heading-xl">{pageTitle}</h1>
+      <h1 className="govuk-heading-l">{pageTitle}</h1>
       {children}
     </div>
   </div>

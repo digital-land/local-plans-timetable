@@ -21,7 +21,7 @@ export const TextInput = ({
   id,
   error,
 }: TextInputProps) => (
-  <div className={cn("govuk-form-group", { "govuk-form-group--error": error })}>
+  <div className={cn("govuk-form-group govuk-!-width-one-half", { "govuk-form-group--error": error })}>
     <label className="govuk-label" htmlFor={id}>
       {label && label}
       {error && (

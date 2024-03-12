@@ -67,7 +67,7 @@ export const ExportPage = () => {
 
   return (
     <>
-      <h1 className="govuk-heading-xl govuk-!-margin-top-6">
+      <h1 className="govuk-heading-l govuk-!-margin-top-6">
         Export your timetable
       </h1>
 
@@ -124,7 +124,7 @@ export const ExportPage = () => {
         </a>
       </div>
 
-      <h2 className="govuk-heading-l govuk-!-margin-top-6">
+      <h2 className="govuk-heading-m govuk-!-margin-top-6">
         Preview your timetable
       </h2>
 

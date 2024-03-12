@@ -15,7 +15,7 @@ export const HowToPublishPage = () => (
       you’re preparing to publish your Local Development Scheme (LDS).
     </p>
     <p className="govuk-body">Using the online form:</p>
-    <ul className="govuk-list govuk-list--bullet">
+    <ul className="govuk-list govuk-list--bullet govuk-!-margin-left-2">
       <li>
         gives a consistent structure, reducing the amount of data you’ll need to
         include
@@ -71,7 +71,7 @@ export const HowToPublishPage = () => (
       you to give predicted timescales for key stages
     </div>
     <p className="govuk-body">The stages you’ll need to complete are:</p>
-    <ul className="govuk-list govuk-list--bullet">
+    <ul className="govuk-list govuk-list--bullet govuk-!-margin-left-2">
       <li>Publication - the publish date for the Local Development Scheme</li>
       <li>
         Public consultation - start and end dates for the first consultation
@@ -100,7 +100,7 @@ export const HowToPublishPage = () => (
       publish your timetable later on.
     </p>
     <p className="govuk-body">For example, this could be:</p>
-    <ul className="govuk-list govuk-list--bullet">
+    <ul className="govuk-list govuk-list--bullet govuk-!-margin-left-2">
       <li>a website manager</li>
       <li>content editor</li>
       <li>someone in a technical role, such as a developer</li>
