@@ -11,11 +11,7 @@ export const UpdateTimetableStatusPage = ({
 }: UpdateTimetableStatusPageProps): JSX.Element => {
   const { setStatusHasChanged, statusHasChanged } = useFormContext();
 
-  const radioValue = statusHasChanged
-    ? "y"
-    : statusHasChanged == false
-    ? "n"
-    : undefined;
+  const radioValue = statusHasChanged?.toString();
 
   return (
     <>
@@ -39,11 +35,11 @@ export const UpdateTimetableStatusPage = ({
         </span>
       </h1>
       <Radios
-        onChange={(value) => setStatusHasChanged(value === "y")}
+        onChange={(value) => setStatusHasChanged(value === "true")}
         inline
         options={[
-          { label: "Yes", value: "y" },
-          { label: "No", value: "n" },
+          { label: "Yes", value: "true" },
+          { label: "No", value: "false" },
         ]}
         selectedOption={radioValue}
         error={errors?.[0].message}
