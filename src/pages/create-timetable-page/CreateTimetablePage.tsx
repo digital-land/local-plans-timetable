@@ -42,7 +42,7 @@ export const CreateTimetablePage = () => {
         to create a new Local Plan timetable or update an existing one.
       </p>
       <p className="govuk-body"> You can use this online form to:</p>
-      <ul className="govuk-list govuk-list--bullet">
+      <ul className="govuk-list govuk-list--bullet govuk-!-margin-left-2">
         <li>
           create an accessible, online timetable to publish on your
           organisation’s website
