@@ -5,6 +5,7 @@ import { GuidencePageStep4CodeSnippets } from "./code snippets/GuidencePageStep4
 import { JavaScriptTagCodeSnippet } from "./code snippets/JavaScriptTagCodeSnippet";
 import { CSSTagCodeSnippet } from "./code snippets/CSSTagCodeSnippet";
 import { GuidencePageExampleCodeSnippet } from "./code snippets/GuidencePageExampleCodeSnippet";
+import "./PublishOnlineGuidencePage.css";
 
 export const PublishOnlineGuidencePage = () => (
   <NavPageWrapper pageTitle="Publishing a Local Plan timetable online: guidance for web teams">
