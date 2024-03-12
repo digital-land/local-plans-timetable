@@ -180,7 +180,7 @@ export const PublishOnlineGuidencePage = () => (
       structure. For example, this could be in an ‘assets’ folder.
     </p>
 
-    <p className="govuk-body">Both of these are text files (show raw data)</p>
+    <p className="govuk-body">Both of these are text files (show raw data).</p>
 
     <h3 className="govuk-heading-s">Step 3: Import the component </h3>
 
