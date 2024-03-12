@@ -1,3 +1,7 @@
+/**
+ * GDS component: https://design-system.service.gov.uk/components/phase-banner/
+ */
+
 type PhaseBannerProps = {
   linkUrl?: string;
 };
