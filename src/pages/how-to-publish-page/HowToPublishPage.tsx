@@ -111,7 +111,7 @@ export const HowToPublishPage = () => (
     </p>
     <p className="govuk-body">
       Share the specialist guidance with them:{" "}
-      <Link className="govuk-link" to="#" /* TODO: Add link when page exists */>
+      <Link className="govuk-link" to={PageRoute.PublishOnlineGuidence}>
         Publishing a local plan timetable online: guidance for web teams
       </Link>
       .
@@ -176,7 +176,7 @@ export const HowToPublishPage = () => (
       you’ll need to share the CSV files with them. The content editor,
       developer or colleague in a similar role should then follow the steps in
       the guidance:{" "}
-      <Link className="govuk-link" to="#" /* TODO: Add link when page exists */>
+      <Link className="govuk-link" to={PageRoute.PublishOnlineGuidence}>
         Publishing a local plan timetable online: guidance for web teams
       </Link>
       .

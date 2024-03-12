@@ -3,6 +3,7 @@ export enum PageRoute {
   Root = "/",
   HowToPublish = "/how-to-publish-a-timetable",
   HowToUpdate = "/how-to-update-a-timetable",
+  PublishOnlineGuidence = "/publishing-guidence-for-web-teams",
   LPA = "/what-is-your-local-authority",
   Title = "/title-of-local-plan",
   Description = "/local-plan-description",
@@ -16,7 +17,7 @@ export enum PageRoute {
   Export = "/export-your-timetable",
   UpdateTimetableStatus = "/update-your-timetable-status",
   StatusChangeEvent = "/about-the-status-change",
-  VisualisationExample = "/visualisation-example"
+  VisualisationExample = "/visualisation-example",
 }
 
 export enum Journey {

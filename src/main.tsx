@@ -58,6 +58,15 @@ const router = createBrowserRouter(
           },
         },
         {
+          path: PageRoute.PublishOnlineGuidence,
+          lazy: async () => {
+            const { PublishOnlineGuidencePage } = await import(
+              "./pages/publish-online-guidence/PublishOnlineGuidencePage"
+            );
+            return { Component: PublishOnlineGuidencePage };
+          },
+        },
+        {
           path: PageRoute.UploadTimetable,
           element: FormPageHoC(UploadTimetablePage, {}, validateUpload),
         },
