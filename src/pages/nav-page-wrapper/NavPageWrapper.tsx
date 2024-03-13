@@ -49,10 +49,10 @@ export const NavPageWrapper = ({
           <li className={styles.appSubnavSectionItem}>
             <Link
               className={`${styles.appSubnavLink} govuk-link  govuk-link--no-underline`}
-              to="#"
+              to={PageRoute.PublishOnlineGuidence}
               aria-current="page"
             >
-              Publishing a local plan timetable online: guidance for web teams
+              Publishing a Local Plan timetable online: guidance for web teams
             </Link>
           </li>
           <li className={styles.appSubnavSectionItem}>
@@ -61,7 +61,7 @@ export const NavPageWrapper = ({
               to={PageRoute.VisualisationExample}
               aria-current="page"
             >
-              What a Local Plan timetable created online looks like 
+              What a Local Plan timetable created online looks like
             </Link>
           </li>
         </ul>

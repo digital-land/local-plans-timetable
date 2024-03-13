@@ -54,11 +54,7 @@ export const HowToUpdatePage = () => (
     <p className="govuk-body">
       You’ll need to re-upload the relevant files in order for the changes to
       show on your website. Follow the updating section of the{" "}
-      <Link
-        className="govuk-link"
-        to="#"
-        /*todo this needs to link to the Publishing a local plan timetable online: guidance for web teams page, nott created yet */
-      >
+      <Link className="govuk-link" to={PageRoute.PublishOnlineGuidence}>
         Publishing a local plan timetable online: guidance for web teams
       </Link>
       .
