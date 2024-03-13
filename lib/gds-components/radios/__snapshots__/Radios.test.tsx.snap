@@ -7,6 +7,7 @@ exports[`Radios calls onChange 1`] = `
   >
     <fieldset
       class="govuk-fieldset"
+      id="radio"
     >
       <legend
         class="govuk-fieldset__legend govuk-fieldset__legend--l"
@@ -26,7 +27,7 @@ exports[`Radios calls onChange 1`] = `
         >
           <input
             class="govuk-radios__input"
-            id="radio"
+            id="y"
             name="radios"
             role="radio-input"
             type="radio"
@@ -34,7 +35,7 @@ exports[`Radios calls onChange 1`] = `
           />
           <label
             class="govuk-label govuk-radios__label"
-            for="radio"
+            for="y"
           >
             Yes
           </label>
@@ -44,7 +45,7 @@ exports[`Radios calls onChange 1`] = `
         >
           <input
             class="govuk-radios__input"
-            id="radio"
+            id="n"
             name="radios"
             role="radio-input"
             type="radio"
@@ -52,7 +53,7 @@ exports[`Radios calls onChange 1`] = `
           />
           <label
             class="govuk-label govuk-radios__label"
-            for="radio"
+            for="n"
           >
             No
           </label>
@@ -70,6 +71,7 @@ exports[`Radios displays 1 radio input for each option 1`] = `
   >
     <fieldset
       class="govuk-fieldset"
+      id="radio"
     >
       <legend
         class="govuk-fieldset__legend govuk-fieldset__legend--l"
@@ -89,7 +91,7 @@ exports[`Radios displays 1 radio input for each option 1`] = `
         >
           <input
             class="govuk-radios__input"
-            id="radio"
+            id="y"
             name="radios"
             role="radio-input"
             type="radio"
@@ -97,7 +99,7 @@ exports[`Radios displays 1 radio input for each option 1`] = `
           />
           <label
             class="govuk-label govuk-radios__label"
-            for="radio"
+            for="y"
           >
             Yes
           </label>
@@ -107,7 +109,7 @@ exports[`Radios displays 1 radio input for each option 1`] = `
         >
           <input
             class="govuk-radios__input"
-            id="radio"
+            id="n"
             name="radios"
             role="radio-input"
             type="radio"
@@ -115,7 +117,7 @@ exports[`Radios displays 1 radio input for each option 1`] = `
           />
           <label
             class="govuk-label govuk-radios__label"
-            for="radio"
+            for="n"
           >
             No
           </label>

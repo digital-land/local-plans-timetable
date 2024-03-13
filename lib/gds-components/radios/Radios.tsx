@@ -12,6 +12,7 @@ type RadiosProps = {
   id: string;
   inline?: boolean;
   error?: string;
+  selectedOption?: string;
 };
 
 export const Radios = ({
@@ -21,12 +22,13 @@ export const Radios = ({
   options,
   error,
   id,
+  selectedOption,
 }: RadiosProps): JSX.Element => {
   return (
     <div
       className={cn("govuk-form-group", { "govuk-form-group--error": error })}
     >
-      <fieldset className="govuk-fieldset">
+      <fieldset className="govuk-fieldset" id={id}>
         {label && (
           <legend className="govuk-fieldset__legend govuk-fieldset__legend--l">
             <h1 className="govuk-fieldset__heading">{label}</h1>
@@ -47,12 +49,16 @@ export const Radios = ({
                 className="govuk-radios__input"
                 type="radio"
                 value={value}
-                id={id}
+                id={value}
                 name="radios"
                 role="radio-input"
+                checked={selectedOption === value}
                 onChange={(e) => onChange(e.target.value)}
               />
-              <label className="govuk-label govuk-radios__label" htmlFor={id}>
+              <label
+                className="govuk-label govuk-radios__label"
+                htmlFor={value}
+              >
                 {label}
               </label>
             </div>
