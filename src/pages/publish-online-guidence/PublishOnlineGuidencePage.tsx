@@ -42,7 +42,7 @@ export const PublishOnlineGuidencePage = () => (
         new tab)
       </Link>{" "}
       has created an online form. This is to help make it quicker and easier to
-      publish a Local Plan timetable
+      publish a Local Plan timetable.
     </p>
 
     <p className="govuk-body">
@@ -241,9 +241,9 @@ export const PublishOnlineGuidencePage = () => (
 
     <GuidencePageStep4CodeSnippets />
 
-    <p className="govuk-body">
-      <strong>An example of the component in a webpage</strong>
-    </p>
+    <h3 className="govuk-heading-s">
+      An example of the component in a webpage
+    </h3>
 
     <p className="govuk-body">
       Lastly, here is an example of the component being used in a simple
