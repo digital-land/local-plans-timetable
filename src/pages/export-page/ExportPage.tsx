@@ -15,7 +15,7 @@ import {
   toDataURL,
 } from "@lib/utils/timetable";
 import { useFormContext } from "../../context/use-form-context";
-import { PageRoute } from "src/routes/routes";
+import { PageRoute } from "../../routes/routes";
 
 export const ExportPage = () => {
   const {
