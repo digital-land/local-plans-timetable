@@ -157,20 +157,20 @@ export const getStageProgress = (
 
   if (!endDate) {
     return startDate.getTime() <= referenceDate.getTime()
-      ? "FINISHED"
-      : "NOT STARTED";
+      ? "Finished"
+      : "Not Started";
   }
 
   if (
     startDate.getTime() <= referenceDate.getTime() &&
     endDate.getTime() >= referenceDate.getTime()
   ) {
-    return "IN PROGRESS";
+    return "In Progress";
   }
 
   return endDate.getTime() < referenceDate.getTime()
-    ? "FINISHED"
-    : "NOT STARTED";
+    ? "Finished"
+    : "Not Started";
 };
 
 export const getStatusChangeMessage = (key: TimetableEventKey): string => {
