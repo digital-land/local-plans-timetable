@@ -43,7 +43,7 @@ export const GuidencePageStep4CodeSnippets = () => {
         &nbsp;&nbsp;&#41;;
         <br />
         <span className={styles.hljsTag}>
-          <span className={styles.hljsAttr}>&lt;script&gt;</span>
+          <span className={styles.hljsAttr}>&lt;/script&gt;</span>
         </span>
       </code>
     </pre>
