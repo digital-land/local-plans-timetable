@@ -61,9 +61,9 @@ export const PlanViewer = ({
           (stage) =>
             timetableEvents.find(
               (event) => event.developmentPlanEvent === stage.startEventKey
-            )?.eventDate &&
+            )?.eventDate ||
             timetableEvents.find(
-              (event) => event.developmentPlanEvent === stage.startEventKey
+              (event) => event.developmentPlanEvent === stage.endEventKey
             )?.eventDate
         )
         .map<StagePreviewInfo>((stage) => {
@@ -154,9 +154,11 @@ export const PlanViewer = ({
               </th>
               <td className="govuk-table__cell govuk-!-padding-top-6">
                 {endEvent?.eventDate
-                  ? `${toDefaultLocalDateString(
+                  ? `${
                       startEvent.eventDate
-                    )} to ${toDefaultLocalDateString(endEvent?.eventDate)}`
+                        ? toDefaultLocalDateString(startEvent.eventDate)
+                        : "Unknown"
+                    } to ${endEvent.eventDate ? toDefaultLocalDateString(endEvent?.eventDate) : "Unknown"}`
                   : toDefaultLocalDateString(startEvent.eventDate)}
               </td>
             </tr>
