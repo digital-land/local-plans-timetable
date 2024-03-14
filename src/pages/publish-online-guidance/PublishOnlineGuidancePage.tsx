@@ -11,7 +11,7 @@ import {
   renderTimetableVisualisationSnippet,
 } from "./snippets";
 
-export const PublishOnlineGuidencePage = () => (
+export const PublishOnlineGuidancePage = () => (
   <NavPageWrapper pageTitle="Publishing a Local Plan timetable online: guidance for web teams">
     <p className="govuk-body">
       This guidance is for Local Authority{" "}
