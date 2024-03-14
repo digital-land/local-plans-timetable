@@ -48,28 +48,42 @@ export const PlanViewer = ({
 
   const stagesInfo = useMemo<StagePreviewInfo[]>(
     () => [
-      {
-        name: "Local Development Scheme Published",
-        startEvent: publishedEvent,
-      },
-      ...stages.map<StagePreviewInfo>((stage) => {
-        const startEvent = timetableEvents.find(
-          (event) => event.developmentPlanEvent === stage.startEventKey
-        );
+      ...(publishedEvent.eventDate
+        ? [
+            {
+              name: "Local Development Scheme Published",
+              startEvent: publishedEvent,
+            },
+          ]
+        : []),
+      ...stages
+        .filter(
+          (stage) =>
+            timetableEvents.find(
+              (event) => event.developmentPlanEvent === stage.startEventKey
+            )?.eventDate &&
+            timetableEvents.find(
+              (event) => event.developmentPlanEvent === stage.startEventKey
+            )?.eventDate
+        )
+        .map<StagePreviewInfo>((stage) => {
+          const startEvent = timetableEvents.find(
+            (event) => event.developmentPlanEvent === stage.startEventKey
+          );
 
-        const endEvent = timetableEvents.find(
-          (event) => event.developmentPlanEvent === stage.endEventKey
-        );
+          const endEvent = timetableEvents.find(
+            (event) => event.developmentPlanEvent === stage.endEventKey
+          );
 
-        if (!startEvent) {
-          throw new Error("event not found");
-        }
-        return {
-          name: stage.title,
-          startEvent,
-          endEvent,
-        };
-      }),
+          if (!startEvent) {
+            throw new Error("event not found");
+          }
+          return {
+            name: stage.title,
+            startEvent,
+            endEvent,
+          };
+        }),
     ],
     [publishedEvent, timetableEvents]
   );
