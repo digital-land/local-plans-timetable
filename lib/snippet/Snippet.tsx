@@ -1,6 +1,6 @@
 import { CopyBlock } from "react-code-blocks";
 
-import "./snippet.css";
+import styles from "./snippet.module.css";
 
 type SnippetProps = {
   code: string;
@@ -14,7 +14,7 @@ export const Snippet = ({
   showLineNumbers = false,
 }: SnippetProps) => {
   return (
-    <div className="snippet">
+    <div className={styles.snippet}>
       <CopyBlock
         language={language}
         text={code}
