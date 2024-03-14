@@ -475,7 +475,7 @@ const stageProgressTestCases: StageProgressTestCase[] = [
   {
     lastUpdatedDate: "2024-02-07T09:03:53.514Z",
     startDate: "2024-03-02",
-    expectedProgress: "Not Started",
+    expectedProgress: "Not started",
   },
   // Start date only - Without day
   {
@@ -491,7 +491,7 @@ const stageProgressTestCases: StageProgressTestCase[] = [
   {
     lastUpdatedDate: "2024-02-07T09:03:53.514Z",
     startDate: "2024-03",
-    expectedProgress: "Not Started",
+    expectedProgress: "Not started",
   },
   // Start and end events
   {
@@ -504,31 +504,31 @@ const stageProgressTestCases: StageProgressTestCase[] = [
     lastUpdatedDate: "2024-02-07T09:03:53.514Z",
     startDate: "2024-03",
     endDate: "2024-04",
-    expectedProgress: "Not Started",
+    expectedProgress: "Not started",
   },
   {
     lastUpdatedDate: "2024-02-07T09:03:53.514Z",
     startDate: "2024-01",
     endDate: "2024-03",
-    expectedProgress: "In Progress",
+    expectedProgress: "In progress",
   },
   {
     lastUpdatedDate: "2024-02-07T09:03:53.514Z",
     startDate: "2024-02",
     endDate: "2024-03",
-    expectedProgress: "In Progress",
+    expectedProgress: "In progress",
   },
   {
     lastUpdatedDate: "2024-02-07T09:03:53.514Z",
     startDate: "2024-01",
     endDate: "2024-02",
-    expectedProgress: "In Progress",
+    expectedProgress: "In progress",
   },
   {
     lastUpdatedDate: "2024-02-07T09:03:53.514Z",
     startDate: "2024-02",
     endDate: "2024-02",
-    expectedProgress: "In Progress",
+    expectedProgress: "In progress",
   },
 ];
 
