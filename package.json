@@ -69,7 +69,7 @@
   "dependencies": {
     "accessible-autocomplete": "^2.0.4",
     "classnames": "^2.5.1",
-    "govuk-frontend": "^5.0.0",
+    "govuk-frontend": "5.2.0",
     "joi": "^17.12.1",
     "papaparse": "^5.4.1",
     "react-code-blocks": "^0.1.6",
