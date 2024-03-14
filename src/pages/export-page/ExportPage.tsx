@@ -15,6 +15,7 @@ import {
   toDataURL,
 } from "@lib/utils/timetable";
 import { useFormContext } from "../../context/use-form-context";
+import { PageRoute } from "../../routes/routes";
 
 export const ExportPage = () => {
   const {
@@ -45,7 +46,12 @@ export const ExportPage = () => {
         eventDate: getFormattedDate(),
       },
     ];
-  }, [developmentPlan.reference, loadedTimetableEvents, statusChangeEvent, timetableEvents]);
+  }, [
+    developmentPlan.reference,
+    loadedTimetableEvents,
+    statusChangeEvent,
+    timetableEvents,
+  ]);
 
   const developmentPlanDownloadLink = useMemo(() => {
     const developmentPlanCSV = resolveDevelopmentPlanCSV(
@@ -93,10 +99,7 @@ export const ExportPage = () => {
         Next, you’ll need to follow the guidance which explains how to use the
         CSV files you’ve just downloaded to publish the timetable on your
         website:{" "}
-        <Link
-          className="govuk-link"
-          to="#" /* Replace with path to real page once it's been created */
-        >
+        <Link className="govuk-link" to={PageRoute.PublishOnlineGuidence}>
           Publishing a local plan timetable online: guidance for web teams
         </Link>
       </p>

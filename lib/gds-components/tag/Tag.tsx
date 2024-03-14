@@ -2,7 +2,7 @@
  * GDS component: https://design-system.service.gov.uk/components/tag/
  */
 
-export type TagLabel = "IN PROGRESS" | "FINISHED" | "NOT STARTED";
+export type TagLabel = "In progress" | "Finished" | "Not started";
 
 type TagProps = {
   label: TagLabel;
@@ -10,16 +10,10 @@ type TagProps = {
 
 export const Tag = ({ label }: TagProps): JSX.Element => {
   const colour = {
-    "IN PROGRESS": "blue",
-    FINISHED: "green",
-    "NOT STARTED": "grey",
+    Finished: "green",
+    "In progress": "light-blue",
+    "Not started": "grey",
   }[label];
 
-  return (
-    <strong
-      className={`govuk-tag govuk-tag--${colour} govuk-!-font-weight-bold`}
-    >
-      {label}
-    </strong>
-  );
+  return <strong className={`govuk-tag govuk-tag--${colour}`}>{label}</strong>;
 };
