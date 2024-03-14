@@ -200,16 +200,21 @@ export const PublishOnlineGuidancePage = () => (
     <h3 className="govuk-heading-s">Bring in both HTML tags</h3>
 
     <p className="govuk-body">
-      The following <strong>CSS tag</strong> will need to go inside the{" "}
-      <span style={{ color: "red" }}>&lt;head&gt;</span> section of the web
-      page’s HTML code.
+      Both of the tags below can be added to either the{" "}
+      <span style={{ color: "red" }}>&lt;head&gt;</span> or{" "}
+      <span style={{ color: "red" }}>&lt;body&gt;</span> of your HTML.
+    </p>
+
+    <p className="govuk-body">
+      The following <strong>link tag</strong> will be needed to load the{" "}
+      <strong>CSS</strong>.
     </p>
 
     <Snippet code={importCSSSnippet} />
+
     <p className="govuk-body">
-      The following <strong>JavaScript tag</strong> will need to go inside the{" "}
-      <span style={{ color: "red" }}>&lt;body&gt;</span> section of the web
-      page’s HTML code.
+      The following <strong>script tag</strong> will be needed to load the{" "}
+      <strong>JavaScript</strong>.
     </p>
 
     <Snippet code={importJavaScriptSnippet} />
