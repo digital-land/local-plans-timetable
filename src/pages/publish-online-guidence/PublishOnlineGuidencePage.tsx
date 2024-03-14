@@ -1,10 +1,7 @@
 import { Link } from "react-router-dom";
 import { NavPageWrapper } from "../nav-page-wrapper/NavPageWrapper";
 import { PageRoute } from "../../routes/routes";
-import { GuidencePageStep4CodeSnippets } from "./code-snippets/GuidencePageStep4CodeSnippets";
-import { JavaScriptTagCodeSnippet } from "./code-snippets/JavaScriptTagCodeSnippet";
-import { CSSTagCodeSnippet } from "./code-snippets/CSSTagCodeSnippet";
-import { GuidencePageExampleCodeSnippet } from "./code-snippets/GuidencePageExampleCodeSnippet";
+import { Snippet } from "./Snippet";
 
 export const PublishOnlineGuidencePage = () => (
   <NavPageWrapper pageTitle="Publishing a Local Plan timetable online: guidance for web teams">
@@ -200,15 +197,18 @@ export const PublishOnlineGuidencePage = () => (
       page’s HTML code.
     </p>
 
-    <CSSTagCodeSnippet />
-
+    <Snippet
+      code={`<link rel="stylesheet" type="text/css" href="https://cdn.statically.io/gh/digital-land/local-plans-timetable/master/timetable-visualisation.min.css"/>`}
+    />
     <p className="govuk-body">
       The following <strong>JavaScript tag</strong> will need to go inside the{" "}
       <span style={{ color: "red" }}>&lt;body&gt;</span> section of the web
       page’s HTML code.
     </p>
 
-    <JavaScriptTagCodeSnippet />
+    <Snippet
+      code={`<script src="https://cdn.statically.io/gh/digital-land/local-plans-timetable/master/timetable-visualisation.min.js"></script>`}
+    />
 
     <p className="govuk-body">
       The CSS and JavaScript are now available in your website.
@@ -239,7 +239,19 @@ export const PublishOnlineGuidencePage = () => (
       visualisation.
     </p>
 
-    <GuidencePageStep4CodeSnippets />
+    <Snippet
+      code={`<script>
+  window.DLUHC.renderTimetableVisualisation(
+    {
+      developmentPlanFilepath:
+        "https://raw.githubusercontent.com/digital-land/local-plans-timetable/main/assets/development-plan.csv",
+      timetableEventsFilepath:
+        "https://raw.githubusercontent.com/digital-land/local-plans-timetable/main/assets/timetable.csv",
+    },
+    document.getElementById("timetable-visualisation")
+  );
+</script>`}
+    />
 
     <h3 className="govuk-heading-s">
       An example of the component in a webpage
@@ -250,7 +262,38 @@ export const PublishOnlineGuidencePage = () => (
       webpage.
     </p>
 
-    <GuidencePageExampleCodeSnippet />
+    <Snippet
+      code={`<html>
+  <head>
+    <title>My first HTML page</title>
+    <link
+      rel=”stylesheet”
+      type=”text/css”
+      href=”https://cdn.statically.io/gh/digital-land/local-plans-timetable/master/timetable-visualisation.min.css”
+    />
+    <style>
+      body {
+        font-family: "Courier New", Courier, monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Welcome to My Website</h1>
+    <p>This is a sample paragraph.</p>
+    <div id="timetable-visualisation"></div>
+    <script src="https://cdn.statically.io/gh/digital-land/local-plans-timetable/master/timetable-visualisation.min.js"></script>
+    <script>
+      window.DLUHC.renderTimetableVisualisation(
+        {
+          developmentPlanFilepath: "https://raw.githubusercontent.com/digital-land/local-plans-timetable/main/assets/development-plan.csv",
+          timetableEventsFilepath: "https://raw.githubusercontent.com/digital-land/local-plans-timetable/main/assets/timetable.csv",
+        },
+        document.getElementById("timetable-visualisation")
+      );
+    </script>
+  </body>
+</html>`}
+    />
 
     <h3 className="govuk-heading-s">
       Step 5: Preview the visualisation of the timetable
