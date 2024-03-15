@@ -3,7 +3,7 @@ export enum PageRoute {
   Root = "/",
   HowToPublish = "/how-to-publish-a-timetable",
   HowToUpdate = "/how-to-update-a-timetable",
-  PublishOnlineGuidence = "/publishing-guidence-for-web-teams",
+  PublishOnlineGuidance = "/publishing-guidance-for-web-teams",
   LPA = "/what-is-your-local-authority",
   Title = "/title-of-local-plan",
   Description = "/local-plan-description",

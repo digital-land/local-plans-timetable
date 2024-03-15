@@ -58,12 +58,12 @@ const router = createBrowserRouter(
           },
         },
         {
-          path: PageRoute.PublishOnlineGuidence,
+          path: PageRoute.PublishOnlineGuidance,
           lazy: async () => {
-            const { PublishOnlineGuidencePage } = await import(
-              "./pages/publish-online-guidence/PublishOnlineGuidencePage"
+            const { PublishOnlineGuidancePage } = await import(
+              "./pages/publish-online-guidance/PublishOnlineGuidancePage"
             );
-            return { Component: PublishOnlineGuidencePage };
+            return { Component: PublishOnlineGuidancePage };
           },
         },
         {

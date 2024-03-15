@@ -1,12 +1,17 @@
 import { Link } from "react-router-dom";
-import { NavPageWrapper } from "../nav-page-wrapper/NavPageWrapper";
-import { PageRoute } from "../../routes/routes";
-import { GuidencePageStep4CodeSnippets } from "./code-snippets/GuidencePageStep4CodeSnippets";
-import { JavaScriptTagCodeSnippet } from "./code-snippets/JavaScriptTagCodeSnippet";
-import { CSSTagCodeSnippet } from "./code-snippets/CSSTagCodeSnippet";
-import { GuidencePageExampleCodeSnippet } from "./code-snippets/GuidencePageExampleCodeSnippet";
 
-export const PublishOnlineGuidencePage = () => (
+import { Snippet } from "@lib/snippet/Snippet";
+
+import { PageRoute } from "../../routes/routes";
+import { NavPageWrapper } from "../nav-page-wrapper/NavPageWrapper";
+import {
+  exampleHTMLSnippet,
+  importCSSSnippet,
+  importJavaScriptSnippet,
+  renderTimetableVisualisationSnippet,
+} from "./snippets";
+
+export const PublishOnlineGuidancePage = () => (
   <NavPageWrapper pageTitle="Publishing a Local Plan timetable online: guidance for web teams">
     <p className="govuk-body">
       This guidance is for Local Authority{" "}
@@ -200,15 +205,14 @@ export const PublishOnlineGuidencePage = () => (
       page’s HTML code.
     </p>
 
-    <CSSTagCodeSnippet />
-
+    <Snippet code={importCSSSnippet} />
     <p className="govuk-body">
       The following <strong>JavaScript tag</strong> will need to go inside the{" "}
       <span style={{ color: "red" }}>&lt;body&gt;</span> section of the web
       page’s HTML code.
     </p>
 
-    <JavaScriptTagCodeSnippet />
+    <Snippet code={importJavaScriptSnippet} />
 
     <p className="govuk-body">
       The CSS and JavaScript are now available in your website.
@@ -239,7 +243,7 @@ export const PublishOnlineGuidencePage = () => (
       visualisation.
     </p>
 
-    <GuidencePageStep4CodeSnippets />
+    <Snippet code={renderTimetableVisualisationSnippet} />
 
     <h3 className="govuk-heading-s">
       An example of the component in a webpage
@@ -250,7 +254,7 @@ export const PublishOnlineGuidencePage = () => (
       webpage.
     </p>
 
-    <GuidencePageExampleCodeSnippet />
+    <Snippet code={exampleHTMLSnippet} />
 
     <h3 className="govuk-heading-s">
       Step 5: Preview the visualisation of the timetable

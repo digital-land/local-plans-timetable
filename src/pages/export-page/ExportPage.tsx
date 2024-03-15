@@ -105,7 +105,7 @@ export const ExportPage = () => {
         Next, you’ll need to follow the guidance which explains how to use the
         CSV files you’ve just downloaded to publish the timetable on your
         website:{" "}
-        <Link className="govuk-link" to={PageRoute.PublishOnlineGuidence}>
+        <Link className="govuk-link" to={PageRoute.PublishOnlineGuidance}>
           Publishing a local plan timetable online: guidance for web teams
         </Link>
       </p>

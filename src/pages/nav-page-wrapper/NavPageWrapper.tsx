@@ -49,7 +49,7 @@ export const NavPageWrapper = ({
           <li className={styles.appSubnavSectionItem}>
             <Link
               className={`${styles.appSubnavLink} govuk-link  govuk-link--no-underline`}
-              to={PageRoute.PublishOnlineGuidence}
+              to={PageRoute.PublishOnlineGuidance}
               aria-current="page"
             >
               Publishing a Local Plan timetable online: guidance for web teams
