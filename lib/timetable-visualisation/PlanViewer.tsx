@@ -6,6 +6,7 @@ import {
   getStageProgress,
   getStatusChangeMessage,
   toDefaultLocalDateString,
+  toStageDateString,
 } from "../utils/timetable";
 import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
 
@@ -42,37 +43,41 @@ export const PlanViewer = ({
       !event.endDate
   );
 
-  if (!publishedEvent) {
-    throw new Error("published event not found");
-  }
-
-  const stagesInfo = useMemo<StagePreviewInfo[]>(
-    () => [
-      {
-        name: "Local Development Scheme Published",
-        startEvent: publishedEvent,
-      },
-      ...stages.map<StagePreviewInfo>((stage) => {
+  const stagesInfo = useMemo<StagePreviewInfo[]>(() => {
+    const foundStages = stages.reduce(
+      (allStages: StagePreviewInfo[], currentStage) => {
         const startEvent = timetableEvents.find(
-          (event) => event.developmentPlanEvent === stage.startEventKey
+          (event) => event.developmentPlanEvent === currentStage.startEventKey
         );
 
         const endEvent = timetableEvents.find(
-          (event) => event.developmentPlanEvent === stage.endEventKey
+          (event) => event.developmentPlanEvent === currentStage.endEventKey
         );
 
-        if (!startEvent) {
-          throw new Error("event not found");
+        if (startEvent && startEvent.eventDate) {
+          allStages.push({
+            name: currentStage.title,
+            startEvent,
+            endEvent,
+          });
         }
-        return {
-          name: stage.title,
-          startEvent,
-          endEvent,
-        };
-      }),
-    ],
-    [publishedEvent, timetableEvents]
-  );
+        return allStages;
+      },
+      []
+    );
+
+    return [
+      ...(publishedEvent && publishedEvent.eventDate
+        ? [
+            {
+              name: "Local Development Scheme Published",
+              startEvent: publishedEvent,
+            },
+          ]
+        : []),
+      ...foundStages,
+    ];
+  }, [publishedEvent, timetableEvents]);
 
   return (
     <div className="govuk-body" data-testid="plan-viewer">
@@ -139,11 +144,7 @@ export const PlanViewer = ({
                 </div>
               </th>
               <td className="govuk-table__cell govuk-!-padding-top-6">
-                {endEvent?.eventDate
-                  ? `${toDefaultLocalDateString(
-                      startEvent.eventDate
-                    )} to ${toDefaultLocalDateString(endEvent?.eventDate)}`
-                  : toDefaultLocalDateString(startEvent.eventDate)}
+                {toStageDateString(startEvent, endEvent)}
               </td>
             </tr>
           ))}
