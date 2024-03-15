@@ -3,7 +3,8 @@ import { ValidateFormParams } from "../FormPageHoc";
 
 const statusChangeEventSchema = Joi.object({
   updateStatus: Joi.boolean().messages({
-    "boolean.base": `Answer is required`,
+    "boolean.base":
+      "Select yes if you need to update the status of your Local Plan timetable",
   }),
 });
 
