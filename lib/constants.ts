@@ -65,8 +65,8 @@ export const getDefaultTimetableEvent = (): Omit<
   eventDate: "",
   notes: "",
   organisation: "",
-  entryDate: getFormattedDate(),
-  startDate: getFormattedDate(),
+  entryDate: "",
+  startDate: "",
   endDate: "",
 });
 
