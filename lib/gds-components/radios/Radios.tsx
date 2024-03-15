@@ -34,15 +34,15 @@ export const Radios = ({
             <h1 className="govuk-fieldset__heading">{label}</h1>
           </legend>
         )}
+        {error && (
+          <p className="govuk-error-message">
+            <span className="govuk-visually-hidden">Error:</span> {error}
+          </p>
+        )}
         <div
           className={cn("govuk-radios", { "govuk-radios--inline": inline })}
           data-module="govuk-radios"
         >
-          {error && (
-            <p className="govuk-error-message">
-              <span className="govuk-visually-hidden">Error:</span> {error}
-            </p>
-          )}
           {options.map(({ label, value }) => (
             <div className="govuk-radios__item" key={label}>
               <input

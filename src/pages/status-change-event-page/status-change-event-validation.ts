@@ -5,7 +5,7 @@ import { eventSchema } from "../event-schema";
 const statusChangeEventSchema = eventSchema.concat(
   Joi.object({
     developmentPlanEvent: Joi.required().messages({
-      "any.required": `Status is required`,
+      "any.required": "Select the status of your Local Plan",
     }),
   })
 );
