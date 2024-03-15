@@ -32,9 +32,9 @@ export const ExportPage = () => {
         developmentPlanEvent === TimetableEventKey.TimetableUpdated
     );
     return [
-      ...timetableEvents.map((x) => {
+      ...timetableEvents.map((Event) => {
         return {
-          ...x,
+          ...Event,
           entryDate: getFormattedDate(),
           startDate: getFormattedDate(),
         };
