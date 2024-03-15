@@ -43,10 +43,6 @@ export const PlanViewer = ({
       !event.endDate
   );
 
-  if (!publishedEvent) {
-    throw new Error("published event not found");
-  }
-
   const stagesInfo = useMemo<StagePreviewInfo[]>(() => {
     const foundStages = stages.reduce(
       (allStages: StagePreviewInfo[], currentStage) => {
@@ -70,14 +66,17 @@ export const PlanViewer = ({
       []
     );
 
-    if (publishedEvent && publishedEvent.eventDate) {
-      foundStages.push({
-        name: "Local Development Scheme Published",
-        startEvent: publishedEvent,
-      });
-    }
-
-    return foundStages;
+    return [
+      ...(publishedEvent && publishedEvent.eventDate
+        ? [
+            {
+              name: "Local Development Scheme Published",
+              startEvent: publishedEvent,
+            },
+          ]
+        : []),
+      ...foundStages,
+    ];
   }, [publishedEvent, timetableEvents]);
 
   return (
