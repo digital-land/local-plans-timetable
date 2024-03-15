@@ -134,6 +134,24 @@ export const toDefaultLocalDateString = (dateString: string) => {
   });
 };
 
+const noDateText = "unknown";
+
+export const toStageDateString = (
+  startEvent: DevelopmentPlanTimetable,
+  endEvent?: DevelopmentPlanTimetable
+): string => {
+  const startDate = startEvent.eventDate;
+  const endDate = endEvent?.eventDate;
+
+  if (!endEvent) {
+    return startDate ? toDefaultLocalDateString(startDate) : noDateText;
+  }
+  const start = startDate ? toDefaultLocalDateString(startDate) : noDateText;
+  const end = endDate ? toDefaultLocalDateString(endDate) : noDateText;
+
+  return `${start} to ${end}`;
+};
+
 const getDatePartFromISOString = (isoString: string, includeDays: boolean) => {
   const date = isoString.split("T")[0];
   return includeDays ? date : date.split("-").slice(0, 2).join("-");

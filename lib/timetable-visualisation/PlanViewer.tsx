@@ -6,6 +6,7 @@ import {
   getStageProgress,
   getStatusChangeMessage,
   toDefaultLocalDateString,
+  toStageDateString,
 } from "../utils/timetable";
 import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
 
@@ -46,47 +47,38 @@ export const PlanViewer = ({
     throw new Error("published event not found");
   }
 
-  const stagesInfo = useMemo<StagePreviewInfo[]>(
-    () => [
-      ...(publishedEvent.eventDate
-        ? [
-            {
-              name: "Local Development Scheme Published",
-              startEvent: publishedEvent,
-            },
-          ]
-        : []),
-      ...stages
-        .filter(
-          (stage) =>
-            timetableEvents.find(
-              (event) => event.developmentPlanEvent === stage.startEventKey
-            )?.eventDate ||
-            timetableEvents.find(
-              (event) => event.developmentPlanEvent === stage.endEventKey
-            )?.eventDate
-        )
-        .map<StagePreviewInfo>((stage) => {
-          const startEvent = timetableEvents.find(
-            (event) => event.developmentPlanEvent === stage.startEventKey
-          );
+  const stagesInfo = useMemo<StagePreviewInfo[]>(() => {
+    const foundStages = stages.reduce(
+      (allStages: StagePreviewInfo[], currentStage) => {
+        const startEvent = timetableEvents.find(
+          (event) => event.developmentPlanEvent === currentStage.startEventKey
+        );
 
-          const endEvent = timetableEvents.find(
-            (event) => event.developmentPlanEvent === stage.endEventKey
-          );
+        const endEvent = timetableEvents.find(
+          (event) => event.developmentPlanEvent === currentStage.endEventKey
+        );
 
-          if (!startEvent) {
-            throw new Error("event not found");
-          }
-          return {
-            name: stage.title,
+        if (startEvent && startEvent.eventDate) {
+          allStages.push({
+            name: currentStage.title,
             startEvent,
             endEvent,
-          };
-        }),
-    ],
-    [publishedEvent, timetableEvents]
-  );
+          });
+        }
+        return allStages;
+      },
+      []
+    );
+
+    if (publishedEvent && publishedEvent.eventDate) {
+      foundStages.push({
+        name: "Local Development Scheme Published",
+        startEvent: publishedEvent,
+      });
+    }
+
+    return foundStages;
+  }, [publishedEvent, timetableEvents]);
 
   return (
     <div className="govuk-body" data-testid="plan-viewer">
@@ -153,13 +145,7 @@ export const PlanViewer = ({
                 </div>
               </th>
               <td className="govuk-table__cell govuk-!-padding-top-6">
-                {endEvent?.eventDate
-                  ? `${
-                      startEvent.eventDate
-                        ? toDefaultLocalDateString(startEvent.eventDate)
-                        : "Unknown"
-                    } to ${endEvent.eventDate ? toDefaultLocalDateString(endEvent?.eventDate) : "Unknown"}`
-                  : toDefaultLocalDateString(startEvent.eventDate)}
+                {toStageDateString(startEvent, endEvent)}
               </td>
             </tr>
           ))}
