@@ -28,8 +28,8 @@ export const ExportPage = () => {
 
   const updatedTimetableEvents = useMemo<DevelopmentPlanTimetable[]>(() => {
     const timetableUpdatedEvent = loadedTimetableEvents?.find(
-      ({ developmentPlanEvent }) =>
-        developmentPlanEvent === TimetableEventKey.TimetableUpdated
+      ({ developmentPlanEvent, endDate }) =>
+        developmentPlanEvent === TimetableEventKey.TimetableUpdated && !endDate
     );
     return [
       ...timetableEvents.map((event) => {
