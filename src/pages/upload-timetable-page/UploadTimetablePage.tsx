@@ -1,9 +1,8 @@
 import { useCallback } from "react";
 
 import { FileUpload } from "@lib/gds-components";
-import { TimetableEventKey } from "@lib/constants";
 import { useFormContext } from "../../context/use-form-context";
-import { csvToObjectArray } from "@lib/utils/timetable";
+import { csvToObjectArray, isValidEvent } from "@lib/utils/timetable";
 import {
   DevelopmentPlan,
   DevelopmentPlanTimetable,
@@ -53,16 +52,7 @@ export const UploadTimetablePage = ({
           const loadedEvents =
             csvToObjectArray<DevelopmentPlanTimetable>(csvString);
           setLoadedTimetableEvents(loadedEvents);
-          setTimetableEvents(
-            loadedEvents
-              // This assumes any row with an end date is invalid
-              .filter(
-                (event) =>
-                  !event.endDate &&
-                  event.developmentPlanEvent !==
-                    TimetableEventKey.TimetableUpdated
-              )
-          );
+          setTimetableEvents(loadedEvents.filter(isValidEvent));
         }
       };
 

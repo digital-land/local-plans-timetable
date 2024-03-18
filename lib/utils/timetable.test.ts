@@ -4,11 +4,16 @@ import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
 import {
   camelCaseToKebabCase,
   getStageProgress,
+  isValidEvent,
   kebabCaseToCamelCase,
   resolveDevelopmentPlanCSV,
   resolveTimetableEventsCSV,
 } from "./timetable";
-import { TimetableEventKey, getFormattedDate } from "../constants";
+import {
+  TimetableEventKey,
+  getDefaultTimetableEvent,
+  getFormattedDate,
+} from "../constants";
 
 jest.mock("uuid", () => ({
   v4: jest.fn(),
@@ -558,5 +563,67 @@ describe("kebabCaseToCamelCase", () => {
     const expectedResult = "kebabCaseString";
 
     expect(kebabCaseToCamelCase(input)).toBe(expectedResult);
+  });
+});
+
+const defaultEvent: DevelopmentPlanTimetable = {
+  ...getDefaultTimetableEvent(),
+  developmentPlan: "1",
+  developmentPlanEvent: TimetableEventKey.PublicationStart,
+};
+
+describe("isValidEvent", () => {
+  test("returns false when startDate is in the future", () => {
+    const today = new Date();
+
+    const event: DevelopmentPlanTimetable = {
+      ...defaultEvent,
+      startDate: new Date(new Date().setDate(today.getDate() + 1)).toString(),
+    };
+
+    expect(isValidEvent(event)).toBe(false);
+  });
+
+  test("returns false when event has no startDate", () => {
+    const event: DevelopmentPlanTimetable = {
+      ...defaultEvent,
+      startDate: "",
+    };
+
+    expect(isValidEvent(event)).toBe(false);
+  });
+
+  test("returns false when endDate is in the past", () => {
+    const today = new Date();
+
+    const event: DevelopmentPlanTimetable = {
+      ...defaultEvent,
+      endDate: new Date(new Date().setDate(today.getDate() - 1)).toString(),
+    };
+
+    expect(isValidEvent(event)).toBe(false);
+  });
+
+  test("returns true when startDate is in the past and event has no endDate", () => {
+    const today = new Date();
+
+    const event: DevelopmentPlanTimetable = {
+      ...defaultEvent,
+      startDate: new Date(new Date().setDate(today.getDate() - 1)).toString(),
+    };
+
+    expect(isValidEvent(event)).toBe(true);
+  });
+
+  test("returns true when startDate is in the past and endDate is in the future", () => {
+    const today = new Date();
+
+    const event: DevelopmentPlanTimetable = {
+      ...defaultEvent,
+      startDate: new Date(new Date().setDate(today.getDate() - 1)).toString(),
+      endDate: new Date(new Date().setDate(today.getDate() + 1)).toString(),
+    };
+
+    expect(isValidEvent(event)).toBe(true);
   });
 });
