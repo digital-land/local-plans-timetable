@@ -214,17 +214,20 @@ export const kebabCaseToCamelCase = (str: string): string => {
   return str.replace(/-./g, (x) => x[1].toUpperCase());
 };
 
-const dateIsInThePast = (date: string) => new Date(date).getTime() < new Date().getTime()
+const dateIsInThePast = (date: string) =>
+  new Date(date).getTime() < new Date().getTime();
 
-const dateIsInTheFuture = (date: string) => new Date(date).getTime() > new Date().getTime()
+const dateIsInTheFuture = (date: string) =>
+  new Date(date).getTime() > new Date().getTime();
 
-export const isValidEvent = (event: DevelopmentPlanTimetable): boolean => {
+export const isValidEntity = ({
+  startDate,
+  endDate,
+}: {
+  startDate: string;
+  endDate?: string;
+}): boolean => {
+  const endDateIsValid = !endDate || dateIsInTheFuture(endDate);
 
-  const endDateIsValid = !event.endDate || dateIsInTheFuture(event.endDate)
-
-  return (
-    dateIsInThePast(event.startDate) &&
-    endDateIsValid &&
-    event.developmentPlanEvent !== TimetableEventKey.TimetableUpdated
-  );
+  return dateIsInThePast(startDate) && endDateIsValid;
 };

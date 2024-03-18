@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import { act, render, screen } from "@testing-library/react";
-import { loadCSV, csvToObjectArray } from "../utils/timetable";
+import { csvToObjectArray, isValidEntity, loadCSV } from "../utils/timetable";
 import { PlanViewer } from "./PlanViewer";
 import { Visualisation } from "./Visualisation";
 
@@ -13,8 +13,21 @@ const timetableEventsFilepath = "/timetable";
 describe("Visualisation", () => {
   beforeEach(() => {
     (loadCSV as jest.Mock).mockResolvedValue("");
+    (isValidEntity as jest.Mock).mockReturnValue(true);
     (PlanViewer as jest.Mock).mockReturnValue(<>Plan viewer component</>);
-    (csvToObjectArray as jest.Mock).mockReturnValue([]);
+    (csvToObjectArray as jest.Mock).mockReturnValue([
+      {
+        reference: "39b7f5e2-beba-43d7-b20d-d9ca3b710f80",
+        name: "",
+        developmentPlan: "dorcester-new-local-plan",
+        developmentPlanEvent: "timetable-updated",
+        eventDate: "2024-02",
+        notes: "",
+        organisation: "",
+        entryDate: "2024-02-02T15:46:14.144Z",
+        startDate: "2024-02-02T15:46:14.144Z",
+      },
+    ]);
   });
 
   afterEach(() => {
@@ -65,6 +78,10 @@ describe("Visualisation", () => {
   });
 
   it("filters the timetable events", async () => {
+    (isValidEntity as jest.Mock).mockReturnValueOnce(true);
+    (isValidEntity as jest.Mock).mockReturnValueOnce(false);
+    (isValidEntity as jest.Mock).mockReturnValue(true);
+
     (csvToObjectArray as jest.Mock).mockReturnValue([
       {
         reference: "39b7f5e2-beba-43d7-b20d-d9ca3b710f80",

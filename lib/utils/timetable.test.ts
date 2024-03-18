@@ -4,16 +4,12 @@ import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
 import {
   camelCaseToKebabCase,
   getStageProgress,
-  isValidEvent,
+  isValidEntity,
   kebabCaseToCamelCase,
   resolveDevelopmentPlanCSV,
   resolveTimetableEventsCSV,
 } from "./timetable";
-import {
-  TimetableEventKey,
-  getDefaultTimetableEvent,
-  getFormattedDate,
-} from "../constants";
+import { TimetableEventKey, getFormattedDate } from "../constants";
 
 jest.mock("uuid", () => ({
   v4: jest.fn(),
@@ -566,64 +562,54 @@ describe("kebabCaseToCamelCase", () => {
   });
 });
 
-const defaultEvent: DevelopmentPlanTimetable = {
-  ...getDefaultTimetableEvent(),
-  developmentPlan: "1",
-  developmentPlanEvent: TimetableEventKey.PublicationStart,
-};
-
-describe("isValidEvent", () => {
+describe("isValidEntity", () => {
   test("returns false when startDate is in the future", () => {
     const today = new Date();
 
-    const event: DevelopmentPlanTimetable = {
-      ...defaultEvent,
+    const entity = {
       startDate: new Date(new Date().setDate(today.getDate() + 1)).toString(),
     };
 
-    expect(isValidEvent(event)).toBe(false);
+    expect(isValidEntity(entity)).toBe(false);
   });
 
-  test("returns false when event has no startDate", () => {
-    const event: DevelopmentPlanTimetable = {
-      ...defaultEvent,
+  test("returns false when entity has no startDate", () => {
+    const entity = {
       startDate: "",
     };
 
-    expect(isValidEvent(event)).toBe(false);
+    expect(isValidEntity(entity)).toBe(false);
   });
 
   test("returns false when endDate is in the past", () => {
     const today = new Date();
 
-    const event: DevelopmentPlanTimetable = {
-      ...defaultEvent,
+    const entity = {
+      startDate: new Date(new Date().setDate(today.getDate() - 2)).toString(),
       endDate: new Date(new Date().setDate(today.getDate() - 1)).toString(),
     };
 
-    expect(isValidEvent(event)).toBe(false);
+    expect(isValidEntity(entity)).toBe(false);
   });
 
-  test("returns true when startDate is in the past and event has no endDate", () => {
+  test("returns true when startDate is in the past and entity has no endDate", () => {
     const today = new Date();
 
-    const event: DevelopmentPlanTimetable = {
-      ...defaultEvent,
+    const entity = {
       startDate: new Date(new Date().setDate(today.getDate() - 1)).toString(),
     };
 
-    expect(isValidEvent(event)).toBe(true);
+    expect(isValidEntity(entity)).toBe(true);
   });
 
   test("returns true when startDate is in the past and endDate is in the future", () => {
     const today = new Date();
 
-    const event: DevelopmentPlanTimetable = {
-      ...defaultEvent,
+    const event = {
       startDate: new Date(new Date().setDate(today.getDate() - 1)).toString(),
       endDate: new Date(new Date().setDate(today.getDate() + 1)).toString(),
     };
 
-    expect(isValidEvent(event)).toBe(true);
+    expect(isValidEntity(event)).toBe(true);
   });
 });
