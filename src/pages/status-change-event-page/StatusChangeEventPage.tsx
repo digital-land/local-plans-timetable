@@ -88,6 +88,7 @@ export const StatusChangeEventPage = ({
       />
       <TextArea
         label="Additional Information (optional)"
+        hint="This information will be shown on your timetable."
         onChange={(value) => updateStatusChangeEvent("notes", value)}
         value={statusChangeEvent.notes}
         characterLimit={100}
