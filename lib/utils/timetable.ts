@@ -215,7 +215,7 @@ export const kebabCaseToCamelCase = (str: string): string => {
 };
 
 const dateIsInThePast = (date: string) =>
-  new Date(date).getTime() < new Date().getTime();
+  new Date(date).getTime() <= new Date().getTime();
 
 const dateIsInTheFuture = (date: string) =>
   new Date(date).getTime() > new Date().getTime();
