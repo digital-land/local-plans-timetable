@@ -8,14 +8,17 @@ import {
 } from "@lib/constants";
 import { Button } from "@lib/gds-components";
 import { PlanViewer } from "@lib/timetable-visualisation/PlanViewer";
-import { DevelopmentPlanTimetable } from "@lib/types/timetable";
+import {
+  DevelopmentPlan,
+  DevelopmentPlanTimetable,
+} from "@lib/types/timetable";
 import {
   resolveDevelopmentPlanCSV,
   resolveTimetableEventsCSV,
   toDataURL,
 } from "@lib/utils/timetable";
 import { useFormContext } from "../../context/use-form-context";
-import { PageRoute } from "../../routes/routes";
+import { Journey, PageRoute } from "../../routes/routes";
 
 export const ExportPage = () => {
   const {
@@ -24,49 +27,65 @@ export const ExportPage = () => {
     timetableEvents,
     loadedTimetableEvents,
     statusChangeEvent,
+    userFlow,
   } = useFormContext();
 
+  const updatedDevelopmentPlan = useMemo<DevelopmentPlan>(() => {
+    const currentDate = getFormattedDate();
+    return {
+      ...developmentPlan,
+      ...(userFlow === Journey.Create && {
+        entryDate: currentDate,
+        startDate: currentDate,
+      }),
+    };
+  }, [developmentPlan, userFlow]);
+
   const updatedTimetableEvents = useMemo<DevelopmentPlanTimetable[]>(() => {
+    const currentDate = getFormattedDate();
     const timetableUpdatedEvent = loadedTimetableEvents?.find(
       ({ developmentPlanEvent, endDate }) =>
         developmentPlanEvent === TimetableEventKey.TimetableUpdated && !endDate
     );
     return [
-      ...timetableEvents.map((event) => {
-        return {
-          ...event,
-          entryDate: getFormattedDate(),
-          startDate: getFormattedDate(),
-        };
-      }),
+      ...timetableEvents.map((event) => ({
+        ...event,
+        ...(userFlow === Journey.Create && {
+          entryDate: currentDate,
+          startDate: currentDate,
+        }),
+      })),
       ...(statusChangeEvent?.developmentPlanEvent
         ? [statusChangeEvent as DevelopmentPlanTimetable]
         : []),
       {
         ...getDefaultTimetableEvent(),
-        developmentPlan: developmentPlan.reference,
+        developmentPlan: updatedDevelopmentPlan.reference,
         developmentPlanEvent: TimetableEventKey.TimetableUpdated,
         ...(timetableUpdatedEvent && {
           reference: timetableUpdatedEvent.reference,
         }),
-        eventDate: getFormattedDate(),
+        eventDate: currentDate,
+        entryDate: currentDate,
+        startDate: currentDate,
       },
     ];
   }, [
-    developmentPlan.reference,
+    updatedDevelopmentPlan.reference,
     loadedTimetableEvents,
     statusChangeEvent,
     timetableEvents,
+    userFlow,
   ]);
 
   const developmentPlanDownloadLink = useMemo(() => {
     const developmentPlanCSV = resolveDevelopmentPlanCSV(
-      developmentPlan,
+      updatedDevelopmentPlan,
       loadedDevelopmentPlan
     );
 
     return toDataURL(developmentPlanCSV);
-  }, [developmentPlan, loadedDevelopmentPlan]);
+  }, [updatedDevelopmentPlan, loadedDevelopmentPlan]);
 
   const timetableEventsDownloadLink = useMemo(() => {
     const timetableCSV = resolveTimetableEventsCSV(
@@ -154,7 +173,7 @@ export const ExportPage = () => {
       </p>
 
       <PlanViewer
-        developmentPlan={developmentPlan}
+        developmentPlan={updatedDevelopmentPlan}
         timetableEvents={updatedTimetableEvents}
       />
     </>

@@ -29,7 +29,7 @@ const contextDefaultFunction = () => {
   throw new Error("no provider");
 };
 
-export const FormContext = createContext<{
+export interface FormContextValues {
   developmentPlan: DevelopmentPlan;
   timetableEvents: DevelopmentPlanTimetable[];
   loadedDevelopmentPlan: DevelopmentPlan[] | null;
@@ -55,7 +55,9 @@ export const FormContext = createContext<{
     key: keyof DevelopmentPlanTimetable,
     value: string
   ) => void;
-}>({
+}
+
+export const FormContext = createContext<FormContextValues>({
   developmentPlan: DEFAULT_DEVELOPMENT_PLAN,
   timetableEvents: getDefaultTimetableEvents(""),
   loadedDevelopmentPlan: null,
