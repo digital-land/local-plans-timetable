@@ -213,3 +213,21 @@ export const camelCaseToKebabCase = (str: string): string => {
 export const kebabCaseToCamelCase = (str: string): string => {
   return str.replace(/-./g, (x) => x[1].toUpperCase());
 };
+
+const dateIsInThePast = (date: string) =>
+  new Date(date).getTime() <= new Date().getTime();
+
+const dateIsInTheFuture = (date: string) =>
+  new Date(date).getTime() > new Date().getTime();
+
+export const isValidEntity = ({
+  startDate,
+  endDate,
+}: {
+  startDate: string;
+  endDate?: string;
+}): boolean => {
+  const endDateIsValid = !endDate || dateIsInTheFuture(endDate);
+
+  return dateIsInThePast(startDate) && endDateIsValid;
+};

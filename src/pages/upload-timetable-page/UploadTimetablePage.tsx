@@ -1,14 +1,16 @@
 import { useCallback } from "react";
 
+import { ValidationErrorItem } from "joi";
+
 import { FileUpload } from "@lib/gds-components";
+import { csvToObjectArray, isValidEntity } from "@lib/utils/timetable";
 import { TimetableEventKey } from "@lib/constants";
-import { useFormContext } from "../../context/use-form-context";
-import { csvToObjectArray } from "@lib/utils/timetable";
 import {
   DevelopmentPlan,
   DevelopmentPlanTimetable,
 } from "@lib/types/timetable";
-import { ValidationErrorItem } from "joi";
+
+import { useFormContext } from "../../context/use-form-context";
 
 const reader = new FileReader();
 
@@ -33,9 +35,15 @@ export const UploadTimetablePage = ({
 
         if (csvString) {
           const developmentPlan = csvToObjectArray<DevelopmentPlan>(csvString);
+
+          const currentDevelopmentPlan = developmentPlan.find(isValidEntity)
+
+          if (!currentDevelopmentPlan) {
+            throw new Error("No valid development plan found")
+          }
+
           setLoadedDevelopmentPlan(developmentPlan);
-          // This assumes the last row is the current row
-          setDevelopmentPlan(developmentPlan.slice(-1)[0]);
+          setDevelopmentPlan(currentDevelopmentPlan);
         }
       };
 
@@ -54,14 +62,12 @@ export const UploadTimetablePage = ({
             csvToObjectArray<DevelopmentPlanTimetable>(csvString);
           setLoadedTimetableEvents(loadedEvents);
           setTimetableEvents(
-            loadedEvents
-              // This assumes any row with an end date is invalid
-              .filter(
-                (event) =>
-                  !event.endDate &&
-                  event.developmentPlanEvent !==
-                    TimetableEventKey.TimetableUpdated
-              )
+            loadedEvents.filter(
+              (event) =>
+                isValidEntity(event) &&
+                event.developmentPlanEvent !==
+                  TimetableEventKey.TimetableUpdated
+            )
           );
         }
       };
