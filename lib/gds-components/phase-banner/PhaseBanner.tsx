@@ -10,6 +10,9 @@ export const PhaseBanner = () => {
           <strong className="govuk-tag govuk-phase-banner__content__tag">
             Prototype
           </strong>
+          <span className="govuk-phase-banner__text">
+            This is a prototype.
+          </span>
         </p>
       </div>
     </>
