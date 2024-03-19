@@ -3,7 +3,7 @@ import { ValidateFormParams } from "../FormPageHoc";
 
 const LPASchema = Joi.object({
   LPA: Joi.string().required().messages({
-    "string.empty": `LPA is required`,
+    "string.empty": `Enter a valid Local Authority`,
   }),
 });
 
