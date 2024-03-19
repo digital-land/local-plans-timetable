@@ -2,7 +2,11 @@ import { v4 as uuidv4 } from "uuid";
 import { unparse, parse } from "papaparse";
 
 import { TagLabel } from "@lib/gds-components";
-import { TimetableEventKey, getFormattedDate } from "../constants";
+import {
+  TimetableEventKey,
+  getFormattedDate,
+  statusChangeEvents,
+} from "../constants";
 import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
 
 export const csvToObjectArray = <T>(CSVString: string): T[] => {
@@ -59,14 +63,23 @@ export const resolveTimetableEventsCSV = (
     );
     if (!formEvent) {
       // This shouldn't ever happen
-      throw Error("Form event not found");
+      throw Error(`event ${loadedEvent.developmentPlanEvent} not found`);
+    }
+    const currentDate = getFormattedDate();
+
+    const isStatusChangeEvent = statusChangeEvents.some(
+      (event) => event === formEvent.developmentPlanEvent
+    );
+
+    if (isStatusChangeEvent) {
+      loadedEvent.endDate = currentDate;
     }
 
     if (
-      formEvent.eventDate !== loadedEvent.eventDate ||
-      formEvent.notes !== loadedEvent.notes
+      !isStatusChangeEvent &&
+      (formEvent.eventDate !== loadedEvent.eventDate ||
+        formEvent.notes !== loadedEvent.notes)
     ) {
-      const currentDate = getFormattedDate();
       loadedEvent.endDate = currentDate;
       eventsToDownload.push({
         ...formEvent,
