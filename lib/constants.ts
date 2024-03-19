@@ -48,6 +48,7 @@ export const DEFAULT_DEVELOPMENT_PLAN: DevelopmentPlan = {
   organisations: "",
   entryDate: "",
   startDate: "",
+  endDate: "",
 };
 
 const eventsToExclude = new Set<TimetableEventKey>([
