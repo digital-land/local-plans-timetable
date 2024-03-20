@@ -5,7 +5,7 @@ import { TagLabel } from "@lib/gds-components";
 import {
   TimetableEventKey,
   getFormattedDate,
-  statusChangeEvents,
+  isStatusChangeEventKey,
 } from "../constants";
 import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
 
@@ -67,18 +67,14 @@ export const resolveTimetableEventsCSV = (
     }
     const currentDate = getFormattedDate();
 
-    const isStatusChangeEvent = statusChangeEvents.some(
-      (event) => event === formEvent.developmentPlanEvent
-    );
-
-    if (isStatusChangeEvent) {
+    if (isStatusChangeEventKey(formEvent.developmentPlanEvent)) {
       loadedEvent.endDate = currentDate;
+      return;
     }
 
     if (
-      !isStatusChangeEvent &&
-      (formEvent.eventDate !== loadedEvent.eventDate ||
-        formEvent.notes !== loadedEvent.notes)
+      formEvent.eventDate !== loadedEvent.eventDate ||
+      formEvent.notes !== loadedEvent.notes
     ) {
       loadedEvent.endDate = currentDate;
       eventsToDownload.push({

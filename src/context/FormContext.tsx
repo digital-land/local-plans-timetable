@@ -16,6 +16,7 @@ import {
   TimetableEventKey,
   getDefaultTimetableEvent,
   getDefaultTimetableEvents,
+  isStatusChangeEventKey,
   statusChangeEvents,
 } from "@lib/constants";
 import {
@@ -48,9 +49,7 @@ export interface FormContextValues {
   setDevelopmentPlan: Dispatch<SetStateAction<DevelopmentPlan>>;
   setLoadedDevelopmentPlan: Dispatch<SetStateAction<DevelopmentPlan[] | null>>;
   setTimetableEvents: Dispatch<SetStateAction<DevelopmentPlanTimetable[]>>;
-  setLoadedTimetableEvents: Dispatch<
-    SetStateAction<DevelopmentPlanTimetable[] | null>
-  >;
+  setLoadedTimetableEvents: (events: DevelopmentPlanTimetable[] | null) => void;
   setUserFlow: Dispatch<React.SetStateAction<Journey | null>>;
   statusChangeEvent: StatusChangeEvent | null;
   statusHasChanged: boolean | null;
@@ -144,6 +143,22 @@ export const FormProvider = (props: { children: ReactNode }) => {
     []
   );
 
+  const setLoadedEvents = useCallback(
+    (events: DevelopmentPlanTimetable[] | null) => {
+      const hasActiveStatusChange = events?.some(
+        ({ developmentPlanEvent, endDate }) =>
+          isStatusChangeEventKey(developmentPlanEvent) && !endDate
+      );
+
+      if (hasActiveStatusChange) {
+        setStatusHasChanged(true);
+      }
+
+      setLoadedTimetableEvents(events);
+    },
+    []
+  );
+
   useEffect(() => {
     if (statusHasChanged) {
       const currentStatusChangeEvent = loadedTimetableEvents?.find(
@@ -162,17 +177,6 @@ export const FormProvider = (props: { children: ReactNode }) => {
     }
   }, [developmentPlan.reference, loadedTimetableEvents, statusHasChanged]);
 
-  useEffect(() => {
-    const currentStatusChangeFound = loadedTimetableEvents?.some(
-      ({ developmentPlanEvent, endDate }) =>
-        statusChangeEvents.some((e) => e === developmentPlanEvent) && !endDate
-    );
-
-    if (currentStatusChangeFound) {
-      setStatusHasChanged(true);
-    }
-  }, [loadedTimetableEvents]);
-
   return (
     <FormContext.Provider
       value={{
@@ -185,7 +189,7 @@ export const FormProvider = (props: { children: ReactNode }) => {
         loadedDevelopmentPlan,
         loadedTimetableEvents,
         setLoadedDevelopmentPlan,
-        setLoadedTimetableEvents,
+        setLoadedTimetableEvents: setLoadedEvents,
         setDevelopmentPlan,
         setTimetableEvents,
         statusHasChanged,
