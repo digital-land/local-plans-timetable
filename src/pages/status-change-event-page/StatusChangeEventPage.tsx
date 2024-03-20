@@ -1,6 +1,5 @@
 import { StatusChangeEventKey, TimetableEventKey } from "@lib/constants";
-import { DateInput, TextArea } from "@lib/gds-components";
-import { RadioOption, Radios } from "@lib/gds-components/radios/Radios";
+import { DateInput, RadioOption, Radios, TextArea } from "@lib/gds-components";
 import { ValidationErrorItem } from "joi";
 import { useFormContext } from "../../context/use-form-context";
 
