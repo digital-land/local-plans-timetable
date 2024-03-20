@@ -181,6 +181,7 @@ export const ExportPage = () => {
       <PlanViewer
         developmentPlan={updatedDevelopmentPlan}
         timetableEvents={updatedTimetableEvents}
+        statusChangeEvent={statusChangeEvent || undefined}
       />
     </>
   );

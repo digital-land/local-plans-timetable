@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { TimetableEventKey, statusChangeEvents } from "../constants";
+import { StatusChangeEvent, TimetableEventKey } from "../constants";
 import { Tag, NotificationBanner } from "../gds-components";
 import {
   getStageProgress,
@@ -15,6 +15,7 @@ import { stages } from "./stages";
 type PlanViewerProps = {
   developmentPlan: DevelopmentPlan;
   timetableEvents: DevelopmentPlanTimetable[];
+  statusChangeEvent?: StatusChangeEvent;
 };
 
 type StagePreviewInfo = {
@@ -26,6 +27,7 @@ type StagePreviewInfo = {
 export const PlanViewer = ({
   developmentPlan: { name, description },
   timetableEvents,
+  statusChangeEvent,
 }: PlanViewerProps) => {
   const publishedEvent = timetableEvents.find(
     (event) =>
@@ -35,12 +37,6 @@ export const PlanViewer = ({
 
   const updatedEvent = timetableEvents.find(
     (event) => event.developmentPlanEvent === TimetableEventKey.TimetableUpdated
-  );
-
-  const statusChangeEvent = timetableEvents.find(
-    (event) =>
-      statusChangeEvents.some((e) => e === event.developmentPlanEvent) &&
-      !event.endDate
   );
 
   const stagesInfo = useMemo<StagePreviewInfo[]>(() => {
