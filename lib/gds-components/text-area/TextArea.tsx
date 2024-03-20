@@ -6,6 +6,7 @@ import { CharacterCount } from "../character-count/CharacterCount";
 
 interface TextAreaProps {
   label?: string;
+  hint?: string;
   onChange: (value: string) => void;
   value: string;
   id: string;
@@ -13,8 +14,15 @@ interface TextAreaProps {
   error?: string;
 }
 
+const getAriaDescribedBy = (rules: { [ariaValue: string]: boolean }) =>
+  Object.entries(rules)
+    .filter(([, shouldApply]) => shouldApply)
+    .map(([ariaValue]) => ariaValue)
+    .join(" ") || undefined;
+
 export const TextArea = ({
   label,
+  hint,
   onChange,
   value,
   characterLimit,
@@ -23,12 +31,19 @@ export const TextArea = ({
 }: TextAreaProps) => {
   return (
     <div
-      className={cn("govuk-form-group govuk-!-width-two-thirds", { "govuk-form-group--error": error })}
+      className={cn("govuk-form-group govuk-!-width-two-thirds", {
+        "govuk-form-group--error": error,
+      })}
     >
       {label && (
         <label className="govuk-label govuk-label--m" htmlFor={id}>
           {label}
         </label>
+      )}
+      {hint && (
+        <div id={`${id}-hint`} className="govuk-hint">
+          {hint}
+        </div>
       )}
       {error && (
         <p className="govuk-error-message">
@@ -42,7 +57,10 @@ export const TextArea = ({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         id={id}
-        aria-describedby={characterLimit ? `${id}-character-count` : undefined}
+        aria-describedby={getAriaDescribedBy({
+          [`${id}-character-count`]: !!characterLimit,
+          [`${id}-hint`]: !!hint,
+        })}
       />
       {characterLimit && (
         <CharacterCount

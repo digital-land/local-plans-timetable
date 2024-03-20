@@ -81,6 +81,7 @@ export const StagePage = ({
       )}
       <TextArea
         label="Additional Information (optional)"
+        hint="This information will be shown on your timetable."
         onChange={(value) =>
           updateTimetableEvent(startEventKey, "notes", value)
         }
