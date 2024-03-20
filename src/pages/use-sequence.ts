@@ -8,7 +8,8 @@ const routesOnCondition = (condition: boolean, ...routes: PageRoute[]) =>
 
 const getSequence = (
   userJourney: Journey | null,
-  timetableStatusHasChanged?: boolean
+  timetableStatusHasChanged: boolean,
+  shouldUpdateDates: boolean
 ) => {
   if (!userJourney) {
     return [];
@@ -30,22 +31,28 @@ const getSequence = (
       userJourney === Journey.Update && !!timetableStatusHasChanged,
       PageRoute.StatusChangeEvent
     ),
-    PageRoute.PublishLocalDevelopmentScheme,
-    ...stages.map((stage) => stage.key),
+    ...routesOnCondition(userJourney === Journey.Update, PageRoute.UpdateDates),
+    ...routesOnCondition(
+      userJourney === Journey.Create || shouldUpdateDates,
+      PageRoute.PublishLocalDevelopmentScheme,
+      ...stages.map((stage) => stage.key)
+    ),
     PageRoute.Export,
   ];
 };
 
 export const useSequence = (
   userJourney: Journey | null,
-  timetableStatusHasChanged?: boolean
+  timetableStatusHasChanged: boolean,
+  shouldUpdateDates: boolean
 ) => {
   const navigate = useNavigate();
   const { pathname } = useLocation() as { pathname: PageRoute };
 
   const sequence = useMemo(
-    () => getSequence(userJourney, timetableStatusHasChanged),
-    [userJourney, timetableStatusHasChanged]
+    () =>
+      getSequence(userJourney, timetableStatusHasChanged, shouldUpdateDates),
+    [userJourney, timetableStatusHasChanged, shouldUpdateDates]
   );
 
   const currentPageIndex = sequence.indexOf(pathname);
