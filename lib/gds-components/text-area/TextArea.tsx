@@ -14,6 +14,12 @@ interface TextAreaProps {
   error?: string;
 }
 
+const getAriaDescribedBy = (rules: { [ariaValue: string]: boolean }) =>
+  Object.entries(rules)
+    .filter(([, shouldApply]) => shouldApply)
+    .map(([ariaValue]) => ariaValue)
+    .join(" ") || undefined;
+
 export const TextArea = ({
   label,
   hint,
@@ -51,12 +57,10 @@ export const TextArea = ({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         id={id}
-        aria-describedby={
-          cn({
-            [`${id}-character-count`]: !!characterLimit,
-            [`${id}-hint`]: !!hint,
-          }) || undefined
-        }
+        aria-describedby={getAriaDescribedBy({
+          [`${id}-character-count`]: !!characterLimit,
+          [`${id}-hint`]: !!hint,
+        })}
       />
       {characterLimit && (
         <CharacterCount
