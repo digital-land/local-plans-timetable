@@ -2,4 +2,30 @@
   font-family: monospace;
   font-size: 20px;
   margin-bottom: 20px;
+  position: relative;
+}
+
+.copyButton:focus {
+  background-color: #fd0;
+  color: black;
+}
+
+.copyButton,
+.copyButton:hover {
+  background-color: #fff;
+  color: #00823b;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  width: 120px;
+  padding: 3px 10px;
+  line-height: 1.25;
+  border: 1px solid #00823b;
+  font-size: 1rem;
+  box-shadow: 0 2px 0 0 #00823b;
+}
+
+.copyButton:focus:hover {
+  border: 2px solid #fd0;
+  box-shadow: none;
 }
