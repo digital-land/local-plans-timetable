@@ -28,4 +28,6 @@
 .copyButton:focus:hover {
   border: 2px solid #fd0;
   box-shadow: none;
+  padding: 2px 10px;
+  outline: 2px solid rgba(0, 0, 0, 0);
 }
