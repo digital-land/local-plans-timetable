@@ -56,7 +56,13 @@ export const ExportPage = () => {
         }),
       })),
       ...(statusChangeEvent?.developmentPlanEvent
-        ? [statusChangeEvent as DevelopmentPlanTimetable]
+        ? [
+            {
+              ...(statusChangeEvent as DevelopmentPlanTimetable),
+              entryDate: currentDate,
+              startDate: currentDate,
+            },
+          ]
         : []),
       {
         ...getDefaultTimetableEvent(),

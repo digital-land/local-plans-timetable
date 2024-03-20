@@ -1,15 +1,4 @@
 import {
-  DEFAULT_DEVELOPMENT_PLAN,
-  StatusChangeEvent,
-  TimetableEventKey,
-  getDefaultTimetableEvent,
-  getDefaultTimetableEvents,
-} from "@lib/constants";
-import {
-  DevelopmentPlan,
-  DevelopmentPlanTimetable,
-} from "@lib/types/timetable";
-import {
   Dispatch,
   ReactNode,
   SetStateAction,
@@ -18,6 +7,22 @@ import {
   useEffect,
   useState,
 } from "react";
+
+import { v4 as uuidv4 } from "uuid";
+
+import {
+  DEFAULT_DEVELOPMENT_PLAN,
+  StatusChangeEvent,
+  TimetableEventKey,
+  getDefaultTimetableEvent,
+  getDefaultTimetableEvents,
+  isStatusChangeEventKey,
+  statusChangeEvents,
+} from "@lib/constants";
+import {
+  DevelopmentPlan,
+  DevelopmentPlanTimetable,
+} from "@lib/types/timetable";
 import { Journey } from "src/routes/routes";
 
 type TimetableEventEditableField = keyof Pick<
@@ -44,9 +49,7 @@ export interface FormContextValues {
   setDevelopmentPlan: Dispatch<SetStateAction<DevelopmentPlan>>;
   setLoadedDevelopmentPlan: Dispatch<SetStateAction<DevelopmentPlan[] | null>>;
   setTimetableEvents: Dispatch<SetStateAction<DevelopmentPlanTimetable[]>>;
-  setLoadedTimetableEvents: Dispatch<
-    SetStateAction<DevelopmentPlanTimetable[] | null>
-  >;
+  setLoadedTimetableEvents: (events: DevelopmentPlanTimetable[] | null) => void;
   setUserFlow: Dispatch<React.SetStateAction<Journey | null>>;
   statusChangeEvent: StatusChangeEvent | null;
   statusHasChanged: boolean | null;
@@ -148,16 +151,39 @@ export const FormProvider = (props: { children: ReactNode }) => {
     []
   );
 
+  const setLoadedEvents = useCallback(
+    (events: DevelopmentPlanTimetable[] | null) => {
+      const hasActiveStatusChange = events?.some(
+        ({ developmentPlanEvent, endDate }) =>
+          isStatusChangeEventKey(developmentPlanEvent) && !endDate
+      );
+
+      if (hasActiveStatusChange) {
+        setStatusHasChanged(true);
+      }
+
+      setLoadedTimetableEvents(events);
+    },
+    []
+  );
+
   useEffect(() => {
     if (statusHasChanged) {
+      const currentStatusChangeEvent = loadedTimetableEvents?.find(
+        ({ developmentPlanEvent, endDate }) =>
+          statusChangeEvents.some((e) => e === developmentPlanEvent) && !endDate
+      );
+
       setStatusChangeEvent({
         ...getDefaultTimetableEvent(),
+        ...currentStatusChangeEvent,
         developmentPlan: developmentPlan.reference,
-      });
+        reference: uuidv4(),
+      } as StatusChangeEvent);
     } else {
       setStatusChangeEvent(null);
     }
-  }, [developmentPlan.reference, statusHasChanged]);
+  }, [developmentPlan.reference, loadedTimetableEvents, statusHasChanged]);
 
   return (
     <FormContext.Provider
@@ -171,7 +197,7 @@ export const FormProvider = (props: { children: ReactNode }) => {
         loadedDevelopmentPlan,
         loadedTimetableEvents,
         setLoadedDevelopmentPlan,
-        setLoadedTimetableEvents,
+        setLoadedTimetableEvents: setLoadedEvents,
         setDevelopmentPlan,
         setTimetableEvents,
         statusHasChanged,

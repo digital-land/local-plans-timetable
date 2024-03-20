@@ -28,6 +28,13 @@ export const statusChangeEvents = [
 
 export type StatusChangeEventKey = (typeof statusChangeEvents)[number];
 
+export const isStatusChangeEventKey = (
+  timetableEventKey: TimetableEventKey
+): timetableEventKey is StatusChangeEventKey =>
+  (statusChangeEvents as unknown as TimetableEventKey[]).includes(
+    timetableEventKey
+  );
+
 export type StatusChangeEvent = Omit<
   DevelopmentPlanTimetable,
   "developmentPlanEvent"
