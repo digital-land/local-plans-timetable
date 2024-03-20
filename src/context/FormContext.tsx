@@ -58,6 +58,8 @@ export interface FormContextValues {
     key: keyof DevelopmentPlanTimetable,
     value: string
   ) => void;
+  shouldUpdateDates: boolean | null;
+  setShouldUpdateDates: Dispatch<SetStateAction<boolean | null>>;
 }
 
 export const FormContext = createContext<FormContextValues>({
@@ -77,6 +79,8 @@ export const FormContext = createContext<FormContextValues>({
   setStatusHasChanged: contextDefaultFunction,
   statusChangeEvent: null,
   updateStatusChangeEvent: contextDefaultFunction,
+  shouldUpdateDates: null,
+  setShouldUpdateDates: contextDefaultFunction,
 });
 
 export const FormProvider = (props: { children: ReactNode }) => {
@@ -104,6 +108,10 @@ export const FormProvider = (props: { children: ReactNode }) => {
 
   const [statusChangeEvent, setStatusChangeEvent] =
     useState<StatusChangeEvent | null>(null);
+
+  const [shouldUpdateDates, setShouldUpdateDates] = useState<boolean | null>(
+    null
+  );
 
   const updateTimetableEvent = useCallback(
     (
@@ -196,6 +204,8 @@ export const FormProvider = (props: { children: ReactNode }) => {
         setStatusHasChanged,
         statusChangeEvent,
         updateStatusChangeEvent,
+        shouldUpdateDates,
+        setShouldUpdateDates,
       }}
     >
       {props.children}

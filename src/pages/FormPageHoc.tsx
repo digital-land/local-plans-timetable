@@ -18,6 +18,7 @@ export type ValidateFormParams<P> = {
   timetableEvents: DevelopmentPlanTimetable[];
   statusChangeEvent: StatusChangeEvent | null;
   statusHasChanged: boolean | null;
+  shouldUpdateDates: boolean | null;
   loadedDevelopmentPlan: DevelopmentPlan[] | null;
   loadedTimetableEvents: DevelopmentPlanTimetable[] | null;
   formProps: P;
@@ -36,6 +37,7 @@ export const FormPageHoC = <P extends Record<string, unknown>>(
       timetableEvents,
       statusChangeEvent,
       statusHasChanged,
+      shouldUpdateDates,
       userFlow,
       loadedDevelopmentPlan,
       loadedTimetableEvents,
@@ -43,7 +45,8 @@ export const FormPageHoC = <P extends Record<string, unknown>>(
 
     const { previousPage, navigateNext } = useSequence(
       userFlow,
-      statusHasChanged ?? true
+      statusHasChanged ?? true,
+      shouldUpdateDates ?? true
     );
     const [errors, setErrors] = useState<ValidationErrorItem[]>();
 
@@ -54,6 +57,7 @@ export const FormPageHoC = <P extends Record<string, unknown>>(
         timetableEvents,
         statusChangeEvent,
         statusHasChanged,
+        shouldUpdateDates,
         formProps,
         loadedDevelopmentPlan,
         loadedTimetableEvents,

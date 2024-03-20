@@ -21,6 +21,8 @@ import { validateTitle } from "./pages/title-page/validate-title-page";
 import { validatePublishLDSEvent } from "./pages/publish-LDS-page/validate-publish-LDS-page";
 import { validateStatusChangeEvent } from "./pages/status-change-event-page/status-change-event-validation";
 import { validateUpdateTimetableStatus } from "./pages/update-timetable-status-page/update-timetable-status-validation";
+import { UpdateDatesPage } from "./pages/update-dates-page/UpdateDatesPage";
+import { validateUpdateDates } from "./pages/update-dates-page/update-dates-validation";
 import { validateLPA } from "./pages/LPA-page/lpa-validation";
 import { stages } from "./pages/stages";
 import { Page } from "./routes/Page";
@@ -101,6 +103,10 @@ const router = createBrowserRouter(
             {},
             validateStatusChangeEvent
           ),
+        },
+        {
+          path: PageRoute.UpdateDates,
+          element: FormPageHoC(UpdateDatesPage, {}, validateUpdateDates),
         },
         ...stages.map(({ key, ...otherProps }) => ({
           path: key,
