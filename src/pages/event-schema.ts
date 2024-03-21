@@ -26,7 +26,7 @@ export const endDateSchema = Joi.date()
     "date.max": `Date must be before ${maxDate.toISOString().split("T")[0]}`,
   });
 
-export const eventSchema = Joi.object({
+export const stageSchema = Joi.object({
   startDate: startDateSchema,
   endDate: endDateSchema,
   notes: Joi.string().allow("").max(notesCharacterLimit).messages({
