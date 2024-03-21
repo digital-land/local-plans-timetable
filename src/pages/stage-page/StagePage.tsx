@@ -53,7 +53,7 @@ export const StagePage = ({
           errors?.find(
             (error) =>
               error.path[0] === startEvent.developmentPlanEvent &&
-              error.path[1] === "eventDate"
+              error.path[1] === "startDate"
           )?.message
         }
         onChange={(value) =>
@@ -69,8 +69,8 @@ export const StagePage = ({
           error={
             errors?.find(
               (error) =>
-                error.path[0] === endEvent.developmentPlanEvent &&
-                error.path[1] === "eventDate"
+                error.path[0] === startEvent.developmentPlanEvent &&
+                error.path[1] === "endDate"
             )?.message
           }
           onChange={(value) =>

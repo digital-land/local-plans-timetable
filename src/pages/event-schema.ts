@@ -21,11 +21,11 @@ export const endDateSchema = Joi.date()
   .max(maxDate)
   .messages({
     "date.format": `Date must be a real date`,
-    "date.min": `End date must not be before start date`,
+    "date.min": `The end date must be the same as or after the start date`,
     "date.max": `Date must be before ${maxDate.toISOString().split("T")[0]}`,
   });
 
-export const eventSchema = Joi.object({
+export const stageSchema = Joi.object({
   startDate: startDateSchema,
   endDate: endDateSchema,
   notes: Joi.string().allow("").max(100).messages({

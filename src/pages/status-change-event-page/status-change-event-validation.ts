@@ -1,8 +1,8 @@
 import Joi, { ValidationErrorItem } from "joi";
 import { ValidateFormParams } from "../FormPageHoc";
-import { eventSchema } from "../event-schema";
+import { stageSchema } from "../event-schema";
 
-const statusChangeEventSchema = eventSchema.concat(
+const statusChangeEventSchema = stageSchema.concat(
   Joi.object({
     developmentPlanEvent: Joi.required().messages({
       "any.required": "Select the status of your Local Plan",
