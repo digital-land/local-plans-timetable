@@ -4,7 +4,6 @@ import {
   SetStateAction,
   createContext,
   useCallback,
-  useEffect,
   useState,
 } from "react";
 
@@ -17,7 +16,6 @@ import {
   getDefaultTimetableEvent,
   getDefaultTimetableEvents,
   isStatusChangeEventKey,
-  statusChangeEvents,
 } from "@lib/constants";
 import {
   DevelopmentPlan,
@@ -53,7 +51,7 @@ export interface FormContextValues {
   setUserFlow: Dispatch<React.SetStateAction<Journey | null>>;
   statusChangeEvent: StatusChangeEvent | null;
   statusHasChanged: boolean | null;
-  setStatusHasChanged: Dispatch<SetStateAction<boolean | null>>;
+  setStatusHasChanged: (statusHasChanged: boolean) => void;
   updateStatusChangeEvent: (
     key: keyof DevelopmentPlanTimetable,
     value: string
@@ -153,37 +151,36 @@ export const FormProvider = (props: { children: ReactNode }) => {
 
   const setLoadedEvents = useCallback(
     (events: DevelopmentPlanTimetable[] | null) => {
-      const hasActiveStatusChange = events?.some(
+      setLoadedTimetableEvents(events);
+
+      const currentStatusChangeEvent = events?.find(
         ({ developmentPlanEvent, endDate }) =>
           isStatusChangeEventKey(developmentPlanEvent) && !endDate
       );
 
-      if (hasActiveStatusChange) {
+      if (currentStatusChangeEvent) {
         setStatusHasChanged(true);
+        setStatusChangeEvent(currentStatusChangeEvent as StatusChangeEvent);
       }
-
-      setLoadedTimetableEvents(events);
     },
     []
   );
 
-  useEffect(() => {
-    if (statusHasChanged) {
-      const currentStatusChangeEvent = loadedTimetableEvents?.find(
-        ({ developmentPlanEvent, endDate }) =>
-          statusChangeEvents.some((e) => e === developmentPlanEvent) && !endDate
-      );
-
-      setStatusChangeEvent({
-        ...getDefaultTimetableEvent(),
-        ...currentStatusChangeEvent,
-        developmentPlan: developmentPlan.reference,
-        reference: uuidv4(),
-      } as StatusChangeEvent);
-    } else {
-      setStatusChangeEvent(null);
-    }
-  }, [developmentPlan.reference, loadedTimetableEvents, statusHasChanged]);
+  const setStatusChanged = useCallback(
+    (statusChanged: boolean) => {
+      setStatusHasChanged(statusChanged);
+      if (statusChanged) {
+        setStatusChangeEvent({
+          ...getDefaultTimetableEvent(),
+          developmentPlan: developmentPlan.reference,
+          reference: uuidv4(),
+        });
+      } else {
+        setStatusChangeEvent(null);
+      }
+    },
+    [developmentPlan]
+  );
 
   return (
     <FormContext.Provider
@@ -201,7 +198,7 @@ export const FormProvider = (props: { children: ReactNode }) => {
         setDevelopmentPlan,
         setTimetableEvents,
         statusHasChanged,
-        setStatusHasChanged,
+        setStatusHasChanged: setStatusChanged,
         statusChangeEvent,
         updateStatusChangeEvent,
         shouldUpdateDates,
