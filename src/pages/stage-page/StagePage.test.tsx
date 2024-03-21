@@ -5,6 +5,7 @@ import { DateInput } from "@lib/gds-components";
 import { TimetableEventKey } from "@lib/constants";
 
 jest.mock("@lib/gds-components");
+jest.mock("../event-schema", () => ({ notesCharacterLimit: 100 }));
 
 describe("StagePage", () => {
   beforeEach(() => {

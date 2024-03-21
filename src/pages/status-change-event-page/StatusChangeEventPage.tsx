@@ -2,6 +2,7 @@ import { StatusChangeEventKey, TimetableEventKey } from "@lib/constants";
 import { DateInput, RadioOption, Radios, TextArea } from "@lib/gds-components";
 import { ValidationErrorItem } from "joi";
 import { useFormContext } from "../../context/use-form-context";
+import { notesCharacterLimit } from "../event-schema";
 
 type ChangeEventOptions = Omit<RadioOption, "value"> & {
   value: StatusChangeEventKey;
@@ -90,7 +91,7 @@ export const StatusChangeEventPage = ({
         hint="This information will be shown on your timetable."
         onChange={(value) => updateStatusChangeEvent("notes", value)}
         value={statusChangeEvent.notes}
-        characterLimit={100}
+        characterLimit={notesCharacterLimit}
         id="notes"
         error={errors?.find((error) => error.path[0] === "notes")?.message}
       />

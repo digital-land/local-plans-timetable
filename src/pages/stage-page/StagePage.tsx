@@ -4,6 +4,7 @@ import { TimetableEventKey } from "@lib/constants";
 import { DateInput, TextArea } from "@lib/gds-components";
 import { ValidationErrorItem } from "joi";
 import { useFormContext } from "../../context/use-form-context";
+import { notesCharacterLimit } from "../event-schema";
 
 export interface StagePageProps {
   title: string;
@@ -86,7 +87,7 @@ export const StagePage = ({
           updateTimetableEvent(startEventKey, "notes", value)
         }
         value={startEvent.notes}
-        characterLimit={100}
+        characterLimit={notesCharacterLimit}
         error={
           errors?.find(
             (error) =>
