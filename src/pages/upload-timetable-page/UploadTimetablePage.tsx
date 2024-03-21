@@ -4,7 +4,7 @@ import { ValidationErrorItem } from "joi";
 
 import { FileUpload } from "@lib/gds-components";
 import { csvToObjectArray, isValidEntity } from "@lib/utils/timetable";
-import { TimetableEventKey } from "@lib/constants";
+import { TimetableEventKey, isStatusChangeEventKey } from "@lib/constants";
 import {
   DevelopmentPlan,
   DevelopmentPlanTimetable,
@@ -36,10 +36,10 @@ export const UploadTimetablePage = ({
         if (csvString) {
           const developmentPlan = csvToObjectArray<DevelopmentPlan>(csvString);
 
-          const currentDevelopmentPlan = developmentPlan.find(isValidEntity)
+          const currentDevelopmentPlan = developmentPlan.find(isValidEntity);
 
           if (!currentDevelopmentPlan) {
-            throw new Error("No valid development plan found")
+            throw new Error("No valid development plan found");
           }
 
           setLoadedDevelopmentPlan(developmentPlan);
@@ -66,7 +66,8 @@ export const UploadTimetablePage = ({
               (event) =>
                 isValidEntity(event) &&
                 event.developmentPlanEvent !==
-                  TimetableEventKey.TimetableUpdated
+                  TimetableEventKey.TimetableUpdated &&
+                !isStatusChangeEventKey(event.developmentPlanEvent)
             )
           );
         }

@@ -54,7 +54,7 @@ export const resolveTimetableEventsCSV = (
     JSON.stringify(loadedTimetableEvents)
   );
   eventsToDownload.forEach((loadedEvent) => {
-    if (loadedEvent.endDate) {
+    if (!isValidEntity(loadedEvent)) {
       return;
     }
 
@@ -62,11 +62,11 @@ export const resolveTimetableEventsCSV = (
       (event) => event.reference === loadedEvent.reference
     );
     if (!formEvent) {
-      // This shouldn't ever happen
-      throw Error(`event ${loadedEvent.developmentPlanEvent} not found`);
+      // Event has been removed
+      return;
     }
-    const currentDate = getFormattedDate();
 
+    const currentDate = getFormattedDate();
     if (isStatusChangeEventKey(formEvent.developmentPlanEvent)) {
       loadedEvent.endDate = currentDate;
       return;
