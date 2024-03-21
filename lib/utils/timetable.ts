@@ -2,11 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import { unparse, parse } from "papaparse";
 
 import { TagLabel } from "@lib/gds-components";
-import {
-  TimetableEventKey,
-  getFormattedDate,
-  isStatusChangeEventKey,
-} from "../constants";
+import { TimetableEventKey, getFormattedDate } from "../constants";
 import { DevelopmentPlan, DevelopmentPlanTimetable } from "../types/timetable";
 
 export const csvToObjectArray = <T>(CSVString: string): T[] => {
@@ -58,16 +54,12 @@ export const resolveTimetableEventsCSV = (
       return;
     }
 
+    const currentDate = getFormattedDate();
     const formEvent = timetableEvents.find(
       (event) => event.reference === loadedEvent.reference
     );
     if (!formEvent) {
       // Event has been removed
-      return;
-    }
-
-    const currentDate = getFormattedDate();
-    if (isStatusChangeEventKey(formEvent.developmentPlanEvent)) {
       loadedEvent.endDate = currentDate;
       return;
     }
