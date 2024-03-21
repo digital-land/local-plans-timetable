@@ -14,10 +14,10 @@ export const startDateSchema = Joi.date()
     "date.max": `Date must be before ${maxDate.toISOString().split("T")[0]}`,
   });
 
-export const endEventSchema = Joi.date()
+export const endDateSchema = Joi.date()
   .iso()
   .allow("")
-  .min(Joi.ref("startEvent"))
+  .min(Joi.ref("startDate"))
   .max(maxDate)
   .messages({
     "date.format": `Date must be a real date`,
@@ -26,8 +26,8 @@ export const endEventSchema = Joi.date()
   });
 
 export const eventSchema = Joi.object({
-  startEvent: startDateSchema,
-  endEvent: endEventSchema,
+  startDate: startDateSchema,
+  endDate: endDateSchema,
   notes: Joi.string().allow("").max(100).messages({
     "string.max": `Notes must be less than or equal to 100 characters long`,
   }),

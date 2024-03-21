@@ -25,7 +25,7 @@ export const validateTimetableStage = ({
 
   const startEventValidation = eventSchema.validate(
     {
-      startEvent: startEvent.eventDate,
+      startDate: startEvent.eventDate,
       notes: startEvent.notes,
     },
     { abortEarly: false }
@@ -43,8 +43,8 @@ export const validateTimetableStage = ({
   if (endEvent && endEventKey) {
     const endEventValidation = eventSchema.validate(
       {
-        startEvent: startEvent.eventDate,
-        endEvent: endEvent.eventDate,
+        startDate: startEvent.eventDate,
+        endDate: endEvent.eventDate,
         notes: endEvent.notes,
       },
       { abortEarly: false }
