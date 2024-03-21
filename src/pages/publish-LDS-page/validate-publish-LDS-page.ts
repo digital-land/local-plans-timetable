@@ -1,11 +1,11 @@
 import Joi, { ValidationErrorItem } from "joi";
 
 import { TimetableEventKey } from "@lib/constants";
-import { eventDateSchema } from "../event-schema";
+import { startDateSchema } from "../event-schema";
 import { ValidateFormParams } from "../FormPageHoc";
 
 const schema = Joi.object({
-  eventDate: eventDateSchema,
+  eventDate: startDateSchema,
 });
 
 export const validatePublishLDSEvent = ({
