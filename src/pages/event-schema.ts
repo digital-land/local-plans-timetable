@@ -2,6 +2,7 @@ import Joi from "joi";
 
 const maxDate = new Date(2099, 11);
 const minDate = new Date(2000, 0);
+export const notesCharacterLimit = 200;
 
 export const eventDateSchema = Joi.date()
   .iso()
@@ -16,7 +17,7 @@ export const eventDateSchema = Joi.date()
 
 export const eventSchema = Joi.object({
   eventDate: eventDateSchema,
-  notes: Joi.string().allow("").max(100).messages({
-    "string.max": `Notes must be less than or equal to 100 characters long`,
+  notes: Joi.string().allow("").max(notesCharacterLimit).messages({
+    "string.max": `Notes must be less than or equal to ${notesCharacterLimit} characters long`,
   }),
 });
