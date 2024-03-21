@@ -51,7 +51,7 @@ export interface FormContextValues {
   setUserFlow: Dispatch<React.SetStateAction<Journey | null>>;
   statusChangeEvent: StatusChangeEvent | null;
   statusHasChanged: boolean | null;
-  setStatusHasChanged: (statusHasChanged: boolean) => void;
+  setStatusHasChanged: (statusHasChanged: boolean | null) => void;
   updateStatusChangeEvent: (
     key: keyof DevelopmentPlanTimetable,
     value: string
@@ -167,7 +167,7 @@ export const FormProvider = (props: { children: ReactNode }) => {
   );
 
   const setStatusChanged = useCallback(
-    (statusChanged: boolean) => {
+    (statusChanged: boolean | null) => {
       setStatusHasChanged(statusChanged);
       if (statusChanged) {
         setStatusChangeEvent({
