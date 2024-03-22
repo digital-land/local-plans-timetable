@@ -112,7 +112,7 @@ const router = createBrowserRouter(
           path: key,
           element: FormPageHoC(
             StagePage,
-            { ...otherProps, stageName: key },
+            { ...otherProps, stageName: key.slice(1) },
             validateTimetableStage
           ),
         })),

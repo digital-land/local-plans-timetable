@@ -5,10 +5,9 @@ import { DateInput, TextArea } from "@lib/gds-components";
 import { ValidationErrorItem } from "joi";
 import { useFormContext } from "../../context/use-form-context";
 import { notesCharacterLimit } from "../stage-schema";
-import { PageRoute } from "src/routes/routes";
 
 export interface StagePageProps {
-  stageName: PageRoute;
+  stageName: string;
   title: string;
   description: ReactNode;
   startEventKey: TimetableEventKey;
@@ -51,7 +50,7 @@ export const StagePage = ({
       <DateInput
         value={startEvent.eventDate}
         label={endEvent ? "Start Date" : "Date"}
-        name={`${startEvent.developmentPlanEvent}-start-date`}
+        name={`${stageName}-start-date`}
         error={
           errors?.find(
             (error) =>
@@ -61,13 +60,13 @@ export const StagePage = ({
         onChange={(value) =>
           updateTimetableEvent(startEventKey, "eventDate", value)
         }
-        id={`${startEvent.developmentPlanEvent}-eventDate`}
+        id={`${stageName}-startDate`}
       />
       {endEventKey && endEvent && (
         <DateInput
           value={endEvent.eventDate}
           label="End Date"
-          name={`${endEvent.developmentPlanEvent}-end-date`}
+          name={`${stageName}-end-date`}
           error={
             errors?.find(
               (error) =>
@@ -77,7 +76,7 @@ export const StagePage = ({
           onChange={(value) =>
             updateTimetableEvent(endEventKey, "eventDate", value)
           }
-          id={`${endEvent.developmentPlanEvent}-eventDate`}
+          id={`${stageName}-endDate`}
         />
       )}
       <TextArea
@@ -93,7 +92,7 @@ export const StagePage = ({
             (error) => error.path[0] === stageName && error.path[1] === "notes"
           )?.message
         }
-        id={`${startEvent.developmentPlanEvent}-notes`}
+        id={`${stageName}-notes`}
       />
     </>
   );
