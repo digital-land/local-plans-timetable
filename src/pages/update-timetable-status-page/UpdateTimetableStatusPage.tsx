@@ -14,7 +14,7 @@ export const UpdateTimetableStatusPage = ({
   const radioValue = statusHasChanged?.toString();
 
   return (
-    <div className="govuk-!-width-two-thirds">
+    <>
       <h1 className="govuk-heading-l govuk-!-margin-top-6">
         Do you need to update the status of your Local Plan timetable?
         <span className="govuk-caption-m govuk-!-margin-top-2">
@@ -41,6 +41,6 @@ export const UpdateTimetableStatusPage = ({
         error={errors?.[0].message}
         id="updateStatus"
       />
-    </div>
+    </>
   );
 };

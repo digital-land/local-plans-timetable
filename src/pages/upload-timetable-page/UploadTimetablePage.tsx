@@ -79,7 +79,7 @@ export const UploadTimetablePage = ({
   );
 
   return (
-    <div className="govuk-!-width-two-thirds">
+    <>
       <h1 className="govuk-heading-l govuk-!-margin-top-6">
         Upload your timetable CSV files
       </h1>
@@ -99,6 +99,6 @@ export const UploadTimetablePage = ({
           errors?.find((error) => error.path[0] === "developmentPlan")?.message
         }
       />
-    </div>
+    </>
   );
 };

@@ -24,7 +24,7 @@ export const PublishLDSPage = ({
   }
 
   return (
-    <div className="govuk-!-width-two-thirds">
+    <>
       <h1 className="govuk-heading-l govuk-!-margin-top-6">
         Local development scheme (LDS) publish date
         <span className="govuk-caption-m govuk-!-margin-top-3">
@@ -51,6 +51,6 @@ export const PublishLDSPage = ({
         }
         id={`${publishLDSEvent.developmentPlanEvent}-eventDate`}
       />
-    </div>
+    </>
   );
 };

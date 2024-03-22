@@ -10,7 +10,7 @@ export const TitlePage = ({ errors }: TitlePageProps): JSX.Element => {
   const { developmentPlan, updateDevelopmentPlan } = useFormContext();
 
   return (
-    <div className=" govuk-!-width-one-half">
+    <div className="govuk-!-width-two-thirds">
       <h1 className="govuk-heading-l govuk-!-margin-top-6">
         Title of the Local Plan
         <span className="govuk-caption-m govuk-!-margin-top-3">

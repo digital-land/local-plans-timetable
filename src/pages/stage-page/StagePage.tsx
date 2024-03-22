@@ -36,7 +36,7 @@ export const StagePage = ({
   }
 
   return (
-    <div className="govuk-!-width-two-thirds">
+    <>
       <h1
         className="govuk-heading-l govuk-!-margin-top-6"
         data-testid="form-title"
@@ -97,6 +97,6 @@ export const StagePage = ({
         }
         id={`${startEvent.developmentPlanEvent}-notes`}
       />
-    </div>
+    </>
   );
 };

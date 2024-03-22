@@ -83,7 +83,7 @@ export const FormPageHoC = <P extends Record<string, unknown>>(
         <Link to={previousPage} className="govuk-back-link">
           Back
         </Link>
-        <form onSubmit={handleClick}>
+        <form onSubmit={handleClick} className="govuk-!-width-two-thirds">
           <ErrorSummary errors={errors} />
           <FormComponent {...formProps} errors={errors}/>
           {navigateNext && <Button type="submit">Continue</Button>}
