@@ -37,7 +37,6 @@ export const StagePage = ({
   if (!startEvent || (endEventKey && !endEvent)) {
     throw new Error("stage event not found");
   }
-  console.log(stageName);
   return (
     <>
       <h1
