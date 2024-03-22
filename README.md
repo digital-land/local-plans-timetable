@@ -32,6 +32,10 @@ Shows a preview of the build locally.
 
 Copies the GOV.UK Frontend font assets to the `public` folder.
 
+### `npm run ts-compile:form`
+
+Compiles the TypeScript for the form application.
+
 ### `npm run build`
 
 Builds the App for production to the `dist` folder.
@@ -47,6 +51,10 @@ Starts Storybook. Open [http://localhost:6006](http://localhost:6006) to view it
 ### `npm run build:storybook`
 
 Builds Storybook to the `storybook-static` folder.
+
+### `npm run ts-compile:cdn`
+
+Compiles the TypeScript for the CDN component.
 
 ### `npm run build:cdn`
 
