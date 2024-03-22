@@ -1,5 +1,7 @@
-import { TextArea } from "@lib/gds-components";
 import { ValidationErrorItem } from "joi";
+
+import { TextArea, Details } from "@lib/gds-components";
+
 import { useFormContext } from "../../context/use-form-context";
 
 type DescriptionPageProps = {
@@ -13,12 +15,16 @@ export const DescriptionPage = ({
 
   return (
     <>
-      <h1 className="govuk-heading-l govuk-!-margin-top-6">
+      <h1 className="govuk-heading-l govuk-!-margin-top-6 govuk-!-margin-bottom-3">
         Local Plan description
         <span className="govuk-caption-m govuk-!-margin-top-3">
           Keep this specific to your own Local Plan
         </span>
       </h1>
+      <Details
+        summary="Help with writing a description"
+        text="This should be a short summary. For example, 'The Local Plan was adopted by Council on 25 July 2019. It is the basis for planning decision and all future development.'"
+      />
       <TextArea
         onChange={(value) => updateDevelopmentPlan("description", value)}
         value={developmentPlan.description}
