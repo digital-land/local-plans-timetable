@@ -51,7 +51,7 @@ export const StagePage = ({
       <DateInput
         value={startEvent.eventDate}
         label={endEvent ? "Start Date" : "Date"}
-        name={`${startEvent}-start-date`}
+        name={`${startEvent.developmentPlanEvent}-start-date`}
         error={
           errors?.find(
             (error) =>
@@ -67,7 +67,7 @@ export const StagePage = ({
         <DateInput
           value={endEvent.eventDate}
           label="End Date"
-          name={`${endEvent}-end-date`}
+          name={`${endEvent.developmentPlanEvent}-end-date`}
           error={
             errors?.find(
               (error) =>
