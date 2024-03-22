@@ -15,8 +15,8 @@ export const UpdateDatesPage = ({
   const radioValue = shouldUpdateDates?.toString();
 
   return (
-    <>
-      <h1 className="govuk-heading-l govuk-!-margin-top-6 govuk-!-width-two-thirds govuk-!-margin-bottom-7">
+    <div className="govuk-!-width-two-thirds">
+      <h1 className="govuk-heading-l govuk-!-margin-top-6 govuk-!-margin-bottom-7">
         Do you need to update the dates of your Local Plan timetable?
       </h1>
       <Radios
@@ -30,6 +30,6 @@ export const UpdateDatesPage = ({
         error={errors?.[0].message}
         id="updateDates"
       />
-    </>
+    </div>
   );
 };

@@ -31,7 +31,7 @@ export const Autocomplete = ({
 
   return (
     <div
-      className={cn("govuk-form-group govuk-!-width-two-thirds", { "govuk-form-group--error": error })}
+      className={cn("govuk-form-group", { "govuk-form-group--error": error })}
     >
       <label className="govuk-label" htmlFor={id}>
         {label}

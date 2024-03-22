@@ -43,7 +43,7 @@ export const StatusChangeEventPage = ({
   )?.value;
 
   return (
-    <>
+    <div className="govuk-!-width-two-thirds">
       <h1 className="govuk-heading-l govuk-!-margin-top-6">
         Tell us about the status change
       </h1>
@@ -95,6 +95,6 @@ export const StatusChangeEventPage = ({
         id="notes"
         error={errors?.find((error) => error.path[0] === "notes")?.message}
       />
-    </>
+    </div>
   );
 };

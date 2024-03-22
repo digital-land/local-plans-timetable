@@ -14,7 +14,7 @@ export const DescriptionPage = ({
   const { developmentPlan, updateDevelopmentPlan } = useFormContext();
 
   return (
-    <>
+    <div className="govuk-!-width-two-thirds">
       <h1 className="govuk-heading-l govuk-!-margin-top-6 govuk-!-margin-bottom-3">
         Local Plan description
         <span className="govuk-caption-m govuk-!-margin-top-3">
@@ -34,6 +34,6 @@ export const DescriptionPage = ({
           errors?.find((error) => error.path[0] === "description")?.message
         }
       />
-    </>
+    </div>
   );
 };

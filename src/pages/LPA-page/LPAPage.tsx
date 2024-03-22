@@ -26,7 +26,7 @@ export const LPAPage = ({ errors }: LPAPageProps): JSX.Element => {
   }, []);
 
   return (
-    <>
+    <div className="govuk-!-width-two-thirds">
       <h1 className="govuk-heading-l govuk-!-margin-top-6">
         What is your Local Authority?
         <span className="govuk-caption-m govuk-!-margin-top-3">
@@ -41,6 +41,6 @@ export const LPAPage = ({ errors }: LPAPageProps): JSX.Element => {
         error={errors?.find((error) => error.path[0] === "LPA")?.message}
         id="LPA"
       />
-    </>
+    </div>
   );
 };

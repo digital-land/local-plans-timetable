@@ -85,7 +85,7 @@ export const FormPageHoC = <P extends Record<string, unknown>>(
         </Link>
         <form onSubmit={handleClick}>
           <ErrorSummary errors={errors} />
-          <FormComponent {...formProps} errors={errors} />
+          <FormComponent {...formProps} errors={errors}/>
           {navigateNext && <Button type="submit">Continue</Button>}
         </form>
       </>

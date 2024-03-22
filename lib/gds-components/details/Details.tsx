@@ -9,7 +9,7 @@ type DetailsProps = {
 
 export const Details = ({ summary, text }: DetailsProps): JSX.Element => {
   return (
-    <details className="govuk-details govuk-grid-column-two-thirds govuk-!-padding-0 govuk-!-margin-bottom-2">
+    <details className="govuk-details govuk-!-padding-0 govuk-!-margin-bottom-2">
       <summary className="govuk-details__summary">
         <span className="govuk-details__summary-text">{summary}</span>
       </summary>
