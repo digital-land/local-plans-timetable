@@ -114,7 +114,7 @@ const router = createBrowserRouter(
         })),
         {
           path: PageRoute.Export,
-          element: FormPageHoC(ExportPage, {}),
+          element: <ExportPage/>,
         },
         {
           path: PageRoute.VisualisationExample,

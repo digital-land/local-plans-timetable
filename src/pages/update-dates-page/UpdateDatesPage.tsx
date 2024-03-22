@@ -16,7 +16,7 @@ export const UpdateDatesPage = ({
 
   return (
     <>
-      <h1 className="govuk-heading-l govuk-!-margin-top-6 govuk-!-width-two-thirds govuk-!-margin-bottom-7">
+      <h1 className="govuk-heading-l govuk-!-margin-top-6 govuk-!-margin-bottom-7">
         Do you need to update the dates of your Local Plan timetable?
       </h1>
       <Radios

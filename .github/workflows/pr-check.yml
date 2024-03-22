@@ -1,0 +1,35 @@
+name: PR check
+
+on: [pull_request]
+
+jobs:
+  lint-and-test:
+    uses: ./.github/workflows/shared-steps.yml
+  form-type-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          cache: "npm"
+
+      - run: npm ci
+
+      - name: Check form application types
+        run: npm run ts-compile:form
+  cdn-type-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+          cache: "npm"
+
+      - run: npm ci
+
+      - name: Check CDN component types
+        run: npm run ts-compile:cdn

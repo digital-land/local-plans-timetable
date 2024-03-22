@@ -3,7 +3,7 @@
 exports[`returns the plain text value 1`] = `
 <DocumentFragment>
   <div
-    class="govuk-form-group govuk-!-width-one-half"
+    class="govuk-form-group"
   >
     <label
       class="govuk-label"
