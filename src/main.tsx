@@ -110,11 +110,7 @@ const router = createBrowserRouter(
         },
         ...stages.map(({ key, ...otherProps }) => ({
           path: key,
-          element: FormPageHoC(
-            StagePage,
-            { ...otherProps, stageName: key.slice(1) },
-            validateTimetableStage
-          ),
+          element: FormPageHoC(StagePage, otherProps, validateTimetableStage),
         })),
         {
           path: PageRoute.Export,

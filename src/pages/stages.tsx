@@ -9,6 +9,7 @@ export type Stage = StagePageProps & {
 export const stages: Stage[] = [
   {
     key: PageRoute.PublicConsultation,
+    stageName: PageRoute.PublicConsultation.slice(1),
     title: "Public consultation stage",
     description: (
       <p className="govuk-body">
@@ -31,6 +32,7 @@ export const stages: Stage[] = [
   },
   {
     key: PageRoute.Publication,
+    stageName: PageRoute.Publication.slice(1),
     title: "Publication stage",
     description: (
       <p className="govuk-body">
@@ -53,6 +55,7 @@ export const stages: Stage[] = [
   },
   {
     key: PageRoute.Submission,
+    stageName: PageRoute.Submission.slice(1),
     title: "Submission stage",
     description: (
       <div className="govuk-body">
@@ -68,6 +71,7 @@ export const stages: Stage[] = [
   },
   {
     key: PageRoute.IndependentExamination,
+    stageName: PageRoute.IndependentExamination.slice(1),
     title: "Independent examination stage",
     description: (
       <div className="govuk-body">
@@ -86,6 +90,7 @@ export const stages: Stage[] = [
   },
   {
     key: PageRoute.PlanAdopted,
+    stageName: PageRoute.PlanAdopted.slice(1),
     title: "Plan adopted",
     description: (
       <div className="govuk-body">

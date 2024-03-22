@@ -1,12 +1,10 @@
 import Joi, { ValidationErrorItem } from "joi";
 import { ValidateFormParams } from "../FormPageHoc";
-import { startDateSchema } from "../stage-schema";
+import { notesSchema, startDateSchema } from "../stage-schema";
 
 const statusChangeEventSchema = Joi.object({
   eventDate: startDateSchema,
-  notes: Joi.string().allow("").max(100).messages({
-    "string.max": `Notes must be less than or equal to 100 characters long`,
-  }),
+  notes: notesSchema,
   developmentPlanEvent: Joi.required().messages({
     "any.required": "Select the status of your Local Plan",
   }),
