@@ -2,7 +2,7 @@ import { StatusChangeEventKey, TimetableEventKey } from "@lib/constants";
 import { DateInput, RadioOption, Radios, TextArea } from "@lib/gds-components";
 import { ValidationErrorItem } from "joi";
 import { useFormContext } from "../../context/use-form-context";
-import { notesCharacterLimit } from "../event-schema";
+import { notesCharacterLimit } from "../stage-schema";
 
 type ChangeEventOptions = Omit<RadioOption, "value"> & {
   value: StatusChangeEventKey;

@@ -4,7 +4,7 @@ import { TimetableEventKey } from "@lib/constants";
 import { DateInput, TextArea } from "@lib/gds-components";
 import { ValidationErrorItem } from "joi";
 import { useFormContext } from "../../context/use-form-context";
-import { notesCharacterLimit } from "../event-schema";
+import { notesCharacterLimit } from "../stage-schema";
 
 export interface StagePageProps {
   title: string;

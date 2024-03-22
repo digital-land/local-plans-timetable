@@ -1,6 +1,6 @@
 import { ValidationErrorItem } from "joi";
 import { ValidateFormParams } from "../FormPageHoc";
-import { stageSchema } from "../event-schema";
+import { stageSchema } from "../stage-schema";
 import { StagePageProps } from "./StagePage";
 
 export const validateTimetableStage = ({
@@ -23,7 +23,7 @@ export const validateTimetableStage = ({
 
   const errors: ValidationErrorItem[] = [];
 
-  const startEventValidation = stageSchema.validate(
+  const stageValidation = stageSchema.validate(
     {
       startDate: startEvent.eventDate,
       endDate: endEvent?.eventDate,
@@ -32,14 +32,13 @@ export const validateTimetableStage = ({
     { abortEarly: false }
   );
 
-  if (startEventValidation.error) {
+  if (stageValidation.error) {
     errors.push(
-      ...startEventValidation.error.details.map((error) => ({
+      ...stageValidation.error.details.map((error) => ({
         ...error,
         path: [startEventKey, ...error.path],
       }))
     );
   }
-
   return errors;
 };

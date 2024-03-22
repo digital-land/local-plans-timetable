@@ -1,7 +1,7 @@
 import Joi, { ValidationErrorItem } from "joi";
 
 import { TimetableEventKey } from "@lib/constants";
-import { startDateSchema } from "../event-schema";
+import { startDateSchema } from "../stage-schema";
 import { ValidateFormParams } from "../FormPageHoc";
 
 const schema = Joi.object({
