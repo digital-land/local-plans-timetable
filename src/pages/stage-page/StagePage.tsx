@@ -48,33 +48,33 @@ export const StagePage = ({
       <DateInput
         value={startEvent.eventDate}
         label={endEvent ? "Start Date" : "Date"}
-        name={`${title.replace(" ","-")}-start-date`}
+        name={`${title.replace(/ /g, "-")}-start-date`}
         error={
           errors?.find(
             (error) =>
-              error.path[0] === title.replace(" ","-") && error.path[1] === "startDate"
+              error.path[0] === title.replace(/ /g, "-") && error.path[1] === "startDate"
           )?.message
         }
         onChange={(value) =>
           updateTimetableEvent(startEventKey, "eventDate", value)
         }
-        id={`${title.replace(" ","-")}-startDate`}
+        id={`${title.replace(/ /g, "-")}-startDate`}
       />
       {endEventKey && endEvent && (
         <DateInput
           value={endEvent.eventDate}
           label="End Date"
-          name={`${title.replace(" ","-")}-end-date`}
+          name={`${title.replace(/ /g, "-")}-end-date`}
           error={
             errors?.find(
               (error) =>
-                error.path[0] === title.replace(" ","-") && error.path[1] === "endDate"
+                error.path[0] === title.replace(/ /g, "-") && error.path[1] === "endDate"
             )?.message
           }
           onChange={(value) =>
             updateTimetableEvent(endEventKey, "eventDate", value)
           }
-          id={`${title.replace(" ","-")}-endDate`}
+          id={`${title.replace(/ /g, "-")}-endDate`}
         />
       )}
       <TextArea
@@ -87,10 +87,10 @@ export const StagePage = ({
         characterLimit={notesCharacterLimit}
         error={
           errors?.find(
-            (error) => error.path[0] === title.replace(" ","-") && error.path[1] === "notes"
+            (error) => error.path[0] === title.replace(/ /g, "-") && error.path[1] === "notes"
           )?.message
         }
-        id={`${title.replace(" ","-")}-notes`}
+        id={`${title.replace(/ /g, "-")}-notes`}
       />
     </>
   );
