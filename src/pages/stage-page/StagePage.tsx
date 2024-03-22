@@ -7,7 +7,6 @@ import { useFormContext } from "../../context/use-form-context";
 import { notesCharacterLimit } from "../stage-schema";
 
 export interface StagePageProps {
-  stageName: string;
   title: string;
   description: ReactNode;
   startEventKey: TimetableEventKey;
@@ -16,7 +15,6 @@ export interface StagePageProps {
 }
 
 export const StagePage = ({
-  stageName,
   title,
   description,
   startEventKey,
@@ -50,33 +48,33 @@ export const StagePage = ({
       <DateInput
         value={startEvent.eventDate}
         label={endEvent ? "Start Date" : "Date"}
-        name={`${stageName}-start-date`}
+        name={`${title.replace(" ","-")}-start-date`}
         error={
           errors?.find(
             (error) =>
-              error.path[0] === stageName && error.path[1] === "startDate"
+              error.path[0] === title.replace(" ","-") && error.path[1] === "startDate"
           )?.message
         }
         onChange={(value) =>
           updateTimetableEvent(startEventKey, "eventDate", value)
         }
-        id={`${stageName}-startDate`}
+        id={`${title.replace(" ","-")}-startDate`}
       />
       {endEventKey && endEvent && (
         <DateInput
           value={endEvent.eventDate}
           label="End Date"
-          name={`${stageName}-end-date`}
+          name={`${title.replace(" ","-")}-end-date`}
           error={
             errors?.find(
               (error) =>
-                error.path[0] === stageName && error.path[1] === "endDate"
+                error.path[0] === title.replace(" ","-") && error.path[1] === "endDate"
             )?.message
           }
           onChange={(value) =>
             updateTimetableEvent(endEventKey, "eventDate", value)
           }
-          id={`${stageName}-endDate`}
+          id={`${title.replace(" ","-")}-endDate`}
         />
       )}
       <TextArea
@@ -89,10 +87,10 @@ export const StagePage = ({
         characterLimit={notesCharacterLimit}
         error={
           errors?.find(
-            (error) => error.path[0] === stageName && error.path[1] === "notes"
+            (error) => error.path[0] === title.replace(" ","-") && error.path[1] === "notes"
           )?.message
         }
-        id={`${stageName}-notes`}
+        id={`${title.replace(" ","-")}-notes`}
       />
     </>
   );
