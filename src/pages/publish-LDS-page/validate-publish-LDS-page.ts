@@ -1,11 +1,11 @@
 import Joi, { ValidationErrorItem } from "joi";
 
 import { TimetableEventKey } from "@lib/constants";
-import { eventDateSchema } from "../event-schema";
+import { startDateSchema } from "../stage-schema";
 import { ValidateFormParams } from "../FormPageHoc";
 
-const schema = Joi.object({
-  eventDate: eventDateSchema,
+const publishLDSEventSchema = Joi.object({
+  eventDate: startDateSchema,
 });
 
 export const validatePublishLDSEvent = ({
@@ -23,7 +23,7 @@ export const validatePublishLDSEvent = ({
 
   const errors: ValidationErrorItem[] = [];
 
-  const validationResult = schema.validate({
+  const validationResult = publishLDSEventSchema.validate({
     eventDate: publishLDSEvent.eventDate,
   });
 

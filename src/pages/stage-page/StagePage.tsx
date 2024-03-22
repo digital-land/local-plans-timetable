@@ -4,7 +4,7 @@ import { TimetableEventKey } from "@lib/constants";
 import { DateInput, TextArea } from "@lib/gds-components";
 import { ValidationErrorItem } from "joi";
 import { useFormContext } from "../../context/use-form-context";
-import { notesCharacterLimit } from "../event-schema";
+import { notesCharacterLimit } from "../stage-schema";
 
 export interface StagePageProps {
   title: string;
@@ -34,7 +34,6 @@ export const StagePage = ({
   if (!startEvent || (endEventKey && !endEvent)) {
     throw new Error("stage event not found");
   }
-
   return (
     <>
       <h1
@@ -49,35 +48,33 @@ export const StagePage = ({
       <DateInput
         value={startEvent.eventDate}
         label={endEvent ? "Start Date" : "Date"}
-        name={`${startEvent}-start-date`}
+        name={`${title.replace(/ /g, "-")}-start-date`}
         error={
           errors?.find(
             (error) =>
-              error.path[0] === startEvent.developmentPlanEvent &&
-              error.path[1] === "eventDate"
+              error.path[0] === title.replace(/ /g, "-") && error.path[1] === "startDate"
           )?.message
         }
         onChange={(value) =>
           updateTimetableEvent(startEventKey, "eventDate", value)
         }
-        id={`${startEvent.developmentPlanEvent}-eventDate`}
+        id={`${title.replace(/ /g, "-")}-startDate`}
       />
       {endEventKey && endEvent && (
         <DateInput
           value={endEvent.eventDate}
           label="End Date"
-          name={`${endEvent}-end-date`}
+          name={`${title.replace(/ /g, "-")}-end-date`}
           error={
             errors?.find(
               (error) =>
-                error.path[0] === endEvent.developmentPlanEvent &&
-                error.path[1] === "eventDate"
+                error.path[0] === title.replace(/ /g, "-") && error.path[1] === "endDate"
             )?.message
           }
           onChange={(value) =>
             updateTimetableEvent(endEventKey, "eventDate", value)
           }
-          id={`${endEvent.developmentPlanEvent}-eventDate`}
+          id={`${title.replace(/ /g, "-")}-endDate`}
         />
       )}
       <TextArea
@@ -90,12 +87,10 @@ export const StagePage = ({
         characterLimit={notesCharacterLimit}
         error={
           errors?.find(
-            (error) =>
-              error.path[0] === startEvent.developmentPlanEvent &&
-              error.path[1] === "notes"
+            (error) => error.path[0] === title.replace(/ /g, "-") && error.path[1] === "notes"
           )?.message
         }
-        id={`${startEvent.developmentPlanEvent}-notes`}
+        id={`${title.replace(/ /g, "-")}-notes`}
       />
     </>
   );

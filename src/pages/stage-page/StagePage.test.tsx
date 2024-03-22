@@ -1,11 +1,11 @@
 import "@testing-library/jest-dom";
 import { act, render } from "@testing-library/react";
-import { StagePage } from "./StagePage";
 import { DateInput } from "@lib/gds-components";
 import { TimetableEventKey } from "@lib/constants";
+import { StagePage } from "./StagePage";
 
 jest.mock("@lib/gds-components");
-jest.mock("../event-schema", () => ({ notesCharacterLimit: 100 }));
+jest.mock("../stage-schema", () => ({ notesCharacterLimit: 100 }));
 
 describe("StagePage", () => {
   beforeEach(() => {

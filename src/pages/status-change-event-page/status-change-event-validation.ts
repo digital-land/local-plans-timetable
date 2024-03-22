@@ -1,14 +1,14 @@
 import Joi, { ValidationErrorItem } from "joi";
 import { ValidateFormParams } from "../FormPageHoc";
-import { eventSchema } from "../event-schema";
+import { notesSchema, startDateSchema } from "../stage-schema";
 
-const statusChangeEventSchema = eventSchema.concat(
-  Joi.object({
-    developmentPlanEvent: Joi.required().messages({
-      "any.required": "Select the status of your Local Plan",
-    }),
-  })
-);
+const statusChangeEventSchema = Joi.object({
+  eventDate: startDateSchema,
+  notes: notesSchema,
+  developmentPlanEvent: Joi.required().messages({
+    "any.required": "Select the status of your Local Plan",
+  }),
+})
 
 export const validateStatusChangeEvent = ({
   statusChangeEvent,
