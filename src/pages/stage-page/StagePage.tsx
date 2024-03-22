@@ -5,8 +5,10 @@ import { DateInput, TextArea } from "@lib/gds-components";
 import { ValidationErrorItem } from "joi";
 import { useFormContext } from "../../context/use-form-context";
 import { notesCharacterLimit } from "../stage-schema";
+import { PageRoute } from "src/routes/routes";
 
 export interface StagePageProps {
+  stageName: PageRoute;
   title: string;
   description: ReactNode;
   startEventKey: TimetableEventKey;
@@ -15,6 +17,7 @@ export interface StagePageProps {
 }
 
 export const StagePage = ({
+  stageName,
   title,
   description,
   startEventKey,
@@ -34,7 +37,7 @@ export const StagePage = ({
   if (!startEvent || (endEventKey && !endEvent)) {
     throw new Error("stage event not found");
   }
-
+  console.log(stageName);
   return (
     <>
       <h1
@@ -53,8 +56,7 @@ export const StagePage = ({
         error={
           errors?.find(
             (error) =>
-              error.path[0] === startEvent.developmentPlanEvent &&
-              error.path[1] === "startDate"
+              error.path[0] === stageName && error.path[1] === "startDate"
           )?.message
         }
         onChange={(value) =>
@@ -70,8 +72,7 @@ export const StagePage = ({
           error={
             errors?.find(
               (error) =>
-                error.path[0] === startEvent.developmentPlanEvent &&
-                error.path[1] === "endDate"
+                error.path[0] === stageName && error.path[1] === "endDate"
             )?.message
           }
           onChange={(value) =>
@@ -90,9 +91,7 @@ export const StagePage = ({
         characterLimit={notesCharacterLimit}
         error={
           errors?.find(
-            (error) =>
-              error.path[0] === startEvent.developmentPlanEvent &&
-              error.path[1] === "notes"
+            (error) => error.path[0] === stageName && error.path[1] === "notes"
           )?.message
         }
         id={`${startEvent.developmentPlanEvent}-notes`}

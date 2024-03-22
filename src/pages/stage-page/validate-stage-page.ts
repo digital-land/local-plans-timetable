@@ -36,7 +36,7 @@ export const validateTimetableStage = ({
     errors.push(
       ...stageValidation.error.details.map((error) => ({
         ...error,
-        path: [startEventKey, ...error.path],
+        path: [formProps.stageName, ...error.path],
       }))
     );
   }

@@ -3,6 +3,7 @@ import { act, render } from "@testing-library/react";
 import { StagePage } from "./StagePage";
 import { DateInput } from "@lib/gds-components";
 import { TimetableEventKey } from "@lib/constants";
+import { PageRoute } from "src/routes/routes";
 
 jest.mock("@lib/gds-components");
 jest.mock("../stage-schema", () => ({ notesCharacterLimit: 100 }));
@@ -20,6 +21,7 @@ describe("StagePage", () => {
     await act(async () => {
       render(
         <StagePage
+          stageName={PageRoute.IndependentExamination}
           title={""}
           description={undefined}
           startEventKey={TimetableEventKey.PlanSubmittedForExamination}
@@ -34,6 +36,7 @@ describe("StagePage", () => {
     await act(async () => {
       render(
         <StagePage
+          stageName={PageRoute.IndependentExamination}
           title={""}
           description={undefined}
           startEventKey={TimetableEventKey.ExaminationHearingStart}
