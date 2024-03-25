@@ -70,51 +70,83 @@ const router = createBrowserRouter(
         },
         {
           path: PageRoute.UploadTimetable,
-          element: FormPageHoC(UploadTimetablePage, {}, validateUpload),
+          element: FormPageHoC({
+            FormComponent: UploadTimetablePage,
+            formProps: {},
+            validatePage: validateUpload,
+          }),
         },
         {
           path: PageRoute.LPA,
-          element: FormPageHoC(LPAPage, {}, validateLPA),
+          element: FormPageHoC({
+            FormComponent: LPAPage,
+            formProps: {},
+            validatePage: validateLPA,
+          }),
         },
         {
           path: PageRoute.Title,
-          element: FormPageHoC(TitlePage, {}, validateTitle),
+          element: FormPageHoC({
+            FormComponent: TitlePage,
+            formProps: {},
+            validatePage: validateTitle,
+          }),
         },
         {
           path: PageRoute.Description,
-          element: FormPageHoC(DescriptionPage, {}, validateDescription),
+          element: FormPageHoC({
+            FormComponent: DescriptionPage,
+            formProps: {},
+            validatePage: validateDescription,
+          }),
         },
         {
           path: PageRoute.PublishLocalDevelopmentScheme,
-          element: FormPageHoC(PublishLDSPage, {}, validatePublishLDSEvent),
+          element: FormPageHoC({
+            FormComponent: PublishLDSPage,
+            formProps: {},
+            validatePage: validatePublishLDSEvent,
+          }),
         },
         {
           path: PageRoute.UpdateTimetableStatus,
-          element: FormPageHoC(
-            UpdateTimetableStatusPage,
-            {},
-            validateUpdateTimetableStatus
-          ),
+          element: FormPageHoC({
+            FormComponent: UpdateTimetableStatusPage,
+            formProps: {},
+            validatePage: validateUpdateTimetableStatus,
+          }),
         },
         {
           path: PageRoute.StatusChangeEvent,
-          element: FormPageHoC(
-            StatusChangeEventPage,
-            {},
-            validateStatusChangeEvent
-          ),
+          element: FormPageHoC({
+            FormComponent: StatusChangeEventPage,
+            formProps: {},
+            validatePage: validateStatusChangeEvent,
+          }),
         },
         {
           path: PageRoute.UpdateDates,
-          element: FormPageHoC(UpdateDatesPage, {}, validateUpdateDates),
+          element: FormPageHoC({
+            FormComponent: UpdateDatesPage,
+            formProps: {},
+            validatePage: validateUpdateDates,
+          }),
         },
         ...stages.map(({ key, ...otherProps }) => ({
           path: key,
-          element: FormPageHoC(StagePage, otherProps, validateTimetableStage),
+          element: FormPageHoC({
+            FormComponent: StagePage,
+            formProps: otherProps,
+            validatePage: validateTimetableStage,
+          }),
         })),
         {
           path: PageRoute.Export,
-          element: <ExportPage/>,
+          element: FormPageHoC({
+            FormComponent: ExportPage,
+            formProps: {},
+            twoThirdsWidth: false,
+          }),
         },
         {
           path: PageRoute.VisualisationExample,

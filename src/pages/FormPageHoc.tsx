@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 import { ValidationErrorItem } from "joi";
+import cn from "classnames";
 
 import { Button, ErrorSummary } from "@lib/gds-components";
 import {
@@ -24,13 +24,21 @@ export type ValidateFormParams<P> = {
   formProps: P;
 };
 
-export const FormPageHoC = <P extends Record<string, unknown>>(
+interface FormPageHoCProps<P extends Record<string, unknown>> {
   FormComponent: (
     props: P & { errors: ValidationErrorItem[] | undefined }
-  ) => JSX.Element,
-  formProps: P,
-  validatePage?: (params: ValidateFormParams<P>) => ValidationErrorItem[]
-) => {
+  ) => JSX.Element;
+  formProps: P;
+  validatePage?: (params: ValidateFormParams<P>) => ValidationErrorItem[];
+  twoThirdsWidth?: boolean;
+}
+
+export const FormPageHoC = <P extends Record<string, unknown>>({
+  FormComponent,
+  formProps,
+  validatePage,
+  twoThirdsWidth = true,
+}: FormPageHoCProps<P>) => {
   const InnerComponent = () => {
     const {
       developmentPlan,
@@ -83,9 +91,12 @@ export const FormPageHoC = <P extends Record<string, unknown>>(
         <Link to={previousPage} className="govuk-back-link">
           Back
         </Link>
-        <form onSubmit={handleClick} className="govuk-!-width-two-thirds">
+        <form
+          onSubmit={handleClick}
+          className={cn({ "govuk-!-width-two-thirds": twoThirdsWidth })}
+        >
           <ErrorSummary errors={errors} />
-          <FormComponent {...formProps} errors={errors}/>
+          <FormComponent {...formProps} errors={errors} />
           {navigateNext && <Button type="submit">Continue</Button>}
         </form>
       </>
