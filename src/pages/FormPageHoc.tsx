@@ -24,7 +24,7 @@ export type ValidateFormParams<P> = {
   formProps: P;
 };
 
-interface FormPageHoCProps<P extends Record<string, unknown>> {
+interface FormPageHocProps<P extends Record<string, unknown>> {
   FormComponent: (
     props: P & { errors: ValidationErrorItem[] | undefined }
   ) => JSX.Element;
@@ -33,12 +33,12 @@ interface FormPageHoCProps<P extends Record<string, unknown>> {
   twoThirdsWidth?: boolean;
 }
 
-export const FormPageHoC = <P extends Record<string, unknown>>({
+export const FormPageHoc = <P extends Record<string, unknown>>({
   FormComponent,
   formProps,
   validatePage,
   twoThirdsWidth = true,
-}: FormPageHoCProps<P>) => {
+}: FormPageHocProps<P>) => {
   const InnerComponent = () => {
     const {
       developmentPlan,
